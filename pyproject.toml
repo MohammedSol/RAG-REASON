@@ -1,0 +1,59 @@
+[project]
+name = "rag-reason"
+version = "0.1.0"
+description = "Module de raisonnement avancé pour agent RAG (Query Analyzer, Planner, Critic, Verifier) orchestré via LangGraph."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Mohammed", email = "" }]
+keywords = ["rag", "llm", "langgraph", "reasoning", "ai-agent"]
+dependencies = [
+    "datasets>=5.0.0",
+    "langchain-core>=1.4.9",
+    "langgraph>=1.2.9",
+    "litellm>=1.92.0",
+    "pydantic>=2.0",
+    "python-dotenv>=1.2.2",
+    "pyyaml>=6.0.3",
+    "ragas>=0.4.3",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/reasoning"]
+
+# -------------------------------------------------------------------
+# Ruff (linter + formatter)
+# -------------------------------------------------------------------
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "UP", "B"]
+
+# -------------------------------------------------------------------
+# Mypy (type checker)
+# -------------------------------------------------------------------
+[tool.mypy]
+strict = true
+ignore_missing_imports = true
+
+# -------------------------------------------------------------------
+# Pytest
+# -------------------------------------------------------------------
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.3.0",
+    "pre-commit>=4.6.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.15.21",
+]

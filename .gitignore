@@ -1,0 +1,116 @@
+# =============================================================
+# RAG-REASON — .gitignore
+# Python 3.11+ · uv · LangGraph · Ollama · LiteLLM · RAGAS
+# =============================================================
+
+# -------------------------
+# Python artefacts
+# -------------------------
+__pycache__/
+*.py[oc]
+*.pyo
+*.pyd
+*.pyw
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+wheels/
+*.whl
+MANIFEST
+
+# -------------------------
+# Environnement virtuel (uv)
+# -------------------------
+.venv/
+.venv*/
+venv/
+env/
+ENV/
+
+# -------------------------
+# Secrets & configuration locale
+# -------------------------
+.env
+.env.*
+.env.example
+*.key
+*.pem
+secrets/
+
+# -------------------------
+# Poids et modèles locaux (Ollama / GGUF)
+# -------------------------
+*.gguf
+*.ggml
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+models/
+ollama_models/
+
+# -------------------------
+# Données & datasets (potentiellement volumineux)
+# -------------------------
+data/
+datasets/
+*.parquet
+*.arrow
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+*.npy
+*.npz
+
+# -------------------------
+# Outils de qualité & tests
+# -------------------------
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.coveragerc
+.tox/
+
+# -------------------------
+# Rapports d'évaluation générés (conserver uniquement les baselines commités)
+# -------------------------
+tests/evaluation/reports/*.json
+!tests/evaluation/reports/baseline_report.json
+
+# -------------------------
+# Éditeurs & IDEs
+# -------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# Jupyter Notebooks checkpoints
+# -------------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# -------------------------
+# uv lock (à committer) — ne pas ignorer uv.lock
+# -------------------------
+# uv.lock  ← NE PAS DÉCOMMENTER : le lock file doit être commité
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+logs/
