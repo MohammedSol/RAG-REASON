@@ -371,13 +371,22 @@ class TestAnalysisResult:
                 reasoning_budget=1,
             )
 
-    def test_reasoning_budget_zero_leve_erreur(self) -> None:
-        """reasoning_budget = 0 viole Field(gt=0)."""
+    def test_reasoning_budget_zero_autorise_pour_ambiguous(self) -> None:
+        """reasoning_budget = 0 est valide : c'est la valeur AMBIGUOUS (ge=0)."""
+        analysis = AnalysisResult(
+            query_type=QueryType.AMBIGUOUS,
+            confidence=0.8,
+            reasoning_budget=0,
+        )
+        assert analysis.reasoning_budget == 0
+
+    def test_reasoning_budget_negatif_leve_erreur(self) -> None:
+        """reasoning_budget < 0 viole Field(ge=0)."""
         with pytest.raises(ValidationError):
             AnalysisResult(
                 query_type=QueryType.SIMPLE,
                 confidence=0.8,
-                reasoning_budget=0,
+                reasoning_budget=-1,
             )
 
     def test_detected_entities_vide_par_defaut(self) -> None:

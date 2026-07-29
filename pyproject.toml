@@ -9,6 +9,7 @@ authors = [{ name = "Mohammed", email = "" }]
 keywords = ["rag", "llm", "langgraph", "reasoning", "ai-agent"]
 dependencies = [
     "datasets>=5.0.0",
+    "graphviz>=0.21",
     "langchain-core>=1.4.9",
     "langgraph>=1.2.9",
     "litellm>=1.92.0",
@@ -16,6 +17,7 @@ dependencies = [
     "python-dotenv>=1.2.2",
     "pyyaml>=6.0.3",
     "ragas>=0.4.3",
+    "streamlit>=1.60.0",
 ]
 
 [build-system]
@@ -34,12 +36,24 @@ line-length = 88
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "UP", "B"]
 
+[tool.ruff.lint.per-file-ignores]
+# Les lignes de prompts LLM sont intentionnellement longues — ne pas tronquer
+"src/reasoning/analyzer/prompts.py" = ["E501"]
+"src/reasoning/planner/prompts.py" = ["E501"]
+# Scripts d'evaluation : les f-strings rich et les commentaires longs sont acceptables
+"scripts/*.py" = ["E501"]
+# Les docstrings francaises dans les tests depassent legerement 88 chars — acceptable
+"tests/**/*.py" = ["E501"]
+# L'interface utilisateur Streamlit peut avoir des textes longs
+"frontend/*.py" = ["E501"]
+
 # -------------------------------------------------------------------
 # Mypy (type checker)
 # -------------------------------------------------------------------
 [tool.mypy]
 strict = true
 ignore_missing_imports = true
+exclude = ["^frontend/"]
 
 # -------------------------------------------------------------------
 # Pytest
@@ -47,6 +61,9 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 asyncio_mode = "auto"
+markers = [
+    "integration: Tests nécessitant Ollama lancé en local (désactiver avec -m 'not integration')",
+]
 
 [dependency-groups]
 dev = [

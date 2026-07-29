@@ -214,13 +214,13 @@ La communication est **exclusivement JSON**, validée par des schémas Pydantic 
   - Stratégie de prompt engineering pour la classification
 - [ ] Choisir la stratégie d'implémentation : LLM-based vs. règles heuristiques hybrides
 
-### 2.2 — Implémentation
-- [ ] Créer `src/reasoning/analyzer/analyzer.py` avec la classe `QueryAnalyzer`
-- [ ] Implémenter la méthode principale `analyze(query: str) -> AnalysisResult`
-- [ ] Créer le template de prompt de classification dans `analyzer/prompts.py`
-- [ ] Implémenter la logique de parsing de la réponse LLM vers `AnalysisResult` (Pydantic)
-- [ ] Implémenter le fallback en cas d'échec du LLM (classification heuristique de secours)
-- [ ] Créer `src/reasoning/analyzer/__init__.py` exposant proprement l'API publique
+  ### 2.2 — Implémentation
+  - [ ] Créer `src/reasoning/analyzer/analyzer.py` avec la classe `QueryAnalyzer`
+  - [ ] Implémenter la méthode principale `analyze(query: str) -> AnalysisResult`
+  - [ ] Créer le template de prompt de classification dans `analyzer/prompts.py`
+  - [ ] Implémenter la logique de parsing de la réponse LLM vers `AnalysisResult` (Pydantic)
+  - [ ] Implémenter le fallback en cas d'échec du LLM (classification heuristique de secours)
+  - [ ] Créer `src/reasoning/analyzer/__init__.py` exposant proprement l'API publique
 
 ### 2.3 — Tests
 - [ ] Écrire des tests unitaires `tests/unit/test_analyzer.py` avec des mocks LiteLLM :

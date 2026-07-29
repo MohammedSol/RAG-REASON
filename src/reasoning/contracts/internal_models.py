@@ -72,7 +72,7 @@ class AnalysisResult(BaseModel):
     query_type: QueryType
     confidence: float = Field(ge=0.0, le=1.0)
     detected_entities: list[str] = Field(default_factory=list)
-    reasoning_budget: int = Field(gt=0)
+    reasoning_budget: int = Field(ge=0, description="0 = AMBIGUOUS (aucun retrieval)")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
