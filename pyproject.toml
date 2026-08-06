@@ -40,6 +40,8 @@ select = ["E", "W", "F", "I", "UP", "B"]
 # Les lignes de prompts LLM sont intentionnellement longues — ne pas tronquer
 "src/reasoning/analyzer/prompts.py" = ["E501"]
 "src/reasoning/planner/prompts.py" = ["E501"]
+"src/reasoning/critic/prompts.py" = ["E501"]
+"src/reasoning/verifier/prompts.py" = ["E501"]
 # Scripts d'evaluation : les f-strings rich et les commentaires longs sont acceptables
 "scripts/*.py" = ["E501"]
 # Les docstrings francaises dans les tests depassent legerement 88 chars — acceptable

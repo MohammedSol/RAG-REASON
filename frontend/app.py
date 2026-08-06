@@ -29,6 +29,8 @@ if str(SRC_DIR) not in sys.path:
 # Import dynamique des composants Backend
 try:
     from reasoning.analyzer.analyzer import QueryAnalyzer
+    from reasoning.contracts.action_interface import RetrievalResponse, RetrievedChunk
+    from reasoning.critic.critic import Critic
     from reasoning.planner.planner import Planner
 except ImportError as e:
     st.error(f"Erreur d'importation depuis src/ : {e}")
@@ -141,7 +143,123 @@ with tab_demo:
                             dot.edge(dep, step.step_id, color="#5c5c5c")
 
                     # Affichage du graphe
-                    st.graphviz_chart(dot, use_container_width=True)
+                    st.graphviz_chart(dot, width="stretch")
+
+                    # =====================================================================
+                    # SECTION CRITIC — Évaluation contextuelle par étape
+                    # =====================================================================
+                    st.markdown("---")
+                    st.warning(
+                        "⚠️ **Chunks simulés à des fins de démonstration** — "
+                        "l'intégration avec le module ACTION (retrieval réel) "
+                        "est prévue au Sprint 6. Les contenus ci-dessous sont "
+                        "entièrement fictifs et éditables manuellement."
+                    )
+                    st.subheader("🔎 Évaluation Critic par étape")
+                    st.markdown(
+                        "Pour chaque sous-question du plan, saisissez un contexte simulé "
+                        "puis cliquez sur **Évaluer ce step** pour appeler le Critic en direct."
+                    )
+
+                    # Contenu simulé par défaut — adapté dynamiquement à la sub_query
+                    # mais restant court (1-2 phrases) pour ne pas surcharger le prompt 7B.
+                    def _default_chunk_text(sub_query: str) -> str:
+                        """Génère un contenu simulé court basé sur les mots-clés de la sous-question."""
+                        words = sub_query.split()
+                        # On prend les 5 premiers mots significatifs comme ancrage thématique
+                        anchor = " ".join(words[:5]) if len(words) >= 5 else sub_query
+                        return (
+                            f"According to available sources, {anchor.lower()} "
+                            "is a well-documented topic with multiple references. "
+                            "[Contenu simulé — à remplacer par un vrai chunk récupéré via retrieval.]"
+                        )
+
+                    for step in plan.steps:
+                        with st.expander(
+                            f"📌 {step.step_id} — {step.sub_query[:80]}{'…' if len(step.sub_query) > 80 else ''}",
+                            expanded=True,
+                        ):
+                            chunk_text = st.text_area(
+                                "Contenu du chunk simulé (éditable) :",
+                                value=_default_chunk_text(step.sub_query),
+                                height=120,
+                                key=f"chunk_text_{step.step_id}",
+                            )
+                            chunk_source = st.text_input(
+                                "Source :",
+                                value="document_simule.txt",
+                                key=f"chunk_source_{step.step_id}",
+                            )
+
+                            if st.button(
+                                "🔍 Évaluer ce step",
+                                key=f"eval_btn_{step.step_id}",
+                                type="secondary",
+                            ):
+                                with st.spinner(
+                                    f"Évaluation Critic pour {step.step_id} via Qwen 7B..."
+                                ):
+                                    try:
+                                        # Construction manuelle du RetrievedChunk et RetrievalResponse
+                                        chunk = RetrievedChunk(
+                                            chunk_id=f"simule_{step.step_id}_001",
+                                            content=chunk_text,
+                                            source=chunk_source,
+                                            relevance_score=0.75,
+                                        )
+                                        response = RetrievalResponse(
+                                            query_id=plan.plan_id,
+                                            chunks=[chunk],
+                                            retrieval_score=0.75,
+                                        )
+
+                                        critic = Critic()
+                                        t_c0 = time.perf_counter()
+                                        evaluation = critic.evaluate(step, response)
+                                        t_c1 = time.perf_counter()
+
+                                        # Affichage du résultat
+                                        col_verdict, col_score = st.columns([1, 2])
+
+                                        with col_verdict:
+                                            if evaluation.is_sufficient:
+                                                st.success("✅ Contexte **suffisant**")
+                                            else:
+                                                st.error("❌ Contexte **insuffisant**")
+
+                                        with col_score:
+                                            st.metric(
+                                                label="Relevance Score",
+                                                value=f"{evaluation.relevance_score:.2f}",
+                                                delta=f"seuil : {critic.sufficiency_threshold:.2f}",
+                                                delta_color="off",
+                                            )
+                                            st.progress(
+                                                min(evaluation.relevance_score, 1.0),
+                                                text=f"{evaluation.relevance_score * 100:.0f} %",
+                                            )
+
+                                        if evaluation.feedback:
+                                            st.write(
+                                                "**Feedback Critic :**",
+                                                evaluation.feedback,
+                                            )
+
+                                        if evaluation.missing_aspects:
+                                            st.write("**Aspects manquants :**")
+                                            for aspect in evaluation.missing_aspects:
+                                                st.markdown(f"- {aspect}")
+
+                                        st.caption(
+                                            f"Latence Critic : {(t_c1 - t_c0) * 1000:.0f} ms "
+                                            f"| max_retries={critic.max_retries}"
+                                        )
+
+                                    except Exception as critic_exc:
+                                        st.error(
+                                            f"Erreur lors de l'évaluation Critic "
+                                            f"({step.step_id}) : {critic_exc}"
+                                        )
 
                 except Exception as e:
                     st.error(f"Une erreur est survenue lors de l'exécution : {e}")
