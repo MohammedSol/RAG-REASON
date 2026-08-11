@@ -19,6 +19,7 @@ from reasoning.shared.toon_utils import (
     _extract_toon_block,
     _infer_value,
     dump_dict_to_toon,
+    parse_toon_records,
     parse_toon_to_dict,
 )
 
@@ -431,3 +432,151 @@ class TestRoundtrip:
         # Le bloc <<< >>> est présent mais vide → aucune paire parseable
         with pytest.raises(ToonParseError):
             parse_toon_to_dict(toon_str)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Tests — parse_toon_records
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+class TestParseToonRecords:
+    """Tests de la nouvelle fonction de parsing multi-enregistrements."""
+
+    # ── Constantes de fixture ──────────────────────────────────────────────────
+
+    RAW_3_RECORDS = (
+        "<<<\n"
+        "claim_text      :: Rabat est la capitale du Maroc\n"
+        "is_supported    :: true\n"
+        "source_chunk_id :: c1\n"
+        "---\n"
+        "claim_text      :: La ville compte 500000 habitants\n"
+        "is_supported    :: false\n"
+        "source_chunk_id ::\n"
+        "---\n"
+        "claim_text      :: Le Maroc est en Afrique du Nord\n"
+        "is_supported    :: true\n"
+        "source_chunk_id :: c3\n"
+        ">>>"
+    )
+
+    RAW_1_RECORD = (
+        "<<<\n"
+        "claim_text      :: OpenAI was founded in 2015\n"
+        "is_supported    :: true\n"
+        "source_chunk_id :: openai-001\n"
+        ">>>"
+    )
+
+    RAW_EMPTY_BLOCK = "<<<\n>>>"
+
+    # ── Cas nominal : 3 enregistrements ───────────────────────────────────────
+
+    def test_trois_enregistrements_nominaux(self) -> None:
+        """Cas nominal : 3 enregistrements séparés par '---' sont tous parsés."""
+        records = parse_toon_records(self.RAW_3_RECORDS)
+        assert len(records) == 3
+
+    def test_valeurs_premier_enregistrement(self) -> None:
+        """Les champs du premier enregistrement sont corrects."""
+        records = parse_toon_records(self.RAW_3_RECORDS)
+        r = records[0]
+        assert r["claim_text"] == "Rabat est la capitale du Maroc"
+        assert r["is_supported"] == "true"  # str, PAS bool
+        assert r["source_chunk_id"] == "c1"
+
+    def test_valeurs_deuxieme_enregistrement_source_vide(self) -> None:
+        """Le second enregistrement a source_chunk_id vide → None."""
+        records = parse_toon_records(self.RAW_3_RECORDS)
+        r = records[1]
+        assert r["is_supported"] == "false"  # str, PAS bool
+        assert r["source_chunk_id"] is None  # valeur vide → None
+
+    def test_ordre_preservation(self) -> None:
+        """Les enregistrements sont retournés dans l'ordre d'apparition."""
+        records = parse_toon_records(self.RAW_3_RECORDS)
+        texts = [r["claim_text"] for r in records]
+        assert texts[0] == "Rabat est la capitale du Maroc"
+        assert texts[2] == "Le Maroc est en Afrique du Nord"
+
+    # ── Cas : un seul enregistrement ──────────────────────────────────────────
+
+    def test_un_seul_enregistrement(self) -> None:
+        """Un bloc sans '---' est traité comme un seul enregistrement."""
+        records = parse_toon_records(self.RAW_1_RECORD)
+        assert len(records) == 1
+        assert records[0]["claim_text"] == "OpenAI was founded in 2015"
+
+    # ── Cas : aucun séparateur présent (bloc mono-enregistrement) ──────────────
+
+    def test_sans_separateur_traite_comme_un_enregistrement(self) -> None:
+        """Sans '---', le contenu complet est un unique enregistrement."""
+        raw = "<<<\nclaim_text :: seul claim\nis_supported :: true\nsource_chunk_id ::\n>>>"
+        records = parse_toon_records(raw)
+        assert len(records) == 1
+        assert records[0]["claim_text"] == "seul claim"
+
+    # ── Cas : bloc vide (zéro claim) ──────────────────────────────────────────
+
+    def test_bloc_vide_retourne_liste_vide(self) -> None:
+        """Bloc <<<\n>>> (aucun claim) → liste vide, aucune exception."""
+        records = parse_toon_records(self.RAW_EMPTY_BLOCK)
+        assert records == []
+
+    def test_bloc_vide_retourne_bien_une_liste(self) -> None:
+        """Le retour d'un bloc vide est bien une liste Python."""
+        records = parse_toon_records(self.RAW_EMPTY_BLOCK)
+        assert isinstance(records, list)
+
+    # ── Cas : enregistrement vide entre deux '---' ────────────────────────────
+
+    def test_enregistrement_vide_entre_separateurs_leve_erreur(self) -> None:
+        """Un enregistrement vide entre deux '---' → ToonParseError."""
+        raw = (
+            "<<<\n"
+            "claim_text :: premier claim\n"
+            "is_supported :: true\n"
+            "source_chunk_id :: c1\n"
+            "---\n"
+            "---\n"  # enregistrement vide
+            "claim_text :: troisieme claim\n"
+            "is_supported :: false\n"
+            "source_chunk_id ::\n"
+            ">>>"
+        )
+        with pytest.raises(ToonParseError) as exc_info:
+            parse_toon_records(raw)
+        assert "enregistrement vide" in str(exc_info.value)
+
+    # ── Cas : bloc absent ─────────────────────────────────────────────────────
+
+    def test_bloc_absent_leve_toon_parse_error(self) -> None:
+        """Aucun bloc <<<...>>> → ToonParseError propagée depuis _extract_toon_block."""
+        with pytest.raises(ToonParseError):
+            parse_toon_records("Texte libre sans structure TOON.")
+
+    def test_chaine_vide_leve_toon_parse_error(self) -> None:
+        """Chaîne vide → ToonParseError (vérification de la garde d'entrée)."""
+        with pytest.raises(ToonParseError):
+            parse_toon_records("")
+
+    # ── Garantie de typage : is_supported est toujours une chaîne ─────────────
+
+    def test_is_supported_est_une_chaine_pas_un_bool(self) -> None:
+        """'is_supported' doit être une str — jamais convertie en bool Python."""
+        records = parse_toon_records(self.RAW_3_RECORDS)
+        for r in records:
+            assert isinstance(r["is_supported"], str)
+            # Vérifier que la comparaison correcte fonctionne
+            assert r["is_supported"] in ("true", "false")
+
+    def test_is_supported_false_est_truthy_si_traite_comme_bool(self) -> None:
+        """Démontre le piège : 'false' est truthy en Python → ne jamais caster."""
+        records = parse_toon_records(self.RAW_3_RECORDS)
+        # Record index 1 a is_supported = "false"
+        val = records[1]["is_supported"]
+        assert val == "false"
+        # Démonstration du piège : bool("false") == True
+        assert bool(val) is True
+        # Comparaison correcte
+        assert val.strip().lower() != "true"

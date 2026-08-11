@@ -8,6 +8,7 @@ données Python natives.
 Responsabilités :
     - Parser une chaîne TOON brute (sortie LLM) en ``dict[str, Any]``
     - Sérialiser un ``dict[str, Any]`` (ou ``.model_dump()`` Pydantic) en TOON
+    - Parser un bloc TOON multi-enregistrements en ``list[dict[str, Any]]``
 
 Contraintes de conception :
     - Aucune dépendance extérieure : bibliothèque standard Python uniquement
@@ -147,6 +148,47 @@ def _infer_value(raw_value: str) -> Any:
     return stripped
 
 
+def _parse_block_lines(content: str) -> dict[str, Any]:
+    """Parse le contenu interne d'un bloc TOON en dictionnaire Python.
+
+    Traite les lignes de la forme ``clé :: valeur`` en ignorant les lignes
+    vides et les lignes sans séparateur ``::``.
+
+    Cette fonction est une extraction du cœur de parsing de
+    ``parse_toon_to_dict()`` ; elle est également utilisée par
+    ``parse_toon_records()`` pour parser chaque enregistrement individuellement.
+    Son comportement est identique à la boucle inline qu'elle remplace.
+
+    Args:
+        content: Le contenu brut d'un bloc TOON, sans les délimiteurs
+            ``<<<``/``>>>``. Peut contenir des lignes vides.
+
+    Returns:
+        Un dictionnaire ``dict[str, Any]`` des paires clé/valeur parsées.
+        Retourne un dict vide si aucune paire n'est trouvée.
+    """
+    result: dict[str, Any] = {}
+
+    for line in content.splitlines():
+        line = line.strip()
+
+        # Ignorer les lignes vides et les lignes sans séparateur
+        if not line or "::" not in line:
+            continue
+
+        # Partitionner sur le PREMIER "::" uniquement
+        key, _, raw_value = line.partition("::")
+        key = key.strip()
+
+        # Ignorer les clés vides (ligne malformée type ":: valeur")
+        if not key:
+            continue
+
+        result[key] = _infer_value(raw_value)
+
+    return result
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # API publique
 # ─────────────────────────────────────────────────────────────────────────────
@@ -191,25 +233,7 @@ def parse_toon_to_dict(raw: str) -> dict[str, Any]:
         raise ToonParseError(reason="chaîne d'entrée vide", raw=raw)
 
     block_content = _extract_toon_block(raw)
-
-    result: dict[str, Any] = {}
-
-    for line in block_content.splitlines():
-        line = line.strip()
-
-        # Ignorer les lignes vides et les lignes sans séparateur
-        if not line or "::" not in line:
-            continue
-
-        # Partitionner sur le PREMIER "::" uniquement
-        key, _, raw_value = line.partition("::")
-        key = key.strip()
-
-        # Ignorer les clés vides (ligne malformée type ":: valeur")
-        if not key:
-            continue
-
-        result[key] = _infer_value(raw_value)
+    result = _parse_block_lines(block_content)
 
     if not result:
         raise ToonParseError(
@@ -279,3 +303,106 @@ def dump_dict_to_toon(data: dict[str, Any]) -> str:
 
     lines.append(">>>")
     return "\n".join(lines)
+
+
+_RECORD_SEP = "---"
+
+
+def parse_toon_records(raw: str) -> list[dict[str, Any]]:
+    """Parse un bloc TOON multi-enregistrements en liste de dictionnaires.
+
+    Utilisé exclusivement par le Verifier (Sprint 5) dont le format de sortie
+    LLM est un unique bloc ``<<<...>>>`` contenant plusieurs enregistrements
+    de claim séparés par une ligne ``---``.
+
+    Processus :
+        1. Extraction du bloc TOON via ``_extract_toon_block()``
+        2. Découpage du contenu sur les lignes égales à ``---`` (après strip)
+        3. Parsing de chaque section via ``_parse_block_lines()``
+        4. Rejet des sections vides (entre deux ``---`` consécutifs)
+
+    Compatibilité :
+        ``parse_toon_to_dict()``, ``_extract_toon_block()``,
+        ``dump_dict_to_toon()`` et ``_infer_value()`` ne sont pas modifiées
+        et restent disponibles pour Analyzer, Planner et Critic.
+
+    Piège de typage :
+        ``is_supported`` (champ Verifier) est parsé comme chaîne
+        ``"true"``/``"false"`` — jamais converti en ``bool`` Python.
+        Comparer avec ``record["is_supported"].strip().lower() == "true"``.
+
+    Args:
+        raw: La chaîne brute retournée par le LLM. Peut contenir du texte
+             parasite autour du bloc ``<<<...>>>``.
+
+    Returns:
+        Liste de ``dict[str, Any]``, un dict par enregistrement, dans
+        l'ordre d'apparition. Retourne une liste vide si le bloc
+        ``<<<...>>>`` est présent mais ne contient aucun enregistrement
+        (bloc vide, ex. zéro claim).
+
+    Raises:
+        ToonParseError: Si le bloc ``<<<...>>>`` est absent ou malformé
+            (propagée depuis ``_extract_toon_block()``), ou si au moins
+            un enregistrement entre deux séparateurs ``---`` est vide
+            (absence totale de paires clé/valeur dans la section).
+
+    Examples:
+        >>> raw = '''
+        ... <<<
+        ... claim_text      :: Rabat est la capitale du Maroc
+        ... is_supported    :: true
+        ... source_chunk_id :: c1
+        ... ---
+        ... claim_text      :: La ville compte 500000 habitants
+        ... is_supported    :: false
+        ... source_chunk_id ::
+        ... >>>
+        ... '''
+        >>> records = parse_toon_records(raw)
+        >>> len(records)
+        2
+        >>> records[0]["claim_text"]
+        'Rabat est la capitale du Maroc'
+        >>> records[0]["is_supported"]  # str, PAS bool
+        'true'
+        >>> records[1]["source_chunk_id"] is None  # valeur vide → None
+        True
+    """
+    if not raw or not raw.strip():
+        raise ToonParseError(reason="chaîne d'entrée vide", raw=raw)
+
+    block_content = _extract_toon_block(raw)
+
+    # Algorithme d'accumulation : regroupe les lignes par séparateur "---"
+    current_lines: list[str] = []
+    sections: list[str] = []
+    for line in block_content.splitlines():
+        if line.strip() == _RECORD_SEP:
+            sections.append("\n".join(current_lines))
+            current_lines = []
+        else:
+            current_lines.append(line)
+    # Dernière section (pas de "---" terminal)
+    sections.append("\n".join(current_lines))
+
+    records: list[dict[str, Any]] = []
+
+    for i, section in enumerate(sections):
+        parsed = _parse_block_lines(section)
+        if not parsed:
+            # Section vide acceptable uniquement si c'est l'unique section
+            # et que le bloc TOON est entièrement vide (zéro claim)
+            if len(sections) == 1:
+                # Bloc vide intentionnel (<<<\n>>>) → liste vide, pas d'erreur
+                return []
+            raise ToonParseError(
+                reason=(
+                    f"enregistrement vide détecté à l'index {i} "
+                    "(aucune paire clé/valeur entre deux séparateurs '---')"
+                ),
+                raw=raw,
+            )
+        records.append(parsed)
+
+    return records
