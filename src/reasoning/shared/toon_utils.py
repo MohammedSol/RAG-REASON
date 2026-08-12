@@ -319,7 +319,10 @@ def parse_toon_records(raw: str) -> list[dict[str, Any]]:
         1. Extraction du bloc TOON via ``_extract_toon_block()``
         2. Découpage du contenu sur les lignes égales à ``---`` (après strip)
         3. Parsing de chaque section via ``_parse_block_lines()``
-        4. Rejet des sections vides (entre deux ``---`` consécutifs)
+        4. Neutralisation des sections vides de BORDURE (séparateur parasite
+           en tête ou en fin de bloc) — artefact de formatage LLM courant
+        5. Rejet des sections vides INTERMÉDIAIRES (``---`` consécutifs au
+           milieu du bloc), qui signalent un enregistrement manquant
 
     Compatibilité :
         ``parse_toon_to_dict()``, ``_extract_toon_block()``,
@@ -339,13 +342,16 @@ def parse_toon_records(raw: str) -> list[dict[str, Any]]:
         Liste de ``dict[str, Any]``, un dict par enregistrement, dans
         l'ordre d'apparition. Retourne une liste vide si le bloc
         ``<<<...>>>`` est présent mais ne contient aucun enregistrement
-        (bloc vide, ex. zéro claim).
+        (bloc vide, ex. zéro claim, ou bloc composé uniquement de
+        séparateurs).
 
     Raises:
         ToonParseError: Si le bloc ``<<<...>>>`` est absent ou malformé
-            (propagée depuis ``_extract_toon_block()``), ou si au moins
-            un enregistrement entre deux séparateurs ``---`` est vide
-            (absence totale de paires clé/valeur dans la section).
+            (propagée depuis ``_extract_toon_block()``), ou si un
+            enregistrement INTERMÉDIAIRE entre deux séparateurs ``---``
+            est vide (absence totale de paires clé/valeur dans la section).
+            Un séparateur en tête ou en fin de bloc n'est PAS une erreur :
+            il est ignoré silencieusement.
 
     Examples:
         >>> raw = '''
@@ -386,19 +392,36 @@ def parse_toon_records(raw: str) -> list[dict[str, Any]]:
     # Dernière section (pas de "---" terminal)
     sections.append("\n".join(current_lines))
 
+    # Parsing de chaque section, en conservant son index d'ORIGINE : après
+    # neutralisation des sections de bordure ci-dessous, l'index d'une
+    # malformation interne doit rester celui du bloc tel que produit par le LLM.
+    parsed_sections: list[tuple[int, dict[str, Any]]] = [
+        (i, _parse_block_lines(section)) for i, section in enumerate(sections)
+    ]
+
+    # Un séparateur '---' parasite en TÊTE ou en FIN de bloc génère une section
+    # vide dénuée d'ambiguïté sémantique : aucun enregistrement n'est perdu, il
+    # s'agit d'un simple artefact de formatage (le LLM clôt volontiers sa liste
+    # par un séparateur). On l'ignore silencieusement.
+    # Une section vide INTERMÉDIAIRE reste au contraire une vraie malformation :
+    # elle signale un enregistrement manquant entre deux séparateurs.
+    while parsed_sections and not parsed_sections[0][1]:
+        parsed_sections.pop(0)
+    while parsed_sections and not parsed_sections[-1][1]:
+        parsed_sections.pop()
+
+    # Bloc entièrement vide (<<<\n>>>) ou composé uniquement de séparateurs
+    # → zéro claim, comportement inchangé : liste vide, pas d'erreur.
+    if not parsed_sections:
+        return []
+
     records: list[dict[str, Any]] = []
 
-    for i, section in enumerate(sections):
-        parsed = _parse_block_lines(section)
+    for index, parsed in parsed_sections:
         if not parsed:
-            # Section vide acceptable uniquement si c'est l'unique section
-            # et que le bloc TOON est entièrement vide (zéro claim)
-            if len(sections) == 1:
-                # Bloc vide intentionnel (<<<\n>>>) → liste vide, pas d'erreur
-                return []
             raise ToonParseError(
                 reason=(
-                    f"enregistrement vide détecté à l'index {i} "
+                    f"enregistrement vide détecté à l'index {index} "
                     "(aucune paire clé/valeur entre deux séparateurs '---')"
                 ),
                 raw=raw,

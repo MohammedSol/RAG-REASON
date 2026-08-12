@@ -548,6 +548,61 @@ class TestParseToonRecords:
             parse_toon_records(raw)
         assert "enregistrement vide" in str(exc_info.value)
 
+    # ── Cas : séparateur parasite en bordure de bloc ──────────────────────────
+
+    def test_separateur_terminal_est_ignore(self) -> None:
+        """Un '---' terminal avant '>>>' est ignoré, pas une erreur.
+
+        Régression : ce cas levait ToonParseError, ce qui déclenchait le repli
+        fail-closed du Verifier et transformait une réponse 100% fondée en
+        verdict d'hallucination.
+        """
+        raw = (
+            "<<<\n"
+            "claim_text      :: OpenAI was founded in December 2015\n"
+            "is_supported    :: true\n"
+            "source_chunk_id :: openai-history-001\n"
+            "---\n"
+            "claim_text      :: GPT-4 was released in March 2023\n"
+            "is_supported    :: true\n"
+            "source_chunk_id :: gpt4-report-002\n"
+            "---\n"
+            ">>>"
+        )
+        records = parse_toon_records(raw)
+        assert len(records) == 2
+        assert records[0]["claim_text"] == "OpenAI was founded in December 2015"
+        assert records[1]["source_chunk_id"] == "gpt4-report-002"
+
+    def test_separateur_terminal_avec_espaces_est_ignore(self) -> None:
+        """Cas réel observé : '---  ' (espaces en fin) produit par Qwen 2.5 7B."""
+        raw = (
+            "<<<\n"
+            "claim_text      :: OpenAI was founded in December 2015.\n"
+            "is_supported    :: true\n"
+            "source_chunk_id :: openai-history-001\n"
+            "---  \n"
+            ">>>"
+        )
+        records = parse_toon_records(raw)
+        assert len(records) == 1
+        assert records[0]["claim_text"] == "OpenAI was founded in December 2015."
+        assert records[0]["is_supported"] == "true"
+
+    def test_separateur_initial_est_ignore(self) -> None:
+        """Un '---' en tête de bloc est ignoré symétriquement."""
+        raw = (
+            "<<<\n"
+            "---\n"
+            "claim_text      :: GPT-4 supports image inputs\n"
+            "is_supported    :: true\n"
+            "source_chunk_id :: gpt4-report-002\n"
+            ">>>"
+        )
+        records = parse_toon_records(raw)
+        assert len(records) == 1
+        assert records[0]["claim_text"] == "GPT-4 supports image inputs"
+
     # ── Cas : bloc absent ─────────────────────────────────────────────────────
 
     def test_bloc_absent_leve_toon_parse_error(self) -> None:
