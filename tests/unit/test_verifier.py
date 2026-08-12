@@ -209,6 +209,9 @@ class TestPartiallyGroundedAnswer:
         assert result.faithfulness_score == pytest.approx(2 / 3)
         # Seuil par défaut 0.80 : 0.667 < 0.80 → non fondé
         assert result.is_grounded is False
+        # Invariant verifier_spec.md §7.1 : même avec is_grounded=False, le
+        # Verifier ne tronque, ne reformule et n'annote jamais la réponse.
+        assert result.final_answer == answer_openai
 
     @patch("reasoning.verifier.verifier.completion")
     def test_unsupported_claims_list_contains_exact_text(
@@ -279,6 +282,10 @@ class TestFullyUngroundedAnswer:
         assert result.faithfulness_score == pytest.approx(0.0)
         assert result.is_grounded is False
         assert len(result.unsupported_claims) == 2
+        # Invariant verifier_spec.md §7.1 : même face à une hallucination
+        # totale, la réponse est restituée intacte — le jugement appartient
+        # à l'orchestrateur, pas au Verifier.
+        assert result.final_answer == answer_openai
 
 
 # ─────────────────────────────────────────────────────────────────────────────
