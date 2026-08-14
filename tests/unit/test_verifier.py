@@ -14,6 +14,7 @@ from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
+
 from reasoning.contracts.action_interface import RetrievedChunk
 from reasoning.contracts.internal_models import VerificationResult
 from reasoning.shared.toon_utils import dump_dict_to_toon

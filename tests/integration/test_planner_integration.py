@@ -12,6 +12,7 @@ Run (avec Ollama actif) :
 from __future__ import annotations
 
 import pytest
+
 from reasoning.contracts.internal_models import (
     AnalysisResult,
     ExecutionPlan,
@@ -179,9 +180,9 @@ def test_planner_live(
     result = live_planner.decompose(query=query, analysis=analysis)
 
     # ── Assertion 1 : type de retour correct ──────────────────────────────
-    assert isinstance(
-        result, ExecutionPlan
-    ), f"decompose() doit retourner un ExecutionPlan, reçu {type(result)}"
+    assert isinstance(result, ExecutionPlan), (
+        f"decompose() doit retourner un ExecutionPlan, reçu {type(result)}"
+    )
 
     # ── Assertion 2 : au moins 1 étape dans le plan ───────────────────────
     assert len(result.steps) >= 1, f"Le plan ne doit jamais être vide. Query: {query!r}"
@@ -194,8 +195,7 @@ def test_planner_live(
 
     # ── Assertion 4 : DAG acyclique ────────────────────────────────────────
     assert live_planner._validate_dag(result) is True, (
-        f"Le plan généré contient un cycle ou une référence invalide. "
-        f"Query: {query!r}"
+        f"Le plan généré contient un cycle ou une référence invalide. Query: {query!r}"
     )
 
     # ── Assertion 5 : champs obligatoires non vides dans chaque PlanStep ──

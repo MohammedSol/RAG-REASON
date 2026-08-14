@@ -13,6 +13,7 @@ from __future__ import annotations
 from unittest.mock import MagicMock, patch
 
 import pytest
+
 from reasoning.contracts.internal_models import (
     AnalysisResult,
     ExecutionPlan,
@@ -260,9 +261,9 @@ def test_max_steps_truncation(mock_completion: MagicMock, planner: Planner) -> N
     assert isinstance(result, ExecutionPlan)
 
     # La règle du budget doit être strictement respectée
-    assert (
-        len(result.steps) <= 2
-    ), f"Budget dépassé : {len(result.steps)} étapes retournées pour un budget de 2"
+    assert len(result.steps) <= 2, (
+        f"Budget dépassé : {len(result.steps)} étapes retournées pour un budget de 2"
+    )
 
     # Les étapes conservées doivent être les premières (step_1, step_2)
     step_ids = [s.step_id for s in result.steps]

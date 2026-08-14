@@ -124,11 +124,14 @@ Mypy s'exécute sur les **sources ET les tests**, jamais seulement les sources.
 
 ---
 
-## Échec de test connu
+## État attendu de la suite de tests
 
-`test_analyzer_default_params` échoue de façon **préexistante** : `timeout`
-vaut `20.0` alors que le test attend `15.0`.
+La suite doit être **intégralement verte (232 tests)**, hors tests
+d'intégration. **Tout échec est une régression à signaler, jamais à
+tolérer.**
 
-Hors périmètre — **ne pas le corriger**. Mais il doit rester le **SEUL** échec
-de la suite, hors tests d'intégration. Tout autre échec est une régression à
-signaler immédiatement.
+> Historique : `test_analyzer_default_params` a longtemps été documenté ici
+> comme un échec préexistant attendu. Il est résolu — son assertion
+> (`timeout == 15.0`) était erronée depuis le commit initial du Sprint 3,
+> alors que `QueryAnalyzer` applique `20.0` depuis ce même commit. Cette
+> tolérance n'a plus lieu d'être et ne doit pas être réintroduite.

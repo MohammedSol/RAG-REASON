@@ -14,6 +14,7 @@ from __future__ import annotations
 from typing import Any
 
 import pytest
+
 from reasoning.shared.toon_utils import (
     ToonParseError,
     _extract_toon_block,

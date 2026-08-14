@@ -17,6 +17,7 @@ Pour ignorer ces tests si Ollama n'est pas disponible :
 from __future__ import annotations
 
 import pytest
+
 from reasoning.analyzer import QueryAnalyzer
 from reasoning.contracts.internal_models import AnalysisResult, QueryType
 
@@ -137,9 +138,9 @@ class TestAnalyzerLive:
         """
         result = live_analyzer.analyze(query)
 
-        assert isinstance(
-            result, AnalysisResult
-        ), f"Attendu AnalysisResult, obtenu {type(result)} pour : {query!r}"
+        assert isinstance(result, AnalysisResult), (
+            f"Attendu AnalysisResult, obtenu {type(result)} pour : {query!r}"
+        )
         assert result.query_type == expected_type, (
             f"Requête : {query!r}\n"
             f"  Attendu  : {expected_type}\n"

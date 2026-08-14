@@ -14,6 +14,7 @@ Exécution :
 
 import pytest
 from pydantic import ValidationError
+
 from reasoning.contracts.action_interface import (
     RetrievalRequest,
     RetrievalResponse,

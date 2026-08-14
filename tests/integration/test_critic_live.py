@@ -17,6 +17,7 @@ Pour ignorer ces tests si Ollama n'est pas disponible :
 from __future__ import annotations
 
 import pytest
+
 from reasoning.contracts.action_interface import RetrievalResponse, RetrievedChunk
 from reasoning.contracts.internal_models import CriticEvaluation, PlanStep
 from reasoning.critic import Critic

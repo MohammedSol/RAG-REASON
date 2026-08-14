@@ -15,6 +15,7 @@ from unittest.mock import MagicMock, patch
 import httpx
 import pytest
 from pydantic import ValidationError
+
 from reasoning.action_client import ActionClient
 from reasoning.contracts.action_interface import RetrievalRequest, RetrievalResponse
 

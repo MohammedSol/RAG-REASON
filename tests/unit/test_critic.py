@@ -14,6 +14,7 @@ from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
+
 from reasoning.contracts.action_interface import RetrievalResponse, RetrievedChunk
 from reasoning.contracts.internal_models import CriticEvaluation, PlanStep
 from reasoning.critic import Critic

@@ -6,14 +6,32 @@ repos:
       - id: end-of-file-fixer
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.5.0
+    # Doit rester aligné sur la version de Ruff du projet (pyproject.toml,
+    # dependency-groups.dev). Une divergence fait diverger le tri d'imports :
+    # le hook reformate dans un style que le Ruff du projet rejette ensuite.
+    rev: v0.15.21
     hooks:
       - id: ruff
         args: [ --fix ]
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.16.1
+  # Mypy s'exécute via l'environnement DU PROJET, pas dans un venv isolé.
+  #
+  # Pourquoi : `mirrors-mypy` installe ses propres dépendances et ne reçoit que
+  # les fichiers stagés. Le paquet `reasoning` n'y étant pas installable, les
+  # imports se résolvaient en `Any` et le typage divergeait du portail réel.
+  # Cas concret rencontré : `tests/unit/test_contracts.py:322` porte un
+  # `# type: ignore[arg-type]` NÉCESSAIRE en contexte complet, que le hook isolé
+  # signalait comme inutile — bloquant un commit sur un faux positif.
+  #
+  # Ce hook lance désormais exactement la commande du portail qualité, sur
+  # l'ensemble du projet (`pass_filenames: false`), ce qui garantit qu'un
+  # commit accepté par le hook l'est aussi par la CI.
+  - repo: local
     hooks:
-      - id: mypy
-        additional_dependencies: [pydantic, pytest]
+      - id: mypy-project
+        name: mypy --strict (portail projet)
+        entry: uv run mypy --strict src/ tests/
+        language: system
+        pass_filenames: false
+        types: [python]
