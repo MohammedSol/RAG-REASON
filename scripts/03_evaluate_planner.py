@@ -19,18 +19,14 @@ from __future__ import annotations
 import io
 import json
 import random
+import re
+import statistics
 import sys
 import time
 from collections import deque
 from pathlib import Path
-from typing import TypedDict
+from typing import Any, TypedDict
 
-from reasoning.contracts.internal_models import (
-    AnalysisResult,
-    ExecutionPlan,
-    QueryType,
-)
-from reasoning.planner import Planner
 from rich.console import Console
 from rich.panel import Panel
 from rich.progress import (
@@ -41,6 +37,15 @@ from rich.progress import (
     TimeElapsedColumn,
 )
 from rich.table import Table
+
+import reasoning.planner.planner as planner_module
+from reasoning.contracts.internal_models import (
+    AnalysisResult,
+    ExecutionPlan,
+    QueryType,
+)
+from reasoning.planner import Planner
+from reasoning.shared.toon_utils import ToonParseError, parse_toon_to_dict
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Fix encoding Windows — cp1252 ne gere pas tous les caracteres rich
@@ -86,11 +91,100 @@ class PlannerEvalRecord(TypedDict):
     hotpot_type: str  # "bridge" ou "comparison"
     query_type: str  # QueryType utilise pour la planification
     n_steps: int  # nombre d'etapes dans le plan genere
-    toon_valid: bool  # la reponse LLM respectait le format TOON
+    toon_valid: bool  # MESURE sur la sortie LLM brute (cf. check_toon_validity)
+    toon_failure_reason: str  # "" si valide, sinon la forme d'echec exacte
     dag_valid: bool  # le graphe est acyclique et coherent
-    is_fallback: bool  # le planner a utilise le fallback sequentiel
+    is_fallback: bool  # le planner a bascule sur le plan sequentiel degrade
     latency_ms: float
+    is_cold_start: bool  # 1re requete : inclut le chargement du modele Ollama
+    raw_llm_output: str  # sortie LLM brute, pour audit de la metrique
     steps_summary: list[str]  # [step_id: sub_query] pour affichage
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Mesure REELLE de la validite TOON
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# POURQUOI CE CHANGEMENT : l'ancienne formule ne mesurait JAMAIS la sortie du
+# LLM. Elle valait :
+#     toon_valid = True
+#     ... except: toon_valid = False        # uniquement sur exception
+#     if is_fallback: toon_valid = False    # <-- le vrai discriminant
+# soit, en pratique, `toon_valid = not detect_fallback(plan)`.
+#
+# Or `detect_fallback()` est une heuristique STRUCTURELLE qui classe en echec :
+#   - tout plan a 1 etape, meme parfaitement forme ;
+#   - toute chaine sequentielle dont les sous-requetes partagent un des 5
+#     premiers mots de la question — donc n'importe quel mot outil
+#     ("the", "is", "what", "in", "was").
+# Consequence mesuree sur le run precedent : les 9 plans declares
+# "TOON invalides" avaient tous `dag_valid=True`, aucun n'avait 1 etape, et
+# leurs sorties LLM brutes etaient strictement conformes au format TOON. Les
+# 13 plans a 2 etapes declares "valides" avaient exactement la meme structure
+# sequentielle que les 8 declares "invalides" : seul un recouvrement lexical
+# fortuit les separait. La metrique publiee (64 %) mesurait donc le
+# comportement de son heuristique, pas celui du moteur.
+#
+# NOUVELLE DEFINITION : la validite TOON est evaluee sur la sortie LLM BRUTE,
+# et uniquement sur elle — le bloc est-il extractible et parsable par
+# `toon_utils` sans exception ? Le taux de repli reste suivi, mais comme une
+# metrique DISTINCTE (`fallback_rate_pct`) : c'est un indicateur de qualite de
+# planification, pas de conformite de format.
+
+_llm_capture: dict[str, str] = {"raw": ""}
+_original_completion = planner_module.completion
+
+
+def _instrumented_completion(*args: object, **kwargs: object) -> Any:
+    """Wrapper transparent : capture la sortie LLM brute sans rien alterer."""
+    response = _original_completion(*args, **kwargs)
+    try:
+        _llm_capture["raw"] = response.choices[0].message.content or ""
+    except Exception:  # noqa: BLE001 — la capture ne doit jamais casser le run
+        _llm_capture["raw"] = ""
+    return response
+
+
+planner_module.completion = _instrumented_completion
+
+
+def check_toon_validity(raw: str) -> tuple[bool, str]:
+    """Evalue la conformite TOON de la sortie LLM brute du Planner.
+
+    Le contrat attendu (docs/planner_spec.md §5) est une suite de blocs
+    `<<<...>>>`, chacun parsable en paires `cle :: valeur`, dont au moins un
+    decrit une etape (`step_id` + `sub_query`).
+
+    Args:
+        raw: La reponse textuelle brute du LLM.
+
+    Returns:
+        Tuple `(is_valid, reason)`. `reason` vaut "" si valide, sinon elle
+        nomme la forme d'echec exacte.
+    """
+    if not raw.strip():
+        return False, "reponse LLM vide"
+
+    blocks = re.findall(r"<<<(.*?)>>>", raw, re.DOTALL)
+    if not blocks:
+        return False, "aucun bloc <<<...>>> dans la sortie"
+
+    parsed_blocks: list[dict[str, object]] = []
+    for i, block in enumerate(blocks):
+        try:
+            parsed_blocks.append(parse_toon_to_dict(f"<<<{block}>>>"))
+        except ToonParseError as exc:
+            return False, f"bloc {i} non parsable ({exc.reason})"
+
+    step_blocks = [b for b in parsed_blocks if "step_id" in b]
+    if not step_blocks:
+        return False, "aucun bloc d'etape (champ step_id absent partout)"
+
+    incomplete = [b for b in step_blocks if not b.get("sub_query")]
+    if incomplete:
+        return False, f"{len(incomplete)} bloc(s) d'etape sans sub_query"
+
+    return True, ""
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -307,7 +401,8 @@ def run_evaluation() -> None:
             )
 
             # Inference avec mesure de latence
-            toon_valid = True  # suppose vrai, mis a False si le Planner fallback
+            _llm_capture["raw"] = ""
+            llm_crashed = False
             t_start = time.perf_counter()
             try:
                 plan: ExecutionPlan = planner.decompose(
@@ -331,7 +426,7 @@ def run_evaluation() -> None:
                     ],
                     dependencies_graph={"step_1": []},
                 )
-                toon_valid = False
+                llm_crashed = True
 
             t_end = time.perf_counter()
             latency_ms = (t_end - t_start) * 1000
@@ -339,12 +434,16 @@ def run_evaluation() -> None:
             # Validation DAG independante
             dag_ok, dag_reason = validate_dag(plan)
 
-            # Detection du fallback sequentiel
+            # Taux de repli : metrique DISTINCTE de la validite de format.
+            # Un repli signale une planification degradee, pas necessairement
+            # une sortie LLM malformee (cf. commentaire de check_toon_validity).
             is_fallback = detect_fallback(plan)
 
-            # Si fallback utilise = le LLM n'a pas respecte le format TOON
-            if is_fallback and toon_valid:
-                toon_valid = False  # fallback = echec de parsing TOON
+            # Validite TOON : mesuree sur la sortie LLM BRUTE, rien d'autre.
+            if llm_crashed:
+                toon_valid, toon_reason = False, "exception pendant l'appel LLM"
+            else:
+                toon_valid, toon_reason = check_toon_validity(_llm_capture["raw"])
 
             # Resume des etapes pour affichage
             steps_summary = [
@@ -361,9 +460,12 @@ def run_evaluation() -> None:
                 query_type=str(query_type),
                 n_steps=len(plan.steps),
                 toon_valid=toon_valid,
+                toon_failure_reason=toon_reason,
                 dag_valid=dag_ok,
                 is_fallback=is_fallback,
                 latency_ms=round(latency_ms, 1),
+                is_cold_start=(idx == 1),
+                raw_llm_output=_llm_capture["raw"],
                 steps_summary=steps_summary,
             )
             eval_results.append(record)
@@ -385,8 +487,21 @@ def run_evaluation() -> None:
     bridge_res = [r for r in eval_results if r["hotpot_type"] == "bridge"]
     comp_res = [r for r in eval_results if r["hotpot_type"] == "comparison"]
 
+    # ── Latence : mediane + moyenne, demarrage a froid isole ──────────────────
+    # La moyenne seule est fragile : sur le run precedent, un unique point a
+    # 78 s (chargement du modele 7B) tirait la moyenne de ~20,5 s a 22,8 s.
+    warm = [r for r in eval_results if not r["is_cold_start"]]
+    cold = [r for r in eval_results if r["is_cold_start"]]
+    warm_lat = sorted(r["latency_ms"] for r in warm) or [0.0]
+    cold_start_ms = round(cold[0]["latency_ms"], 1) if cold else 0.0
+
     avg_latency = sum(r["latency_ms"] for r in eval_results) / total
     avg_steps = sum(r["n_steps"] for r in eval_results) / total
+    median_latency_warm = statistics.median(warm_lat)
+    mean_latency_warm = statistics.fmean(warm_lat)
+
+    # Taux de repli : metrique autonome, decouplee de la validite de format
+    fallback_rate = n_fallback / total * 100
 
     toon_pct = n_toon_valid / total * 100
     dag_pct = n_dag_valid / total * 100
@@ -400,15 +515,28 @@ def run_evaluation() -> None:
     output_payload = {
         "summary": {
             "total": total,
+            # Validite TOON : MESUREE sur la sortie LLM brute (nouvelle
+            # definition — l'ancienne derivait de detect_fallback()).
             "toon_valid": n_toon_valid,
-            "dag_valid": n_dag_valid,
-            "both_valid": n_both_valid,
-            "fallback_count": n_fallback,
             "toon_validity_pct": round(toon_pct, 2),
+            "dag_valid": n_dag_valid,
             "dag_validity_pct": round(dag_pct, 2),
+            "both_valid": n_both_valid,
             "full_validity_pct": round(both_pct, 2),
-            "avg_latency_ms": round(avg_latency, 1),
+            # Taux de repli : metrique DISTINCTE, ne conditionne plus la
+            # validite de format.
+            "fallback_count": n_fallback,
+            "fallback_rate_pct": round(fallback_rate, 2),
             "avg_steps_per_plan": round(avg_steps, 2),
+            "latency": {
+                "cold_start_ms": cold_start_ms,
+                "warm_median_ms": round(median_latency_warm, 1),
+                "warm_mean_ms": round(mean_latency_warm, 1),
+                "warm_n": len(warm),
+            },
+            # Conservee pour comparaison historique : inclut le demarrage a
+            # froid et n'est donc pas representative du regime nominal.
+            "avg_latency_ms": round(avg_latency, 1),
         },
         "results": list(eval_results),
     }
@@ -447,7 +575,7 @@ def run_evaluation() -> None:
 
     tc = _pct_color(toon_pct)
     table.add_row(
-        "Taux validite TOON (format <<<...>>>)",
+        "Validite TOON (sortie LLM brute)",
         f"[{tc}]{toon_pct:.1f}% ({n_toon_valid}/{total})[/{tc}]",
     )
     dc = _pct_color(dag_pct)
@@ -478,15 +606,39 @@ def run_evaluation() -> None:
         )
 
     table.add_row("", "")
-    table.add_row("Fallbacks sequentiels detectes", str(n_fallback))
+    table.add_row(
+        "Taux de repli sequentiel [dim](distinct)[/dim]",
+        f"{fallback_rate:.1f}% ({n_fallback}/{total})",
+    )
     table.add_row("Nombre moyen d'etapes par plan", f"{avg_steps:.1f}")
-    table.add_row("Latence moyenne par requete", f"{avg_latency:.0f} ms")
+    table.add_row("", "")
+    table.add_row("Latence MEDIANE (a chaud)", f"{median_latency_warm:.0f} ms")
+    table.add_row("Latence moyenne (a chaud)", f"{mean_latency_warm:.0f} ms")
+    table.add_row(
+        "[dim]Latence moyenne globale (avec demarrage a froid)[/dim]",
+        f"[dim]{avg_latency:.0f} ms[/dim]",
+    )
     table.add_row(
         "Resultats sauvegardes dans",
         str(OUTPUT_FILE.relative_to(BASE_DIR)),
     )
 
     console.print(table)
+    console.print(
+        f"\n[yellow]Note :[/yellow] la 1re requete ({cold_start_ms:.0f} ms) inclut le "
+        "chargement du modele Ollama et est exclue des latences 'a chaud'."
+    )
+
+    # Detail des echecs de format, s'il y en a
+    failures = [r for r in eval_results if not r["toon_valid"]]
+    if failures:
+        console.print("\n[bold red]Echecs de format TOON :[/bold red]")
+        for r in failures:
+            console.print(f"  - {r['id']} : {r['toon_failure_reason']}")
+    else:
+        console.print(
+            "\n[green]Aucun echec de format TOON sur la sortie LLM brute.[/green]"
+        )
     console.print()
 
 
