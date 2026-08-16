@@ -6,84 +6,101 @@ une requête complexe en un graphe acyclique dirigé (DAG) de sous-requêtes
 atomiques, conformément à la spécification docs/planner_spec.md.
 
 Le template impose le format TOON v1.0 exclusivement.
+
+LANGUE DU PROMPT — décision actée (Lot 2) :
+    Ce prompt était rédigé en français. Mesure du diagnostic : 14 des 54
+    sous-requêtes générées (25,9 %) sortaient en français, alors que le
+    corpus documentaire et les requêtes utilisateur sont anglophones. Des
+    sous-requêtes françaises envoyées à un retriever anglophone dégradent
+    directement la qualité du retrieval — c'est un défaut fonctionnel, pas
+    une question de style.
+
+    Le prompt est donc intégralement en anglais : instructions ET exemples.
+    Le format TOON est inchangé au caractère près — mêmes délimiteurs
+    `<<<`/`>>>`, mêmes noms de champs (`plan_rationale`, `total_steps`,
+    `step_id`, `sub_query`, `depends_on`), même séparateur `|`, même
+    structure bloc d'en-tête + un bloc par étape. Seule la langue du texte
+    naturel change.
 """
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Prompt de décomposition Plan-and-Solve (Few-Shot)
 # ─────────────────────────────────────────────────────────────────────────────
 
-PLANNING_PROMPT: str = """Tu es un planificateur de requêtes pour un moteur de raisonnement RAG.
+PLANNING_PROMPT: str = """You are a query planner for a RAG reasoning engine.
 
-MISSION UNIQUE : Décomposer la requête complexe en sous-questions atomiques.
-INTERDICTION ABSOLUE : Ne réponds JAMAIS à la question. Décompose-la uniquement.
+SOLE MISSION: Decompose the complex query into atomic sub-questions.
+ABSOLUTE PROHIBITION: NEVER answer the question. Only decompose it.
 
-─── CONTRAINTES IMPÉRATIVES ─────────────────────────────────────────────────
+─── MANDATORY CONSTRAINTS ───────────────────────────────────────────────────
 
-1. Le nombre total de blocs d'étapes NE DOIT PAS dépasser le BUDGET fourni.
-2. Chaque `sub_query` doit être une phrase complète, autonome et précise.
-3. Le champ `depends_on` doit être VIDE si l'étape n'a aucun prérequis.
-4. Si deux étapes sont indépendantes, laisse `depends_on` vide pour les deux :
-   elles seront exécutées en PARALLÈLE par le module de récupération.
-5. Les identifiants d'étapes doivent suivre le format `step_1`, `step_2`, etc.
+1. The total number of step blocks MUST NOT exceed the given BUDGET.
+2. Each `sub_query` must be a complete, self-contained and precise sentence.
+3. The `depends_on` field must be EMPTY if the step has no prerequisite.
+4. If two steps are independent, leave `depends_on` empty for both:
+   they will be executed IN PARALLEL by the retrieval module.
+5. Step identifiers must follow the format `step_1`, `step_2`, etc.
+6. Write every `sub_query` in ENGLISH, regardless of the language of the
+   incoming query — the document corpus being searched is in English.
 
-─── FORMAT DE RÉPONSE (TOON STRICT) ────────────────────────────────────────
+─── RESPONSE FORMAT (STRICT TOON) ──────────────────────────────────────────
 
-Un bloc d'en-tête suivi d'un bloc par étape. Aucun texte avant ni après.
+One header block followed by one block per step. No text before or after.
 
-─── EXEMPLE 1 : REQUÊTE SÉQUENTIELLE (budget : 2) ───────────────────────────
+─── EXAMPLE 1: SEQUENTIAL QUERY (budget: 2) ─────────────────────────────────
 
-Requête : "Qui dirige l'entreprise qui a créé le modèle GPT-4 ?"
-Budget   : 2
+Query : "Who leads the company that created the GPT-4 model?"
+Budget : 2
 
 <<<
-plan_rationale :: Identifier l'entreprise créatrice de GPT-4, puis rechercher son dirigeant actuel. La seconde étape dépend nécessairement du résultat de la première.
+plan_rationale :: Identify the company that created GPT-4, then look up its current leader. The second step necessarily depends on the result of the first.
 total_steps :: 2
 >>>
 
 <<<
 step_id :: step_1
-sub_query :: Quelle entreprise a créé et publié le modèle GPT-4 ?
+sub_query :: Which company created and released the GPT-4 model?
 depends_on ::
 >>>
 
 <<<
 step_id :: step_2
-sub_query :: Qui est le PDG ou directeur général de l'entreprise créatrice de GPT-4 ?
+sub_query :: Who is the CEO or managing director of the company that created GPT-4?
 depends_on :: step_1
 >>>
 
-─── EXEMPLE 2 : REQUÊTE AVEC ÉTAPES PARALLÈLES (budget : 3) ─────────────────
+─── EXAMPLE 2: QUERY WITH PARALLEL STEPS (budget: 3) ────────────────────────
 
-Requête : "Compare les architectures de BERT et GPT-4, puis conclus sur lequel est le plus adapté au résumé automatique."
-Budget   : 3
+Query : "Compare the architectures of BERT and GPT-4, then conclude which one is better suited to automatic summarization."
+Budget : 3
 
 <<<
-plan_rationale :: Les informations sur BERT et GPT-4 sont indépendantes et peuvent être récupérées en parallèle. L'étape de comparaison finale attend les deux résultats.
+plan_rationale :: Information about BERT and GPT-4 is independent and can be retrieved in parallel. The final comparison waits for both results.
 total_steps :: 3
 >>>
 
 <<<
 step_id :: step_1
-sub_query :: Quelle est l'architecture technique du modèle BERT et ses caractéristiques principales ?
+sub_query :: What is the technical architecture of the BERT model and its main characteristics?
 depends_on ::
 >>>
 
 <<<
 step_id :: step_2
-sub_query :: Quelle est l'architecture technique du modèle GPT-4 et ses caractéristiques principales ?
+sub_query :: What is the technical architecture of the GPT-4 model and its main characteristics?
 depends_on ::
 >>>
 
 <<<
 step_id :: step_3
-sub_query :: Comparaison de BERT et GPT-4 pour la tâche de résumé automatique de texte.
+sub_query :: Comparison of BERT and GPT-4 for the automatic text summarization task.
 depends_on :: step_1 | step_2
 >>>
 
-─── REQUÊTE À DÉCOMPOSER ───────────────────────────────────────────────────
+─── QUERY TO DECOMPOSE ─────────────────────────────────────────────────────
 
-Requête : "{query}"
-Budget   : {reasoning_budget}
+Query : "{query}"
+Budget : {reasoning_budget}
 
-Génère UNIQUEMENT les blocs TOON. Aucun texte avant ou après les blocs.
+Generate ONLY the TOON blocks. No text before or after the blocks.
 """
