@@ -1,0 +1,478 @@
+{
+  "summary": {
+    "total": 25,
+    "toon_valid": 25,
+    "toon_validity_pct": 100.0,
+    "dag_valid": 25,
+    "dag_validity_pct": 100.0,
+    "both_valid": 25,
+    "full_validity_pct": 100.0,
+    "fallback_count": 8,
+    "fallback_rate_pct": 32.0,
+    "avg_steps_per_plan": 2.2,
+    "latency": {
+      "cold_start_ms": 66409.7,
+      "warm_median_ms": 17953.0,
+      "warm_mean_ms": 20124.1,
+      "warm_n": 24
+    },
+    "avg_latency_ms": 21975.5
+  },
+  "results": [
+    {
+      "id": "5add67555542992ae4cec54e",
+      "question": "Which of these battles occurred earlier--the Battle of Peleliu or the Battle of Belleau Wood?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 66409.7,
+      "is_cold_start": true,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the date of the Battle of Peleliu?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the date of the Battle of Belleau Wood?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the date of the Battle of Peleliu? [depends_on=[]]",
+        "step_2: What is the date of the Battle of Belleau Wood? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a74106b55429979e288289e",
+      "question": "Where is the company that Sachin Warrier worked for as a software engineer headquartered? ",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 23905.9,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nplan_rationale :: Identify the company where Sachin Warrier worked as a software engineer, then find out where this company is headquartered.\ntotal_steps :: 2\n>>>\n\n<<<\nstep_id :: step_1\nsub_query :: What company did Sachin Warrier work for as a software engineer?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Where is the headquarters of the company that Sachin Warrier worked for located?\ndepends_on :: step_1\n>>>",
+      "steps_summary": [
+        "step_1: What company did Sachin Warrier work for as a software engineer? [depends_on=[]]",
+        "step_2: Where is the headquarters of the company that Sachin Warrier worked fo... [depends_on=['step_1']]"
+      ]
+    },
+    {
+      "id": "5a7bbb64554299042af8f7cc",
+      "question": "Who is older, Annie Morton or Terry Richardson?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 3,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 20656.6,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the birth year of Annie Morton?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the birth year of Terry Richardson?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_3\nsub_query :: Compare the birth years of Annie Morton and Terry Richardson to determine who is older.\ndepends_on :: step_1 | step_2\n>>>",
+      "steps_summary": [
+        "step_1: What is the birth year of Annie Morton? [depends_on=[]]",
+        "step_2: What is the birth year of Terry Richardson? [depends_on=[]]",
+        "step_3: Compare the birth years of Annie Morton and Terry Richardson to determ... [depends_on=['step_1', 'step_2']]"
+      ]
+    },
+    {
+      "id": "5a79c1335542994bb9457066",
+      "question": "Eric Ambler and Carol Shields are both best Known for what profession?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 13038.1,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is Eric Ambler best known for?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is Carol Shields best known for?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is Eric Ambler best known for? [depends_on=[]]",
+        "step_2: What is Carol Shields best known for? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5ae005b555429942ec259bec",
+      "question": "In what year was the novel that Lourenço Mutarelli based \"Nina\" on based first published?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 23237.1,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nplan_rationale :: Identify the novel based on which Lourenço Mutarelli wrote \"Nina\", then find out in what year that original novel was first published.\ntotal_steps :: 2\n>>>\n\n<<<\nstep_id :: step_1\nsub_query :: Which novel did Lourenço Mutarelli base \"Nina\" on?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: In what year was the identified novel first published?\ndepends_on :: step_1\n>>>",
+      "steps_summary": [
+        "step_1: Which novel did Lourenço Mutarelli base \"Nina\" on? [depends_on=[]]",
+        "step_2: In what year was the identified novel first published? [depends_on=['step_1']]"
+      ]
+    },
+    {
+      "id": "5a78bd9b554299078472774a",
+      "question": "What nationality were social anthropologists Alfred Gell and Edmund Leach?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 20544.8,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nplan_rationale :: Identify the nationalities of both Alfred Gell and Edmund Leach, which can be done in parallel.\ntotal_steps :: 2\n>>>\n\n<<<\nstep_id :: step_1\nsub_query :: What is the nationality of social anthropologist Alfred Gell?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the nationality of social anthropologist Edmund Leach?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the nationality of social anthropologist Alfred Gell? [depends_on=[]]",
+        "step_2: What is the nationality of social anthropologist Edmund Leach? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5ae37c765542992f92d822d4",
+      "question": "What was the name of the 1996 loose adaptation of William Shakespeare's \"Romeo & Juliet\" written by James Gunn?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 30203.9,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nplan_rationale :: Identify the specific 1996 adaptation of Romeo & Juliet, then find its author.\ntotal_steps :: 2\n>>>\n\n<<<\nstep_id :: step_1\nsub_query :: What is the title and a brief description of the 1996 loose adaptation of William Shakespeare's \"Romeo & Juliet\"?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Who wrote the 1996 loose adaptation of William Shakespeare's \"Romeo & Juliet\" mentioned in the previous query?\ndepends_on :: step_1\n>>>",
+      "steps_summary": [
+        "step_1: What is the title and a brief description of the 1996 loose adaptation... [depends_on=[]]",
+        "step_2: Who wrote the 1996 loose adaptation of William Shakespeare's \"Romeo & ... [depends_on=['step_1']]"
+      ]
+    },
+    {
+      "id": "5abbf698554299114383a0b5",
+      "question": "Which British first-generation jet-powered medium bomber was used in the South West Pacific theatre of World War II?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 3,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 26922.2,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the name of the British first-generation jet-powered medium bomber?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: In which theatres was the identified British jet-powered medium bomber used during World War II?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_3\nsub_query :: Which specific theatre of World War II involved the use of the British first-generation jet-powered medium bomber in the South West Pacific region?\ndepends_on :: step_1 | step_2\n>>>",
+      "steps_summary": [
+        "step_1: What is the name of the British first-generation jet-powered medium bo... [depends_on=[]]",
+        "step_2: In which theatres was the identified British jet-powered medium bomber... [depends_on=[]]",
+        "step_3: Which specific theatre of World War II involved the use of the British... [depends_on=['step_1', 'step_2']]"
+      ]
+    },
+    {
+      "id": "5a71166d5542994082a3e576",
+      "question": "Which battle occurred first, the Battle of Manila or the Battle of Guam?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 14742.8,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the date of the Battle of Manila?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the date of the Battle of Guam?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the date of the Battle of Manila? [depends_on=[]]",
+        "step_2: What is the date of the Battle of Guam? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a80721b554299485f5985ef",
+      "question": "The Livesey Hal War Memorial commemorates the fallen of which war, that had over 60 million casualties?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 17308.3,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the name and nature of the war for which the Livesey Hal War Memorial commemorates the fallen?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: How many casualties were there in the identified war?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the name and nature of the war for which the Livesey Hal War M... [depends_on=[]]",
+        "step_2: How many casualties were there in the identified war? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a78daf855429970f5fffdae",
+      "question": "Which game was released first, Icehouse pieces or Kill Doctor Lucky?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 17230.1,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the release year of the game Icehouse pieces?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the release year of the game Kill Doctor Lucky?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the release year of the game Icehouse pieces? [depends_on=[]]",
+        "step_2: What is the release year of the game Kill Doctor Lucky? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5ac289ff5542996366519a02",
+      "question": "Is the Marsilea or the Brabejum the genus of more individual species of plants?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 19019.0,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the number of individual species in the genus Marsilea?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the number of individual species in the genus Brabejum?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the number of individual species in the genus Marsilea? [depends_on=[]]",
+        "step_2: What is the number of individual species in the genus Brabejum? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5ac23ff0554299636651994d",
+      "question": "When was Poison's album \"Shut Up, Make Love\" released?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 16491.8,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the release date of Poison's album \"Shut Up, Make Love\"?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Who are the members of the band Poison?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the release date of Poison's album \"Shut Up, Make Love\"? [depends_on=[]]",
+        "step_2: Who are the members of the band Poison? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a7555215542996c70cfaee1",
+      "question": "Which came to market first, \"Hey Pa! There's a Goat on the Roof\" or \"Poleconomy\"",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 17620.4,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the publication year of the book \"Hey Pa! There's a Goat on the Roof\"?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the publication year of the book \"Poleconomy\"?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the publication year of the book \"Hey Pa! There's a Goat on th... [depends_on=[]]",
+        "step_2: What is the publication year of the book \"Poleconomy\"? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5ae4a3265542995ad6573de5",
+      "question": "Hayden is a singer-songwriter from Canada, but where does Buck-Tick hail from?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 15598.6,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: Who is Buck-Tick and what is their origin?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Where is Hayden from, considering he is a singer-songwriter from Canada?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: Who is Buck-Tick and what is their origin? [depends_on=[]]",
+        "step_2: Where is Hayden from, considering he is a singer-songwriter from Canad... [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a877e5d5542993e715abf7d",
+      "question": "What screenwriter with credits for \"Evolution\" co-wrote a film starring Nicolas Cage and Téa Leoni?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 3,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 29992.6,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the list of screenwriters who have credits for the film \"Evolution\"?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Which of the screenwriters from the \"Evolution\" credits also co-wrote a film starring Nicolas Cage and Téa Leoni?\ndepends_on :: step_1\n>>>\n\n<<<\nstep_id :: step_3\nsub_query :: What is the title of the film starring Nicolas Cage and Téa Leoni that was co-written by one of the screenwriters from \"Evolution\" credits?\ndepends_on :: step_2\n>>>",
+      "steps_summary": [
+        "step_1: What is the list of screenwriters who have credits for the film \"Evolu... [depends_on=[]]",
+        "step_2: Which of the screenwriters from the \"Evolution\" credits also co-wrote ... [depends_on=['step_1']]",
+        "step_3: What is the title of the film starring Nicolas Cage and Téa Leoni that... [depends_on=['step_2']]"
+      ]
+    },
+    {
+      "id": "5a7166395542994082a3e814",
+      "question": "What is the name of the fight song of the university whose main campus is in Lawrence, Kansas and whose branch campuses are in the Kansas City metropolitan area?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 3,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 26690.8,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the name of the university whose main campus is in Lawrence, Kansas?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Which branch campuses does this university have in the Kansas City metropolitan area?\ndepends_on :: step_1\n>>>\n\n<<<\nstep_id :: step_3\nsub_query :: What is the fight song of the identified university?\ndepends_on :: step_2\n>>>",
+      "steps_summary": [
+        "step_1: What is the name of the university whose main campus is in Lawrence, K... [depends_on=[]]",
+        "step_2: Which branch campuses does this university have in the Kansas City met... [depends_on=['step_1']]",
+        "step_3: What is the fight song of the identified university? [depends_on=['step_2']]"
+      ]
+    },
+    {
+      "id": "5ae0361155429925eb1afc2c",
+      "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 16693.4,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: Who was the French ace pilot and adventurer who flew L'Oiseau Blanc?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the historical context of L'Oiseau Blanc during the pilot's era?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: Who was the French ace pilot and adventurer who flew L'Oiseau Blanc? [depends_on=[]]",
+        "step_2: What is the historical context of L'Oiseau Blanc during the pilot's er... [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5ae1f4cb554299234fd0436d",
+      "question": "What is the inhabitant of the city where  122nd SS-Standarte was formed in2014",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 27288.5,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nplan_rationale :: Identify the city where the 122nd SS-Standarte was formed in 2014, then find out what the inhabitant of that city is.\ntotal_steps :: 3\n>>>\n\n<<<\nstep_id :: step_1\nsub_query :: In which city was the 122nd SS-Standarte formed in 2014?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the inhabitant of the city identified in step 1?\ndepends_on :: step_1\n>>>",
+      "steps_summary": [
+        "step_1: In which city was the 122nd SS-Standarte formed in 2014? [depends_on=[]]",
+        "step_2: What is the inhabitant of the city identified in step 1? [depends_on=['step_1']]"
+      ]
+    },
+    {
+      "id": "5a77cb335542997042120b3a",
+      "question": "What American professional Hawaiian surfer born 18 October 1992 won the Rip Curl Pro Portugal?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 3,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 27525.7,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the name of the American professional Hawaiian surfer born on 18 October 1992?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Which event is the Rip Curl Pro Portugal?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_3\nsub_query :: Did the surfer named in step 1 win the Rip Curl Pro Portugal event?\ndepends_on :: step_1 | step_2\n>>>",
+      "steps_summary": [
+        "step_1: What is the name of the American professional Hawaiian surfer born on ... [depends_on=[]]",
+        "step_2: Which event is the Rip Curl Pro Portugal? [depends_on=[]]",
+        "step_3: Did the surfer named in step 1 win the Rip Curl Pro Portugal event? [depends_on=['step_1', 'step_2']]"
+      ]
+    },
+    {
+      "id": "5ab642845542995eadeeff8e",
+      "question": "Are Broughtonia and Laeliocattleya both orchids?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 15612.2,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the classification of Broughtonia?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the classification of Laeliocattleya?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What is the classification of Broughtonia? [depends_on=[]]",
+        "step_2: What is the classification of Laeliocattleya? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a7ec61a55429934daa2fc5f",
+      "question": "Are Staten Island Catapult and This Is Elvis both documentaries?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 16176.4,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: Are Staten Island Catapult and This Is Elvis both classified as documentaries?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What is the genre of Staten Island Catapult?\ndepends_on :: step_1\n>>>",
+      "steps_summary": [
+        "step_1: Are Staten Island Catapult and This Is Elvis both classified as docume... [depends_on=[]]",
+        "step_2: What is the genre of Staten Island Catapult? [depends_on=['step_1']]"
+      ]
+    },
+    {
+      "id": "5ab611cc5542992aa134a411",
+      "question": "What professions did S. Sylvan Simon and Danny Cannon have in common?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 13728.2,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What professions was S. Sylvan Simon involved in?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: What professions was Danny Cannon involved in?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: What professions was S. Sylvan Simon involved in? [depends_on=[]]",
+        "step_2: What professions was Danny Cannon involved in? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a7b8749554299294a54a9db",
+      "question": "Which author has won more Pulitzer Prizes, Thomas Friedman or Henri Bergson?",
+      "hotpot_type": "comparison",
+      "query_type": "COMPARATIVE",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": false,
+      "latency_ms": 14465.9,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: How many Pulitzer Prizes has Thomas Friedman won?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: How many Pulitzer Prizes has Henri Bergson won?\ndepends_on ::\n>>>",
+      "steps_summary": [
+        "step_1: How many Pulitzer Prizes has Thomas Friedman won? [depends_on=[]]",
+        "step_2: How many Pulitzer Prizes has Henri Bergson won? [depends_on=[]]"
+      ]
+    },
+    {
+      "id": "5a8361b65542992ef85e22a0",
+      "question": "Vince Phillips held a junior welterweight title by an organization recognized by what larger Hall of Fame?",
+      "hotpot_type": "bridge",
+      "query_type": "MULTI_HOP",
+      "n_steps": 2,
+      "toon_valid": true,
+      "toon_failure_reason": "",
+      "dag_valid": true,
+      "is_fallback": true,
+      "latency_ms": 18285.5,
+      "is_cold_start": false,
+      "raw_llm_output": "<<<\nstep_id :: step_1\nsub_query :: What is the name of the organization that Vince Phillips held a junior welterweight title with?\ndepends_on ::\n>>>\n\n<<<\nstep_id :: step_2\nsub_query :: Which larger Hall of Fame recognizes the organization from step_1?\ndepends_on :: step_1\n>>>",
+      "steps_summary": [
+        "step_1: What is the name of the organization that Vince Phillips held a junior... [depends_on=[]]",
+        "step_2: Which larger Hall of Fame recognizes the organization from step_1? [depends_on=['step_1']]"
+      ]
+    }
+  ]
+}

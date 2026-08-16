@@ -55,7 +55,22 @@ ollama_models/
 # -------------------------
 # Données & datasets (potentiellement volumineux)
 # -------------------------
-data/
+# Exception : les résultats d'évaluation (data/evaluation/*.json) SONT versionnés.
+#
+# Pourquoi ces JSON ne sont pas de simples artefacts régénérables : le LLM est
+# non-déterministe malgré `temperature=0` (ordonnancement des kernels, batching,
+# cache KV). Relancer une évaluation ne reproduit pas les mêmes valeurs — bande
+# de bruit mesurée au Lot 2 : ±2 pt sur l'accuracy bridge, ±0,5 pt sur
+# l'accuracy globale. Les versionner conserve la trace datée des mesures
+# effectivement utilisées pour les arbitrages des Lots 1, 2 et 2b.
+#
+# Note de syntaxe : `data/` seul exclurait le répertoire entier, et Git ne peut
+# pas ré-inclure un fichier dont un répertoire parent est exclu. La hiérarchie
+# est donc désexclue niveau par niveau.
+data/*
+!data/evaluation/
+data/evaluation/*
+!data/evaluation/*.json
 datasets/
 *.parquet
 *.arrow
