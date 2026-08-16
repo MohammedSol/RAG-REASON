@@ -1,23 +1,23 @@
 {
   "summary": {
     "total": 200,
-    "correct": 149,
-    "accuracy_pct": 74.5,
-    "bridge_accuracy_pct": 53.0,
-    "comparison_accuracy_pct": 96.0,
-    "avg_latency_ms": 3931.5,
+    "correct": 151,
+    "accuracy_pct": 75.5,
+    "bridge_accuracy_pct": 57.0,
+    "comparison_accuracy_pct": 94.0,
+    "avg_latency_ms": 3443.5,
     "accuracy_by_path": {
       "regex": {
-        "n": 56,
-        "correct": 53,
-        "accuracy_pct": 94.64,
-        "share_pct": 28.0
+        "n": 79,
+        "correct": 74,
+        "accuracy_pct": 93.67,
+        "share_pct": 39.5
       },
       "llm": {
-        "n": 144,
-        "correct": 96,
-        "accuracy_pct": 66.67,
-        "share_pct": 72.0
+        "n": 121,
+        "correct": 77,
+        "accuracy_pct": 63.64,
+        "share_pct": 60.5
       },
       "heuristic_fallback": {
         "n": 0,
@@ -27,22 +27,22 @@
       }
     },
     "latency": {
-      "cold_start_ms": 11280.4,
+      "cold_start_ms": 11216.2,
       "warm_all": {
         "n": 199,
-        "median_ms": 4645.9,
-        "mean_ms": 3894.6
+        "median_ms": 4440.4,
+        "mean_ms": 3404.4
       },
       "by_path": {
         "regex": {
-          "n": 56,
+          "n": 79,
           "median_ms": 0.0,
-          "mean_ms": 0.1
+          "mean_ms": 0.0
         },
         "llm": {
-          "n": 143,
-          "median_ms": 5181.6,
-          "mean_ms": 5419.7
+          "n": 120,
+          "median_ms": 5152.6,
+          "mean_ms": 5645.6
         },
         "heuristic_fallback": {
           "n": 0,
@@ -59,9 +59,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.2,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -73,7 +73,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 11280.4,
+      "latency_ms": 11216.2,
       "decision_path": "llm",
       "is_cold_start": true
     },
@@ -85,7 +85,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4626.0,
+      "latency_ms": 4582.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -95,9 +95,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 0.0,
+      "latency_ms": 0.1,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -109,7 +109,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 4549.9,
+      "latency_ms": 4661.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -119,7 +119,7 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.89,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -131,7 +131,7 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": false,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -143,10 +143,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.91,
       "is_correct": true,
-      "latency_ms": 6007.6,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -157,7 +157,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 8572.4,
+      "latency_ms": 5111.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -169,7 +169,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 7596.5,
+      "latency_ms": 7182.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -179,7 +179,7 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -193,7 +193,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 7430.6,
+      "latency_ms": 6253.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -205,7 +205,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 7889.2,
+      "latency_ms": 5203.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -215,10 +215,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 7798.9,
-      "decision_path": "llm",
+      "latency_ms": 0.2,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -229,7 +229,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 7127.9,
+      "latency_ms": 7423.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -241,7 +241,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 6729.1,
+      "latency_ms": 6818.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -253,7 +253,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4064.9,
+      "latency_ms": 4557.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -265,7 +265,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 5809.5,
+      "latency_ms": 5131.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -277,7 +277,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 7156.6,
+      "latency_ms": 7326.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -287,9 +287,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.2,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -301,7 +301,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": false,
-      "latency_ms": 5796.5,
+      "latency_ms": 6880.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -313,7 +313,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 6642.4,
+      "latency_ms": 5411.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -325,7 +325,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 4048.5,
+      "latency_ms": 6656.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -337,7 +337,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 4633.6,
+      "latency_ms": 4346.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -346,11 +346,11 @@
       "question": "Alexander Kerensky was defeated and destroyed by the Bolsheviks in the course of a civil war that ended when ?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "COMPARATIVE",
-      "confidence": 0.95,
-      "is_correct": false,
-      "latency_ms": 4741.3,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": true,
+      "latency_ms": 0.1,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -359,10 +359,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.95,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 4630.8,
-      "decision_path": "llm",
+      "latency_ms": 0.2,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -373,7 +373,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 5103.7,
+      "latency_ms": 5040.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -383,10 +383,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.95,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 6319.8,
-      "decision_path": "llm",
+      "latency_ms": 0.1,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -395,10 +395,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.95,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 4333.8,
-      "decision_path": "llm",
+      "latency_ms": 0.1,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -409,7 +409,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.89,
       "is_correct": true,
-      "latency_ms": 4851.6,
+      "latency_ms": 7362.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -421,7 +421,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 4342.6,
+      "latency_ms": 6682.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -431,10 +431,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 4461.8,
-      "decision_path": "llm",
+      "latency_ms": 0.3,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -445,7 +445,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4827.5,
+      "latency_ms": 4888.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -454,11 +454,11 @@
       "question": "Who is the writer of this song that was inspired by words on a tombstone and was the first track on the box set Back to Mono?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "COMPARATIVE",
-      "confidence": 0.85,
-      "is_correct": false,
-      "latency_ms": 5711.9,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": true,
+      "latency_ms": 0.2,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -469,7 +469,7 @@
       "predicted": "AMBIGUOUS",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 5775.6,
+      "latency_ms": 4261.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -481,7 +481,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4426.7,
+      "latency_ms": 4997.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -491,9 +491,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.91,
       "is_correct": true,
-      "latency_ms": 0.4,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -503,10 +503,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 4998.1,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -517,7 +517,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.89,
       "is_correct": true,
-      "latency_ms": 4589.9,
+      "latency_ms": 5238.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -529,7 +529,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 5154.2,
+      "latency_ms": 8144.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -541,7 +541,7 @@
       "predicted": "AMBIGUOUS",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 7285.8,
+      "latency_ms": 7760.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -551,9 +551,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 0.0,
+      "latency_ms": 0.1,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -565,7 +565,7 @@
       "predicted": "AMBIGUOUS",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 5770.6,
+      "latency_ms": 7037.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -575,7 +575,7 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": false,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -587,10 +587,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.91,
       "is_correct": true,
-      "latency_ms": 4393.2,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -601,7 +601,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4866.1,
+      "latency_ms": 5843.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -611,9 +611,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.91,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -625,7 +625,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 5668.6,
+      "latency_ms": 7636.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -637,7 +637,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6285.5,
+      "latency_ms": 6807.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -649,7 +649,7 @@
       "predicted": "AMBIGUOUS",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 5517.0,
+      "latency_ms": 5201.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -661,7 +661,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 6348.3,
+      "latency_ms": 6628.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -671,10 +671,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.85,
+      "confidence": 0.91,
       "is_correct": true,
-      "latency_ms": 4549.2,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -682,11 +682,11 @@
       "question": "who is the younger brother of The episode guest stars of The Hard Easy ",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "predicted": "AMBIGUOUS",
+      "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 0.0,
-      "decision_path": "regex",
+      "latency_ms": 4456.3,
+      "decision_path": "llm",
       "is_cold_start": false
     },
     {
@@ -697,7 +697,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5545.1,
+      "latency_ms": 5508.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -709,7 +709,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 6073.1,
+      "latency_ms": 6790.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -721,7 +721,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4763.2,
+      "latency_ms": 5478.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -731,10 +731,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "COMPARATIVE",
-      "confidence": 0.89,
+      "confidence": 0.93,
       "is_correct": false,
-      "latency_ms": 4667.2,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -745,7 +745,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 4259.9,
+      "latency_ms": 6547.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -757,7 +757,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 4542.6,
+      "latency_ms": 4847.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -769,7 +769,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 5178.9,
+      "latency_ms": 5611.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -778,11 +778,11 @@
       "question": "What is the middle name of the actress who plays Bobbi Bacha in Suburban Madness?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "AMBIGUOUS",
-      "confidence": 0.85,
-      "is_correct": false,
-      "latency_ms": 5624.5,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.91,
+      "is_correct": true,
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -793,7 +793,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 3457.6,
+      "latency_ms": 6223.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -805,7 +805,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 3977.2,
+      "latency_ms": 4351.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -817,7 +817,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.87,
       "is_correct": false,
-      "latency_ms": 5215.1,
+      "latency_ms": 4787.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -829,7 +829,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 6173.5,
+      "latency_ms": 4199.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -841,7 +841,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.87,
       "is_correct": true,
-      "latency_ms": 5286.7,
+      "latency_ms": 5089.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -853,7 +853,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 6086.7,
+      "latency_ms": 6935.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -862,11 +862,11 @@
       "question": "Handi-Snacks are a snack food product line sold by what American multinational confectionery, food, and beverage company that is based in Illinois?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "SIMPLE",
-      "confidence": 0.95,
-      "is_correct": false,
-      "latency_ms": 4712.3,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": true,
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -877,7 +877,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 6241.4,
+      "latency_ms": 5773.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -889,7 +889,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 5812.0,
+      "latency_ms": 6505.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -899,7 +899,7 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -913,7 +913,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 3750.8,
+      "latency_ms": 4116.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -925,7 +925,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 4176.9,
+      "latency_ms": 3935.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -934,11 +934,11 @@
       "question": "Which American film director hosted the 18th Independent Spirit Awards in 2002?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "SIMPLE",
-      "confidence": 0.95,
-      "is_correct": false,
-      "latency_ms": 4725.5,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": true,
+      "latency_ms": 0.1,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -949,7 +949,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4199.4,
+      "latency_ms": 4013.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -959,9 +959,9 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.2,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -973,7 +973,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 3776.3,
+      "latency_ms": 4201.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -985,7 +985,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 4676.0,
+      "latency_ms": 5043.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -997,7 +997,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5181.6,
+      "latency_ms": 7297.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1009,7 +1009,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 6195.4,
+      "latency_ms": 6621.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1021,7 +1021,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 4204.2,
+      "latency_ms": 4591.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1033,7 +1033,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 3982.6,
+      "latency_ms": 4555.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1043,10 +1043,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 0.0,
-      "decision_path": "regex",
+      "latency_ms": 5177.7,
+      "decision_path": "llm",
       "is_cold_start": false
     },
     {
@@ -1055,10 +1055,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.95,
+      "confidence": 0.86,
       "is_correct": true,
-      "latency_ms": 5447.0,
-      "decision_path": "llm",
+      "latency_ms": 0.1,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1066,11 +1066,11 @@
       "question": "Which American film actor and dancer starred in the 1945 film Johnny Angel?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "MULTI_HOP",
+      "predicted": "SIMPLE",
       "confidence": 0.87,
-      "is_correct": true,
-      "latency_ms": 0.0,
-      "decision_path": "regex",
+      "is_correct": false,
+      "latency_ms": 6682.2,
+      "decision_path": "llm",
       "is_cold_start": false
     },
     {
@@ -1081,7 +1081,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5949.6,
+      "latency_ms": 4921.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1093,7 +1093,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.9,
       "is_correct": false,
-      "latency_ms": 4142.9,
+      "latency_ms": 4560.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1105,7 +1105,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": false,
-      "latency_ms": 4398.6,
+      "latency_ms": 5300.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1117,7 +1117,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.89,
       "is_correct": true,
-      "latency_ms": 5284.3,
+      "latency_ms": 6795.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1129,7 +1129,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 6355.3,
+      "latency_ms": 4898.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1141,7 +1141,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 3929.8,
+      "latency_ms": 3913.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1151,10 +1151,10 @@
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
       "predicted": "MULTI_HOP",
-      "confidence": 0.87,
+      "confidence": 0.89,
       "is_correct": true,
-      "latency_ms": 0.3,
-      "decision_path": "regex",
+      "latency_ms": 4556.1,
+      "decision_path": "llm",
       "is_cold_start": false
     },
     {
@@ -1165,7 +1165,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 3565.4,
+      "latency_ms": 3961.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1177,7 +1177,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 4061.6,
+      "latency_ms": 4013.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1189,7 +1189,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 4408.0,
+      "latency_ms": 4324.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1198,11 +1198,11 @@
       "question": "What other political position did the person who introduced the DISCLOSE Act hold?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "COMPARATIVE",
-      "confidence": 0.9,
-      "is_correct": false,
-      "latency_ms": 4003.6,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": true,
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1213,7 +1213,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 3511.7,
+      "latency_ms": 3794.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1222,11 +1222,11 @@
       "question": "In which role did Caroline Carver played in a 1999 Hallmark Entertainment made-for-TV fantasy movie?",
       "hotpot_type": "bridge",
       "expected": "MULTI_HOP",
-      "predicted": "MULTI_HOP",
-      "confidence": 0.87,
-      "is_correct": true,
-      "latency_ms": 0.1,
-      "decision_path": "regex",
+      "predicted": "SIMPLE",
+      "confidence": 0.85,
+      "is_correct": false,
+      "latency_ms": 4808.3,
+      "decision_path": "llm",
       "is_cold_start": false
     },
     {
@@ -1237,7 +1237,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 4763.3,
+      "latency_ms": 4847.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1249,7 +1249,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5047.9,
+      "latency_ms": 4994.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1261,7 +1261,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 7297.7,
+      "latency_ms": 4419.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1273,7 +1273,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 7105.4,
+      "latency_ms": 4940.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1285,7 +1285,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 6390.0,
+      "latency_ms": 4310.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1297,7 +1297,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5223.2,
+      "latency_ms": 5217.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1309,7 +1309,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6450.2,
+      "latency_ms": 6520.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1319,9 +1319,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1331,9 +1331,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1345,7 +1345,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4370.8,
+      "latency_ms": 4743.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1357,7 +1357,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 4645.9,
+      "latency_ms": 4440.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1369,7 +1369,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 6194.9,
+      "latency_ms": 4992.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1379,9 +1379,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1393,7 +1393,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 7247.1,
+      "latency_ms": 5144.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1403,10 +1403,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.95,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 5068.5,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1417,7 +1417,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6383.7,
+      "latency_ms": 6316.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1429,7 +1429,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 3713.1,
+      "latency_ms": 3975.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1439,9 +1439,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1453,7 +1453,7 @@
       "predicted": "SIMPLE",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 4867.2,
+      "latency_ms": 4571.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1465,7 +1465,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4640.0,
+      "latency_ms": 4742.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1477,7 +1477,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5026.8,
+      "latency_ms": 4556.8,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1487,7 +1487,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1501,7 +1501,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5179.6,
+      "latency_ms": 4371.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1511,7 +1511,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1525,7 +1525,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 6092.7,
+      "latency_ms": 4339.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1537,7 +1537,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4240.8,
+      "latency_ms": 4472.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1547,7 +1547,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1559,7 +1559,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1571,7 +1571,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1582,11 +1582,11 @@
       "question": "Josey Scott and Ian Watkins were both promising musicians. Which of these talented men was incarcerated, impacting his career with a rock band?",
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
-      "predicted": "COMPARATIVE",
-      "confidence": 0.95,
-      "is_correct": true,
-      "latency_ms": 6236.6,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": false,
+      "latency_ms": 0.1,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1597,7 +1597,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6412.7,
+      "latency_ms": 4606.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1609,7 +1609,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4950.2,
+      "latency_ms": 4950.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1619,10 +1619,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.95,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 5004.1,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1631,9 +1631,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1645,7 +1645,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4642.7,
+      "latency_ms": 4683.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1657,7 +1657,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 4930.6,
+      "latency_ms": 4891.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1669,7 +1669,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4590.7,
+      "latency_ms": 4575.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1679,7 +1679,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1691,7 +1691,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1703,7 +1703,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1717,7 +1717,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4566.6,
+      "latency_ms": 4814.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1729,7 +1729,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4693.2,
+      "latency_ms": 4769.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1739,7 +1739,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1751,7 +1751,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1765,7 +1765,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4393.9,
+      "latency_ms": 4420.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1775,9 +1775,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1789,7 +1789,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.85,
       "is_correct": false,
-      "latency_ms": 5355.2,
+      "latency_ms": 5643.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1799,9 +1799,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1811,9 +1811,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1825,7 +1825,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6991.0,
+      "latency_ms": 7045.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1835,7 +1835,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1847,7 +1847,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1859,7 +1859,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1871,10 +1871,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 5473.6,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1885,7 +1885,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 6939.2,
+      "latency_ms": 5163.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1895,10 +1895,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.95,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 5709.9,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -1909,7 +1909,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 7196.3,
+      "latency_ms": 7135.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1919,7 +1919,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1931,7 +1931,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1945,7 +1945,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 6042.1,
+      "latency_ms": 6902.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1955,7 +1955,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -1969,7 +1969,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.89,
       "is_correct": true,
-      "latency_ms": 5125.5,
+      "latency_ms": 5182.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -1979,9 +1979,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -1991,7 +1991,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.92,
       "is_correct": true,
       "latency_ms": 0.1,
       "decision_path": "regex",
@@ -2005,7 +2005,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 7146.8,
+      "latency_ms": 7185.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2015,10 +2015,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.95,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 7183.8,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -2027,10 +2027,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.95,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 7460.4,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -2041,7 +2041,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6931.1,
+      "latency_ms": 6312.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2053,7 +2053,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.9,
       "is_correct": true,
-      "latency_ms": 5454.9,
+      "latency_ms": 4726.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2065,7 +2065,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6223.1,
+      "latency_ms": 4467.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2075,7 +2075,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -2089,7 +2089,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.9,
       "is_correct": true,
-      "latency_ms": 4821.3,
+      "latency_ms": 4221.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2099,10 +2099,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.9,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 5379.1,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -2111,7 +2111,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -2125,7 +2125,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 8152.9,
+      "latency_ms": 6503.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2135,10 +2135,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 6249.7,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -2147,7 +2147,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -2159,9 +2159,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2171,9 +2171,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2183,9 +2183,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2197,7 +2197,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.9,
       "is_correct": true,
-      "latency_ms": 5182.8,
+      "latency_ms": 6648.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2209,7 +2209,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 6545.5,
+      "latency_ms": 5160.5,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2219,9 +2219,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2233,7 +2233,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.85,
       "is_correct": true,
-      "latency_ms": 6921.6,
+      "latency_ms": 9632.3,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2243,9 +2243,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2255,10 +2255,10 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.9,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 6886.5,
-      "decision_path": "llm",
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -2269,7 +2269,7 @@
       "predicted": "MULTI_HOP",
       "confidence": 0.95,
       "is_correct": false,
-      "latency_ms": 5635.8,
+      "latency_ms": 7716.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2278,11 +2278,11 @@
       "question": "In between The Bears and I and Oceans which was released on July 31, 1974, by Buena Vista Distribution?",
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
-      "predicted": "COMPARATIVE",
-      "confidence": 0.85,
-      "is_correct": true,
-      "latency_ms": 6869.4,
-      "decision_path": "llm",
+      "predicted": "MULTI_HOP",
+      "confidence": 0.86,
+      "is_correct": false,
+      "latency_ms": 0.0,
+      "decision_path": "regex",
       "is_cold_start": false
     },
     {
@@ -2293,7 +2293,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 4296.7,
+      "latency_ms": 7435.6,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2303,9 +2303,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2315,7 +2315,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -2329,7 +2329,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4348.0,
+      "latency_ms": 7178.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2339,9 +2339,9 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.88,
+      "confidence": 0.93,
       "is_correct": true,
-      "latency_ms": 0.1,
+      "latency_ms": 0.0,
       "decision_path": "regex",
       "is_cold_start": false
     },
@@ -2353,7 +2353,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4777.3,
+      "latency_ms": 7704.9,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2365,7 +2365,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4765.8,
+      "latency_ms": 7629.7,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2377,7 +2377,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 4574.2,
+      "latency_ms": 7871.4,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2389,7 +2389,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.9,
       "is_correct": true,
-      "latency_ms": 5706.5,
+      "latency_ms": 9868.1,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2401,7 +2401,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.92,
       "is_correct": true,
-      "latency_ms": 6044.9,
+      "latency_ms": 8679.2,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2411,7 +2411,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.9,
+      "confidence": 0.92,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -2425,7 +2425,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.9,
       "is_correct": true,
-      "latency_ms": 4071.4,
+      "latency_ms": 7873.0,
       "decision_path": "llm",
       "is_cold_start": false
     },
@@ -2435,7 +2435,7 @@
       "hotpot_type": "comparison",
       "expected": "COMPARATIVE",
       "predicted": "COMPARATIVE",
-      "confidence": 0.92,
+      "confidence": 0.93,
       "is_correct": true,
       "latency_ms": 0.0,
       "decision_path": "regex",
@@ -2449,7 +2449,7 @@
       "predicted": "COMPARATIVE",
       "confidence": 0.95,
       "is_correct": true,
-      "latency_ms": 5207.7,
+      "latency_ms": 7693.2,
       "decision_path": "llm",
       "is_cold_start": false
     }

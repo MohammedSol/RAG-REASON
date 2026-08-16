@@ -101,50 +101,85 @@ _COMPARATIVE_MARKERS: tuple[str, ...] = (
 # Ces patterns détectent les structures unambigues SANS appel LLM.
 # ─────────────────────────────────────────────────────────────────────────────
 
-# COMPARATIVE — questions temporelles/comparatives avec wh-word
-# Ex: "who is older", "which battle occurred first", "born first"
-_RE_COMP_TEMPORAL: re.Pattern[str] = re.compile(
-    r"\b(?:who|which)\b.{0,80}"
-    r"\b(?:older|younger|born\s+first|born\s+last|"
-    r"came\s+first|occurred\s+first|appeared\s+first|"
-    r"decided\s+first|happened\s+first|is\s+older|"
-    r"was\s+born\s+first|had\s+to\s+escape)\b",
+# AUDIT LOT 3 — les motifs ci-dessous ont été reconstruits sur une base
+# SYNTAXIQUE, après un audit qui a montré que les précédents reposaient sur des
+# listes de LEXÈMES calibrées sur des questions précises du jeu d'évaluation :
+#   - "had to escape"   : 1 seule occurrence, tirée de "who had to escape the
+#                         Nazis, Sigmund Freud or Evelyn Waugh?" — aucun lien
+#                         linguistique entre « s'échapper » et la comparaison ;
+#   - "the N where the N": 1 seule occurrence, tirée de "The arena where the
+#                         Lewiston Maineiacs played" — gabarit sur-spécifique ;
+#   - 27 des 45 lexèmes énumérés ne se déclenchaient JAMAIS sur les 140
+#     requêtes DEV (listes mortes), et "younger" déclenchait 2 fois pour
+#     0 bonne réponse.
+# Chaque motif retenu décrit désormais une CONSTRUCTION de l'anglais,
+# justifiée ci-dessous, et non une formulation observée dans le benchmark.
+
+# ── COMPARATIVE ──────────────────────────────────────────────────────────────
+
+# C1 — QUESTION ALTERNATIVE : interrogatif en wh- portant sur une disjonction.
+# Construction : « Which/Who/What … A or B ? ». La disjonction sous portée
+# interrogative force une mise en regard de deux termes : c'est la définition
+# même d'une question comparative. Ce motif remplace, en les subsumant, les
+# anciennes listes d'adjectifs comparatifs et de verbes temporels : « Who was
+# born first, A or B? » et « Who is older, A or B? » relèvent tous deux de
+# cette construction, sans qu'il faille énumérer « born first » ni « older ».
+_RE_COMP_ALTERNATIVE: re.Pattern[str] = re.compile(
+    r"\b(?:who|which|what|whose)\b.{0,120}\s+or\s+",
     re.IGNORECASE,
 )
 
-# COMPARATIVE — "X or Y [superlatif]" (closest, largest, oldest…)
-# Ex: "Is Gasherbrum II or Nuptse closest to Everest?"
-_RE_COMP_SUPERLATIVE: re.Pattern[str] = re.compile(
-    r"\bor\b.{0,80}"
-    r"\b(?:closest|nearest|farthest|largest|smallest|"
-    r"tallest|shortest|oldest|youngest|longest|"
-    r"bigger|better|worse)\b",
-    re.IGNORECASE,
-)
-
-# COMPARATIVE — "[Proper Noun A] or [Proper Noun B]"
-# Détecte deux séquences de mots capitalisés séparées par " or ".
-# Ex: "Sigmund Freud or Evelyn Waugh", "Annie Morton or Terry Richardson"
+# C2 — DISJONCTION DE DEUX SYNTAGMES NOMINAUX PROPRES.
+# Construction : « [Nom Propre A] or [Nom Propre B] », hors question en wh-
+# (« Is A or B … ? », « A or B, which … ? »). La coordination par « or » de
+# deux entités nommées est un marqueur de comparaison indépendant du verbe.
+# Sensible à la casse : c'est la majuscule qui identifie les noms propres.
 _RE_COMP_TWO_ENTITIES: re.Pattern[str] = re.compile(
     r"[A-Z]\w+(?:\s+(?:[A-Z]\w*|\w{1,4}))*"
     r"\s+or\s+"
     r"[A-Z]\w+(?:\s+(?:[A-Z]\w*|\w{1,4}))*",
 )
 
-# MULTI_HOP — clause relative chaînée (who/that + verbe d'action)
-# Ex: "the woman who portrayed Corliss Archer", "group that was formed by"
-_RE_HOP_RELATIVE: re.Pattern[str] = re.compile(
-    r"\b(?:who|that|which)\b.{0,60}"
-    r"\b(?:portrayed|played|founded|directed|created|won|wrote|"
-    r"starred|performed|managed|led|established|published|"
-    r"produced|invented|designed|built|composed|formed|launched)\b",
+# ── MULTI_HOP ────────────────────────────────────────────────────────────────
+# Point commun des motifs suivants : l'entité cible n'est pas nommée, elle est
+# désignée INDIRECTEMENT par une proposition subordonnée. Il faut donc d'abord
+# résoudre l'entité intermédiaire — c'est la définition du « bridge ».
+
+# H1 — GÉNITIF PRÉPOSITIONNEL SUIVI D'UNE RELATIVE : « … of the N that/who … ».
+# L'entité est identifiée par emboîtement : un syntagme possessif dont le
+# complément est lui-même décrit par une relative.
+_RE_HOP_NESTED_OF: re.Pattern[str] = re.compile(
+    r"\bof the\b.{0,60}\b(?:that|who|which|whose)\b",
     re.IGNORECASE,
 )
 
-# MULTI_HOP — "the [lieu/entité] where the [autre entité]"
-# Ex: "The arena where the Lewiston Maineiacs played"
-_RE_HOP_WHERE: re.Pattern[str] = re.compile(
-    r"\bthe\s+\w+\s+where\s+the\s+\w+",
+# H2 — RELATIVE POSSESSIVE en « whose » : « the country whose currency is … ».
+# L'entité est désignée par un de ses attributs, jamais par son nom.
+# Note d'honnêteté : ce motif ne s'est déclenché sur AUCUNE des 140 requêtes
+# DEV (il est absorbé par H1 quand « of the » précède). Il est conservé parce
+# que la construction est bien attestée en anglais, pas parce qu'une mesure
+# l'a justifié.
+_RE_HOP_WHOSE: re.Pattern[str] = re.compile(
+    r"\bwhose\b",
+    re.IGNORECASE,
+)
+
+# H3 — RELATIVE LOCATIVE OU TEMPORELLE : « the N where/when the N … ».
+# Le lieu ou le moment est défini par un évènement rattaché à une autre
+# entité. Généralise l'ancien gabarit sur-spécifique en couvrant aussi
+# « when » et non plus seulement « where ».
+_RE_HOP_LOCATIVE: re.Pattern[str] = re.compile(
+    r"\bthe\s+\w+\s+(?:where|when)\s+the\s+\w+",
+    re.IGNORECASE,
+)
+
+# H4 — RELATIVE RESTRICTIVE À VERBE FLÉCHI : « who/that/which … VERBE-ed ».
+# Remplace l'ancienne liste de 20 verbes (dont 13 jamais déclenchés) par le
+# critère morphologique du passé en « -ed ». Placé en DERNIER : une relative
+# restrictive apparaît aussi dans des questions comparatives, la priorité aux
+# motifs C1/C2 lève l'ambiguïté (mesuré : 61,9 % isolé, 85,7 % en cascade).
+_RE_HOP_RELATIVE: re.Pattern[str] = re.compile(
+    r"\b(?:who|that|which)\b(?:\s+\w+){0,3}\s+\w{3,}ed\b",
     re.IGNORECASE,
 )
 
@@ -349,12 +384,19 @@ class QueryAnalyzer:
         - Déterministe et reproductible
         - Corrige les cas où le modèle 3B manque de connaissance du domaine
 
-        Priority order (highest confidence first) :
-            1. COMPARATIVE — patterns temporels/comparatifs explicites
-            2. COMPARATIVE — superlatifs après "or"
-            3. COMPARATIVE — deux entités propres avec "or"
-            4. MULTI_HOP   — clauses relatives chaînées
-            5. MULTI_HOP   — structure "where the [entity]"
+        Ordre de priorité — les motifs COMPARATIFS passent EN PREMIER.
+        Ce n'est pas arbitraire : une question comparative contient souvent
+        elle aussi une relative restrictive, alors qu'une question « bridge »
+        ne contient pas de disjonction. Tester la disjonction d'abord lève
+        l'ambiguïté (mesuré sur DEV : le motif H4 seul tombe à 61,9 % de
+        justesse, contre 85,7 % une fois placé après C1/C2).
+
+            1. COMPARATIVE — question alternative (wh- … « or »)
+            2. COMPARATIVE — disjonction de deux noms propres
+            3. MULTI_HOP   — génitif prépositionnel + relative
+            4. MULTI_HOP   — relative possessive en « whose »
+            5. MULTI_HOP   — relative locative ou temporelle
+            6. MULTI_HOP   — relative restrictive à verbe fléchi
 
         Args:
             query: La requête utilisateur brute.
@@ -362,9 +404,19 @@ class QueryAnalyzer:
         Returns:
             AnalysisResult si un pattern est détecté, None sinon.
         """
-        # Pattern 1 — COMPARATIVE : questions comparatives temporelles
-        # "who is older", "born first", "which battle occurred first"
-        if _RE_COMP_TEMPORAL.search(query):
+        # Pattern 1 — COMPARATIVE : question alternative
+        # « Which was founded earlier, A or B? », « Who is older, A or B? »
+        if _RE_COMP_ALTERNATIVE.search(query):
+            return AnalysisResult(
+                query_type=QueryType.COMPARATIVE,
+                confidence=0.93,
+                detected_entities=[],
+                reasoning_budget=2,
+            )
+
+        # Pattern 2 — COMPARATIVE : disjonction de deux noms propres
+        # « Is A or B … ? » — hors interrogatif en wh-, capté par le motif 1.
+        if _RE_COMP_TWO_ENTITIES.search(query):
             return AnalysisResult(
                 query_type=QueryType.COMPARATIVE,
                 confidence=0.92,
@@ -372,42 +424,43 @@ class QueryAnalyzer:
                 reasoning_budget=2,
             )
 
-        # Pattern 2 — COMPARATIVE : superlatif après "or"
-        # "Is Gasherbrum II or Nuptse closest to Everest?"
-        if _RE_COMP_SUPERLATIVE.search(query):
-            return AnalysisResult(
-                query_type=QueryType.COMPARATIVE,
-                confidence=0.90,
-                detected_entities=[],
-                reasoning_budget=2,
-            )
-
-        # Pattern 3 — COMPARATIVE : deux noms propres séparés par "or"
-        # "Sigmund Freud or Evelyn Waugh", "Annie Morton or Terry Richardson"
-        if _RE_COMP_TWO_ENTITIES.search(query):
-            return AnalysisResult(
-                query_type=QueryType.COMPARATIVE,
-                confidence=0.88,
-                detected_entities=[],
-                reasoning_budget=2,
-            )
-
-        # Pattern 4 — MULTI_HOP : clause relative chaînée
-        # "the woman who portrayed Corliss Archer", "group that was formed"
-        if _RE_HOP_RELATIVE.search(query):
+        # Pattern 3 — MULTI_HOP : génitif prépositionnel suivi d'une relative
+        # « … the name of the university that … »
+        if _RE_HOP_NESTED_OF.search(query):
             return AnalysisResult(
                 query_type=QueryType.MULTI_HOP,
-                confidence=0.87,
+                confidence=0.91,
                 detected_entities=[],
                 reasoning_budget=3,
             )
 
-        # Pattern 5 — MULTI_HOP : structure locale "where the [entity]"
-        # "The arena where the Lewiston Maineiacs played"
-        if _RE_HOP_WHERE.search(query):
+        # Pattern 4 — MULTI_HOP : relative possessive
+        # « the country whose currency is the ngultrum »
+        if _RE_HOP_WHOSE.search(query):
             return AnalysisResult(
                 query_type=QueryType.MULTI_HOP,
-                confidence=0.85,
+                confidence=0.90,
+                detected_entities=[],
+                reasoning_budget=3,
+            )
+
+        # Pattern 5 — MULTI_HOP : relative locative ou temporelle
+        # « the arena where the team played », « the year when the law passed »
+        if _RE_HOP_LOCATIVE.search(query):
+            return AnalysisResult(
+                query_type=QueryType.MULTI_HOP,
+                confidence=0.89,
+                detected_entities=[],
+                reasoning_budget=3,
+            )
+
+        # Pattern 6 — MULTI_HOP : relative restrictive à verbe fléchi
+        # « the woman who directed the film », « the group that was formed by »
+        # En dernier : le plus large, donc le plus sujet aux faux positifs.
+        if _RE_HOP_RELATIVE.search(query):
+            return AnalysisResult(
+                query_type=QueryType.MULTI_HOP,
+                confidence=0.86,
                 detected_entities=[],
                 reasoning_budget=3,
             )
