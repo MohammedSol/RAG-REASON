@@ -1,0 +1,4794 @@
+{
+  "source": {
+    "dataset": "hotpotqa/hotpot_qa",
+    "config": "distractor",
+    "split": "validation",
+    "selection": "filtre sur les id de data/processed/hotpotqa_sprint3.json (inchange) — 100 bridge + 100 comparison",
+    "why_distractor": "Le split fullwiki, utilise au Sprint 3, ne contient les paragraphes gold que pour 45/200 questions (22,5 %) : son context est le resultat d'une recuperation sur tout Wikipedia. Le split distractor garantit les 2 paragraphes gold + 8 distracteurs, soit 200/200 (100 %). Les 200 id sont presents dans les deux splits : ni les questions, ni leur ordre, ni les resultats des evaluations anterieures ne changent. Les distracteurs sont conserves pour ne pas rendre le retrieval trivial.",
+    "coverage_measured": {
+      "fullwiki": "45/200",
+      "distractor": "200/200"
+    }
+  },
+  "naming_convention": "titre -> espaces en underscores, caracteres Windows invalides (<>:\"/\\|?*) retires, extension .txt. Objectif : chunk['source'] du module ACTION == nom de fichier == titre d'article, pour aligner supporting_facts et resultats de retrieval sans table de correspondance externe.",
+  "counts": {
+    "articles": 1966,
+    "questions": 200,
+    "questions_complete": 200,
+    "questions_incomplete": 0,
+    "coverage_pct": 100.0,
+    "collisions": 0
+  },
+  "collisions": [],
+  "incomplete_questions": [],
+  "title_to_file": {
+    "1-Hexanol": "1-Hexanol.txt",
+    "1-Pentanol": "1-Pentanol.txt",
+    "10 Hronia Mazi": "10_Hronia_Mazi.txt",
+    "10th Flight Test Squadron": "10th_Flight_Test_Squadron.txt",
+    "11 Harrowhouse": "11_Harrowhouse.txt",
+    "122d Fighter Squadron": "122d_Fighter_Squadron.txt",
+    "122nd (Muskoka) Battalion, CEF": "122nd_(Muskoka)_Battalion,_CEF.txt",
+    "122nd Division": "122nd_Division.txt",
+    "122nd Division (Imperial Japanese Army)": "122nd_Division_(Imperial_Japanese_Army).txt",
+    "122nd Fighter Aviation Squadron": "122nd_Fighter_Aviation_Squadron.txt",
+    "122nd Hydroplane Liaison Squadron": "122nd_Hydroplane_Liaison_Squadron.txt",
+    "122nd Infantry Regiment (United States)": "122nd_Infantry_Regiment_(United_States).txt",
+    "122nd Ohio Infantry": "122nd_Ohio_Infantry.txt",
+    "122nd SS-Standarte": "122nd_SS-Standarte.txt",
+    "14ymedio": "14ymedio.txt",
+    "18th Independent Spirit Awards": "18th_Independent_Spirit_Awards.txt",
+    "1925 Birthday Honours": "1925_Birthday_Honours.txt",
+    "1939 PGA Championship": "1939_PGA_Championship.txt",
+    "1940 PGA Championship": "1940_PGA_Championship.txt",
+    "1951 Birthday Honours": "1951_Birthday_Honours.txt",
+    "1953 Georgia Tech Yellow Jackets football team": "1953_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1957 Indianapolis 500": "1957_Indianapolis_500.txt",
+    "1959 Georgia Tech Yellow Jackets football team": "1959_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1964 Armstrong 500": "1964_Armstrong_500.txt",
+    "1964 Georgia Tech Yellow Jackets football team": "1964_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1965 Birthday Honours": "1965_Birthday_Honours.txt",
+    "1968 US Open (tennis)": "1968_US_Open_(tennis).txt",
+    "1973 Queen's Club Championships": "1973_Queen's_Club_Championships.txt",
+    "1977 PGA Championship": "1977_PGA_Championship.txt",
+    "1978–79 Wigan Athletic F.C. season": "1978–79_Wigan_Athletic_F.C._season.txt",
+    "1979–80 Wigan Athletic F.C. season": "1979–80_Wigan_Athletic_F.C._season.txt",
+    "1980 Georgia Tech Yellow Jackets football team": "1980_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1982 French Open – Men's Doubles": "1982_French_Open_–_Men's_Doubles.txt",
+    "1982 U.S. Pro Indoor – Doubles": "1982_U.S._Pro_Indoor_–_Doubles.txt",
+    "1982 US Open – Mixed Doubles": "1982_US_Open_–_Mixed_Doubles.txt",
+    "1982 Volvo Masters – Doubles": "1982_Volvo_Masters_–_Doubles.txt",
+    "1983 Donnay Indoor Championships – Doubles": "1983_Donnay_Indoor_Championships_–_Doubles.txt",
+    "1983 Volvo International – Doubles": "1983_Volvo_International_–_Doubles.txt",
+    "1985 Hong Kong electoral reform": "1985_Hong_Kong_electoral_reform.txt",
+    "1987 Georgia Tech Yellow Jackets football team": "1987_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1987 Pittsburgh Steelers season": "1987_Pittsburgh_Steelers_season.txt",
+    "1988 Georgia Tech Yellow Jackets football team": "1988_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1988 Volvo International – Doubles": "1988_Volvo_International_–_Doubles.txt",
+    "1989 Colorado Buffaloes football team": "1989_Colorado_Buffaloes_football_team.txt",
+    "1989 Houston Oilers season": "1989_Houston_Oilers_season.txt",
+    "1990 Atlanta Falcons season": "1990_Atlanta_Falcons_season.txt",
+    "1990 Georgia Tech Yellow Jackets football team": "1990_Georgia_Tech_Yellow_Jackets_football_team.txt",
+    "1992–93 Charlotte Hornets season": "1992–93_Charlotte_Hornets_season.txt",
+    "1994 Athens International – Doubles": "1994_Athens_International_–_Doubles.txt",
+    "1995–96 Manchester United F.C. season": "1995–96_Manchester_United_F.C._season.txt",
+    "1995–96 VCU Rams men's basketball team": "1995–96_VCU_Rams_men's_basketball_team.txt",
+    "1996 FA Charity Shield": "1996_FA_Charity_Shield.txt",
+    "1998 ICC KnockOut Trophy Final": "1998_ICC_KnockOut_Trophy_Final.txt",
+    "1998 ICC KnockOut Trophy squads": "1998_ICC_KnockOut_Trophy_squads.txt",
+    "2000 ICC KnockOut Trophy": "2000_ICC_KnockOut_Trophy.txt",
+    "2000 ICC KnockOut Trophy squads": "2000_ICC_KnockOut_Trophy_squads.txt",
+    "2000 PGA Championship": "2000_PGA_Championship.txt",
+    "2000 Wimbledon Championships – Men's Doubles": "2000_Wimbledon_Championships_–_Men's_Doubles.txt",
+    "2001 Bangladesh census": "2001_Bangladesh_census.txt",
+    "2003 WNBA season": "2003_WNBA_season.txt",
+    "2004–05 VCU Rams men's basketball team": "2004–05_VCU_Rams_men's_basketball_team.txt",
+    "2006 PGA Championship": "2006_PGA_Championship.txt",
+    "2006–07 QMJHL season": "2006–07_QMJHL_season.txt",
+    "2006–07 Wigan Athletic F.C. season": "2006–07_Wigan_Athletic_F.C._season.txt",
+    "2007 Memorial Cup": "2007_Memorial_Cup.txt",
+    "2007–08 Wigan Athletic F.C. season": "2007–08_Wigan_Athletic_F.C._season.txt",
+    "2009 Big 12 Conference football season": "2009_Big_12_Conference_football_season.txt",
+    "2009 Colorado Buffaloes football team": "2009_Colorado_Buffaloes_football_team.txt",
+    "2009 Singapore Grand Prix": "2009_Singapore_Grand_Prix.txt",
+    "2009–10 VCU Rams men's basketball team": "2009–10_VCU_Rams_men's_basketball_team.txt",
+    "2010 Kiev Victory Day Parade": "2010_Kiev_Victory_Day_Parade.txt",
+    "2010–11 VCU Rams men's basketball team": "2010–11_VCU_Rams_men's_basketball_team.txt",
+    "2010–11 Vermont Catamounts men's basketball team": "2010–11_Vermont_Catamounts_men's_basketball_team.txt",
+    "2011 Barcelona Ladies Open – Doubles": "2011_Barcelona_Ladies_Open_–_Doubles.txt",
+    "2011 Colorado Buffaloes football team": "2011_Colorado_Buffaloes_football_team.txt",
+    "2011 French Open – Women's Singles": "2011_French_Open_–_Women's_Singles.txt",
+    "2011 Pulitzer Prize": "2011_Pulitzer_Prize.txt",
+    "2011–12 QMJHL season": "2011–12_QMJHL_season.txt",
+    "2011–12 VCU Rams men's basketball team": "2011–12_VCU_Rams_men's_basketball_team.txt",
+    "2011–12 Vermont Catamounts men's basketball team": "2011–12_Vermont_Catamounts_men's_basketball_team.txt",
+    "2012 Colorado Buffaloes football team": "2012_Colorado_Buffaloes_football_team.txt",
+    "2012 US Open – Men's singles final": "2012_US_Open_–_Men's_singles_final.txt",
+    "2012–13 VCU Rams men's basketball team": "2012–13_VCU_Rams_men's_basketball_team.txt",
+    "2012–13 Vermont Catamounts men's basketball team": "2012–13_Vermont_Catamounts_men's_basketball_team.txt",
+    "2013 Birthday Honours": "2013_Birthday_Honours.txt",
+    "2013–14 VCU Rams men's basketball team": "2013–14_VCU_Rams_men's_basketball_team.txt",
+    "2013–14 Vermont Catamounts men's basketball team": "2013–14_Vermont_Catamounts_men's_basketball_team.txt",
+    "2014 Bahrain Grand Prix": "2014_Bahrain_Grand_Prix.txt",
+    "2014 Birthday Honours": "2014_Birthday_Honours.txt",
+    "2014 Colorado Buffaloes football team": "2014_Colorado_Buffaloes_football_team.txt",
+    "2014 NPCSC Decision on Hong Kong": "2014_NPCSC_Decision_on_Hong_Kong.txt",
+    "2014 S/S": "2014_SS.txt",
+    "2014–15 Charlotte Hornets season": "2014–15_Charlotte_Hornets_season.txt",
+    "2014–15 Colorado Buffaloes men's basketball team": "2014–15_Colorado_Buffaloes_men's_basketball_team.txt",
+    "2014–15 VCU Rams men's basketball team": "2014–15_VCU_Rams_men's_basketball_team.txt",
+    "2015 Birthday Honours": "2015_Birthday_Honours.txt",
+    "2015 Colorado Buffaloes football team": "2015_Colorado_Buffaloes_football_team.txt",
+    "2015 Macedonian Football Supercup": "2015_Macedonian_Football_Supercup.txt",
+    "2015 Rogers Cup – Women's Doubles": "2015_Rogers_Cup_–_Women's_Doubles.txt",
+    "2015 Wimbledon Championships – Women's Doubles": "2015_Wimbledon_Championships_–_Women's_Doubles.txt",
+    "2015–16 Colorado Buffaloes men's basketball team": "2015–16_Colorado_Buffaloes_men's_basketball_team.txt",
+    "2015–16 VCU Rams men's basketball team": "2015–16_VCU_Rams_men's_basketball_team.txt",
+    "2015–16 Vermont Catamounts men's basketball team": "2015–16_Vermont_Catamounts_men's_basketball_team.txt",
+    "2016 Birthday Honours": "2016_Birthday_Honours.txt",
+    "2016–17 Colorado Buffaloes men's basketball team": "2016–17_Colorado_Buffaloes_men's_basketball_team.txt",
+    "2016–17 Vermont Catamounts men's basketball team": "2016–17_Vermont_Catamounts_men's_basketball_team.txt",
+    "2017 Australian Open – Men's singles final": "2017_Australian_Open_–_Men's_singles_final.txt",
+    "2017 Birthday Honours": "2017_Birthday_Honours.txt",
+    "2017–18 Wigan Athletic F.C. season": "2017–18_Wigan_Athletic_F.C._season.txt",
+    "2018 PGA Championship": "2018_PGA_Championship.txt",
+    "28th Independent Spirit Awards": "28th_Independent_Spirit_Awards.txt",
+    "32nd Independent Spirit Awards": "32nd_Independent_Spirit_Awards.txt",
+    "339th Flight Test Squadron": "339th_Flight_Test_Squadron.txt",
+    "370th Flight Test Squadron": "370th_Flight_Test_Squadron.txt",
+    "4 a.m. (novel)": "4_a.m._(novel).txt",
+    "413th Flight Test Squadron": "413th_Flight_Test_Squadron.txt",
+    "415th Flight Test Flight": "415th_Flight_Test_Flight.txt",
+    "417th Flight Test Squadron": "417th_Flight_Test_Squadron.txt",
+    "419th Flight Test Squadron": "419th_Flight_Test_Squadron.txt",
+    "486th Flight Test Squadron": "486th_Flight_Test_Squadron.txt",
+    "500 Years Later": "500_Years_Later.txt",
+    "514th Flight Test Squadron": "514th_Flight_Test_Squadron.txt",
+    "712 Fifth Avenue": "712_Fifth_Avenue.txt",
+    "888 7th Avenue": "888_7th_Avenue.txt",
+    "990WBOB": "990WBOB.txt",
+    "A Boy in a Man's World": "A_Boy_in_a_Man's_World.txt",
+    "A Christmas Carol": "A_Christmas_Carol.txt",
+    "A Kiss for Corliss": "A_Kiss_for_Corliss.txt",
+    "A Rather Blustery Day": "A_Rather_Blustery_Day.txt",
+    "A Summer in the Cage": "A_Summer_in_the_Cage.txt",
+    "A Week of Garfield": "A_Week_of_Garfield.txt",
+    "A Wise Old Owl": "A_Wise_Old_Owl.txt",
+    "A World Apart (film)": "A_World_Apart_(film).txt",
+    "A rose by any other name would smell as sweet": "A_rose_by_any_other_name_would_smell_as_sweet.txt",
+    "A41 road": "A41_road.txt",
+    "A5117 road": "A5117_road.txt",
+    "AES+F": "AES+F.txt",
+    "About a Boy (film)": "About_a_Boy_(film).txt",
+    "About a Boy (soundtrack)": "About_a_Boy_(soundtrack).txt",
+    "Abraham Maslow": "Abraham_Maslow.txt",
+    "Abteilungsleiter (NSDAP)": "Abteilungsleiter_(NSDAP).txt",
+    "Accessible Media": "Accessible_Media.txt",
+    "Adam Collis": "Adam_Collis.txt",
+    "Adenocarpus viscosus": "Adenocarpus_viscosus.txt",
+    "Adrian Conan Doyle": "Adrian_Conan_Doyle.txt",
+    "Adriana Trigiani": "Adriana_Trigiani.txt",
+    "Advice column": "Advice_column.txt",
+    "Affiliated Managers Group": "Affiliated_Managers_Group.txt",
+    "Against the Wind (album)": "Against_the_Wind_(album).txt",
+    "Agee (film)": "Agee_(film).txt",
+    "Aiken Drum": "Aiken_Drum.txt",
+    "Aisne-Marne American Cemetery and Memorial": "Aisne-Marne_American_Cemetery_and_Memorial.txt",
+    "Ajuga": "Ajuga.txt",
+    "Ajugeae": "Ajugeae.txt",
+    "Akbariyya": "Akbariyya.txt",
+    "Ako Mitchell": "Ako_Mitchell.txt",
+    "Al Haj FAW motors": "Al_Haj_FAW_motors.txt",
+    "Ala Kart (custom car)": "Ala_Kart_(custom_car).txt",
+    "Alain Resnais": "Alain_Resnais.txt",
+    "Alamein Memorial": "Alamein_Memorial.txt",
+    "Alberta Hail Project": "Alberta_Hail_Project.txt",
+    "Aldo Pontremoli": "Aldo_Pontremoli.txt",
+    "Aldonic acid": "Aldonic_acid.txt",
+    "Alec Muffett": "Alec_Muffett.txt",
+    "Aleksandar Bošković": "Aleksandar_Bošković.txt",
+    "Alex Ferguson": "Alex_Ferguson.txt",
+    "Alexander Kerensky": "Alexander_Kerensky.txt",
+    "Alexandroff extension": "Alexandroff_extension.txt",
+    "Alfred Balk": "Alfred_Balk.txt",
+    "Alfred Gell": "Alfred_Gell.txt",
+    "Alias French Gertie": "Alias_French_Gertie.txt",
+    "Alien (film)": "Alien_(film).txt",
+    "Alien (soundtrack)": "Alien_(soundtrack).txt",
+    "Aliens (soundtrack)": "Aliens_(soundtrack).txt",
+    "All Ages: The Boston Hardcore Film": "All_Ages_The_Boston_Hardcore_Film.txt",
+    "All I Wanna Do Is Make Love to You": "All_I_Wanna_Do_Is_Make_Love_to_You.txt",
+    "All That You Are (Goo Goo Dolls song)": "All_That_You_Are_(Goo_Goo_Dolls_song).txt",
+    "Allison Transmission": "Allison_Transmission.txt",
+    "Almost Saturday Night": "Almost_Saturday_Night.txt",
+    "Alpine National Park": "Alpine_National_Park.txt",
+    "Altamont Diary": "Altamont_Diary.txt",
+    "Altanochir (1882–1949)": "Altanochir_(1882–1949).txt",
+    "Alvaro Mexia": "Alvaro_Mexia.txt",
+    "Always (Saliva song)": "Always_(Saliva_song).txt",
+    "Am Rong": "Am_Rong.txt",
+    "Amanda Lepore": "Amanda_Lepore.txt",
+    "Amaruk Kayshapanta": "Amaruk_Kayshapanta.txt",
+    "Ambroise Thomas": "Ambroise_Thomas.txt",
+    "America East Conference": "America_East_Conference.txt",
+    "American Expeditionary Forces": "American_Expeditionary_Forces.txt",
+    "American Hardcore (film)": "American_Hardcore_(film).txt",
+    "Amherst, Massachusetts": "Amherst,_Massachusetts.txt",
+    "Anani ben Sason": "Anani_ben_Sason.txt",
+    "Anastas Mikoyan": "Anastas_Mikoyan.txt",
+    "Andlang": "Andlang.txt",
+    "Andraé Crouch": "Andraé_Crouch.txt",
+    "Andre Norton Award": "Andre_Norton_Award.txt",
+    "Andrei Kirilenko (politician)": "Andrei_Kirilenko_(politician).txt",
+    "Andrew Jaspan": "Andrew_Jaspan.txt",
+    "Andrew Murray (Guyanese boxer)": "Andrew_Murray_(Guyanese_boxer).txt",
+    "Andrićgrad": "Andrićgrad.txt",
+    "Androscoggin Bank Colisée": "Androscoggin_Bank_Colisée.txt",
+    "Andy Irons": "Andy_Irons.txt",
+    "Andy's Ancestry": "Andy's_Ancestry.txt",
+    "Anggun discography": "Anggun_discography.txt",
+    "Animorphs": "Animorphs.txt",
+    "Annie Morton": "Annie_Morton.txt",
+    "Anthony Rossomando": "Anthony_Rossomando.txt",
+    "Anthony Woodson": "Anthony_Woodson.txt",
+    "Antonino Lo Surdo": "Antonino_Lo_Surdo.txt",
+    "Apple Remote": "Apple_Remote.txt",
+    "Apple Remote Desktop": "Apple_Remote_Desktop.txt",
+    "Apple Watch": "Apple_Watch.txt",
+    "Arabs in India": "Arabs_in_India.txt",
+    "Araby Lockhart": "Araby_Lockhart.txt",
+    "Aram Avakian": "Aram_Avakian.txt",
+    "Araripesuchus wegeneri": "Araripesuchus_wegeneri.txt",
+    "Arena of Khazan": "Arena_of_Khazan.txt",
+    "Argentine PGA Championship": "Argentine_PGA_Championship.txt",
+    "Armand Castelmary": "Armand_Castelmary.txt",
+    "Armed Forces Covenant": "Armed_Forces_Covenant.txt",
+    "Armed Forces Day (Poland)": "Armed_Forces_Day_(Poland).txt",
+    "Army (Ellie Goulding song)": "Army_(Ellie_Goulding_song).txt",
+    "Arnold Schwarzenegger filmography": "Arnold_Schwarzenegger_filmography.txt",
+    "Arras Flying Services Memorial": "Arras_Flying_Services_Memorial.txt",
+    "Art Laboe": "Art_Laboe.txt",
+    "Arthur Conan Doyle": "Arthur_Conan_Doyle.txt",
+    "Arthur Roberts (editor)": "Arthur_Roberts_(editor).txt",
+    "Aryanto Yuniawan": "Aryanto_Yuniawan.txt",
+    "As Cool as I Am (film)": "As_Cool_as_I_Am_(film).txt",
+    "As the Music Plays": "As_the_Music_Plays.txt",
+    "Asante Traditional Buildings": "Asante_Traditional_Buildings.txt",
+    "Asgard (yacht)": "Asgard_(yacht).txt",
+    "Asiatic-Pacific Theater": "Asiatic-Pacific_Theater.txt",
+    "Association of Social Anthropologists": "Association_of_Social_Anthropologists.txt",
+    "At Last Bill Cosby Really Sings": "At_Last_Bill_Cosby_Really_Sings.txt",
+    "Atsushi Sakurai": "Atsushi_Sakurai.txt",
+    "Attorney misconduct": "Attorney_misconduct.txt",
+    "Augustine of Canterbury": "Augustine_of_Canterbury.txt",
+    "Ava DuVernay": "Ava_DuVernay.txt",
+    "Avenue Capital Group": "Avenue_Capital_Group.txt",
+    "Ayana Walker": "Ayana_Walker.txt",
+    "Azam mosque of Qom": "Azam_mosque_of_Qom.txt",
+    "BTS discography": "BTS_discography.txt",
+    "Back to Mono (1958–1969)": "Back_to_Mono_(1958–1969).txt",
+    "Backford Cross": "Backford_Cross.txt",
+    "Bad Bascomb (film)": "Bad_Bascomb_(film).txt",
+    "Badly Drawn Boy": "Badly_Drawn_Boy.txt",
+    "Badly Drawn Boy discography": "Badly_Drawn_Boy_discography.txt",
+    "Baird Bryant": "Baird_Bryant.txt",
+    "Baker v. Nelson": "Baker_v._Nelson.txt",
+    "Ballenberg": "Ballenberg.txt",
+    "Bamboo (band)": "Bamboo_(band).txt",
+    "Bamboo Mañalac": "Bamboo_Mañalac.txt",
+    "Bang Bang You're Dead (song)": "Bang_Bang_You're_Dead_(song).txt",
+    "BankUnited": "BankUnited.txt",
+    "Barbie and the Secret Door": "Barbie_and_the_Secret_Door.txt",
+    "Barend": "Barend.txt",
+    "Barnyard Dawg": "Barnyard_Dawg.txt",
+    "Barry Beyerstein": "Barry_Beyerstein.txt",
+    "Barton Lynch": "Barton_Lynch.txt",
+    "Based on a True Story...": "Based_on_a_True_Story.txt",
+    "Basset Hound": "Basset_Hound.txt",
+    "Battle of Adwa": "Battle_of_Adwa.txt",
+    "Battle of Alhandic": "Battle_of_Alhandic.txt",
+    "Battle of Aspromonte": "Battle_of_Aspromonte.txt",
+    "Battle of Belleau Wood": "Battle_of_Belleau_Wood.txt",
+    "Battle of Berestechko": "Battle_of_Berestechko.txt",
+    "Battle of Calabria": "Battle_of_Calabria.txt",
+    "Battle of Cross Keys": "Battle_of_Cross_Keys.txt",
+    "Battle of Gaines's Mill": "Battle_of_Gaines's_Mill.txt",
+    "Battle of Glendale (Skye)": "Battle_of_Glendale_(Skye).txt",
+    "Battle of Guam (1944)": "Battle_of_Guam_(1944).txt",
+    "Battle of Jupiter Inlet": "Battle_of_Jupiter_Inlet.txt",
+    "Battle of Klushino": "Battle_of_Klushino.txt",
+    "Battle of Malvern Hill": "Battle_of_Malvern_Hill.txt",
+    "Battle of Manila (1574)": "Battle_of_Manila_(1574).txt",
+    "Battle of Manila (1945)": "Battle_of_Manila_(1945).txt",
+    "Battle of Norfolk": "Battle_of_Norfolk.txt",
+    "Battle of Peleliu": "Battle_of_Peleliu.txt",
+    "Battle of Port Republic": "Battle_of_Port_Republic.txt",
+    "Battle of Romanovka": "Battle_of_Romanovka.txt",
+    "Battle of Silda": "Battle_of_Silda.txt",
+    "Battle of Stones River": "Battle_of_Stones_River.txt",
+    "Battle of Yao (Japan)": "Battle_of_Yao_(Japan).txt",
+    "Battle of the Burbia River": "Battle_of_the_Burbia_River.txt",
+    "Battle of the Ch'ongch'on River": "Battle_of_the_Ch'ongch'on_River.txt",
+    "Bayuquan Railway Station": "Bayuquan_Railway_Station.txt",
+    "Be the One (Poison song)": "Be_the_One_(Poison_song).txt",
+    "Be'er Sheva fringe-fingered lizard": "Be'er_Sheva_fringe-fingered_lizard.txt",
+    "Beat Happening/Screaming Trees": "Beat_HappeningScreaming_Trees.txt",
+    "Bedknobs and Broomsticks": "Bedknobs_and_Broomsticks.txt",
+    "Before We Say Goodbye": "Before_We_Say_Goodbye.txt",
+    "Berghuis v. Thompkins": "Berghuis_v._Thompkins.txt",
+    "Bernhard Bötel": "Bernhard_Bötel.txt",
+    "Bertha Runkle": "Bertha_Runkle.txt",
+    "Best Western Lake Buena Vista Resort Hotel": "Best_Western_Lake_Buena_Vista_Resort_Hotel.txt",
+    "Big Stone Gap (film)": "Big_Stone_Gap_(film).txt",
+    "Bill Barretta": "Bill_Barretta.txt",
+    "Bill Clinton": "Bill_Clinton.txt",
+    "Bill Cosby Is a Very Funny Fellow...Right!": "Bill_Cosby_Is_a_Very_Funny_Fellow...Right!.txt",
+    "Bill's Best Friend": "Bill's_Best_Friend.txt",
+    "Billings Bulls": "Billings_Bulls.txt",
+    "Billy Boy": "Billy_Boy.txt",
+    "Billy Ray Cyrus discography": "Billy_Ray_Cyrus_discography.txt",
+    "Birgu Clock Tower": "Birgu_Clock_Tower.txt",
+    "Birthday Honours": "Birthday_Honours.txt",
+    "Bishop International Airport": "Bishop_International_Airport.txt",
+    "Bitið fast í vitið": "Bitið_fast_í_vitið.txt",
+    "Bitter Jester": "Bitter_Jester.txt",
+    "Bitter electromagnet": "Bitter_electromagnet.txt",
+    "Black 13": "Black_13.txt",
+    "Black Clover": "Black_Clover.txt",
+    "Black Nativity": "Black_Nativity.txt",
+    "Black Seminoles": "Black_Seminoles.txt",
+    "Blindness (novel)": "Blindness_(novel).txt",
+    "Block booking": "Block_booking.txt",
+    "Blueberry Tea": "Blueberry_Tea.txt",
+    "Boa vs. Python (song)": "Boa_vs._Python_(song).txt",
+    "Bob Seger": "Bob_Seger.txt",
+    "Bobbi Bacha": "Bobbi_Bacha.txt",
+    "Bobby Dodd Stadium": "Bobby_Dodd_Stadium.txt",
+    "Bobby Fox": "Bobby_Fox.txt",
+    "Boots (EP)": "Boots_(EP).txt",
+    "Boots (album)": "Boots_(album).txt",
+    "Bordan Tkachuk": "Bordan_Tkachuk.txt",
+    "Borough of Berwick-upon-Tweed": "Borough_of_Berwick-upon-Tweed.txt",
+    "Boss Bailey": "Boss_Bailey.txt",
+    "Boston, Lincolnshire": "Boston,_Lincolnshire.txt",
+    "Boxes (Icehouse album)": "Boxes_(Icehouse_album).txt",
+    "Brabejum": "Brabejum.txt",
+    "Brad Parscale": "Brad_Parscale.txt",
+    "Bradford P. Campbell": "Bradford_P._Campbell.txt",
+    "Breed standard (dogs)": "Breed_standard_(dogs).txt",
+    "Brian C. Bialiy": "Brian_C._Bialiy.txt",
+    "Brian Doyle-Murray": "Brian_Doyle-Murray.txt",
+    "Brintonia": "Brintonia.txt",
+    "British Journal": "British_Journal.txt",
+    "British Journal of Social Psychology": "British_Journal_of_Social_Psychology.txt",
+    "Broken Arrow (1950 film)": "Broken_Arrow_(1950_film).txt",
+    "Brother from Another Series": "Brother_from_Another_Series.txt",
+    "Broughtonia": "Broughtonia.txt",
+    "Broughtonia sanguinea": "Broughtonia_sanguinea.txt",
+    "Brown County, Kansas": "Brown_County,_Kansas.txt",
+    "Brown State Fishing Lake": "Brown_State_Fishing_Lake.txt",
+    "Buck-Tick": "Buck-Tick.txt",
+    "Buddy film": "Buddy_film.txt",
+    "Buena Vista (brand)": "Buena_Vista_(brand).txt",
+    "Buena Vista Downtown Historic District": "Buena_Vista_Downtown_Historic_District.txt",
+    "Buena Vista High School (Michigan)": "Buena_Vista_High_School_(Michigan).txt",
+    "Buena Vista Park": "Buena_Vista_Park.txt",
+    "Buena Vista, Pennsylvania": "Buena_Vista,_Pennsylvania.txt",
+    "Buffett Foundation": "Buffett_Foundation.txt",
+    "Bulldog": "Bulldog.txt",
+    "Bunny Grant": "Bunny_Grant.txt",
+    "Buried Country": "Buried_Country.txt",
+    "Burji La": "Burji_La.txt",
+    "C24 Gallery": "C24_Gallery.txt",
+    "CSICon": "CSICon.txt",
+    "CUPS (CMU)": "CUPS_(CMU).txt",
+    "Caladenia": "Caladenia.txt",
+    "California Hot Rod Reunion": "California_Hot_Rod_Reunion.txt",
+    "Calochilus": "Calochilus.txt",
+    "Campaign finance reform in the United States": "Campaign_finance_reform_in_the_United_States.txt",
+    "Campus Confessions": "Campus_Confessions.txt",
+    "Can't Help Myself": "Can't_Help_Myself.txt",
+    "Can't Take My Eyes Off You": "Can't_Take_My_Eyes_Off_You.txt",
+    "Can't Touch It": "Can't_Touch_It.txt",
+    "Cannonball (Skylar Grey song)": "Cannonball_(Skylar_Grey_song).txt",
+    "Canyon Creek Food Company": "Canyon_Creek_Food_Company.txt",
+    "Caraga": "Caraga.txt",
+    "Cardinal Health": "Cardinal_Health.txt",
+    "Carl B. Stokes United States Courthouse": "Carl_B._Stokes_United_States_Courthouse.txt",
+    "Carl Barât": "Carl_Barât.txt",
+    "Carlo Rovelli": "Carlo_Rovelli.txt",
+    "Carlos Rendón Zipagauta": "Carlos_Rendón_Zipagauta.txt",
+    "Carnegie Mellon University": "Carnegie_Mellon_University.txt",
+    "Carnegie Mellon University in Qatar": "Carnegie_Mellon_University_in_Qatar.txt",
+    "Carol Shields": "Carol_Shields.txt",
+    "Carolina Dodge Dealers 400": "Carolina_Dodge_Dealers_400.txt",
+    "Caroline Carver (actress)": "Caroline_Carver_(actress).txt",
+    "Carrefour": "Carrefour.txt",
+    "Carreras Cigarette Factory": "Carreras_Cigarette_Factory.txt",
+    "Carroll County, New Hampshire": "Carroll_County,_New_Hampshire.txt",
+    "Case Gym": "Case_Gym.txt",
+    "Cat Butt": "Cat_Butt.txt",
+    "Catan": "Catan.txt",
+    "Catan Card Game": "Catan_Card_Game.txt",
+    "Catan Dice Game": "Catan_Dice_Game.txt",
+    "Catan: Cities &amp; Knights": "Catan_Cities_&amp;_Knights.txt",
+    "Catan: Seafarers": "Catan_Seafarers.txt",
+    "Catharina Felser": "Catharina_Felser.txt",
+    "Cattleytonia": "Cattleytonia.txt",
+    "Cedrol": "Cedrol.txt",
+    "Cesira Ferrani": "Cesira_Ferrani.txt",
+    "Chagrin Documentary Film Festival": "Chagrin_Documentary_Film_Festival.txt",
+    "Chahar Right Rear Banner": "Chahar_Right_Rear_Banner.txt",
+    "Chak 86/6.R Sahiwal": "Chak_866.R_Sahiwal.txt",
+    "Champ Bailey": "Champ_Bailey.txt",
+    "Change Has Come": "Change_Has_Come.txt",
+    "Charles Charamba": "Charles_Charamba.txt",
+    "Charles Craft": "Charles_Craft.txt",
+    "Charles Morgan Jr.": "Charles_Morgan_Jr.txt",
+    "Charles Nungesser": "Charles_Nungesser.txt",
+    "Charlotte Hornets": "Charlotte_Hornets.txt",
+    "Charlotte Hornets all-time roster": "Charlotte_Hornets_all-time_roster.txt",
+    "Charlotte Hornets draft history": "Charlotte_Hornets_draft_history.txt",
+    "Charmed": "Charmed.txt",
+    "Charmed (season 4)": "Charmed_(season_4).txt",
+    "Chatta Bazaar": "Chatta_Bazaar.txt",
+    "Chiara Nappi": "Chiara_Nappi.txt",
+    "Chicago Public Media": "Chicago_Public_Media.txt",
+    "Chief of the Defence Staff (Canada)": "Chief_of_the_Defence_Staff_(Canada).txt",
+    "Children's Day (Japan)": "Children's_Day_(Japan).txt",
+    "Chinese Australians": "Chinese_Australians.txt",
+    "Cho Kyuhyun": "Cho_Kyuhyun.txt",
+    "Chris Funk": "Chris_Funk.txt",
+    "Chris Hanzsek": "Chris_Hanzsek.txt",
+    "Chris Marker": "Chris_Marker.txt",
+    "Chris Menges": "Chris_Menges.txt",
+    "Chris Van Hollen": "Chris_Van_Hollen.txt",
+    "Christmas in the Basque Country": "Christmas_in_the_Basque_Country.txt",
+    "Christopher Mitchell (actor)": "Christopher_Mitchell_(actor).txt",
+    "Christus Apollo": "Christus_Apollo.txt",
+    "Christy Sutherland": "Christy_Sutherland.txt",
+    "Chrome, Smoke &amp; BBQ": "Chrome,_Smoke_&amp;_BBQ.txt",
+    "Chrysalis (magazine)": "Chrysalis_(magazine).txt",
+    "Chuck Berry on Stage": "Chuck_Berry_on_Stage.txt",
+    "Château de Druyes": "Château_de_Druyes.txt",
+    "Château Élysée": "Château_Élysée.txt",
+    "Cineriz": "Cineriz.txt",
+    "Cinizasaurus": "Cinizasaurus.txt",
+    "Circle. Square. Triangle": "Circle._Square._Triangle.txt",
+    "City of Angels (film)": "City_of_Angels_(film).txt",
+    "City of Norwood v. Horney": "City_of_Norwood_v._Horney.txt",
+    "Claudia Drake": "Claudia_Drake.txt",
+    "Claudio Pellegrini": "Claudio_Pellegrini.txt",
+    "Clean Power Finance": "Clean_Power_Finance.txt",
+    "Clear Skies!": "Clear_Skies!.txt",
+    "Clifton B. Cates": "Clifton_B._Cates.txt",
+    "Clinton Walker": "Clinton_Walker.txt",
+    "Clinton, Minnesota": "Clinton,_Minnesota.txt",
+    "Clive Donner": "Clive_Donner.txt",
+    "Clock Tower of Murshidabad": "Clock_Tower_of_Murshidabad.txt",
+    "Clock Tower, Brighton": "Clock_Tower,_Brighton.txt",
+    "Coastwatchers": "Coastwatchers.txt",
+    "Cobb Galleria Centre": "Cobb_Galleria_Centre.txt",
+    "Coco Ho": "Coco_Ho.txt",
+    "College of Staten Island Baseball Complex": "College_of_Staten_Island_Baseball_Complex.txt",
+    "Collie": "Collie.txt",
+    "Collins Ferry Historic District": "Collins_Ferry_Historic_District.txt",
+    "Columbia University": "Columbia_University.txt",
+    "Comanchesaurus": "Comanchesaurus.txt",
+    "Combat Zone Wrestling": "Combat_Zone_Wrestling.txt",
+    "Commanda Lake": "Commanda_Lake.txt",
+    "Commedia all'italiana": "Commedia_all'italiana.txt",
+    "Commissioner v. Banks": "Commissioner_v._Banks.txt",
+    "Communism in Russia": "Communism_in_Russia.txt",
+    "Compass Minerals": "Compass_Minerals.txt",
+    "Compilation (The Clean album)": "Compilation_(The_Clean_album).txt",
+    "Conchita Badía": "Conchita_Badía.txt",
+    "Concho Indian Boarding School": "Concho_Indian_Boarding_School.txt",
+    "Conductivity near the percolation threshold": "Conductivity_near_the_percolation_threshold.txt",
+    "Confrontation (TV series)": "Confrontation_(TV_series).txt",
+    "Conrad Brooks": "Conrad_Brooks.txt",
+    "Conscription in the United States": "Conscription_in_the_United_States.txt",
+    "Cool from the Wire": "Cool_from_the_Wire.txt",
+    "Coprosma repens": "Coprosma_repens.txt",
+    "Cops and Robbers (1973 film)": "Cops_and_Robbers_(1973_film).txt",
+    "Coral Gardens and Their Magic": "Coral_Gardens_and_Their_Magic.txt",
+    "Cornelia, Georgia": "Cornelia,_Georgia.txt",
+    "Corporate synergy": "Corporate_synergy.txt",
+    "Cotter High School (Winona, Minnesota)": "Cotter_High_School_(Winona,_Minnesota).txt",
+    "Country Music Star No. 1": "Country_Music_Star_No._1.txt",
+    "Court Square Capital Partners": "Court_Square_Capital_Partners.txt",
+    "Craig v. Boren": "Craig_v._Boren.txt",
+    "Crank Caverns": "Crank_Caverns.txt",
+    "Crater Lake National Park": "Crater_Lake_National_Park.txt",
+    "Crescent Communities": "Crescent_Communities.txt",
+    "Crime and Punishment": "Crime_and_Punishment.txt",
+    "Criminal Lawyer": "Criminal_Lawyer.txt",
+    "Criminal law in the Marshall Court": "Criminal_law_in_the_Marshall_Court.txt",
+    "Criminal law in the Waite Court": "Criminal_law_in_the_Waite_Court.txt",
+    "Criss Angel": "Criss_Angel.txt",
+    "CrissCross": "CrissCross.txt",
+    "Cross Manage": "Cross_Manage.txt",
+    "Cryptoraptor": "Cryptoraptor.txt",
+    "Crystal River Energy Complex": "Crystal_River_Energy_Complex.txt",
+    "Cultural Property (Japan)": "Cultural_Property_(Japan).txt",
+    "Cupressus": "Cupressus.txt",
+    "Customer magazine": "Customer_magazine.txt",
+    "Cynthia Hogan": "Cynthia_Hogan.txt",
+    "Cypress": "Cypress.txt",
+    "Cypress-pine": "Cypress-pine.txt",
+    "CytoSport": "CytoSport.txt",
+    "Cão de Gado Transmontano": "Cão_de_Gado_Transmontano.txt",
+    "D1NZ": "D1NZ.txt",
+    "DISCLOSE Act": "DISCLOSE_Act.txt",
+    "Dafeng District": "Dafeng_District.txt",
+    "Dakotadon": "Dakotadon.txt",
+    "Daniel House": "Daniel_House.txt",
+    "Danny Cannon": "Danny_Cannon.txt",
+    "Danny Jones": "Danny_Jones.txt",
+    "Dark Passage (film)": "Dark_Passage_(film).txt",
+    "Darrell Crate": "Darrell_Crate.txt",
+    "Daryl Hall": "Daryl_Hall.txt",
+    "Davey Tree Expert Company": "Davey_Tree_Expert_Company.txt",
+    "David Beckham Academy": "David_Beckham_Academy.txt",
+    "David Beckham's Soccer USA": "David_Beckham's_Soccer_USA.txt",
+    "David C. Funder": "David_C._Funder.txt",
+    "David Coderre": "David_Coderre.txt",
+    "David Huntsinger": "David_Huntsinger.txt",
+    "David S. Touretzky": "David_S._Touretzky.txt",
+    "David Urban": "David_Urban.txt",
+    "David Waksberg": "David_Waksberg.txt",
+    "David Weissman": "David_Weissman.txt",
+    "David Yates": "David_Yates.txt",
+    "Dazhou": "Dazhou.txt",
+    "DeObia Oparei": "DeObia_Oparei.txt",
+    "Dead Man's Land": "Dead_Man's_Land.txt",
+    "Deadfall (1993 film)": "Deadfall_(1993_film).txt",
+    "Deadwood (song)": "Deadwood_(song).txt",
+    "Dean Valli": "Dean_Valli.txt",
+    "Death of Abdul Wali": "Death_of_Abdul_Wali.txt",
+    "Deceit (Doctor Who novel)": "Deceit_(Doctor_Who_novel).txt",
+    "Deep-fried peanuts": "Deep-fried_peanuts.txt",
+    "Deewana (1992 film)": "Deewana_(1992_film).txt",
+    "Delirium (Ellie Goulding album)": "Delirium_(Ellie_Goulding_album).txt",
+    "Delirium World Tour": "Delirium_World_Tour.txt",
+    "Deliver Us from Evil (2014 film)": "Deliver_Us_from_Evil_(2014_film).txt",
+    "Delmer Daves": "Delmer_Daves.txt",
+    "Den Za Nas": "Den_Za_Nas.txt",
+    "Despoina": "Despoina.txt",
+    "Destination Tokyo": "Destination_Tokyo.txt",
+    "Destinations": "Destinations.txt",
+    "Dev Hynes": "Dev_Hynes.txt",
+    "Dewey Beard": "Dewey_Beard.txt",
+    "Dhoolpet": "Dhoolpet.txt",
+    "Dictyosperma": "Dictyosperma.txt",
+    "Did It in a Minute": "Did_It_in_a_Minute.txt",
+    "Did You Ever See a Lassie?": "Did_You_Ever_See_a_Lassie.txt",
+    "Didz Hammond": "Didz_Hammond.txt",
+    "Dig Your Own Grave": "Dig_Your_Own_Grave.txt",
+    "Digswell Park": "Digswell_Park.txt",
+    "Dime Magazine": "Dime_Magazine.txt",
+    "Dime novel": "Dime_novel.txt",
+    "Dinosaur (film)": "Dinosaur_(film).txt",
+    "Diplomatic bag": "Diplomatic_bag.txt",
+    "Diplomatic mission": "Diplomatic_mission.txt",
+    "Director of the Defense Intelligence Agency": "Director_of_the_Defense_Intelligence_Agency.txt",
+    "Dirleton": "Dirleton.txt",
+    "Dirleton Castle": "Dirleton_Castle.txt",
+    "Dirleton Kirk": "Dirleton_Kirk.txt",
+    "Dirty Pretty Things (band)": "Dirty_Pretty_Things_(band).txt",
+    "Disco Bill": "Disco_Bill.txt",
+    "Disco polo": "Disco_polo.txt",
+    "Divorce Italian Style": "Divorce_Italian_Style.txt",
+    "Divya S. Menon": "Divya_S._Menon.txt",
+    "Djamaâ el Kebir": "Djamaâ_el_Kebir.txt",
+    "Doc NYC": "Doc_NYC.txt",
+    "Doctor Strange (2016 film)": "Doctor_Strange_(2016_film).txt",
+    "Docville": "Docville.txt",
+    "Dog Tales (1958 film)": "Dog_Tales_(1958_film).txt",
+    "Don't Let the Sun Catch You Crying": "Don't_Let_the_Sun_Catch_You_Crying.txt",
+    "Donald J. Hall Jr.": "Donald_J._Hall_Jr.txt",
+    "Donald Trump (Last Week Tonight)": "Donald_Trump_(Last_Week_Tonight).txt",
+    "Donald Trump in music": "Donald_Trump_in_music.txt",
+    "Donald Trump presidential campaign, 2000": "Donald_Trump_presidential_campaign,_2000.txt",
+    "Douglas Ainslie": "Douglas_Ainslie.txt",
+    "Douglas J. Bennet": "Douglas_J._Bennet.txt",
+    "Dover, New Hampshire": "Dover,_New_Hampshire.txt",
+    "Downtown Kansas City": "Downtown_Kansas_City.txt",
+    "Drained": "Drained.txt",
+    "Draining and development of the Everglades": "Draining_and_development_of_the_Everglades.txt",
+    "Drifting (motorsport)": "Drifting_(motorsport).txt",
+    "Drive Angry": "Drive_Angry.txt",
+    "Drum Beat": "Drum_Beat.txt",
+    "Duke Energy": "Duke_Energy.txt",
+    "Duke Energy Florida": "Duke_Energy_Florida.txt",
+    "Duke Tumatoe": "Duke_Tumatoe.txt",
+    "Dummy corporation": "Dummy_corporation.txt",
+    "Duration (philosophy)": "Duration_(philosophy).txt",
+    "Durvillaea willana": "Durvillaea_willana.txt",
+    "Dwyer Arena": "Dwyer_Arena.txt",
+    "Dzvinia Orlowsky": "Dzvinia_Orlowsky.txt",
+    "E. J. Carroll": "E._J._Carroll.txt",
+    "E. Mavis Hetherington": "E._Mavis_Hetherington.txt",
+    "EFL Cup": "EFL_Cup.txt",
+    "ELDee": "ELDee.txt",
+    "Eagle Mountain Railroad": "Eagle_Mountain_Railroad.txt",
+    "East Lempster, New Hampshire": "East_Lempster,_New_Hampshire.txt",
+    "Echosmith": "Echosmith.txt",
+    "Ed Wood": "Ed_Wood.txt",
+    "Ed Wood (film)": "Ed_Wood_(film).txt",
+    "Edgar Kaiser Jr.": "Edgar_Kaiser_Jr.txt",
+    "Edgar Kaiser Sr.": "Edgar_Kaiser_Sr.txt",
+    "Edmund Leach": "Edmund_Leach.txt",
+    "Eduardo Troconis": "Eduardo_Troconis.txt",
+    "Edward Albee": "Edward_Albee.txt",
+    "Edward Albee's At Home at the Zoo": "Edward_Albee's_At_Home_at_the_Zoo.txt",
+    "Edward D. Martin": "Edward_D._Martin.txt",
+    "Edward F. Albee Foundation": "Edward_F._Albee_Foundation.txt",
+    "Edwin A. Doss": "Edwin_A._Doss.txt",
+    "Eenasul Fateh": "Eenasul_Fateh.txt",
+    "Ehretia": "Ehretia.txt",
+    "Elasund": "Elasund.txt",
+    "Elephant Pass railway station": "Elephant_Pass_railway_station.txt",
+    "Eliezer ben Jacob I": "Eliezer_ben_Jacob_I.txt",
+    "Elinor Kershaw": "Elinor_Kershaw.txt",
+    "Elizabeth Martínez": "Elizabeth_Martínez.txt",
+    "Elko Regional Airport": "Elko_Regional_Airport.txt",
+    "Elmo M. Haney": "Elmo_M._Haney.txt",
+    "Emayatzy Corinealdi": "Emayatzy_Corinealdi.txt",
+    "Embassy of China, London": "Embassy_of_China,_London.txt",
+    "Embassy of the United States, Nairobi": "Embassy_of_the_United_States,_Nairobi.txt",
+    "Emma Bull": "Emma_Bull.txt",
+    "End of Days (film)": "End_of_Days_(film).txt",
+    "End of the Road (1970 film)": "End_of_the_Road_(1970_film).txt",
+    "Enda Kenny": "Enda_Kenny.txt",
+    "Energy shot": "Energy_shot.txt",
+    "English Electric Canberra": "English_Electric_Canberra.txt",
+    "English Setter": "English_Setter.txt",
+    "Enrico Fermi": "Enrico_Fermi.txt",
+    "Enrique Banchs": "Enrique_Banchs.txt",
+    "Enrique Carreras": "Enrique_Carreras.txt",
+    "Enrique Echeverría": "Enrique_Echeverría.txt",
+    "Enrique Grau": "Enrique_Grau.txt",
+    "Ephigenia of Ethiopia": "Ephigenia_of_Ethiopia.txt",
+    "Ephraim Sklyansky": "Ephraim_Sklyansky.txt",
+    "Eric Ambler": "Eric_Ambler.txt",
+    "Eric Schultz": "Eric_Schultz.txt",
+    "Ernest Mangnall": "Ernest_Mangnall.txt",
+    "Erskine Barton Childers": "Erskine_Barton_Childers.txt",
+    "Eski Imaret Mosque": "Eski_Imaret_Mosque.txt",
+    "Esma Sultan": "Esma_Sultan.txt",
+    "Esma Sultan (daughter of Abdul Hamid I)": "Esma_Sultan_(daughter_of_Abdul_Hamid_I).txt",
+    "Esma Sultan (daughter of Abdülaziz)": "Esma_Sultan_(daughter_of_Abdülaziz).txt",
+    "Esma Sultan (daughter of Ahmed III)": "Esma_Sultan_(daughter_of_Ahmed_III).txt",
+    "Esma Sultan Mansion": "Esma_Sultan_Mansion.txt",
+    "Ethiopia–Japan relations": "Ethiopia–Japan_relations.txt",
+    "Etiquette &amp; Espionage": "Etiquette_&amp;_Espionage.txt",
+    "Eucryphia": "Eucryphia.txt",
+    "Euromarché": "Euromarché.txt",
+    "Evelyn Waugh": "Evelyn_Waugh.txt",
+    "Evicted!": "Evicted!.txt",
+    "EvidenceNetwork.ca": "EvidenceNetwork.ca.txt",
+    "Executive Order 10925": "Executive_Order_10925.txt",
+    "Exeter incident": "Exeter_incident.txt",
+    "Exxon": "Exxon.txt",
+    "Faction Punk": "Faction_Punk.txt",
+    "Family Plan": "Family_Plan.txt",
+    "Family Reunion (Saliva song)": "Family_Reunion_(Saliva_song).txt",
+    "Fatai Onikeke": "Fatai_Onikeke.txt",
+    "Fazle Hasan Abed": "Fazle_Hasan_Abed.txt",
+    "Feel Good Inc.": "Feel_Good_Inc.txt",
+    "Feist (dog)": "Feist_(dog).txt",
+    "Fen": "Fen.txt",
+    "Fender Hot Rod DeVille": "Fender_Hot_Rod_DeVille.txt",
+    "Fender Hot Rod Deluxe": "Fender_Hot_Rod_Deluxe.txt",
+    "Ferdi Taygan": "Ferdi_Taygan.txt",
+    "Ferdinando Provesi": "Ferdinando_Provesi.txt",
+    "Fernando Tapias Stahelin": "Fernando_Tapias_Stahelin.txt",
+    "Ferocactus": "Ferocactus.txt",
+    "Ferry Cross the Mersey": "Ferry_Cross_the_Mersey.txt",
+    "Festival Puccini": "Festival_Puccini.txt",
+    "Film laboratory": "Film_laboratory.txt",
+    "Finding the Sun": "Finding_the_Sun.txt",
+    "Fine Gael leadership election, 2017": "Fine_Gael_leadership_election,_2017.txt",
+    "Finn Iunker": "Finn_Iunker.txt",
+    "Fireflight": "Fireflight.txt",
+    "First Italo-Ethiopian War": "First_Italo-Ethiopian_War.txt",
+    "Fishing Lake": "Fishing_Lake.txt",
+    "Flaming Feather": "Flaming_Feather.txt",
+    "Flaming beverage": "Flaming_beverage.txt",
+    "Flamingo Las Vegas": "Flamingo_Las_Vegas.txt",
+    "Flashlight (DJ Fresh song)": "Flashlight_(DJ_Fresh_song).txt",
+    "Flatiron Building": "Flatiron_Building.txt",
+    "Flavia Pennetta": "Flavia_Pennetta.txt",
+    "Florence Nagle": "Florence_Nagle.txt",
+    "Flying with Music": "Flying_with_Music.txt",
+    "Fokienia": "Fokienia.txt",
+    "Folk rock": "Folk_rock.txt",
+    "Football Weekly": "Football_Weekly.txt",
+    "For Against": "For_Against.txt",
+    "For Screening Purposes Only": "For_Screening_Purposes_Only.txt",
+    "Force India VJM04": "Force_India_VJM04.txt",
+    "Ford flathead V8 engine": "Ford_flathead_V8_engine.txt",
+    "Formula One drivers from Mexico": "Formula_One_drivers_from_Mexico.txt",
+    "Fort Diu": "Fort_Diu.txt",
+    "Frances Fitzgerald (politician)": "Frances_Fitzgerald_(politician).txt",
+    "Francesca Schiavone": "Francesca_Schiavone.txt",
+    "Francis H. Kimball": "Francis_H._Kimball.txt",
+    "Franco Corelli": "Franco_Corelli.txt",
+    "Frank L. Schmidt": "Frank_L._Schmidt.txt",
+    "Franklin D. Roosevelt's record on civil rights": "Franklin_D._Roosevelt's_record_on_civil_rights.txt",
+    "François Coli": "François_Coli.txt",
+    "Freakonomics (film)": "Freakonomics_(film).txt",
+    "Freakonomics Radio": "Freakonomics_Radio.txt",
+    "Fred Basset": "Fred_Basset.txt",
+    "Fred Hageman": "Fred_Hageman.txt",
+    "FreedomFilmFest": "FreedomFilmFest.txt",
+    "Freetown Memorial": "Freetown_Memorial.txt",
+    "Frenchman Formation": "Frenchman_Formation.txt",
+    "Freshwater (opera)": "Freshwater_(opera).txt",
+    "Freud and Philosophy": "Freud_and_Philosophy.txt",
+    "Freud: A Life for Our Time": "Freud_A_Life_for_Our_Time.txt",
+    "Freudiana": "Freudiana.txt",
+    "Friendship Hall": "Friendship_Hall.txt",
+    "Front Row (software)": "Front_Row_(software).txt",
+    "Fruitadens": "Fruitadens.txt",
+    "Fuding": "Fuding.txt",
+    "Fuding Railway Station": "Fuding_Railway_Station.txt",
+    "Galle Clock Tower": "Galle_Clock_Tower.txt",
+    "Gallery (magazine)": "Gallery_(magazine).txt",
+    "Game (2016 film)": "Game_(2016_film).txt",
+    "Garajonay National Park": "Garajonay_National_Park.txt",
+    "Gardnerville Branch Jail": "Gardnerville_Branch_Jail.txt",
+    "Garifuna Settlement Day": "Garifuna_Settlement_Day.txt",
+    "Gary Cherone": "Gary_Cherone.txt",
+    "Gary Lee Conner": "Gary_Lee_Conner.txt",
+    "Gasherbrum I": "Gasherbrum_I.txt",
+    "Gasherbrum II": "Gasherbrum_II.txt",
+    "Gasherbrum III": "Gasherbrum_III.txt",
+    "George Abbott": "George_Abbott.txt",
+    "George Archainbaud": "George_Archainbaud.txt",
+    "George D. Buffett": "George_D._Buffett.txt",
+    "George Raft": "George_Raft.txt",
+    "George Reynolds (Mormon)": "George_Reynolds_(Mormon).txt",
+    "George V": "George_V.txt",
+    "Georges Madon": "Georges_Madon.txt",
+    "Georgia Tech Yellow Jackets football": "Georgia_Tech_Yellow_Jackets_football.txt",
+    "Georgia Tech Yellow Jackets men's basketball": "Georgia_Tech_Yellow_Jackets_men's_basketball.txt",
+    "Gerald Ford": "Gerald_Ford.txt",
+    "Gerald R. Ford Freeway": "Gerald_R._Ford_Freeway.txt",
+    "Gerald R. Ford International Airport": "Gerald_R._Ford_International_Airport.txt",
+    "Gerald R. Ford Presidential Library": "Gerald_R._Ford_Presidential_Library.txt",
+    "Gerry Marsden": "Gerry_Marsden.txt",
+    "Gershgorin circle theorem": "Gershgorin_circle_theorem.txt",
+    "Gervais Raoul Lufbery": "Gervais_Raoul_Lufbery.txt",
+    "Get Christie Love!": "Get_Christie_Love!.txt",
+    "Gevheri Kadın": "Gevheri_Kadın.txt",
+    "Ghost Rider (Suicide song)": "Ghost_Rider_(Suicide_song).txt",
+    "Gianni Schicchi": "Gianni_Schicchi.txt",
+    "Giant dog breed": "Giant_dog_breed.txt",
+    "Gibson (cocktail)": "Gibson_(cocktail).txt",
+    "Gimme Shelter": "Gimme_Shelter.txt",
+    "Gimme Shelter (1970 film)": "Gimme_Shelter_(1970_film).txt",
+    "Gimme Shelter (album)": "Gimme_Shelter_(album).txt",
+    "Gimme Shelter (disambiguation)": "Gimme_Shelter_(disambiguation).txt",
+    "Gin pennant": "Gin_pennant.txt",
+    "Giuseppe Arimondi": "Giuseppe_Arimondi.txt",
+    "Giuseppe Verdi": "Giuseppe_Verdi.txt",
+    "Giuseppe Verdi (film)": "Giuseppe_Verdi_(film).txt",
+    "Give War a Chance": "Give_War_a_Chance.txt",
+    "Glacier National Park Fund": "Glacier_National_Park_Fund.txt",
+    "Gloriana St. Clair": "Gloriana_St._Clair.txt",
+    "Goldenrod": "Goldenrod.txt",
+    "Gone in 60 Seconds (2000 film)": "Gone_in_60_Seconds_(2000_film).txt",
+    "Gonzo (Muppet)": "Gonzo_(Muppet).txt",
+    "Goo Goo Dolls": "Goo_Goo_Dolls.txt",
+    "Goo Goo Dolls (album)": "Goo_Goo_Dolls_(album).txt",
+    "Gordon Johndroe": "Gordon_Johndroe.txt",
+    "Gore-Chernomyrdin Commission": "Gore-Chernomyrdin_Commission.txt",
+    "Goštautai": "Goštautai.txt",
+    "Grace Church School": "Grace_Church_School.txt",
+    "Grand Central Murder": "Grand_Central_Murder.txt",
+    "Grantley Adams International Airport": "Grantley_Adams_International_Airport.txt",
+    "Great Eastern Conventions": "Great_Eastern_Conventions.txt",
+    "Greatest Hits (Dan Fogelberg album)": "Greatest_Hits_(Dan_Fogelberg_album).txt",
+    "Gregory B. Craig": "Gregory_B._Craig.txt",
+    "Grennaskolan": "Grennaskolan.txt",
+    "Gretchen Osgood Warren": "Gretchen_Osgood_Warren.txt",
+    "Ground Intelligence Officer": "Ground_Intelligence_Officer.txt",
+    "Groups of Traditional Buildings": "Groups_of_Traditional_Buildings.txt",
+    "Gruhn Guitars": "Gruhn_Guitars.txt",
+    "Gruntruck": "Gruntruck.txt",
+    "Guido Caldarelli": "Guido_Caldarelli.txt",
+    "Gulangyu": "Gulangyu.txt",
+    "Gulfstream Natural Gas Pipeline": "Gulfstream_Natural_Gas_Pipeline.txt",
+    "Gumbo (PJ Morton album)": "Gumbo_(PJ_Morton_album).txt",
+    "Guns N' Roses discography": "Guns_N'_Roses_discography.txt",
+    "Gus Williams (musician)": "Gus_Williams_(musician).txt",
+    "Guy Randall-Johnson": "Guy_Randall-Johnson.txt",
+    "Gösta Prüzelius": "Gösta_Prüzelius.txt",
+    "H. Bedford-Jones": "H._Bedford-Jones.txt",
+    "HGGC": "HGGC.txt",
+    "Hackers (film)": "Hackers_(film).txt",
+    "Haddington, East Lothian": "Haddington,_East_Lothian.txt",
+    "Hailstorm Alley": "Hailstorm_Alley.txt",
+    "Halcyon (album)": "Halcyon_(album).txt",
+    "Hall &amp; Oates": "Hall_&amp;_Oates.txt",
+    "Hallelujah! I'm a Bum (album)": "Hallelujah!_I'm_a_Bum_(album).txt",
+    "Halliburton": "Halliburton.txt",
+    "Hamish and Andy's Gap Year": "Hamish_and_Andy's_Gap_Year.txt",
+    "Hammerjack's": "Hammerjack's.txt",
+    "Hampden County, Massachusetts": "Hampden_County,_Massachusetts.txt",
+    "Handi-Snacks": "Handi-Snacks.txt",
+    "Hanggin Rear Banner": "Hanggin_Rear_Banner.txt",
+    "Hannah Gale": "Hannah_Gale.txt",
+    "Hannibal Brooks": "Hannibal_Brooks.txt",
+    "Hassan Sadpara": "Hassan_Sadpara.txt",
+    "Haven't You Heard? I'm Sakamoto": "Haven't_You_Heard_I'm_Sakamoto.txt",
+    "Hawkinsara": "Hawkinsara.txt",
+    "Hayden (musician)": "Hayden_(musician).txt",
+    "Head of mission": "Head_of_mission.txt",
+    "Heaven Knows (Robert Plant song)": "Heaven_Knows_(Robert_Plant_song).txt",
+    "Heaven in Judaism": "Heaven_in_Judaism.txt",
+    "Heffalumps and Woozles": "Heffalumps_and_Woozles.txt",
+    "Heidi Ewing": "Heidi_Ewing.txt",
+    "Hellfest (American music festival)": "Hellfest_(American_music_festival).txt",
+    "Hellogoodbye": "Hellogoodbye.txt",
+    "Henri Bergson": "Henri_Bergson.txt",
+    "Henrik Dorsin": "Henrik_Dorsin.txt",
+    "Henry J. Kaiser": "Henry_J._Kaiser.txt",
+    "Henry P. Haney": "Henry_P._Haney.txt",
+    "Henry Roth": "Henry_Roth.txt",
+    "Herbert S. Lewis": "Herbert_S._Lewis.txt",
+    "Here We Go Round the Mulberry Bush": "Here_We_Go_Round_the_Mulberry_Bush.txt",
+    "Here We Go Round the Mulberry Bush (Traffic song)": "Here_We_Go_Round_the_Mulberry_Bush_(Traffic_song).txt",
+    "Here We Go Round the Mulberry Bush (disambiguation)": "Here_We_Go_Round_the_Mulberry_Bush_(disambiguation).txt",
+    "Here We Go Round the Mulberry Bush (film)": "Here_We_Go_Round_the_Mulberry_Bush_(film).txt",
+    "Hermigua": "Hermigua.txt",
+    "Hey Pa! There's a Goat on the Roof": "Hey_Pa!_There's_a_Goat_on_the_Roof.txt",
+    "Higgins Lake": "Higgins_Lake.txt",
+    "Higgins Lake, Michigan": "Higgins_Lake,_Michigan.txt",
+    "High Commission of Australia, London": "High_Commission_of_Australia,_London.txt",
+    "Hikky Burr": "Hikky_Burr.txt",
+    "Hill Air Force Base": "Hill_Air_Force_Base.txt",
+    "Hip Hip Pooh-Ray!": "Hip_Hip_Pooh-Ray!.txt",
+    "Hirabayashi v. United States": "Hirabayashi_v._United_States.txt",
+    "Hiroshima mon amour": "Hiroshima_mon_amour.txt",
+    "History (band)": "History_(band).txt",
+    "History of the Kansas City metropolitan area": "History_of_the_Kansas_City_metropolitan_area.txt",
+    "Hoffman v. Jones": "Hoffman_v._Jones.txt",
+    "Hold Me Up": "Hold_Me_Up.txt",
+    "Holiday Inn Lake Buena Vista Downtown": "Holiday_Inn_Lake_Buena_Vista_Downtown.txt",
+    "Hollywood Outlaw Movie": "Hollywood_Outlaw_Movie.txt",
+    "Hong Kong Basic Law": "Hong_Kong_Basic_Law.txt",
+    "Hoppy Serves a Writ": "Hoppy_Serves_a_Writ.txt",
+    "Horqin Left Rear Banner": "Horqin_Left_Rear_Banner.txt",
+    "Hot Rod (magazine)": "Hot_Rod_(magazine).txt",
+    "Hot Rod Lincoln": "Hot_Rod_Lincoln.txt",
+    "Hot toddy": "Hot_toddy.txt",
+    "Hot toddy (disambiguation)": "Hot_toddy_(disambiguation).txt",
+    "Hounsfield Heights/Briar Hill, Calgary": "Hounsfield_HeightsBriar_Hill,_Calgary.txt",
+    "Howard Barish": "Howard_Barish.txt",
+    "Howard Graham Buffett": "Howard_Graham_Buffett.txt",
+    "Howard Warren Buffett": "Howard_Warren_Buffett.txt",
+    "Huernia": "Huernia.txt",
+    "Human Development Index": "Human_Development_Index.txt",
+    "Human rights in Niger": "Human_rights_in_Niger.txt",
+    "Hunter Davies": "Hunter_Davies.txt",
+    "Hysen Pasha Mosque": "Hysen_Pasha_Mosque.txt",
+    "Hänt Bild": "Hänt_Bild.txt",
+    "Hänt Extra": "Hänt_Extra.txt",
+    "I Against I": "I_Against_I.txt",
+    "I Don't Wanna Know": "I_Don't_Wanna_Know.txt",
+    "I Love NY (2015 film)": "I_Love_NY_(2015_film).txt",
+    "I Love Trouble (1948 film)": "I_Love_Trouble_(1948_film).txt",
+    "I&quot;s": "I&quot;s.txt",
+    "I, Too (Langston Hughes poem)": "I,_Too_(Langston_Hughes_poem).txt",
+    "IFFHS World's Best Club Coach": "IFFHS_World's_Best_Club_Coach.txt",
+    "IFFHS World's Best Goalkeeper": "IFFHS_World's_Best_Goalkeeper.txt",
+    "INXS": "INXS.txt",
+    "ITunes Originals – Goo Goo Dolls": "ITunes_Originals_–_Goo_Goo_Dolls.txt",
+    "Ian McEwan": "Ian_McEwan.txt",
+    "Ian Watkins (Lostprophets)": "Ian_Watkins_(Lostprophets).txt",
+    "Ibn Arabi": "Ibn_Arabi.txt",
+    "Icehouse (song)": "Icehouse_(song).txt",
+    "Icehouse pieces": "Icehouse_pieces.txt",
+    "Identity Films": "Identity_Films.txt",
+    "Idiocracy": "Idiocracy.txt",
+    "Idrees Ul Haq": "Idrees_Ul_Haq.txt",
+    "Ife Piankhi": "Ife_Piankhi.txt",
+    "Ilocos Region": "Ilocos_Region.txt",
+    "Imanishi family's House": "Imanishi_family's_House.txt",
+    "Immigration policy of Donald Trump": "Immigration_policy_of_Donald_Trump.txt",
+    "Impossible Dream": "Impossible_Dream.txt",
+    "In It to Win It (Saliva album)": "In_It_to_Win_It_(Saliva_album).txt",
+    "In My Country There Is Problem": "In_My_Country_There_Is_Problem.txt",
+    "In the Realm of the Hackers": "In_the_Realm_of_the_Hackers.txt",
+    "Independent Spirit Award for Best Cinematography": "Independent_Spirit_Award_for_Best_Cinematography.txt",
+    "Independent Spirit Award for Best Editing": "Independent_Spirit_Award_for_Best_Editing.txt",
+    "Independent Spirit Award for Best First Feature": "Independent_Spirit_Award_for_Best_First_Feature.txt",
+    "Independent Spirit Awards": "Independent_Spirit_Awards.txt",
+    "Index Magazine": "Index_Magazine.txt",
+    "Index of alcohol-related articles": "Index_of_alcohol-related_articles.txt",
+    "Indian Scout (motorcycle)": "Indian_Scout_(motorcycle).txt",
+    "Indianapolis Motor Speedway": "Indianapolis_Motor_Speedway.txt",
+    "Indigenous peoples of Florida": "Indigenous_peoples_of_Florida.txt",
+    "Indriati Iskak": "Indriati_Iskak.txt",
+    "Inge Kaul": "Inge_Kaul.txt",
+    "Innerspace": "Innerspace.txt",
+    "Inquiline": "Inquiline.txt",
+    "Inside the Mind of Bill Cosby": "Inside_the_Mind_of_Bill_Cosby.txt",
+    "Interamerican Scout Jamboree": "Interamerican_Scout_Jamboree.txt",
+    "International Boxing Federation": "International_Boxing_Federation.txt",
+    "Introduction to Metaphysics (Bergson)": "Introduction_to_Metaphysics_(Bergson).txt",
+    "Irish Bulletin": "Irish_Bulletin.txt",
+    "Iron Man (TV series)": "Iron_Man_(TV_series).txt",
+    "Isaak Hassler": "Isaak_Hassler.txt",
+    "Isle of Flowers": "Isle_of_Flowers.txt",
+    "Isopropyl alcohol": "Isopropyl_alcohol.txt",
+    "It Could Happen to You (1994 film)": "It_Could_Happen_to_You_(1994_film).txt",
+    "Ivo Andrić": "Ivo_Andrić.txt",
+    "J-Shin": "J-Shin.txt",
+    "J. G. Farrell": "J._G._Farrell.txt",
+    "J. M. Barrie": "J._M._Barrie.txt",
+    "Jack Endino": "Jack_Endino.txt",
+    "Jack Gelber": "Jack_Gelber.txt",
+    "Jackie Lou Blanco": "Jackie_Lou_Blanco.txt",
+    "Jacopo Puccini": "Jacopo_Puccini.txt",
+    "Jamboree (Beat Happening album)": "Jamboree_(Beat_Happening_album).txt",
+    "Jameel v Wall Street Journal Europe Sprl": "Jameel_v_Wall_Street_Journal_Europe_Sprl.txt",
+    "James Alcock": "James_Alcock.txt",
+    "James Franco": "James_Franco.txt",
+    "James Gunn": "James_Gunn.txt",
+    "James Gunn's PG Porn": "James_Gunn's_PG_Porn.txt",
+    "James Howard Williams": "James_Howard_Williams.txt",
+    "James P. Comer": "James_P._Comer.txt",
+    "James Reilly (Irish politician)": "James_Reilly_(Irish_politician).txt",
+    "James Roland MacLaren": "James_Roland_MacLaren.txt",
+    "Jane Marcus": "Jane_Marcus.txt",
+    "Jane de Gay": "Jane_de_Gay.txt",
+    "Janet Waldo": "Janet_Waldo.txt",
+    "Janna Allen": "Janna_Allen.txt",
+    "Jawbreaker (film)": "Jawbreaker_(film).txt",
+    "Jay Leiderman": "Jay_Leiderman.txt",
+    "Jeff Friedman": "Jeff_Friedman.txt",
+    "Jeff Malcolm": "Jeff_Malcolm.txt",
+    "Jeff Strabone": "Jeff_Strabone.txt",
+    "Jeffrey Stanley": "Jeffrey_Stanley.txt",
+    "Jeonju Hanok Village": "Jeonju_Hanok_Village.txt",
+    "Jeris White": "Jeris_White.txt",
+    "Jerry Glanville": "Jerry_Glanville.txt",
+    "Jersey Boys: Original Broadway Cast Recording": "Jersey_Boys_Original_Broadway_Cast_Recording.txt",
+    "Jessica Todd Harper": "Jessica_Todd_Harper.txt",
+    "Jester": "Jester.txt",
+    "Ji Hyeon-ok": "Ji_Hyeon-ok.txt",
+    "Jim Cummings": "Jim_Cummings.txt",
+    "Jim Lentz": "Jim_Lentz.txt",
+    "Jim Shoulders": "Jim_Shoulders.txt",
+    "Johanna Bennett": "Johanna_Bennett.txt",
+    "John A. Brown (department store)": "John_A._Brown_(department_store).txt",
+    "John Bruton": "John_Bruton.txt",
+    "John Darby (Dean of Chester)": "John_Darby_(Dean_of_Chester).txt",
+    "John Fogerty": "John_Fogerty.txt",
+    "John Fogerty (album)": "John_Fogerty_(album).txt",
+    "John Fogerty (engineer)": "John_Fogerty_(engineer).txt",
+    "John Frederick Fogerty": "John_Frederick_Fogerty.txt",
+    "John Glenn Columbus International Airport": "John_Glenn_Columbus_International_Airport.txt",
+    "John Home Robertson": "John_Home_Robertson.txt",
+    "John Ince (actor)": "John_Ince_(actor).txt",
+    "John John Florence": "John_John_Florence.txt",
+    "John Ridge": "John_Ridge.txt",
+    "John Roach &amp; Sons": "John_Roach_&amp;_Sons.txt",
+    "John Waters": "John_Waters.txt",
+    "Johnny Angel": "Johnny_Angel.txt",
+    "Johnny Angel (song)": "Johnny_Angel_(song).txt",
+    "Johnny Angel Wendell": "Johnny_Angel_Wendell.txt",
+    "Johnny Lee Clary": "Johnny_Lee_Clary.txt",
+    "Johnny Rutherford": "Johnny_Rutherford.txt",
+    "Jon St. Andre": "Jon_St._Andre.txt",
+    "Jonathan Michael Ansell": "Jonathan_Michael_Ansell.txt",
+    "Jonathan Wolfson": "Jonathan_Wolfson.txt",
+    "Jorge Lozano": "Jorge_Lozano.txt",
+    "Joseph Fogerty Sr.": "Joseph_Fogerty_Sr.txt",
+    "Joseph L. Follett": "Joseph_L._Follett.txt",
+    "Joseph McGrath (film director)": "Joseph_McGrath_(film_director).txt",
+    "Josey Scott": "Josey_Scott.txt",
+    "Joshua Parlby": "Joshua_Parlby.txt",
+    "José Echegaray": "José_Echegaray.txt",
+    "José Saramago": "José_Saramago.txt",
+    "José Saramago Foundation": "José_Saramago_Foundation.txt",
+    "Jounen Kwéyòl": "Jounen_Kwéyòl.txt",
+    "Journal of Human Development and Capabilities": "Journal_of_Human_Development_and_Capabilities.txt",
+    "Julian Holland (boxer)": "Julian_Holland_(boxer).txt",
+    "Julián Hernández (filmmaker)": "Julián_Hernández_(filmmaker).txt",
+    "Jungle (X Ambassadors and Jamie N Commons song)": "Jungle_(X_Ambassadors_and_Jamie_N_Commons_song).txt",
+    "Just Another Romantic Wrestling Comedy": "Just_Another_Romantic_Wrestling_Comedy.txt",
+    "Just as I Am (Yolanda Adams album)": "Just_as_I_Am_(Yolanda_Adams_album).txt",
+    "KOKO-FM": "KOKO-FM.txt",
+    "Kaiser Shipyards": "Kaiser_Shipyards.txt",
+    "Kaiser Ventures": "Kaiser_Ventures.txt",
+    "Kakoy Legaspi": "Kakoy_Legaspi.txt",
+    "Kalanta Xristougenon": "Kalanta_Xristougenon.txt",
+    "Kanave Kalayathe": "Kanave_Kalayathe.txt",
+    "Kansas City Scout": "Kansas_City_Scout.txt",
+    "Kansas City jazz": "Kansas_City_jazz.txt",
+    "Kansas City metropolitan area": "Kansas_City_metropolitan_area.txt",
+    "Kansas Song": "Kansas_Song.txt",
+    "Karakoram": "Karakoram.txt",
+    "Karen Clark Sheard": "Karen_Clark_Sheard.txt",
+    "Kasper Hvidt": "Kasper_Hvidt.txt",
+    "Kasper Schmeichel": "Kasper_Schmeichel.txt",
+    "Kate Higgins": "Kate_Higgins.txt",
+    "Katri, Girl of the Meadows": "Katri,_Girl_of_the_Meadows.txt",
+    "Kay Tagal Kang Hinintay": "Kay_Tagal_Kang_Hinintay.txt",
+    "Keith Bostic": "Keith_Bostic.txt",
+    "Keith Bostic (American football)": "Keith_Bostic_(American_football).txt",
+    "Keith Richards": "Keith_Richards.txt",
+    "Ken Herock": "Ken_Herock.txt",
+    "Ken St. Andre": "Ken_St._Andre.txt",
+    "Kendrick Frazier": "Kendrick_Frazier.txt",
+    "Kenton Richardson": "Kenton_Richardson.txt",
+    "Kerensky–Krasnov uprising": "Kerensky–Krasnov_uprising.txt",
+    "Kerr Smith": "Kerr_Smith.txt",
+    "Kevin Shields": "Kevin_Shields.txt",
+    "Keyed Up": "Keyed_Up.txt",
+    "Khan Kluay": "Khan_Kluay.txt",
+    "Kidandali": "Kidandali.txt",
+    "Kierra Sheard": "Kierra_Sheard.txt",
+    "Kill Doctor Lucky": "Kill_Doctor_Lucky.txt",
+    "Kimberly Young": "Kimberly_Young.txt",
+    "Kingston Morning": "Kingston_Morning.txt",
+    "Kingstone Companies": "Kingstone_Companies.txt",
+    "Kir (cocktail)": "Kir_(cocktail).txt",
+    "Kirton End": "Kirton_End.txt",
+    "Kirton, Nottinghamshire": "Kirton,_Nottinghamshire.txt",
+    "Kirton, Suffolk": "Kirton,_Suffolk.txt",
+    "Kiss (Carly Rae Jepsen album)": "Kiss_(Carly_Rae_Jepsen_album).txt",
+    "Kiss and Tell (1945 film)": "Kiss_and_Tell_(1945_film).txt",
+    "Književni jug": "Književni_jug.txt",
+    "Kohlberg Kravis Roberts": "Kohlberg_Kravis_Roberts.txt",
+    "Kon Kan": "Kon_Kan.txt",
+    "Koningsdag": "Koningsdag.txt",
+    "Kumanovo Clock Tower": "Kumanovo_Clock_Tower.txt",
+    "Kyo (musician)": "Kyo_(musician).txt",
+    "Kyokusui-no-en": "Kyokusui-no-en.txt",
+    "Kyosuke Usuta": "Kyosuke_Usuta.txt",
+    "Küçük Hüseyin Pasha": "Küçük_Hüseyin_Pasha.txt",
+    "L'Oiseau Blanc": "L'Oiseau_Blanc.txt",
+    "L'Oiseau bleu (Metzinger)": "L'Oiseau_bleu_(Metzinger).txt",
+    "L'affiche rouge": "L'affiche_rouge.txt",
+    "L.A. Confidential (soundtrack)": "L.A._Confidential_(soundtrack).txt",
+    "La Bohème (1988 film)": "La_Bohème_(1988_film).txt",
+    "La Femme Musketeer": "La_Femme_Musketeer.txt",
+    "La fanciulla del West": "La_fanciulla_del_West.txt",
+    "LaLee's Kin: The Legacy of Cotton": "LaLee's_Kin_The_Legacy_of_Cotton.txt",
+    "LaRon Landry": "LaRon_Landry.txt",
+    "Lady Gaga x Terry Richardson": "Lady_Gaga_x_Terry_Richardson.txt",
+    "Laeliocattleya": "Laeliocattleya.txt",
+    "Laleli Mosque": "Laleli_Mosque.txt",
+    "Langston Hughes": "Langston_Hughes.txt",
+    "Langston Hughes House": "Langston_Hughes_House.txt",
+    "Langston Hughes Medal": "Langston_Hughes_Medal.txt",
+    "Langston Hughes Performing Arts Center": "Langston_Hughes_Performing_Arts_Center.txt",
+    "Langston Hughes Society": "Langston_Hughes_Society.txt",
+    "Larnelle Harris": "Larnelle_Harris.txt",
+    "Last Action Hero": "Last_Action_Hero.txt",
+    "Last Year at Marienbad": "Last_Year_at_Marienbad.txt",
+    "Latice Crawford": "Latice_Crawford.txt",
+    "Latvian name": "Latvian_name.txt",
+    "Lau Kong Yung v Director of Immigration": "Lau_Kong_Yung_v_Director_of_Immigration.txt",
+    "Lavr Kornilov": "Lavr_Kornilov.txt",
+    "Lawrence Austin": "Lawrence_Austin.txt",
+    "Le Conversazioni": "Le_Conversazioni.txt",
+    "Lead programmer": "Lead_programmer.txt",
+    "Leader of Fine Gael": "Leader_of_Fine_Gael.txt",
+    "Leah Flanagan": "Leah_Flanagan.txt",
+    "Lean Horse Ultramarathon": "Lean_Horse_Ultramarathon.txt",
+    "Led Zeppelin Boxed Set 2": "Led_Zeppelin_Boxed_Set_2.txt",
+    "Lee Hazlewood": "Lee_Hazlewood.txt",
+    "Leeds Equity Partners": "Leeds_Equity_Partners.txt",
+    "Left Behind: The Kids": "Left_Behind_The_Kids.txt",
+    "Left-wing uprisings against the Bolsheviks": "Left-wing_uprisings_against_the_Bolsheviks.txt",
+    "Legend (film score)": "Legend_(film_score).txt",
+    "Lempster, New Hampshire": "Lempster,_New_Hampshire.txt",
+    "Lenelle Moïse": "Lenelle_Moïse.txt",
+    "Leo Varadkar": "Leo_Varadkar.txt",
+    "Leonberger": "Leonberger.txt",
+    "Lepidozamia": "Lepidozamia.txt",
+    "Leptospermum": "Leptospermum.txt",
+    "Leptosporangiate fern": "Leptosporangiate_fern.txt",
+    "Les Chansons d'Aragon": "Les_Chansons_d'Aragon.txt",
+    "Letters to Cleo": "Letters_to_Cleo.txt",
+    "Leucopaxillus gentianeus": "Leucopaxillus_gentianeus.txt",
+    "Lev Kuleshov": "Lev_Kuleshov.txt",
+    "Lev Yilmaz": "Lev_Yilmaz.txt",
+    "Levasseur PL.8": "Levasseur_PL.8.txt",
+    "Levolution (album)": "Levolution_(album).txt",
+    "Lewinsky scandal": "Lewinsky_scandal.txt",
+    "Lewis's": "Lewis's.txt",
+    "Lewiston Maineiacs": "Lewiston_Maineiacs.txt",
+    "Li Na": "Li_Na.txt",
+    "Liaison Office (Hong Kong)": "Liaison_Office_(Hong_Kong).txt",
+    "Liam Cosgrave": "Liam_Cosgrave.txt",
+    "Libocedrus": "Libocedrus.txt",
+    "Life of Riley (2014 film)": "Life_of_Riley_(2014_film).txt",
+    "Lifestyle magazine": "Lifestyle_magazine.txt",
+    "Light cavalerie vodka": "Light_cavalerie_vodka.txt",
+    "Lil Ru": "Lil_Ru.txt",
+    "Lincolnshire Management": "Lincolnshire_Management.txt",
+    "Linda Duvall": "Linda_Duvall.txt",
+    "Linda Mvusi": "Linda_Mvusi.txt",
+    "Lindum Sports Club Ground": "Lindum_Sports_Club_Ground.txt",
+    "Lionel Ngakane": "Lionel_Ngakane.txt",
+    "Lionel S. Reiss": "Lionel_S._Reiss.txt",
+    "Lionheart (1987 film)": "Lionheart_(1987_film).txt",
+    "Lipstick (1960 film)": "Lipstick_(1960_film).txt",
+    "List of Bobobo-bo Bo-bobo chapters": "List_of_Bobobo-bo_Bo-bobo_chapters.txt",
+    "List of Charlotte Hornets seasons": "List_of_Charlotte_Hornets_seasons.txt",
+    "List of Charmed characters": "List_of_Charmed_characters.txt",
+    "List of Marvel Comics characters: N": "List_of_Marvel_Comics_characters_N.txt",
+    "List of Naruto chapters (Part I)": "List_of_Naruto_chapters_(Part_I).txt",
+    "List of Romeo × Juliet episodes": "List_of_Romeo_×_Juliet_episodes.txt",
+    "List of Square Enix companion books": "List_of_Square_Enix_companion_books.txt",
+    "List of Teen Titans Go! episodes": "List_of_Teen_Titans_Go!_episodes.txt",
+    "List of Teen Titans episodes": "List_of_Teen_Titans_episodes.txt",
+    "List of Texas Tech Lady Raiders in the WNBA Draft": "List_of_Texas_Tech_Lady_Raiders_in_the_WNBA_Draft.txt",
+    "List of The Muppets productions": "List_of_The_Muppets_productions.txt",
+    "List of The Office (U.S. TV series) characters": "List_of_The_Office_(U.S._TV_series)_characters.txt",
+    "List of U.S. state dogs": "List_of_U.S._state_dogs.txt",
+    "List of Walt Disney Pictures films": "List_of_Walt_Disney_Pictures_films.txt",
+    "List of Wigan Borough F.C. players": "List_of_Wigan_Borough_F.C._players.txt",
+    "List of awards and nominations received by Shinee": "List_of_awards_and_nominations_received_by_Shinee.txt",
+    "List of diplomatic missions of Azerbaijan": "List_of_diplomatic_missions_of_Azerbaijan.txt",
+    "List of magazines in Austria": "List_of_magazines_in_Austria.txt",
+    "List of magazines in Malaysia": "List_of_magazines_in_Malaysia.txt",
+    "List of magazines in Portugal": "List_of_magazines_in_Portugal.txt",
+    "List of major opera composers": "List_of_major_opera_composers.txt",
+    "List of oldest synagogues": "List_of_oldest_synagogues.txt",
+    "List of soft drinks by country": "List_of_soft_drinks_by_country.txt",
+    "List of songs recorded by Ellie Goulding": "List_of_songs_recorded_by_Ellie_Goulding.txt",
+    "List of songs written by Ravi": "List_of_songs_written_by_Ravi.txt",
+    "Little Black Rain Cloud": "Little_Black_Rain_Cloud.txt",
+    "Live from Daryl's House": "Live_from_Daryl's_House.txt",
+    "Live in Buffalo: July 4th, 2004": "Live_in_Buffalo_July_4th,_2004.txt",
+    "Live in Japan (John Coltrane album)": "Live_in_Japan_(John_Coltrane_album).txt",
+    "Livesey Hall War Memorial": "Livesey_Hall_War_Memorial.txt",
+    "Loan modification in the United States": "Loan_modification_in_the_United_States.txt",
+    "Local H": "Local_H.txt",
+    "London International Documentary Festival": "London_International_Documentary_Festival.txt",
+    "London Review of Books": "London_Review_of_Books.txt",
+    "Look (UK magazine)": "Look_(UK_magazine).txt",
+    "Lord Haliburton of Dirleton": "Lord_Haliburton_of_Dirleton.txt",
+    "Lord High Treasurer": "Lord_High_Treasurer.txt",
+    "Lori L. Holt": "Lori_L._Holt.txt",
+    "Lostprophets": "Lostprophets.txt",
+    "Lothian and Borders": "Lothian_and_Borders.txt",
+    "Louis Aragon": "Louis_Aragon.txt",
+    "Louis Schwitzer Award": "Louis_Schwitzer_Award.txt",
+    "Louise Bryant": "Louise_Bryant.txt",
+    "Lourenço Mutarelli": "Lourenço_Mutarelli.txt",
+    "Love Me like You Do": "Love_Me_like_You_Do.txt",
+    "Love in Motion (song)": "Love_in_Motion_(song).txt",
+    "Lucky to Be Alive (Confederate Railroad album)": "Lucky_to_Be_Alive_(Confederate_Railroad_album).txt",
+    "MEO Rip Curl Pro Portugal": "MEO_Rip_Curl_Pro_Portugal.txt",
+    "MEO Rip Curl Pro Portugal 2016": "MEO_Rip_Curl_Pro_Portugal_2016.txt",
+    "MEO Rip Curl Pro Portugal 2017": "MEO_Rip_Curl_Pro_Portugal_2017.txt",
+    "MS Excelsior Neptune": "MS_Excelsior_Neptune.txt",
+    "MacScan": "MacScan.txt",
+    "Mad Season (band)": "Mad_Season_(band).txt",
+    "Made in Britain": "Made_in_Britain.txt",
+    "Madonna (book)": "Madonna_(book).txt",
+    "Madtown": "Madtown.txt",
+    "Magic in Harry Potter": "Magic_in_Harry_Potter.txt",
+    "Mahbub ul Haq": "Mahbub_ul_Haq.txt",
+    "Mahesh Bhupathi": "Mahesh_Bhupathi.txt",
+    "Mahesh Bhupathi Tennis Academy": "Mahesh_Bhupathi_Tennis_Academy.txt",
+    "Make Love": "Make_Love.txt",
+    "Make Love Not War (album)": "Make_Love_Not_War_(album).txt",
+    "Makedonsko Sonce": "Makedonsko_Sonce.txt",
+    "Management consulting": "Management_consulting.txt",
+    "Manchester Terrier": "Manchester_Terrier.txt",
+    "Manga Bible (series)": "Manga_Bible_(series).txt",
+    "Manhattan Life Insurance Building": "Manhattan_Life_Insurance_Building.txt",
+    "Manhattan Life Insurance Company": "Manhattan_Life_Insurance_Company.txt",
+    "Manischewitz": "Manischewitz.txt",
+    "Manorama (Tamil actress)": "Manorama_(Tamil_actress).txt",
+    "Manson (film)": "Manson_(film).txt",
+    "Manuel Quiroga (violinist)": "Manuel_Quiroga_(violinist).txt",
+    "Marc Parenteau": "Marc_Parenteau.txt",
+    "Marcel Trillat": "Marcel_Trillat.txt",
+    "March on the Drina": "March_on_the_Drina.txt",
+    "Marion Christopher Barry": "Marion_Christopher_Barry.txt",
+    "Marion, South Australia": "Marion,_South_Australia.txt",
+    "Mark Arm": "Mark_Arm.txt",
+    "Mark Britten": "Mark_Britten.txt",
+    "Mark Ciardi": "Mark_Ciardi.txt",
+    "Mark D. Fabiani": "Mark_D._Fabiani.txt",
+    "Marsilea": "Marsilea.txt",
+    "Marsilea minuta": "Marsilea_minuta.txt",
+    "Marsileaceae": "Marsileaceae.txt",
+    "Marta Domachowska": "Marta_Domachowska.txt",
+    "Masakazu Katsura": "Masakazu_Katsura.txt",
+    "Masami Tsuchiya": "Masami_Tsuchiya.txt",
+    "Mascogos": "Mascogos.txt",
+    "Masnières Newfoundland Memorial": "Masnières_Newfoundland_Memorial.txt",
+    "Mathematically Alive": "Mathematically_Alive.txt",
+    "Matt Busby": "Matt_Busby.txt",
+    "Matt Cameron": "Matt_Cameron.txt",
+    "Matter and Memory": "Matter_and_Memory.txt",
+    "Maxeda": "Maxeda.txt",
+    "McFarland, USA": "McFarland,_USA.txt",
+    "McLean station": "McLean_station.txt",
+    "McLean, Virginia": "McLean,_Virginia.txt",
+    "Me! I'm Afraid of Virginia Woolf": "Me!_I'm_Afraid_of_Virginia_Woolf.txt",
+    "Meet Corliss Archer": "Meet_Corliss_Archer.txt",
+    "Meet Corliss Archer (TV series)": "Meet_Corliss_Archer_(TV_series).txt",
+    "Mekong Capital": "Mekong_Capital.txt",
+    "Mendocino County GMO Ban": "Mendocino_County_GMO_Ban.txt",
+    "Mercenaries, Spies and Private Eyes": "Mercenaries,_Spies_and_Private_Eyes.txt",
+    "Merry Clayton": "Merry_Clayton.txt",
+    "Method Man": "Method_Man.txt",
+    "Michael Finnegan (song)": "Michael_Finnegan_(song).txt",
+    "Michael James Lewis": "Michael_James_Lewis.txt",
+    "Michael Wynne (playwright)": "Michael_Wynne_(playwright).txt",
+    "Mick (DJ)": "Mick_(DJ).txt",
+    "Micropædia": "Micropædia.txt",
+    "Middle Atlantic PGA Championship": "Middle_Atlantic_PGA_Championship.txt",
+    "Middle name": "Middle_name.txt",
+    "Mihai Mălaimare Jr.": "Mihai_Mălaimare_Jr.txt",
+    "Mike Shank": "Mike_Shank.txt",
+    "Mikhail Gorbachev": "Mikhail_Gorbachev.txt",
+    "Mikhail Suslov": "Mikhail_Suslov.txt",
+    "Milan Murray": "Milan_Murray.txt",
+    "Mild and Hazy": "Mild_and_Hazy.txt",
+    "Military history of Mexico": "Military_history_of_Mexico.txt",
+    "Mind If We Make Love to You": "Mind_If_We_Make_Love_to_You.txt",
+    "Miner Memorial Library": "Miner_Memorial_Library.txt",
+    "Mirage (Digitalism album)": "Mirage_(Digitalism_album).txt",
+    "Miranda (album)": "Miranda_(album).txt",
+    "Mississippi University for Women v. Hogan": "Mississippi_University_for_Women_v._Hogan.txt",
+    "Mobil Producing Nigeria": "Mobil_Producing_Nigeria.txt",
+    "Moche Rip Curl Pro Portugal 2014": "Moche_Rip_Curl_Pro_Portugal_2014.txt",
+    "Moche Rip Curl Pro Portugal 2015": "Moche_Rip_Curl_Pro_Portugal_2015.txt",
+    "Modernization of Investigative Techniques Act": "Modernization_of_Investigative_Techniques_Act.txt",
+    "Moina Mathers": "Moina_Mathers.txt",
+    "Molly Childers": "Molly_Childers.txt",
+    "Moments of Being": "Moments_of_Being.txt",
+    "Mondelez International": "Mondelez_International.txt",
+    "Monica Lewinsky": "Monica_Lewinsky.txt",
+    "Mono Masters": "Mono_Masters.txt",
+    "Montezuma Castle National Monument": "Montezuma_Castle_National_Monument.txt",
+    "Morbo (band)": "Morbo_(band).txt",
+    "Moroccan Ambassador to China": "Moroccan_Ambassador_to_China.txt",
+    "Motherland (2010 film)": "Motherland_(2010_film).txt",
+    "Mouse Davis": "Mouse_Davis.txt",
+    "Moving On (The Office)": "Moving_On_(The_Office).txt",
+    "Mrs. Bixby and the Colonel's Coat": "Mrs._Bixby_and_the_Colonel's_Coat.txt",
+    "Muggsy Bogues": "Muggsy_Bogues.txt",
+    "Mulan (soundtrack)": "Mulan_(soundtrack).txt",
+    "Muriel (film)": "Muriel_(film).txt",
+    "Murree rebellion of 1857": "Murree_rebellion_of_1857.txt",
+    "Muscogee language": "Muscogee_language.txt",
+    "Museum of Ivo Andrić": "Museum_of_Ivo_Andrić.txt",
+    "Museumsdorf Niedersulz": "Museumsdorf_Niedersulz.txt",
+    "Music composition and composers in Pristina": "Music_composition_and_composers_in_Pristina.txt",
+    "Muted group theory": "Muted_group_theory.txt",
+    "Muthuchippi Poloru": "Muthuchippi_Poloru.txt",
+    "Muyiwa Olarewaju": "Muyiwa_Olarewaju.txt",
+    "Mwambutsa IV of Burundi": "Mwambutsa_IV_of_Burundi.txt",
+    "My Bride is a Mermaid": "My_Bride_is_a_Mermaid.txt",
+    "My Eyes (Blake Shelton song)": "My_Eyes_(Blake_Shelton_song).txt",
+    "My Eyes Adored You": "My_Eyes_Adored_You.txt",
+    "My Fair Lady (Broadway cast recording)": "My_Fair_Lady_(Broadway_cast_recording).txt",
+    "Myiodynastes": "Myiodynastes.txt",
+    "Mırra": "Mırra.txt",
+    "Nadar climber": "Nadar_climber.txt",
+    "Nagaram (2010 film)": "Nagaram_(2010_film).txt",
+    "Nancy Sinatra": "Nancy_Sinatra.txt",
+    "Narrow Hills Provincial Park": "Narrow_Hills_Provincial_Park.txt",
+    "Nashville Rebel (box set)": "Nashville_Rebel_(box_set).txt",
+    "National Hot Rod Reunion": "National_Hot_Rod_Reunion.txt",
+    "National Intelligence Board": "National_Intelligence_Board.txt",
+    "National Intelligence Cross": "National_Intelligence_Cross.txt",
+    "National Intelligence Estimate": "National_Intelligence_Estimate.txt",
+    "National Intelligence Medal of Achievement": "National_Intelligence_Medal_of_Achievement.txt",
+    "National Intelligence Reform Medal": "National_Intelligence_Reform_Medal.txt",
+    "National Intelligence Superior Service Medal": "National_Intelligence_Superior_Service_Medal.txt",
+    "National Lampoon 1964 High School Yearbook Parody": "National_Lampoon_1964_High_School_Yearbook_Parody.txt",
+    "Nazir Sabir": "Nazir_Sabir.txt",
+    "Neafie &amp; Levy": "Neafie_&amp;_Levy.txt",
+    "Nelson Rockefeller": "Nelson_Rockefeller.txt",
+    "Neosho State Fishing Lake": "Neosho_State_Fishing_Lake.txt",
+    "Nerve of a covering": "Nerve_of_a_covering.txt",
+    "NetSupport Manager": "NetSupport_Manager.txt",
+    "Network Analysis and Ethnographic Problems": "Network_Analysis_and_Ethnographic_Problems.txt",
+    "Neuro: Supernatural Detective": "Neuro_Supernatural_Detective.txt",
+    "New Haven Documentary Film Festival": "New_Haven_Documentary_Film_Festival.txt",
+    "New York Life Building": "New_York_Life_Building.txt",
+    "New York Life Insurance Building (Montreal)": "New_York_Life_Insurance_Building_(Montreal).txt",
+    "New York Shipbuilding Corporation": "New_York_Shipbuilding_Corporation.txt",
+    "New York Society of Model Engineers": "New_York_Society_of_Model_Engineers.txt",
+    "Nick Powell": "Nick_Powell.txt",
+    "Night School: the Web Series": "Night_School_the_Web_Series.txt",
+    "Nikola Mladenov": "Nikola_Mladenov.txt",
+    "Nikolai Podgorny": "Nikolai_Podgorny.txt",
+    "Nisekoi": "Nisekoi.txt",
+    "Nitrogen assimilation": "Nitrogen_assimilation.txt",
+    "No One (Alicia Keys song)": "No_One_(Alicia_Keys_song).txt",
+    "No Promises (Icehouse song)": "No_Promises_(Icehouse_song).txt",
+    "No Water, No Moon": "No_Water,_No_Moon.txt",
+    "No. 12 Squadron RAAF": "No._12_Squadron_RAAF.txt",
+    "No. 2 Squadron RAAF": "No._2_Squadron_RAAF.txt",
+    "Nola (film)": "Nola_(film).txt",
+    "North African elephant": "North_African_elephant.txt",
+    "North Cascades National Park": "North_Cascades_National_Park.txt",
+    "North Kansas City, Missouri": "North_Kansas_City,_Missouri.txt",
+    "Northern California PGA Championship": "Northern_California_PGA_Championship.txt",
+    "Northern Virginia Campaign": "Northern_Virginia_Campaign.txt",
+    "Notbroken": "Notbroken.txt",
+    "Nuptse": "Nuptse.txt",
+    "Nusretiye Clock Tower": "Nusretiye_Clock_Tower.txt",
+    "Nutri Ventures – The Quest for the 7 Kingdoms": "Nutri_Ventures_–_The_Quest_for_the_7_Kingdoms.txt",
+    "Nýtt líf": "Nýtt_líf.txt",
+    "O mio babbino caro": "O_mio_babbino_caro.txt",
+    "Oceans (film)": "Oceans_(film).txt",
+    "Office of Population Affairs": "Office_of_Population_Affairs.txt",
+    "Oh My God (Guns N' Roses song)": "Oh_My_God_(Guns_N'_Roses_song).txt",
+    "Old 8×10": "Old_8×10.txt",
+    "Oldest synagogues in the United Kingdom": "Oldest_synagogues_in_the_United_Kingdom.txt",
+    "Olga Morozova": "Olga_Morozova.txt",
+    "Om Records": "Om_Records.txt",
+    "Omodos": "Omodos.txt",
+    "On My Mind (Ellie Goulding song)": "On_My_Mind_(Ellie_Goulding_song).txt",
+    "Once Upon a Secret": "Once_Upon_a_Secret.txt",
+    "One Rank, One Pension": "One_Rank,_One_Pension.txt",
+    "One on One (song)": "One_on_One_(song).txt",
+    "Open-air museums in Slovakia": "Open-air_museums_in_Slovakia.txt",
+    "Ophur": "Ophur.txt",
+    "Oppenheimer Award": "Oppenheimer_Award.txt",
+    "Orange County Fair Speedway": "Orange_County_Fair_Speedway.txt",
+    "Orange Field Tea Factory": "Orange_Field_Tea_Factory.txt",
+    "Oranjegekte": "Oranjegekte.txt",
+    "Oregon and Transcontinental Company": "Oregon_and_Transcontinental_Company.txt",
+    "Original Sound": "Original_Sound.txt",
+    "Origins of the Sri Lankan civil war": "Origins_of_the_Sri_Lankan_civil_war.txt",
+    "Orlando: A Biography": "Orlando_A_Biography.txt",
+    "Oryctodromeus": "Oryctodromeus.txt",
+    "Osage State Fishing Lake": "Osage_State_Fishing_Lake.txt",
+    "Ostava": "Ostava.txt",
+    "Otaara": "Otaara.txt",
+    "Ottavio Alessi": "Ottavio_Alessi.txt",
+    "Our Casuarina Tree": "Our_Casuarina_Tree.txt",
+    "Outline of Ethiopia": "Outline_of_Ethiopia.txt",
+    "Outside (Calvin Harris song)": "Outside_(Calvin_Harris_song).txt",
+    "Owens &amp; Minor": "Owens_&amp;_Minor.txt",
+    "Owner earnings": "Owner_earnings.txt",
+    "Oz the Great and Powerful": "Oz_the_Great_and_Powerful.txt",
+    "P'ent'ay": "P'ent'ay.txt",
+    "P. J. O'Rourke": "P._J._O'Rourke.txt",
+    "PNG solution": "PNG_solution.txt",
+    "PRX-07034": "PRX-07034.txt",
+    "Pachypodium": "Pachypodium.txt",
+    "Pachypodium lealii": "Pachypodium_lealii.txt",
+    "Paddy O'Rourke (Meath footballer)": "Paddy_O'Rourke_(Meath_footballer).txt",
+    "Paddy O'Toole": "Paddy_O'Toole.txt",
+    "Pamela B. Davis": "Pamela_B._Davis.txt",
+    "Pamela B. Green": "Pamela_B._Green.txt",
+    "Pamela Gilbert": "Pamela_Gilbert.txt",
+    "Paracaleana": "Paracaleana.txt",
+    "Param, Rampur": "Param,_Rampur.txt",
+    "Parkia timoriana": "Parkia_timoriana.txt",
+    "Parkridge, Saskatoon": "Parkridge,_Saskatoon.txt",
+    "Parma Airport": "Parma_Airport.txt",
+    "Parody film": "Parody_film.txt",
+    "Parrish (film)": "Parrish_(film).txt",
+    "Participant observation": "Participant_observation.txt",
+    "Pashmina": "Pashmina.txt",
+    "Patricio Echegaray": "Patricio_Echegaray.txt",
+    "Paul Manafort": "Paul_Manafort.txt",
+    "Paul Sauvage (aviator)": "Paul_Sauvage_(aviator).txt",
+    "Pavel Alexandrov": "Pavel_Alexandrov.txt",
+    "Pavel Urysohn": "Pavel_Urysohn.txt",
+    "Pelé": "Pelé.txt",
+    "Penelope Lively": "Penelope_Lively.txt",
+    "Pensacola International Airport": "Pensacola_International_Airport.txt",
+    "PepsiCo": "PepsiCo.txt",
+    "Pershing Square Capital Management": "Pershing_Square_Capital_Management.txt",
+    "Peter Kingston-Davey": "Peter_Kingston-Davey.txt",
+    "Peter Schmeichel": "Peter_Schmeichel.txt",
+    "Peter W. Smith": "Peter_W._Smith.txt",
+    "Phil Rosen": "Phil_Rosen.txt",
+    "Phillips Distilling Company": "Phillips_Distilling_Company.txt",
+    "Phlebodium": "Phlebodium.txt",
+    "Phlebodium aureum": "Phlebodium_aureum.txt",
+    "Physicians Mutual": "Physicians_Mutual.txt",
+    "Piano Girl": "Piano_Girl.txt",
+    "Picric acid": "Picric_acid.txt",
+    "Pieris (butterfly)": "Pieris_(butterfly).txt",
+    "Pieris (plant)": "Pieris_(plant).txt",
+    "Pieris canidia": "Pieris_canidia.txt",
+    "Pieris floribunda": "Pieris_floribunda.txt",
+    "Pietro Germi": "Pietro_Germi.txt",
+    "Pilgerodendron": "Pilgerodendron.txt",
+    "Pirate's Cove": "Pirate's_Cove.txt",
+    "Pluck and Luck": "Pluck_and_Luck.txt",
+    "Poet-diplomat": "Poet-diplomat.txt",
+    "Poetical Refugee": "Poetical_Refugee.txt",
+    "Poison (American band)": "Poison_(American_band).txt",
+    "Poleconomy": "Poleconomy.txt",
+    "Polycom": "Polycom.txt",
+    "Portland State Vikings football under Jerry Glanville": "Portland_State_Vikings_football_under_Jerry_Glanville.txt",
+    "Portland and Southwestern Railroad Tunnel": "Portland_and_Southwestern_Railroad_Tunnel.txt",
+    "Portsmouth Naval Memorial": "Portsmouth_Naval_Memorial.txt",
+    "Poughkeepsie Galleria": "Poughkeepsie_Galleria.txt",
+    "Power of Three (Charmed)": "Power_of_Three_(Charmed).txt",
+    "Pre-Commissioning Unit": "Pre-Commissioning_Unit.txt",
+    "President pro tempore of the United States Senate": "President_pro_tempore_of_the_United_States_Senate.txt",
+    "Pretty Little Dutch Girl": "Pretty_Little_Dutch_Girl.txt",
+    "Princeton High School (Illinois)": "Princeton_High_School_(Illinois).txt",
+    "Princeton Neuroscience Institute": "Princeton_Neuroscience_Institute.txt",
+    "Progress Energy Inc": "Progress_Energy_Inc.txt",
+    "Protests against Donald Trump": "Protests_against_Donald_Trump.txt",
+    "Psycho Realm": "Psycho_Realm.txt",
+    "Public Law 113-167": "Public_Law_113-167.txt",
+    "Punk's Not Dead (2007 film)": "Punk's_Not_Dead_(2007_film).txt",
+    "Pureland Industrial Complex": "Pureland_Industrial_Complex.txt",
+    "Puss N' Boots/These Boots Are Made for Walkin'": "Puss_N'_BootsThese_Boots_Are_Made_for_Walkin'.txt",
+    "Quando Eu Era Vivo": "Quando_Eu_Era_Vivo.txt",
+    "Queen's Day (disambiguation)": "Queen's_Day_(disambiguation).txt",
+    "R v Van der Peet": "R_v_Van_der_Peet.txt",
+    "R509 road (Ireland)": "R509_road_(Ireland).txt",
+    "Raaz Pichhle Janam Ka": "Raaz_Pichhle_Janam_Ka.txt",
+    "Rabat": "Rabat.txt",
+    "Radiohead Box Set": "Radiohead_Box_Set.txt",
+    "Rafferty (1980 TV series)": "Rafferty_(1980_TV_series).txt",
+    "Raimund Harmstorf": "Raimund_Harmstorf.txt",
+    "Rainham War Memorial": "Rainham_War_Memorial.txt",
+    "Raleigh Executive Jetport": "Raleigh_Executive_Jetport.txt",
+    "Ralph Charles": "Ralph_Charles.txt",
+    "Ralph Giannini": "Ralph_Giannini.txt",
+    "Ralph Hefferline": "Ralph_Hefferline.txt",
+    "Ralph Ince": "Ralph_Ince.txt",
+    "Ralph Murphy": "Ralph_Murphy.txt",
+    "Random House Tower": "Random_House_Tower.txt",
+    "Randy Travis": "Randy_Travis.txt",
+    "Rat rod": "Rat_rod.txt",
+    "Ratafia": "Ratafia.txt",
+    "Rave music": "Rave_music.txt",
+    "Real estate benchmarking": "Real_estate_benchmarking.txt",
+    "Real estate technology": "Real_estate_technology.txt",
+    "Reed A. Albee": "Reed_A._Albee.txt",
+    "Register Cliff": "Register_Cliff.txt",
+    "Religious Technology Center": "Religious_Technology_Center.txt",
+    "Remote control": "Remote_control.txt",
+    "Republican Party Reptile": "Republican_Party_Reptile.txt",
+    "Rewrapped": "Rewrapped.txt",
+    "Reynolds v Times Newspapers Ltd": "Reynolds_v_Times_Newspapers_Ltd.txt",
+    "Reynolds v. Pegler": "Reynolds_v._Pegler.txt",
+    "Reynolds v. Sims": "Reynolds_v._Sims.txt",
+    "Reynolds v. United States": "Reynolds_v._United_States.txt",
+    "Richard Nixon": "Richard_Nixon.txt",
+    "Rick Wilber": "Rick_Wilber.txt",
+    "Ride Out (album)": "Ride_Out_(album).txt",
+    "Ripley's Believe It or Not! (TV series)": "Ripley's_Believe_It_or_Not!_(TV_series).txt",
+    "Rising Star (France)": "Rising_Star_(France).txt",
+    "Rivermaya": "Rivermaya.txt",
+    "Riverview, New Brunswick": "Riverview,_New_Brunswick.txt",
+    "Rizzo the Rat": "Rizzo_the_Rat.txt",
+    "Roald Dahl": "Roald_Dahl.txt",
+    "Roald Dahl Children's Gallery": "Roald_Dahl_Children's_Gallery.txt",
+    "Roald Dahl Plass": "Roald_Dahl_Plass.txt",
+    "Roald Dahl short stories bibliography": "Roald_Dahl_short_stories_bibliography.txt",
+    "Roald Dahl's Willy Wonka (musical)": "Roald_Dahl's_Willy_Wonka_(musical).txt",
+    "Roald Dahl: Collected Stories": "Roald_Dahl_Collected_Stories.txt",
+    "Robert Barton": "Robert_Barton.txt",
+    "Robert Caesar Childers": "Robert_Caesar_Childers.txt",
+    "Robert Earl Jones": "Robert_Earl_Jones.txt",
+    "Robert Erskine Childers": "Robert_Erskine_Childers.txt",
+    "Robert Glasper": "Robert_Glasper.txt",
+    "Robert Hormats": "Robert_Hormats.txt",
+    "Robert Nyce": "Robert_Nyce.txt",
+    "Robert R. Hood": "Robert_R._Hood.txt",
+    "Robert Suettinger": "Robert_Suettinger.txt",
+    "Robert's American Gourmet Food": "Robert's_American_Gourmet_Food.txt",
+    "Roberta Vinci": "Roberta_Vinci.txt",
+    "Roberto De Vicenzo": "Roberto_De_Vicenzo.txt",
+    "Robin Cole": "Robin_Cole.txt",
+    "Robin Goldstein": "Robin_Goldstein.txt",
+    "Robins Center": "Robins_Center.txt",
+    "Rockin' All Over the World": "Rockin'_All_Over_the_World.txt",
+    "Roger O. Egeberg": "Roger_O._Egeberg.txt",
+    "Rogers Locomotive and Machine Works": "Rogers_Locomotive_and_Machine_Works.txt",
+    "Rolling Stone": "Rolling_Stone.txt",
+    "Roman Catholic Diocese of Yingkou": "Roman_Catholic_Diocese_of_Yingkou.txt",
+    "Romeo": "Romeo.txt",
+    "Romeo + Juliet": "Romeo_+_Juliet.txt",
+    "Romeo and Juliet on screen": "Romeo_and_Juliet_on_screen.txt",
+    "Romeo × Juliet": "Romeo_×_Juliet.txt",
+    "Ron Bottcher": "Ron_Bottcher.txt",
+    "Ron Snidow": "Ron_Snidow.txt",
+    "Roque Cinchado": "Roque_Cinchado.txt",
+    "Rory Attwell": "Rory_Attwell.txt",
+    "Rosario + Vampire": "Rosario_+_Vampire.txt",
+    "Rose McGowan": "Rose_McGowan.txt",
+    "Rostker v. Goldberg": "Rostker_v._Goldberg.txt",
+    "Rough Shoot": "Rough_Shoot.txt",
+    "Rove goat": "Rove_goat.txt",
+    "Row, Row, Row Your Boat": "Row,_Row,_Row_Your_Boat.txt",
+    "Roy Harper (comics)": "Roy_Harper_(comics).txt",
+    "Roy Holder": "Roy_Holder.txt",
+    "Roy Roman": "Roy_Roman.txt",
+    "Roy's Wedding": "Roy's_Wedding.txt",
+    "Ruakuri Cave": "Ruakuri_Cave.txt",
+    "Rubicon Drinks": "Rubicon_Drinks.txt",
+    "Russian Civil War": "Russian_Civil_War.txt",
+    "Russkiy Toy": "Russkiy_Toy.txt",
+    "Rutgers University": "Rutgers_University.txt",
+    "S. Sylvan Simon": "S._Sylvan_Simon.txt",
+    "SF9 (band)": "SF9_(band).txt",
+    "Sabal Trail Transmission Pipeline": "Sabal_Trail_Transmission_Pipeline.txt",
+    "Sachin Bansal": "Sachin_Bansal.txt",
+    "Sachin Warrier": "Sachin_Warrier.txt",
+    "Sacred Planet": "Sacred_Planet.txt",
+    "Safe Harbor (TV series)": "Safe_Harbor_(TV_series).txt",
+    "Sainik School Balachadi, Jamnagar": "Sainik_School_Balachadi,_Jamnagar.txt",
+    "Saint-Jean-Baptiste Day": "Saint-Jean-Baptiste_Day.txt",
+    "Salute to the Marines": "Salute_to_the_Marines.txt",
+    "Sam Davies (cricketer)": "Sam_Davies_(cricketer).txt",
+    "Sam Eagle": "Sam_Eagle.txt",
+    "Sami ul Haq": "Sami_ul_Haq.txt",
+    "Samuel Eliot Morison": "Samuel_Eliot_Morison.txt",
+    "Sandra Reynolds": "Sandra_Reynolds.txt",
+    "Sarah Bolger": "Sarah_Bolger.txt",
+    "Sarah Drew": "Sarah_Drew.txt",
+    "Sauce Viejo, Argentina": "Sauce_Viejo,_Argentina.txt",
+    "SavaCentre": "SavaCentre.txt",
+    "Savage's Station, Virginia": "Savage's_Station,_Virginia.txt",
+    "Savoia-Marchetti SM.79": "Savoia-Marchetti_SM.79.txt",
+    "Science Fantasy (magazine)": "Science_Fantasy_(magazine).txt",
+    "Scotch Collie": "Scotch_Collie.txt",
+    "Scott Derrickson": "Scott_Derrickson.txt",
+    "Scott Parkin": "Scott_Parkin.txt",
+    "Scott Sidney": "Scott_Sidney.txt",
+    "Scott's Run Nature Preserve": "Scott's_Run_Nature_Preserve.txt",
+    "Scottish Borders": "Scottish_Borders.txt",
+    "Scout Promise": "Scout_Promise.txt",
+    "Scout Tufankjian": "Scout_Tufankjian.txt",
+    "Screaming Trees": "Screaming_Trees.txt",
+    "Screaming Trees discography": "Screaming_Trees_discography.txt",
+    "Sean Healey": "Sean_Healey.txt",
+    "Season of the Witch (2011 film)": "Season_of_the_Witch_(2011_film).txt",
+    "Seasoned Veteran": "Seasoned_Veteran.txt",
+    "Second Battle of Agordat": "Second_Battle_of_Agordat.txt",
+    "Second Best (film)": "Second_Best_(film).txt",
+    "Secretary of State for Constitutional Affairs": "Secretary_of_State_for_Constitutional_Affairs.txt",
+    "Sela Ward": "Sela_Ward.txt",
+    "Selle v. Gibb": "Selle_v._Gibb.txt",
+    "Selma (film)": "Selma_(film).txt",
+    "Selver": "Selver.txt",
+    "Seminole": "Seminole.txt",
+    "Seminole County, Oklahoma": "Seminole_County,_Oklahoma.txt",
+    "Seminole Nation of Oklahoma": "Seminole_Nation_of_Oklahoma.txt",
+    "Seminole music": "Seminole_music.txt",
+    "Semyon Aranovich": "Semyon_Aranovich.txt",
+    "Semyon Aranovich Gershgorin": "Semyon_Aranovich_Gershgorin.txt",
+    "September 16 military parade": "September_16_military_parade.txt",
+    "Serafino (film)": "Serafino_(film).txt",
+    "Sergio Ferrara": "Sergio_Ferrara.txt",
+    "Sergio Pérez": "Sergio_Pérez.txt",
+    "Sergo Mikoyan": "Sergo_Mikoyan.txt",
+    "Serri (singer)": "Serri_(singer).txt",
+    "Seven Brief Lessons on Physics": "Seven_Brief_Lessons_on_Physics.txt",
+    "Seven Days Battles": "Seven_Days_Battles.txt",
+    "Seven Days Confederate order of battle": "Seven_Days_Confederate_order_of_battle.txt",
+    "Seven Days Union order of battle": "Seven_Days_Union_order_of_battle.txt",
+    "Seventeen discography": "Seventeen_discography.txt",
+    "Sex determination in Silene": "Sex_determination_in_Silene.txt",
+    "Shadowshaper": "Shadowshaper.txt",
+    "Shanghai": "Shanghai.txt",
+    "Shawnee State Fishing Lake": "Shawnee_State_Fishing_Lake.txt",
+    "Shayne Workman": "Shayne_Workman.txt",
+    "Sheila Cavanagh": "Sheila_Cavanagh.txt",
+    "Shelley Fabares": "Shelley_Fabares.txt",
+    "Shellite (explosive)": "Shellite_(explosive).txt",
+    "Sherlock Holmes (1916 film)": "Sherlock_Holmes_(1916_film).txt",
+    "Sherlock Holmes (2010 film)": "Sherlock_Holmes_(2010_film).txt",
+    "Shia Muslims in the Arab world": "Shia_Muslims_in_the_Arab_world.txt",
+    "Shinobi vs. Dragon Ninja": "Shinobi_vs._Dragon_Ninja.txt",
+    "Shipmates Forever": "Shipmates_Forever.txt",
+    "Shirley Temple": "Shirley_Temple.txt",
+    "Shonen Jump (magazine)": "Shonen_Jump_(magazine).txt",
+    "Shuangmiao, Inner Mongolia": "Shuangmiao,_Inner_Mongolia.txt",
+    "Shut Up, Make Love": "Shut_Up,_Make_Love.txt",
+    "Sichuan–Shanghai gas pipeline": "Sichuan–Shanghai_gas_pipeline.txt",
+    "Sicko": "Sicko.txt",
+    "Sigmund Freud": "Sigmund_Freud.txt",
+    "Sigmund Freud Archives": "Sigmund_Freud_Archives.txt",
+    "Sigmund Freud Museum (Vienna)": "Sigmund_Freud_Museum_(Vienna).txt",
+    "Sigmund Freud Prize": "Sigmund_Freud_Prize.txt",
+    "Silene": "Silene.txt",
+    "Silene antirrhina": "Silene_antirrhina.txt",
+    "Silene conoidea": "Silene_conoidea.txt",
+    "Silene latifolia": "Silene_latifolia.txt",
+    "Silene menziesii": "Silene_menziesii.txt",
+    "Silene stenophylla": "Silene_stenophylla.txt",
+    "Silene suksdorfii": "Silene_suksdorfii.txt",
+    "Silene tomentosa": "Silene_tomentosa.txt",
+    "Silent Light": "Silent_Light.txt",
+    "Silent Sigh": "Silent_Sigh.txt",
+    "Silver Bells (film)": "Silver_Bells_(film).txt",
+    "Silver Spoon (manga)": "Silver_Spoon_(manga).txt",
+    "Simon Coveney": "Simon_Coveney.txt",
+    "Sinbad of the Seven Seas": "Sinbad_of_the_Seven_Seas.txt",
+    "Sine Novela": "Sine_Novela.txt",
+    "Singh": "Singh.txt",
+    "Sinister (film)": "Sinister_(film).txt",
+    "Sinocyclocheilus": "Sinocyclocheilus.txt",
+    "Sinopieris": "Sinopieris.txt",
+    "Sinuiju Special Administrative Region": "Sinuiju_Special_Administrative_Region.txt",
+    "Sir Matt Busby Sports Complex": "Sir_Matt_Busby_Sports_Complex.txt",
+    "Siri Remote": "Siri_Remote.txt",
+    "Skeptical Inquirer": "Skeptical_Inquirer.txt",
+    "Skin Yard": "Skin_Yard.txt",
+    "Skin Yard (album)": "Skin_Yard_(album).txt",
+    "Skyscraper National Park": "Skyscraper_National_Park.txt",
+    "Snack Foods Limited": "Snack_Foods_Limited.txt",
+    "Snackbox Food Holdings": "Snackbox_Food_Holdings.txt",
+    "Snegithiye": "Snegithiye.txt",
+    "Sneha (actress)": "Sneha_(actress).txt",
+    "Snoecks": "Snoecks.txt",
+    "Snow Queen (2002 film)": "Snow_Queen_(2002_film).txt",
+    "Snow White: The Fairest of Them All": "Snow_White_The_Fairest_of_Them_All.txt",
+    "Social Anthropology (journal)": "Social_Anthropology_(journal).txt",
+    "Socialist Revolutionary Party": "Socialist_Revolutionary_Party.txt",
+    "Soft drink": "Soft_drink.txt",
+    "Solidago curtisii": "Solidago_curtisii.txt",
+    "Solidago elongata": "Solidago_elongata.txt",
+    "Solidago ouachitensis": "Solidago_ouachitensis.txt",
+    "Solidago rugosa": "Solidago_rugosa.txt",
+    "Solidago rupestris": "Solidago_rupestris.txt",
+    "Solidago speciosa": "Solidago_speciosa.txt",
+    "Solidago uliginosa": "Solidago_uliginosa.txt",
+    "Something for the Rest of Us": "Something_for_the_Rest_of_Us.txt",
+    "Something in the Way You Move": "Something_in_the_Way_You_Move.txt",
+    "Something to Talk About (Badly Drawn Boy song)": "Something_to_Talk_About_(Badly_Drawn_Boy_song).txt",
+    "Sommeren '92": "Sommeren_'92.txt",
+    "Song of the Open Road": "Song_of_the_Open_Road.txt",
+    "Sorbaria": "Sorbaria.txt",
+    "South Phoenix": "South_Phoenix.txt",
+    "South West Pacific Area (command)": "South_West_Pacific_Area_(command).txt",
+    "South West Pacific theatre of World War II": "South_West_Pacific_theatre_of_World_War_II.txt",
+    "South of the Border (2009 film)": "South_of_the_Border_(2009_film).txt",
+    "Spencer Averick": "Spencer_Averick.txt",
+    "Sphaerotholus": "Sphaerotholus.txt",
+    "Spirit of the Border": "Spirit_of_the_Border.txt",
+    "Spring Hill station": "Spring_Hill_station.txt",
+    "Springfield Park (Wigan)": "Springfield_Park_(Wigan).txt",
+    "St. Andre (Goa Assembly constituency)": "St._Andre_(Goa_Assembly_constituency).txt",
+    "St. Andre's Parish": "St._Andre's_Parish.txt",
+    "St. George, Staten Island": "St._George,_Staten_Island.txt",
+    "St. Mary's Priory (Lothian)": "St._Mary's_Priory_(Lothian).txt",
+    "Stanley Coren": "Stanley_Coren.txt",
+    "Stanton Y. Hill": "Stanton_Y._Hill.txt",
+    "Starfaring": "Starfaring.txt",
+    "State Secretary (Norway)": "State_Secretary_(Norway).txt",
+    "State media": "State_media.txt",
+    "Staten Island": "Staten_Island.txt",
+    "Staten Island Borough Hall": "Staten_Island_Borough_Hall.txt",
+    "Staten Island Catapult": "Staten_Island_Catapult.txt",
+    "Staten Island Community Board 1": "Staten_Island_Community_Board_1.txt",
+    "Staten Island Register": "Staten_Island_Register.txt",
+    "Staten Island Technical High School": "Staten_Island_Technical_High_School.txt",
+    "Statistical inference": "Statistical_inference.txt",
+    "Statue of Sigmund Freud, Hampstead": "Statue_of_Sigmund_Freud,_Hampstead.txt",
+    "Stay (Shakespears Sister song)": "Stay_(Shakespears_Sister_song).txt",
+    "Stay (Sugarland song)": "Stay_(Sugarland_song).txt",
+    "Steeltown (band)": "Steeltown_(band).txt",
+    "Stenocereus": "Stenocereus.txt",
+    "Stephanitis takeyai": "Stephanitis_takeyai.txt",
+    "Steven Adler": "Steven_Adler.txt",
+    "Steven D. Smith": "Steven_D._Smith.txt",
+    "Steven K. Galson": "Steven_K._Galson.txt",
+    "Stormbreaker (film)": "Stormbreaker_(film).txt",
+    "Stranger in Town (album)": "Stranger_in_Town_(album).txt",
+    "Stranger in the House (song)": "Stranger_in_the_House_(song).txt",
+    "Strasbourg": "Strasbourg.txt",
+    "Strawberry Park, Cheshire": "Strawberry_Park,_Cheshire.txt",
+    "Struggle for Rome (board game)": "Struggle_for_Rome_(board_game).txt",
+    "Submarino (beverage)": "Submarino_(beverage).txt",
+    "Suburban Madness": "Suburban_Madness.txt",
+    "Subway 400": "Subway_400.txt",
+    "Suffrajett": "Suffrajett.txt",
+    "Suicide (1977 album)": "Suicide_(1977_album).txt",
+    "Sullivan County, New Hampshire": "Sullivan_County,_New_Hampshire.txt",
+    "Sultan Ahmed Mosque": "Sultan_Ahmed_Mosque.txt",
+    "Sumie Tanaka": "Sumie_Tanaka.txt",
+    "Summers v. Earth Island Institute": "Summers_v._Earth_Island_Institute.txt",
+    "Supertubos": "Supertubos.txt",
+    "Supreme Life Building": "Supreme_Life_Building.txt",
+    "Surfer hair": "Surfer_hair.txt",
+    "Surus": "Surus.txt",
+    "Susan Alice Buffett": "Susan_Alice_Buffett.txt",
+    "Susan Buffett": "Susan_Buffett.txt",
+    "Susan Gerbic": "Susan_Gerbic.txt",
+    "Tabernacle": "Tabernacle.txt",
+    "TaeguTec": "TaeguTec.txt",
+    "Taimushan Railway Station": "Taimushan_Railway_Station.txt",
+    "Take 21": "Take_21.txt",
+    "Takeshi Fukunaga": "Takeshi_Fukunaga.txt",
+    "Tappi Tíkarrass": "Tappi_Tíkarrass.txt",
+    "Tara Strong": "Tara_Strong.txt",
+    "Tara Strong filmography": "Tara_Strong_filmography.txt",
+    "Tashkopryu Mosque": "Tashkopryu_Mosque.txt",
+    "Tata Consultancy Services": "Tata_Consultancy_Services.txt",
+    "Tazweed Center": "Tazweed_Center.txt",
+    "Tea Moderna (magazine)": "Tea_Moderna_(magazine).txt",
+    "Teatro Giuseppe Verdi": "Teatro_Giuseppe_Verdi.txt",
+    "Teddy Roosevelt Terrier": "Teddy_Roosevelt_Terrier.txt",
+    "Teen Titans": "Teen_Titans.txt",
+    "Teen Titans (season 1)": "Teen_Titans_(season_1).txt",
+    "Teen Titans (season 4)": "Teen_Titans_(season_4).txt",
+    "Teen Titans Go! (TV series)": "Teen_Titans_Go!_(TV_series).txt",
+    "Teen Titans: Trouble in Tokyo": "Teen_Titans_Trouble_in_Tokyo.txt",
+    "Teide National Park": "Teide_National_Park.txt",
+    "Terren Peizer": "Terren_Peizer.txt",
+    "Terry Richardson": "Terry_Richardson.txt",
+    "Tesco Extra": "Tesco_Extra.txt",
+    "Test Icicles": "Test_Icicles.txt",
+    "Tetrakis(hydroxymethyl)phosphonium chloride": "Tetrakis(hydroxymethyl)phosphonium_chloride.txt",
+    "The Adventure of the Empty House": "The_Adventure_of_the_Empty_House.txt",
+    "The Assault on Truth": "The_Assault_on_Truth.txt",
+    "The Bears and I": "The_Bears_and_I.txt",
+    "The Best of Roald Dahl": "The_Best_of_Roald_Dahl.txt",
+    "The Big Brain": "The_Big_Brain.txt",
+    "The Birds on the Trees": "The_Birds_on_the_Trees.txt",
+    "The Boatniks": "The_Boatniks.txt",
+    "The Boys Next Door (1996 film)": "The_Boys_Next_Door_(1996_film).txt",
+    "The Bugle Sounds": "The_Bugle_Sounds.txt",
+    "The Card (1952 film)": "The_Card_(1952_film).txt",
+    "The Class of '92": "The_Class_of_'92.txt",
+    "The Collected Short Stories of Roald Dahl": "The_Collected_Short_Stories_of_Roald_Dahl.txt",
+    "The Conversation (website)": "The_Conversation_(website).txt",
+    "The Coward (1915 film)": "The_Coward_(1915_film).txt",
+    "The Cruel Sea (1953 film)": "The_Cruel_Sea_(1953_film).txt",
+    "The Dark Glow of the Mountains": "The_Dark_Glow_of_the_Mountains.txt",
+    "The Deserter (1912 film)": "The_Deserter_(1912_film).txt",
+    "The Divide trilogy": "The_Divide_trilogy.txt",
+    "The Doors: Vinyl Box Set": "The_Doors_Vinyl_Box_Set.txt",
+    "The Duchess and the Jeweller": "The_Duchess_and_the_Jeweller.txt",
+    "The Eighth (United States)": "The_Eighth_(United_States).txt",
+    "The Family Man": "The_Family_Man.txt",
+    "The Farm (The Office)": "The_Farm_(The_Office).txt",
+    "The Five Obstructions": "The_Five_Obstructions.txt",
+    "The Four Seasons (band)": "The_Four_Seasons_(band).txt",
+    "The General (1926 film)": "The_General_(1926_film).txt",
+    "The General (locomotive)": "The_General_(locomotive).txt",
+    "The Golden Hour (novel)": "The_Golden_Hour_(novel).txt",
+    "The Great Locomotive Chase": "The_Great_Locomotive_Chase.txt",
+    "The Great Locomotive Chase Festival": "The_Great_Locomotive_Chase_Festival.txt",
+    "The Hanging Tree": "The_Hanging_Tree.txt",
+    "The Hard Easy (Adventure Time)": "The_Hard_Easy_(Adventure_Time).txt",
+    "The Hard Easy (film)": "The_Hard_Easy_(film).txt",
+    "The Hork-Bajir Chronicles": "The_Hork-Bajir_Chronicles.txt",
+    "The Hour of Bewilderbeast": "The_Hour_of_Bewilderbeast.txt",
+    "The House That Jack Built (1967 film)": "The_House_That_Jack_Built_(1967_film).txt",
+    "The Importance of Being Icelandic": "The_Importance_of_Being_Icelandic.txt",
+    "The Kids of Catan": "The_Kids_of_Catan.txt",
+    "The Kindaichi Case Files": "The_Kindaichi_Case_Files.txt",
+    "The Life and Work of Sigmund Freud": "The_Life_and_Work_of_Sigmund_Freud.txt",
+    "The Little Review Gallery": "The_Little_Review_Gallery.txt",
+    "The Long Road Home": "The_Long_Road_Home.txt",
+    "The Longer We Make Love": "The_Longer_We_Make_Love.txt",
+    "The Lost World (TV series)": "The_Lost_World_(TV_series).txt",
+    "The Magical Legend of the Leprechauns": "The_Magical_Legend_of_the_Leprechauns.txt",
+    "The Mark on the Wall": "The_Mark_on_the_Wall.txt",
+    "The Marvelous Land of Oz": "The_Marvelous_Land_of_Oz.txt",
+    "The Mask of Dimitrios": "The_Mask_of_Dimitrios.txt",
+    "The Memory of Our People": "The_Memory_of_Our_People.txt",
+    "The Moth Diaries (film)": "The_Moth_Diaries_(film).txt",
+    "The Muppet Christmas Carol": "The_Muppet_Christmas_Carol.txt",
+    "The New Lot": "The_New_Lot.txt",
+    "The Original Jam Sessions 1969": "The_Original_Jam_Sessions_1969.txt",
+    "The Petrified Forest": "The_Petrified_Forest.txt",
+    "The Prince of Tennis": "The_Prince_of_Tennis.txt",
+    "The Progressive Populist": "The_Progressive_Populist.txt",
+    "The Rain Rain Rain Came Down Down Down": "The_Rain_Rain_Rain_Came_Down_Down_Down.txt",
+    "The Return of Sherlock Holmes (1929 film)": "The_Return_of_Sherlock_Holmes_(1929_film).txt",
+    "The Rivals for Catan": "The_Rivals_for_Catan.txt",
+    "The Roald Dahl Treasury": "The_Roald_Dahl_Treasury.txt",
+    "The Scourge of the Desert": "The_Scourge_of_the_Desert.txt",
+    "The Spiderwick Chronicles (film)": "The_Spiderwick_Chronicles_(film).txt",
+    "The Suicide File": "The_Suicide_File.txt",
+    "The Sword in the Stone (film)": "The_Sword_in_the_Stone_(film).txt",
+    "The Testimony (1946 film)": "The_Testimony_(1946_film).txt",
+    "The Texas (locomotive)": "The_Texas_(locomotive).txt",
+    "The Tragedy of Romeo and Juliet (film)": "The_Tragedy_of_Romeo_and_Juliet_(film).txt",
+    "The Twenty-fifth Anniversary Anthology": "The_Twenty-fifth_Anniversary_Anthology.txt",
+    "The Voice Teens (Philippine TV series)": "The_Voice_Teens_(Philippine_TV_series).txt",
+    "The Voice Teens (Philippines season 1)": "The_Voice_Teens_(Philippines_season_1).txt",
+    "The Voice of the Philippines": "The_Voice_of_the_Philippines.txt",
+    "The War Is Over (film)": "The_War_Is_Over_(film).txt",
+    "The Warren Buffett Way": "The_Warren_Buffett_Way.txt",
+    "The Wheels on the Bus": "The_Wheels_on_the_Bus.txt",
+    "The White House Doctor": "The_White_House_Doctor.txt",
+    "The Wonder Who?": "The_Wonder_Who.txt",
+    "The Wonderful Thing About Tiggers": "The_Wonderful_Thing_About_Tiggers.txt",
+    "The Year of the Dog (film)": "The_Year_of_the_Dog_(film).txt",
+    "The Yonah (locomotive)": "The_Yonah_(locomotive).txt",
+    "The Zoo Story": "The_Zoo_Story.txt",
+    "Their Lives": "Their_Lives.txt",
+    "These Boots Are Made for Walkin'": "These_Boots_Are_Made_for_Walkin'.txt",
+    "This Is Elvis": "This_Is_Elvis.txt",
+    "This Is Me (Randy Travis album)": "This_Is_Me_(Randy_Travis_album).txt",
+    "This Is the Life (2008 film)": "This_Is_the_Life_(2008_film).txt",
+    "Thomas Friedman": "Thomas_Friedman.txt",
+    "Thomas Gordon (writer)": "Thomas_Gordon_(writer).txt",
+    "Thomas H. Ince": "Thomas_H._Ince.txt",
+    "Thomas Hylland Eriksen": "Thomas_Hylland_Eriksen.txt",
+    "Thomas Ince: Hollywood's Independent Pioneer": "Thomas_Ince_Hollywood's_Independent_Pioneer.txt",
+    "Three Comrades (novel)": "Three_Comrades_(novel).txt",
+    "Three Little Kittens": "Three_Little_Kittens.txt",
+    "Three Men on a Horse": "Three_Men_on_a_Horse.txt",
+    "Three Tall Women": "Three_Tall_Women.txt",
+    "Three are Three": "Three_are_Three.txt",
+    "Thrill of a Lifetime (film)": "Thrill_of_a_Lifetime_(film).txt",
+    "Time and Free Will": "Time_and_Free_Will.txt",
+    "Time to Kill (1989 film)": "Time_to_Kill_(1989_film).txt",
+    "Timofey Samsonov": "Timofey_Samsonov.txt",
+    "Tinghu District": "Tinghu_District.txt",
+    "Tish (film)": "Tish_(film).txt",
+    "To Know Him Is to Love Him": "To_Know_Him_Is_to_Love_Him.txt",
+    "To Shoot an Elephant": "To_Shoot_an_Elephant.txt",
+    "Tom Draper": "Tom_Draper.txt",
+    "Tom Rothrock": "Tom_Rothrock.txt",
+    "Tongcheng Subdistrict, Fuding": "Tongcheng_Subdistrict,_Fuding.txt",
+    "Tony Ave": "Tony_Ave.txt",
+    "Tony Fabrizio": "Tony_Fabrizio.txt",
+    "Tosca (1956 film)": "Tosca_(1956_film).txt",
+    "Total Recall (1990 film)": "Total_Recall_(1990_film).txt",
+    "Tower Hill Memorial": "Tower_Hill_Memorial.txt",
+    "Toy Manchester Terrier": "Toy_Manchester_Terrier.txt",
+    "Toys in the Attic (2009 film)": "Toys_in_the_Attic_(2009_film).txt",
+    "Training centre for release of the Atma-energy": "Training_centre_for_release_of_the_Atma-energy.txt",
+    "Trainmaster Command Control": "Trainmaster_Command_Control.txt",
+    "Transition House Association of Nova Scotia": "Transition_House_Association_of_Nova_Scotia.txt",
+    "Trash Box": "Trash_Box.txt",
+    "Treaty of Addis Ababa": "Treaty_of_Addis_Ababa.txt",
+    "Tree fern": "Tree_fern.txt",
+    "Treehouse (game)": "Treehouse_(game).txt",
+    "Trinidad and Tobago League Cup": "Trinidad_and_Tobago_League_Cup.txt",
+    "Tromeo and Juliet": "Tromeo_and_Juliet.txt",
+    "True Lies": "True_Lies.txt",
+    "Truly": "Truly.txt",
+    "Trump campaign–Russian meeting": "Trump_campaign–Russian_meeting.txt",
+    "Tukufu Zuberi": "Tukufu_Zuberi.txt",
+    "Tunnels &amp; Trolls": "Tunnels_&amp;_Trolls.txt",
+    "Tunnels &amp; Trolls: Crusaders of Khazan": "Tunnels_&amp;_Trolls_Crusaders_of_Khazan.txt",
+    "Tupolev Tu-12": "Tupolev_Tu-12.txt",
+    "Tweedledum and Tweedledee": "Tweedledum_and_Tweedledee.txt",
+    "Twisties": "Twisties.txt",
+    "Two Girls on Broadway": "Two_Girls_on_Broadway.txt",
+    "Tyler Bates": "Tyler_Bates.txt",
+    "Tysons Corner Center": "Tysons_Corner_Center.txt",
+    "Tysons Galleria": "Tysons_Galleria.txt",
+    "Tysons, Virginia": "Tysons,_Virginia.txt",
+    "U Know What's Up": "U_Know_What's_Up.txt",
+    "U.S. Route 19 Truck (Pittsburgh)": "U.S._Route_19_Truck_(Pittsburgh).txt",
+    "U.S. Route 287": "U.S._Route_287.txt",
+    "USS Belleau Wood": "USS_Belleau_Wood.txt",
+    "USS Belleau Wood (CVL-24)": "USS_Belleau_Wood_(CVL-24).txt",
+    "USS Belleau Wood (LHA-3)": "USS_Belleau_Wood_(LHA-3).txt",
+    "Umba River (Tanzania)": "Umba_River_(Tanzania).txt",
+    "Under Your Skin (album)": "Under_Your_Skin_(album).txt",
+    "Under an Hour": "Under_an_Hour.txt",
+    "Ungod": "Ungod.txt",
+    "United States Assistant Secretary of State": "United_States_Assistant_Secretary_of_State.txt",
+    "United States Mission to the European Union": "United_States_Mission_to_the_European_Union.txt",
+    "United States Senate election in Illinois, 1978": "United_States_Senate_election_in_Illinois,_1978.txt",
+    "United States v. Binion": "United_States_v._Binion.txt",
+    "United States v. Paramount Pictures, Inc.": "United_States_v._Paramount_Pictures,_Inc.txt",
+    "United States v. Quiver": "United_States_v._Quiver.txt",
+    "Universal remote": "Universal_remote.txt",
+    "University of Kansas": "University_of_Kansas.txt",
+    "University of Missouri–Kansas City": "University_of_Missouri–Kansas_City.txt",
+    "University of the Incarnate Word": "University_of_the_Incarnate_Word.txt",
+    "Uno-X": "Uno-X.txt",
+    "Urad Rear Banner": "Urad_Rear_Banner.txt",
+    "Urbanisation in India": "Urbanisation_in_India.txt",
+    "V.L. v. E.L.": "V.L._v._E.L.txt",
+    "VELUX": "VELUX.txt",
+    "Valli (album)": "Valli_(album).txt",
+    "Van Conner": "Van_Conner.txt",
+    "Van Staphorst v. Maryland": "Van_Staphorst_v._Maryland.txt",
+    "Vanguard (magazine)": "Vanguard_(magazine).txt",
+    "Vatican leaks scandal": "Vatican_leaks_scandal.txt",
+    "Venkatesan Guruswami": "Venkatesan_Guruswami.txt",
+    "Verdi, the King of Melody": "Verdi,_the_King_of_Melody.txt",
+    "Vermont Catamounts men's basketball": "Vermont_Catamounts_men's_basketball.txt",
+    "Vermont Catamounts men's ice hockey": "Vermont_Catamounts_men's_ice_hockey.txt",
+    "Vermont Catamounts men's soccer": "Vermont_Catamounts_men's_soccer.txt",
+    "Verão Vermelho": "Verão_Vermelho.txt",
+    "Vetigel": "Vetigel.txt",
+    "Vice President of Panama": "Vice_President_of_Panama.txt",
+    "Victoria Hanley": "Victoria_Hanley.txt",
+    "Vietnam War Memorial, Hanoi": "Vietnam_War_Memorial,_Hanoi.txt",
+    "Viglen": "Viglen.txt",
+    "Village accountant": "Village_accountant.txt",
+    "Villard (imprint)": "Villard_(imprint).txt",
+    "Vince Phillips": "Vince_Phillips.txt",
+    "Vino cotto": "Vino_cotto.txt",
+    "Viol": "Viol.txt",
+    "Virginia Commonwealth University": "Virginia_Commonwealth_University.txt",
+    "Virginia Woolf": "Virginia_Woolf.txt",
+    "Visa policy of Hong Kong": "Visa_policy_of_Hong_Kong.txt",
+    "Vishwajyoti Higher Secondary School": "Vishwajyoti_Higher_Secondary_School.txt",
+    "Višegrad": "Višegrad.txt",
+    "Volvo T6": "Volvo_T6.txt",
+    "Vídbláin": "Vídbláin.txt",
+    "W. E. Johns": "W._E._Johns.txt",
+    "W. F. Morris": "W._F._Morris.txt",
+    "Waiting for the Rest of It": "Waiting_for_the_Rest_of_It.txt",
+    "Wale Adebanwi": "Wale_Adebanwi.txt",
+    "Walt Disney Studios Motion Pictures": "Walt_Disney_Studios_Motion_Pictures.txt",
+    "Warren Buffett": "Warren_Buffett.txt",
+    "Wassail": "Wassail.txt",
+    "We Bring an Arsenal": "We_Bring_an_Arsenal.txt",
+    "We Can Get Together": "We_Can_Get_Together.txt",
+    "Weak heap": "Weak_heap.txt",
+    "Web Weirdos": "Web_Weirdos.txt",
+    "Weekly Shonen Jump (American magazine)": "Weekly_Shonen_Jump_(American_magazine).txt",
+    "Wes McKinney": "Wes_McKinney.txt",
+    "West McLean, Virginia": "West_McLean,_Virginia.txt",
+    "West v. Barnes": "West_v._Barnes.txt",
+    "Westminster School, Adelaide": "Westminster_School,_Adelaide.txt",
+    "What Are Little Boys Made Of?": "What_Are_Little_Boys_Made_Of.txt",
+    "What Are Little Girls Made Of?": "What_Are_Little_Girls_Made_Of.txt",
+    "When People Grow, People Go": "When_People_Grow,_People_Go.txt",
+    "Where We Belong (Lostprophets song)": "Where_We_Belong_(Lostprophets_song).txt",
+    "White Sunday": "White_Sunday.txt",
+    "Whole Woman's Health v. Hellerstedt": "Whole_Woman's_Health_v._Hellerstedt.txt",
+    "Whole life insurance": "Whole_life_insurance.txt",
+    "Why Is There Air?": "Why_Is_There_Air.txt",
+    "Wilford H. Fawcett House": "Wilford_H._Fawcett_House.txt",
+    "William Connolley": "William_Connolley.txt",
+    "William D. Russell (director)": "William_D._Russell_(director).txt",
+    "William H. Cook Water Tank House": "William_H._Cook_Water_Tank_House.txt",
+    "William H. Ginsburg": "William_H._Ginsburg.txt",
+    "William Henry Nicholls": "William_Henry_Nicholls.txt",
+    "William R. Harwood": "William_R._Harwood.txt",
+    "Williams sisters": "Williams_sisters.txt",
+    "Willoughton": "Willoughton.txt",
+    "Winner (band)": "Winner_(band).txt",
+    "Winnie the Pooh and the Blustery Day": "Winnie_the_Pooh_and_the_Blustery_Day.txt",
+    "Wolf Alice": "Wolf_Alice.txt",
+    "Wolong Special Administrative Region": "Wolong_Special_Administrative_Region.txt",
+    "Wonder en is gheen Wonder": "Wonder_en_is_gheen_Wonder.txt",
+    "Wondering (Dirty Pretty Things song)": "Wondering_(Dirty_Pretty_Things_song).txt",
+    "Woodson, Arkansas": "Woodson,_Arkansas.txt",
+    "Woodsville, New Hampshire": "Woodsville,_New_Hampshire.txt",
+    "Woody Guthrie Folk Festival": "Woody_Guthrie_Folk_Festival.txt",
+    "Wooster and Davis": "Wooster_and_Davis.txt",
+    "World Summit of Nobel Peace Laureates": "World_Summit_of_Nobel_Peace_Laureates.txt",
+    "World War II casualties": "World_War_II_casualties.txt",
+    "X Ambassadors": "X_Ambassadors.txt",
+    "Xanthoceras": "Xanthoceras.txt",
+    "Xiapu County": "Xiapu_County.txt",
+    "Xylitol": "Xylitol.txt",
+    "Yandu District": "Yandu_District.txt",
+    "Yeah! (Usher song)": "Yeah!_(Usher_song).txt",
+    "Yellowcraigs": "Yellowcraigs.txt",
+    "Yes, Yes, Yes": "Yes,_Yes,_Yes.txt",
+    "Yingkou": "Yingkou.txt",
+    "Yingkou East Railway Station": "Yingkou_East_Railway_Station.txt",
+    "Yingkou Lanqi Airport": "Yingkou_Lanqi_Airport.txt",
+    "You Me and Captain Longbridge": "You_Me_and_Captain_Longbridge.txt",
+    "Yvonne Ridley": "Yvonne_Ridley.txt",
+    "Zab Judah": "Zab_Judah.txt",
+    "Zaheer Khan": "Zaheer_Khan.txt",
+    "Zaječická hořká": "Zaječická_hořká.txt",
+    "Zurracapote": "Zurracapote.txt",
+    "Élan vital": "Élan_vital.txt",
+    "♯JusticeForFlint": "♯JusticeForFlint.txt"
+  },
+  "questions": [
+    {
+      "id": "5a8c7595554299585d9e36b6",
+      "type": "bridge",
+      "gold_titles": [
+        "Kiss and Tell (1945 film)",
+        "Shirley Temple"
+      ],
+      "gold_present": [
+        "Kiss and Tell (1945 film)",
+        "Shirley Temple"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a85ea095542994775f606a8",
+      "type": "bridge",
+      "gold_titles": [
+        "Animorphs",
+        "The Hork-Bajir Chronicles"
+      ],
+      "gold_present": [
+        "Animorphs",
+        "The Hork-Bajir Chronicles"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8e3ea95542995a26add48d",
+      "type": "bridge",
+      "gold_titles": [
+        "Adriana Trigiani",
+        "Big Stone Gap (film)"
+      ],
+      "gold_present": [
+        "Adriana Trigiani",
+        "Big Stone Gap (film)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abd94525542992ac4f382d2",
+      "type": "bridge",
+      "gold_titles": [
+        "2014 S/S",
+        "Winner (band)"
+      ],
+      "gold_present": [
+        "2014 S/S",
+        "Winner (band)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a85b2d95542997b5ce40028",
+      "type": "bridge",
+      "gold_titles": [
+        "Eenasul Fateh",
+        "Management consulting"
+      ],
+      "gold_present": [
+        "Eenasul Fateh",
+        "Management consulting"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a87ab905542996e4f3088c1",
+      "type": "bridge",
+      "gold_titles": [
+        "Androscoggin Bank Colisée",
+        "Lewiston Maineiacs"
+      ],
+      "gold_present": [
+        "Androscoggin Bank Colisée",
+        "Lewiston Maineiacs"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7bbb64554299042af8f7cc",
+      "type": "bridge",
+      "gold_titles": [
+        "Annie Morton",
+        "Terry Richardson"
+      ],
+      "gold_present": [
+        "Annie Morton",
+        "Terry Richardson"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7166395542994082a3e814",
+      "type": "bridge",
+      "gold_titles": [
+        "Kansas Song",
+        "University of Kansas"
+      ],
+      "gold_present": [
+        "Kansas Song",
+        "University of Kansas"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a877e5d5542993e715abf7d",
+      "type": "bridge",
+      "gold_titles": [
+        "David Weissman",
+        "The Family Man"
+      ],
+      "gold_present": [
+        "David Weissman",
+        "The Family Man"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab3b0bf5542992ade7c6e39",
+      "type": "bridge",
+      "gold_titles": [
+        "End of Days (film)",
+        "Oh My God (Guns N' Roses song)"
+      ],
+      "gold_present": [
+        "End of Days (film)",
+        "Oh My God (Guns N' Roses song)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab6d09255429954757d337d",
+      "type": "bridge",
+      "gold_titles": [
+        "1995–96 Manchester United F.C. season",
+        "Alex Ferguson"
+      ],
+      "gold_present": [
+        "1995–96 Manchester United F.C. season",
+        "Alex Ferguson"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a75e05c55429976ec32bc5f",
+      "type": "bridge",
+      "gold_titles": [
+        "Brown County, Kansas",
+        "Brown State Fishing Lake"
+      ],
+      "gold_present": [
+        "Brown County, Kansas",
+        "Brown State Fishing Lake"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab3e45655429976abd1bcd4",
+      "type": "bridge",
+      "gold_titles": [
+        "America East Conference",
+        "Vermont Catamounts men's soccer"
+      ],
+      "gold_present": [
+        "America East Conference",
+        "Vermont Catamounts men's soccer"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae0d4c9554299603e418468",
+      "type": "bridge",
+      "gold_titles": [
+        "Richard Nixon",
+        "Roger O. Egeberg"
+      ],
+      "gold_present": [
+        "Richard Nixon",
+        "Roger O. Egeberg"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae7a8175542993210983ed8",
+      "type": "bridge",
+      "gold_titles": [
+        "Formula One drivers from Mexico",
+        "Sergio Pérez"
+      ],
+      "gold_present": [
+        "Formula One drivers from Mexico",
+        "Sergio Pérez"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae6050f55429929b0807a5e",
+      "type": "bridge",
+      "gold_titles": [
+        "A Rather Blustery Day",
+        "Jim Cummings"
+      ],
+      "gold_present": [
+        "A Rather Blustery Day",
+        "Jim Cummings"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adddccd5542997dc7907069",
+      "type": "bridge",
+      "gold_titles": [
+        "Apple Remote",
+        "Front Row (software)"
+      ],
+      "gold_present": [
+        "Apple Remote",
+        "Front Row (software)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae22b8d554299234fd0440f",
+      "type": "bridge",
+      "gold_titles": [
+        "Kasper Schmeichel",
+        "Peter Schmeichel"
+      ],
+      "gold_present": [
+        "Kasper Schmeichel",
+        "Peter Schmeichel"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a722b8655429971e9dc9329",
+      "type": "bridge",
+      "gold_titles": [
+        "Lee Hazlewood",
+        "These Boots Are Made for Walkin'"
+      ],
+      "gold_present": [
+        "Lee Hazlewood",
+        "These Boots Are Made for Walkin'"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adf37a95542995ec70e8f97",
+      "type": "bridge",
+      "gold_titles": [
+        "2011–12 VCU Rams men's basketball team",
+        "Virginia Commonwealth University"
+      ],
+      "gold_present": [
+        "2011–12 VCU Rams men's basketball team",
+        "Virginia Commonwealth University"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a828c8355429966c78a6a50",
+      "type": "bridge",
+      "gold_titles": [
+        "Henry J. Kaiser",
+        "Kaiser Ventures"
+      ],
+      "gold_present": [
+        "Henry J. Kaiser",
+        "Kaiser Ventures"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8a3e745542996c9b8d5e70",
+      "type": "bridge",
+      "gold_titles": [
+        "Arena of Khazan",
+        "Tunnels &amp; Trolls"
+      ],
+      "gold_present": [
+        "Arena of Khazan",
+        "Tunnels &amp; Trolls"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac23ff0554299636651994d",
+      "type": "bridge",
+      "gold_titles": [
+        "Poison (American band)",
+        "Shut Up, Make Love"
+      ],
+      "gold_present": [
+        "Poison (American band)",
+        "Shut Up, Make Love"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae0361155429925eb1afc2c",
+      "type": "bridge",
+      "gold_titles": [
+        "Charles Nungesser",
+        "L'Oiseau Blanc"
+      ],
+      "gold_present": [
+        "Charles Nungesser",
+        "L'Oiseau Blanc"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abf63f15542997ec76fd3ea",
+      "type": "bridge",
+      "gold_titles": [
+        "Russian Civil War",
+        "Socialist Revolutionary Party"
+      ],
+      "gold_present": [
+        "Russian Civil War",
+        "Socialist Revolutionary Party"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8ef2a75542995a26add583",
+      "type": "bridge",
+      "gold_titles": [
+        "Carlo Rovelli",
+        "Seven Brief Lessons on Physics"
+      ],
+      "gold_present": [
+        "Carlo Rovelli",
+        "Seven Brief Lessons on Physics"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a80721b554299485f5985ef",
+      "type": "bridge",
+      "gold_titles": [
+        "Livesey Hall War Memorial",
+        "World War II casualties"
+      ],
+      "gold_present": [
+        "Livesey Hall War Memorial",
+        "World War II casualties"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7571135542992d0ec05f98",
+      "type": "bridge",
+      "gold_titles": [
+        "Columbia University",
+        "Ralph Hefferline"
+      ],
+      "gold_present": [
+        "Columbia University",
+        "Ralph Hefferline"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a74106b55429979e288289e",
+      "type": "bridge",
+      "gold_titles": [
+        "Sachin Warrier",
+        "Tata Consultancy Services"
+      ],
+      "gold_present": [
+        "Sachin Warrier",
+        "Tata Consultancy Services"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a79311755429970f5fffe67",
+      "type": "bridge",
+      "gold_titles": [
+        "I&quot;s",
+        "Masakazu Katsura"
+      ],
+      "gold_present": [
+        "I&quot;s",
+        "Masakazu Katsura"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab2d3df554299194fa9352c",
+      "type": "bridge",
+      "gold_titles": [
+        "Battle of Adwa",
+        "Giuseppe Arimondi"
+      ],
+      "gold_present": [
+        "Battle of Adwa",
+        "Giuseppe Arimondi"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a760ab65542994ccc918697",
+      "type": "bridge",
+      "gold_titles": [
+        "Alfred Balk",
+        "Nelson Rockefeller"
+      ],
+      "gold_present": [
+        "Alfred Balk",
+        "Nelson Rockefeller"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7d54165542995f4f402256",
+      "type": "bridge",
+      "gold_titles": [
+        "Dirleton Castle",
+        "Yellowcraigs"
+      ],
+      "gold_present": [
+        "Dirleton Castle",
+        "Yellowcraigs"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab859a955429934fafe6d7b",
+      "type": "bridge",
+      "gold_titles": [
+        "Back to Mono (1958–1969)",
+        "To Know Him Is to Love Him"
+      ],
+      "gold_present": [
+        "Back to Mono (1958–1969)",
+        "To Know Him Is to Love Him"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5add61d65542995b365fab21",
+      "type": "bridge",
+      "gold_titles": [
+        "Mikhail Gorbachev",
+        "World Summit of Nobel Peace Laureates"
+      ],
+      "gold_present": [
+        "Mikhail Gorbachev",
+        "World Summit of Nobel Peace Laureates"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abbf698554299114383a0b5",
+      "type": "bridge",
+      "gold_titles": [
+        "English Electric Canberra",
+        "No. 2 Squadron RAAF"
+      ],
+      "gold_present": [
+        "English Electric Canberra",
+        "No. 2 Squadron RAAF"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8e1027554299653c1aa15f",
+      "type": "bridge",
+      "gold_titles": [
+        "2009 Big 12 Conference football season",
+        "2009 Colorado Buffaloes football team"
+      ],
+      "gold_present": [
+        "2009 Big 12 Conference football season",
+        "2009 Colorado Buffaloes football team"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab84bf555429916710eb01f",
+      "type": "bridge",
+      "gold_titles": [
+        "Carrefour",
+        "Euromarché"
+      ],
+      "gold_present": [
+        "Carrefour",
+        "Euromarché"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a77724455429972597f153e",
+      "type": "bridge",
+      "gold_titles": [
+        "1957 Indianapolis 500",
+        "Indianapolis Motor Speedway"
+      ],
+      "gold_present": [
+        "1957 Indianapolis 500",
+        "Indianapolis Motor Speedway"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a87c13f5542996e4f30890c",
+      "type": "bridge",
+      "gold_titles": [
+        "Franco Corelli",
+        "Tosca (1956 film)"
+      ],
+      "gold_present": [
+        "Franco Corelli",
+        "Tosca (1956 film)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab96ab755429970cfb8eacd",
+      "type": "bridge",
+      "gold_titles": [
+        "Delirium (Ellie Goulding album)",
+        "On My Mind (Ellie Goulding song)"
+      ],
+      "gold_present": [
+        "Delirium (Ellie Goulding album)",
+        "On My Mind (Ellie Goulding song)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8a43eb5542996c9b8d5e82",
+      "type": "bridge",
+      "gold_titles": [
+        "Marion, South Australia",
+        "Westminster School, Adelaide"
+      ],
+      "gold_present": [
+        "Marion, South Australia",
+        "Westminster School, Adelaide"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae73acb5542991e8301cc07",
+      "type": "bridge",
+      "gold_titles": [
+        "D1NZ",
+        "Drifting (motorsport)"
+      ],
+      "gold_present": [
+        "D1NZ",
+        "Drifting (motorsport)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7320565542991f9a20c61d",
+      "type": "bridge",
+      "gold_titles": [
+        "Jerry Glanville",
+        "Keith Bostic (American football)"
+      ],
+      "gold_present": [
+        "Jerry Glanville",
+        "Keith Bostic (American football)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae32e125542991a06ce9946",
+      "type": "bridge",
+      "gold_titles": [
+        "Boston, Lincolnshire",
+        "Kirton End"
+      ],
+      "gold_present": [
+        "Boston, Lincolnshire",
+        "Kirton End"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8b20335542996c9b8d5fb3",
+      "type": "bridge",
+      "gold_titles": [
+        "1992–93 Charlotte Hornets season",
+        "Muggsy Bogues"
+      ],
+      "gold_present": [
+        "1992–93 Charlotte Hornets season",
+        "Muggsy Bogues"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a85fb085542994775f606de",
+      "type": "bridge",
+      "gold_titles": [
+        "Alien (film)",
+        "Alien (soundtrack)"
+      ],
+      "gold_present": [
+        "Alien (film)",
+        "Alien (soundtrack)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a77152355429966f1a36c2e",
+      "type": "bridge",
+      "gold_titles": [
+        "What Are Little Boys Made Of?",
+        "What Are Little Girls Made Of?"
+      ],
+      "gold_present": [
+        "What Are Little Boys Made Of?",
+        "What Are Little Girls Made Of?"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8f4c8d554299458435d5a3",
+      "type": "bridge",
+      "gold_titles": [
+        "Halliburton",
+        "Scott Parkin"
+      ],
+      "gold_present": [
+        "Halliburton",
+        "Scott Parkin"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a80840f554299485f59863b",
+      "type": "bridge",
+      "gold_titles": [
+        "Jawbreaker (film)",
+        "Rose McGowan"
+      ],
+      "gold_present": [
+        "Jawbreaker (film)",
+        "Rose McGowan"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8361b65542992ef85e22a0",
+      "type": "bridge",
+      "gold_titles": [
+        "International Boxing Federation",
+        "Vince Phillips"
+      ],
+      "gold_present": [
+        "International Boxing Federation",
+        "Vince Phillips"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae7ba7a5542993210983f12",
+      "type": "bridge",
+      "gold_titles": [
+        "I Don't Wanna Know",
+        "Yeah! (Usher song)"
+      ],
+      "gold_present": [
+        "I Don't Wanna Know",
+        "Yeah! (Usher song)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac2acff55429921a00ab02b",
+      "type": "bridge",
+      "gold_titles": [
+        "Brian Doyle-Murray",
+        "The Hard Easy (Adventure Time)"
+      ],
+      "gold_present": [
+        "Brian Doyle-Murray",
+        "The Hard Easy (Adventure Time)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5aba7cfe554299232ef4a2fd",
+      "type": "bridge",
+      "gold_titles": [
+        "2017–18 Wigan Athletic F.C. season",
+        "EFL Cup"
+      ],
+      "gold_present": [
+        "2017–18 Wigan Athletic F.C. season",
+        "EFL Cup"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae5aba0554299546bf82f17",
+      "type": "bridge",
+      "gold_titles": [
+        "Tara Strong",
+        "Teen Titans Go! (TV series)"
+      ],
+      "gold_present": [
+        "Tara Strong",
+        "Teen Titans Go! (TV series)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae1f4cb554299234fd0436d",
+      "type": "bridge",
+      "gold_titles": [
+        "122nd SS-Standarte",
+        "Strasbourg"
+      ],
+      "gold_present": [
+        "122nd SS-Standarte",
+        "Strasbourg"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae7e1fc55429952e35ea9cc",
+      "type": "bridge",
+      "gold_titles": [
+        "Koningsdag",
+        "Oranjegekte"
+      ],
+      "gold_present": [
+        "Koningsdag",
+        "Oranjegekte"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae37c765542992f92d822d4",
+      "type": "bridge",
+      "gold_titles": [
+        "James Gunn",
+        "Tromeo and Juliet"
+      ],
+      "gold_present": [
+        "James Gunn",
+        "Tromeo and Juliet"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae33c4d5542992f92d82262",
+      "type": "bridge",
+      "gold_titles": [
+        "Bill Clinton",
+        "Robert Suettinger"
+      ],
+      "gold_present": [
+        "Bill Clinton",
+        "Robert Suettinger"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a77cb335542997042120b3a",
+      "type": "bridge",
+      "gold_titles": [
+        "John John Florence",
+        "MEO Rip Curl Pro Portugal"
+      ],
+      "gold_present": [
+        "John John Florence",
+        "MEO Rip Curl Pro Portugal"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8979f4554299669944a52e",
+      "type": "bridge",
+      "gold_titles": [
+        "Bobbi Bacha",
+        "Sela Ward"
+      ],
+      "gold_present": [
+        "Bobbi Bacha",
+        "Sela Ward"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a713ea95542994082a3e6e4",
+      "type": "bridge",
+      "gold_titles": [
+        "Alvaro Mexia",
+        "Indigenous peoples of Florida"
+      ],
+      "gold_present": [
+        "Alvaro Mexia",
+        "Indigenous peoples of Florida"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a78bd9b554299078472774a",
+      "type": "bridge",
+      "gold_titles": [
+        "Alfred Gell",
+        "Edmund Leach"
+      ],
+      "gold_present": [
+        "Alfred Gell",
+        "Edmund Leach"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7625e8554299109176e66a",
+      "type": "bridge",
+      "gold_titles": [
+        "1925 Birthday Honours",
+        "George V"
+      ],
+      "gold_present": [
+        "1925 Birthday Honours",
+        "George V"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae2dd2055429928c423950d",
+      "type": "bridge",
+      "gold_titles": [
+        "East Lempster, New Hampshire",
+        "Sullivan County, New Hampshire"
+      ],
+      "gold_present": [
+        "East Lempster, New Hampshire",
+        "Sullivan County, New Hampshire"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abdf12255429976d4830a2f",
+      "type": "bridge",
+      "gold_titles": [
+        "Against the Wind (album)",
+        "Bob Seger"
+      ],
+      "gold_present": [
+        "Against the Wind (album)",
+        "Bob Seger"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a88658955429938390d3f47",
+      "type": "bridge",
+      "gold_titles": [
+        "Conscription in the United States",
+        "Rostker v. Goldberg"
+      ],
+      "gold_present": [
+        "Conscription in the United States",
+        "Rostker v. Goldberg"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a86ebac55429960ec39b6d6",
+      "type": "bridge",
+      "gold_titles": [
+        "Handi-Snacks",
+        "Mondelez International"
+      ],
+      "gold_present": [
+        "Handi-Snacks",
+        "Mondelez International"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5aba5d2e55429901930fa799",
+      "type": "bridge",
+      "gold_titles": [
+        "Monica Lewinsky",
+        "Their Lives"
+      ],
+      "gold_present": [
+        "Monica Lewinsky",
+        "Their Lives"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae5736e5542990ba0bbb2b3",
+      "type": "bridge",
+      "gold_titles": [
+        "Paul Manafort",
+        "Trump campaign–Russian meeting"
+      ],
+      "gold_present": [
+        "Paul Manafort",
+        "Trump campaign–Russian meeting"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae005b555429942ec259bec",
+      "type": "bridge",
+      "gold_titles": [
+        "Crime and Punishment",
+        "Lourenço Mutarelli"
+      ],
+      "gold_present": [
+        "Crime and Punishment",
+        "Lourenço Mutarelli"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a835478554299123d8c20ed",
+      "type": "bridge",
+      "gold_titles": [
+        "Mrs. Bixby and the Colonel's Coat",
+        "Roald Dahl"
+      ],
+      "gold_present": [
+        "Mrs. Bixby and the Colonel's Coat",
+        "Roald Dahl"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abfb3425542990832d3a1c0",
+      "type": "bridge",
+      "gold_titles": [
+        "Andrew Jaspan",
+        "The Conversation (website)"
+      ],
+      "gold_present": [
+        "Andrew Jaspan",
+        "The Conversation (website)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac3165c5542995ef918c10a",
+      "type": "bridge",
+      "gold_titles": [
+        "18th Independent Spirit Awards",
+        "John Waters"
+      ],
+      "gold_present": [
+        "18th Independent Spirit Awards",
+        "John Waters"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae53b545542990ba0bbb23c",
+      "type": "bridge",
+      "gold_titles": [
+        "Flamingo Las Vegas",
+        "Why Is There Air?"
+      ],
+      "gold_present": [
+        "Flamingo Las Vegas",
+        "Why Is There Air?"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae2b770554299495565db0f",
+      "type": "bridge",
+      "gold_titles": [
+        "London International Documentary Festival",
+        "London Review of Books"
+      ],
+      "gold_present": [
+        "London International Documentary Festival",
+        "London Review of Books"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a80b3a9554299485f5986cc",
+      "type": "bridge",
+      "gold_titles": [
+        "McLean, Virginia",
+        "Tysons Galleria"
+      ],
+      "gold_present": [
+        "McLean, Virginia",
+        "Tysons Galleria"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8e0a005542995085b373a1",
+      "type": "bridge",
+      "gold_titles": [
+        "Bordan Tkachuk",
+        "Viglen"
+      ],
+      "gold_present": [
+        "Bordan Tkachuk",
+        "Viglen"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adccd795542990d50227d2c",
+      "type": "bridge",
+      "gold_titles": [
+        "Moroccan Ambassador to China",
+        "Rabat"
+      ],
+      "gold_present": [
+        "Moroccan Ambassador to China",
+        "Rabat"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a85eed75542996432c5713b",
+      "type": "bridge",
+      "gold_titles": [
+        "Black Seminoles",
+        "Mascogos"
+      ],
+      "gold_present": [
+        "Black Seminoles",
+        "Mascogos"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a774e9c55429972597f14f3",
+      "type": "bridge",
+      "gold_titles": [
+        "David Huntsinger",
+        "Larnelle Harris"
+      ],
+      "gold_present": [
+        "David Huntsinger",
+        "Larnelle Harris"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae738f75542991bbc9761c4",
+      "type": "bridge",
+      "gold_titles": [
+        "Boss Bailey",
+        "Champ Bailey"
+      ],
+      "gold_present": [
+        "Boss Bailey",
+        "Champ Bailey"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac32b565542995ef918c154",
+      "type": "bridge",
+      "gold_titles": [
+        "1964 Georgia Tech Yellow Jackets football team",
+        "Bobby Dodd Stadium"
+      ],
+      "gold_present": [
+        "1964 Georgia Tech Yellow Jackets football team",
+        "Bobby Dodd Stadium"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abc8d75554299700f9d7900",
+      "type": "bridge",
+      "gold_titles": [
+        "Leader of Fine Gael",
+        "Leo Varadkar"
+      ],
+      "gold_present": [
+        "Leader of Fine Gael",
+        "Leo Varadkar"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8bb29b554299240d9c2089",
+      "type": "bridge",
+      "gold_titles": [
+        "George Raft",
+        "Johnny Angel"
+      ],
+      "gold_present": [
+        "George Raft",
+        "Johnny Angel"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab659e355429954757d324e",
+      "type": "bridge",
+      "gold_titles": [
+        "George Abbott",
+        "Three Men on a Horse"
+      ],
+      "gold_present": [
+        "George Abbott",
+        "Three Men on a Horse"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8b8b3155429949d91db5d7",
+      "type": "bridge",
+      "gold_titles": [
+        "Owner earnings",
+        "Warren Buffett"
+      ],
+      "gold_present": [
+        "Owner earnings",
+        "Warren Buffett"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae7eaf65542994a481bbe1d",
+      "type": "bridge",
+      "gold_titles": [
+        "2000 ICC KnockOut Trophy",
+        "Zaheer Khan"
+      ],
+      "gold_present": [
+        "2000 ICC KnockOut Trophy",
+        "Zaheer Khan"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8c4c625542995e66a475a1",
+      "type": "bridge",
+      "gold_titles": [
+        "514th Flight Test Squadron",
+        "Hill Air Force Base"
+      ],
+      "gold_present": [
+        "514th Flight Test Squadron",
+        "Hill Air Force Base"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a818387554299260e20a291",
+      "type": "bridge",
+      "gold_titles": [
+        "Based on a True Story...",
+        "My Eyes (Blake Shelton song)"
+      ],
+      "gold_present": [
+        "Based on a True Story...",
+        "My Eyes (Blake Shelton song)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab978855542996be2020512",
+      "type": "bridge",
+      "gold_titles": [
+        "Flaming Feather",
+        "Montezuma Castle National Monument"
+      ],
+      "gold_present": [
+        "Flaming Feather",
+        "Montezuma Castle National Monument"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae63dad55429929b0807afe",
+      "type": "bridge",
+      "gold_titles": [
+        "Here We Go Round the Mulberry Bush (film)",
+        "Hunter Davies"
+      ],
+      "gold_present": [
+        "Here We Go Round the Mulberry Bush (film)",
+        "Hunter Davies"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7dcc775542990b8f503ab5",
+      "type": "bridge",
+      "gold_titles": [
+        "Picric acid",
+        "Shellite (explosive)"
+      ],
+      "gold_present": [
+        "Picric acid",
+        "Shellite (explosive)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a887bc0554299206df2b2b6",
+      "type": "bridge",
+      "gold_titles": [
+        "Argentine PGA Championship",
+        "Roberto De Vicenzo"
+      ],
+      "gold_present": [
+        "Argentine PGA Championship",
+        "Roberto De Vicenzo"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a83880e554299123d8c214e",
+      "type": "bridge",
+      "gold_titles": [
+        "Ghost Rider (Suicide song)",
+        "Suicide (1977 album)"
+      ],
+      "gold_present": [
+        "Ghost Rider (Suicide song)",
+        "Suicide (1977 album)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a879adb5542996e4f30887f",
+      "type": "bridge",
+      "gold_titles": [
+        "Chris Van Hollen",
+        "DISCLOSE Act"
+      ],
+      "gold_present": [
+        "Chris Van Hollen",
+        "DISCLOSE Act"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a75f0ea5542994ccc91866c",
+      "type": "bridge",
+      "gold_titles": [
+        "A41 road",
+        "Backford Cross"
+      ],
+      "gold_present": [
+        "A41 road",
+        "Backford Cross"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a89f5815542993b751ca9c5",
+      "type": "bridge",
+      "gold_titles": [
+        "Caroline Carver (actress)",
+        "The Magical Legend of the Leprechauns"
+      ],
+      "gold_present": [
+        "Caroline Carver (actress)",
+        "The Magical Legend of the Leprechauns"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8d5fc6554299585d9e37c6",
+      "type": "bridge",
+      "gold_titles": [
+        "Sarah Bolger",
+        "The Spiderwick Chronicles (film)"
+      ],
+      "gold_present": [
+        "Sarah Bolger",
+        "The Spiderwick Chronicles (film)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac120c55542992a796dedfc",
+      "type": "bridge",
+      "gold_titles": [
+        "Kohlberg Kravis Roberts",
+        "Maxeda"
+      ],
+      "gold_present": [
+        "Kohlberg Kravis Roberts",
+        "Maxeda"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8b57f25542995d1e6f1371",
+      "type": "comparison",
+      "gold_titles": [
+        "Ed Wood",
+        "Scott Derrickson"
+      ],
+      "gold_present": [
+        "Ed Wood",
+        "Scott Derrickson"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adbf0a255429947ff17385a",
+      "type": "comparison",
+      "gold_titles": [
+        "Esma Sultan Mansion",
+        "Laleli Mosque"
+      ],
+      "gold_present": [
+        "Esma Sultan Mansion",
+        "Laleli Mosque"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8db19d5542994ba4e3dd00",
+      "type": "comparison",
+      "gold_titles": [
+        "For Against",
+        "Local H"
+      ],
+      "gold_present": [
+        "For Against",
+        "Local H"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab56e32554299637185c594",
+      "type": "comparison",
+      "gold_titles": [
+        "888 7th Avenue",
+        "Random House Tower"
+      ],
+      "gold_present": [
+        "888 7th Avenue",
+        "Random House Tower"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab29c24554299449642c932",
+      "type": "comparison",
+      "gold_titles": [
+        "Ambroise Thomas",
+        "Giuseppe Verdi"
+      ],
+      "gold_present": [
+        "Ambroise Thomas",
+        "Giuseppe Verdi"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8133725542995ce29dcbdb",
+      "type": "comparison",
+      "gold_titles": [
+        "Henry Roth",
+        "Robert Erskine Childers"
+      ],
+      "gold_present": [
+        "Henry Roth",
+        "Robert Erskine Childers"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae2070a5542994d89d5b313",
+      "type": "comparison",
+      "gold_titles": [
+        "Badly Drawn Boy",
+        "Wolf Alice"
+      ],
+      "gold_present": [
+        "Badly Drawn Boy",
+        "Wolf Alice"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abd259d55429924427fcf1a",
+      "type": "comparison",
+      "gold_titles": [
+        "Dictyosperma",
+        "Huernia"
+      ],
+      "gold_present": [
+        "Dictyosperma",
+        "Huernia"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae4a3265542995ad6573de5",
+      "type": "comparison",
+      "gold_titles": [
+        "Buck-Tick",
+        "Hayden (musician)"
+      ],
+      "gold_present": [
+        "Buck-Tick",
+        "Hayden (musician)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abc0a5d5542993f40c73c64",
+      "type": "comparison",
+      "gold_titles": [
+        "Freakonomics (film)",
+        "In the Realm of the Hackers"
+      ],
+      "gold_present": [
+        "Freakonomics (film)",
+        "In the Realm of the Hackers"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7cc50e554299452d57ba3e",
+      "type": "comparison",
+      "gold_titles": [
+        "Letters to Cleo",
+        "Screaming Trees"
+      ],
+      "gold_present": [
+        "Letters to Cleo",
+        "Screaming Trees"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab51dae5542991779162d82",
+      "type": "comparison",
+      "gold_titles": [
+        "Elko Regional Airport",
+        "Gerald R. Ford International Airport"
+      ],
+      "gold_present": [
+        "Elko Regional Airport",
+        "Gerald R. Ford International Airport"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7a0e1e5542990783324e1a",
+      "type": "comparison",
+      "gold_titles": [
+        "Manchester Terrier",
+        "Scotch Collie"
+      ],
+      "gold_present": [
+        "Manchester Terrier",
+        "Scotch Collie"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8e068b5542995085b37384",
+      "type": "comparison",
+      "gold_titles": [
+        "Ferocactus",
+        "Silene"
+      ],
+      "gold_present": [
+        "Ferocactus",
+        "Silene"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adc53f75542996e6852530a",
+      "type": "comparison",
+      "gold_titles": [
+        "Ajuga",
+        "Cypress"
+      ],
+      "gold_present": [
+        "Ajuga",
+        "Cypress"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7be2595542997c3ec972ac",
+      "type": "comparison",
+      "gold_titles": [
+        "Emma Bull",
+        "Virginia Woolf"
+      ],
+      "gold_present": [
+        "Emma Bull",
+        "Virginia Woolf"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7759fc5542993569682d60",
+      "type": "comparison",
+      "gold_titles": [
+        "Garajonay National Park",
+        "Teide National Park"
+      ],
+      "gold_present": [
+        "Garajonay National Park",
+        "Teide National Park"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5aba749055429901930fa7d8",
+      "type": "comparison",
+      "gold_titles": [
+        "Aram Avakian",
+        "Chris Menges"
+      ],
+      "gold_present": [
+        "Aram Avakian",
+        "Chris Menges"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae224da554299234fd043ee",
+      "type": "comparison",
+      "gold_titles": [
+        "Gibson (cocktail)",
+        "Zurracapote"
+      ],
+      "gold_present": [
+        "Gibson (cocktail)",
+        "Zurracapote"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac1b8ee5542994d76dccedc",
+      "type": "comparison",
+      "gold_titles": [
+        "Lev Yilmaz",
+        "Pamela B. Green"
+      ],
+      "gold_present": [
+        "Lev Yilmaz",
+        "Pamela B. Green"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a84c4135542994c784dda31",
+      "type": "comparison",
+      "gold_titles": [
+        "Fuding",
+        "Yingkou"
+      ],
+      "gold_present": [
+        "Fuding",
+        "Yingkou"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7a455c5542994f819ef1a7",
+      "type": "comparison",
+      "gold_titles": [
+        "George Archainbaud",
+        "Ralph Murphy"
+      ],
+      "gold_present": [
+        "George Archainbaud",
+        "Ralph Murphy"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5add11935542994734353827",
+      "type": "comparison",
+      "gold_titles": [
+        "Ostava",
+        "Skin Yard"
+      ],
+      "gold_present": [
+        "Ostava",
+        "Skin Yard"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8c5569554299240d9c2126",
+      "type": "comparison",
+      "gold_titles": [
+        "Daryl Hall",
+        "Gerry Marsden"
+      ],
+      "gold_present": [
+        "Daryl Hall",
+        "Gerry Marsden"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8574945542997b5ce3fffb",
+      "type": "comparison",
+      "gold_titles": [
+        "Gimme Shelter (1970 film)",
+        "LaLee's Kin: The Legacy of Cotton"
+      ],
+      "gold_present": [
+        "Gimme Shelter (1970 film)",
+        "LaLee's Kin: The Legacy of Cotton"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7332935542991f9a20c67d",
+      "type": "comparison",
+      "gold_titles": [
+        "Catan",
+        "Pirate's Cove"
+      ],
+      "gold_present": [
+        "Catan",
+        "Pirate's Cove"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac2d1d755429921a00ab053",
+      "type": "comparison",
+      "gold_titles": [
+        "Jorge Lozano",
+        "Roberta Vinci"
+      ],
+      "gold_present": [
+        "Jorge Lozano",
+        "Roberta Vinci"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac298f9554299657fa28fc9",
+      "type": "comparison",
+      "gold_titles": [
+        "Ian Watkins (Lostprophets)",
+        "Josey Scott"
+      ],
+      "gold_present": [
+        "Ian Watkins (Lostprophets)",
+        "Josey Scott"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a88d745554299206df2b378",
+      "type": "comparison",
+      "gold_titles": [
+        "David Yates",
+        "Pietro Germi"
+      ],
+      "gold_present": [
+        "David Yates",
+        "Pietro Germi"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab642845542995eadeeff8e",
+      "type": "comparison",
+      "gold_titles": [
+        "Broughtonia",
+        "Laeliocattleya"
+      ],
+      "gold_present": [
+        "Broughtonia",
+        "Laeliocattleya"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7633ad5542992db9473741",
+      "type": "comparison",
+      "gold_titles": [
+        "Battle of Manila (1945)",
+        "Seven Days Battles"
+      ],
+      "gold_present": [
+        "Battle of Manila (1945)",
+        "Seven Days Battles"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7cbf8c554299452d57b9f4",
+      "type": "comparison",
+      "gold_titles": [
+        "Dinosaur (film)",
+        "McFarland, USA"
+      ],
+      "gold_present": [
+        "Dinosaur (film)",
+        "McFarland, USA"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab6ba245542995eadef007f",
+      "type": "comparison",
+      "gold_titles": [
+        "Bamboo Mañalac",
+        "Danny Jones"
+      ],
+      "gold_present": [
+        "Bamboo Mañalac",
+        "Danny Jones"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab271fe554299449642c8a6",
+      "type": "comparison",
+      "gold_titles": [
+        "The Five Obstructions",
+        "The Importance of Being Icelandic"
+      ],
+      "gold_present": [
+        "The Five Obstructions",
+        "The Importance of Being Icelandic"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab8ee035542991b5579f04b",
+      "type": "comparison",
+      "gold_titles": [
+        "Hot Rod (magazine)",
+        "The Memory of Our People"
+      ],
+      "gold_present": [
+        "Hot Rod (magazine)",
+        "The Memory of Our People"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a717d4c5542994082a3e854",
+      "type": "comparison",
+      "gold_titles": [
+        "Pavel Alexandrov",
+        "Semyon Aranovich Gershgorin"
+      ],
+      "gold_present": [
+        "Pavel Alexandrov",
+        "Semyon Aranovich Gershgorin"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a834ed95542990548d0b1ca",
+      "type": "comparison",
+      "gold_titles": [
+        "712 Fifth Avenue",
+        "Manhattan Life Insurance Building"
+      ],
+      "gold_present": [
+        "712 Fifth Avenue",
+        "Manhattan Life Insurance Building"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7b7ff75542995eb53be93d",
+      "type": "comparison",
+      "gold_titles": [
+        "Arthur Conan Doyle",
+        "Penelope Lively"
+      ],
+      "gold_present": [
+        "Arthur Conan Doyle",
+        "Penelope Lively"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adc65e85542996e68525350",
+      "type": "comparison",
+      "gold_titles": [
+        "Dafeng District",
+        "Dazhou"
+      ],
+      "gold_present": [
+        "Dafeng District",
+        "Dazhou"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac289ff5542996366519a02",
+      "type": "comparison",
+      "gold_titles": [
+        "Brabejum",
+        "Marsilea"
+      ],
+      "gold_present": [
+        "Brabejum",
+        "Marsilea"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab9b29c554299743d22ebae",
+      "type": "comparison",
+      "gold_titles": [
+        "Craig v. Boren",
+        "United States v. Paramount Pictures, Inc."
+      ],
+      "gold_present": [
+        "Craig v. Boren",
+        "United States v. Paramount Pictures, Inc."
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab1d7ac554299449642c7e6",
+      "type": "comparison",
+      "gold_titles": [
+        "Ehretia",
+        "Xanthoceras"
+      ],
+      "gold_present": [
+        "Ehretia",
+        "Xanthoceras"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae058e855429945ae959331",
+      "type": "comparison",
+      "gold_titles": [
+        "Chrysalis (magazine)",
+        "Look (UK magazine)"
+      ],
+      "gold_present": [
+        "Chrysalis (magazine)",
+        "Look (UK magazine)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7b8749554299294a54a9db",
+      "type": "comparison",
+      "gold_titles": [
+        "Henri Bergson",
+        "Thomas Friedman"
+      ],
+      "gold_present": [
+        "Henri Bergson",
+        "Thomas Friedman"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae4d3c95542990ba0bbb165",
+      "type": "comparison",
+      "gold_titles": [
+        "Eski Imaret Mosque",
+        "Nusretiye Clock Tower"
+      ],
+      "gold_present": [
+        "Eski Imaret Mosque",
+        "Nusretiye Clock Tower"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a879ba55542993e715abfc3",
+      "type": "comparison",
+      "gold_titles": [
+        "Alain Resnais",
+        "Scott Sidney"
+      ],
+      "gold_present": [
+        "Alain Resnais",
+        "Scott Sidney"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab1e984554299340b525428",
+      "type": "comparison",
+      "gold_titles": [
+        "Asante Traditional Buildings",
+        "Gulangyu"
+      ],
+      "gold_present": [
+        "Asante Traditional Buildings",
+        "Gulangyu"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac5199a5542994611c8b38a",
+      "type": "comparison",
+      "gold_titles": [
+        "Pachypodium",
+        "Stenocereus"
+      ],
+      "gold_present": [
+        "Pachypodium",
+        "Stenocereus"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab6369655429953192ad2a1",
+      "type": "comparison",
+      "gold_titles": [
+        "Eucryphia",
+        "Lepidozamia"
+      ],
+      "gold_present": [
+        "Eucryphia",
+        "Lepidozamia"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab8f7535542991b5579f0a7",
+      "type": "comparison",
+      "gold_titles": [
+        "Oz the Great and Powerful",
+        "Sacred Planet"
+      ],
+      "gold_present": [
+        "Oz the Great and Powerful",
+        "Sacred Planet"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7d2afd5542995f4f402221",
+      "type": "comparison",
+      "gold_titles": [
+        "Ferdi Taygan",
+        "Mahesh Bhupathi"
+      ],
+      "gold_present": [
+        "Ferdi Taygan",
+        "Mahesh Bhupathi"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7555215542996c70cfaee1",
+      "type": "comparison",
+      "gold_titles": [
+        "Hey Pa! There's a Goat on the Roof",
+        "Poleconomy"
+      ],
+      "gold_present": [
+        "Hey Pa! There's a Goat on the Roof",
+        "Poleconomy"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac3ae475542995ef918c1e5",
+      "type": "comparison",
+      "gold_titles": [
+        "Skeptical Inquirer",
+        "The Progressive Populist"
+      ],
+      "gold_present": [
+        "Skeptical Inquirer",
+        "The Progressive Populist"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7be5bd5542997c3ec972ba",
+      "type": "comparison",
+      "gold_titles": [
+        "Basset Hound",
+        "Leonberger"
+      ],
+      "gold_present": [
+        "Basset Hound",
+        "Leonberger"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7ec61a55429934daa2fc5f",
+      "type": "comparison",
+      "gold_titles": [
+        "Staten Island Catapult",
+        "This Is Elvis"
+      ],
+      "gold_present": [
+        "Staten Island Catapult",
+        "This Is Elvis"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a867089554299211dda2b30",
+      "type": "comparison",
+      "gold_titles": [
+        "Rolling Stone",
+        "Shonen Jump (magazine)"
+      ],
+      "gold_present": [
+        "Rolling Stone",
+        "Shonen Jump (magazine)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a76387d554299109176e6ba",
+      "type": "comparison",
+      "gold_titles": [
+        "Am Rong",
+        "Ava DuVernay"
+      ],
+      "gold_present": [
+        "Am Rong",
+        "Ava DuVernay"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abbd3ac55429931dba1458b",
+      "type": "comparison",
+      "gold_titles": [
+        "Affiliated Managers Group",
+        "Duke Energy"
+      ],
+      "gold_present": [
+        "Affiliated Managers Group",
+        "Duke Energy"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8d93ad554299653c1aa13d",
+      "type": "comparison",
+      "gold_titles": [
+        "John Fogerty",
+        "Serri (singer)"
+      ],
+      "gold_present": [
+        "John Fogerty",
+        "Serri (singer)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac4392e5542997ea680ca32",
+      "type": "comparison",
+      "gold_titles": [
+        "Enrique Carreras",
+        "Lionel Ngakane"
+      ],
+      "gold_present": [
+        "Enrique Carreras",
+        "Lionel Ngakane"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8e3dc05542995085b37401",
+      "type": "comparison",
+      "gold_titles": [
+        "Reynolds v. Sims",
+        "Selle v. Gibb"
+      ],
+      "gold_present": [
+        "Reynolds v. Sims",
+        "Selle v. Gibb"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab5b6c1554299637185c5e5",
+      "type": "comparison",
+      "gold_titles": [
+        "Hellogoodbye",
+        "The Four Seasons (band)"
+      ],
+      "gold_present": [
+        "Hellogoodbye",
+        "The Four Seasons (band)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae25ed15542992decbdccd2",
+      "type": "comparison",
+      "gold_titles": [
+        "Goldenrod",
+        "Sorbaria"
+      ],
+      "gold_present": [
+        "Goldenrod",
+        "Sorbaria"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5add67555542992ae4cec54e",
+      "type": "comparison",
+      "gold_titles": [
+        "Battle of Belleau Wood",
+        "Battle of Peleliu"
+      ],
+      "gold_present": [
+        "Battle of Belleau Wood",
+        "Battle of Peleliu"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a78b209554299148911f93e",
+      "type": "comparison",
+      "gold_titles": [
+        "Edward Albee",
+        "J. M. Barrie"
+      ],
+      "gold_present": [
+        "Edward Albee",
+        "J. M. Barrie"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab85a1155429934fafe6d7c",
+      "type": "comparison",
+      "gold_titles": [
+        "Carnegie Mellon University",
+        "Rutgers University"
+      ],
+      "gold_present": [
+        "Carnegie Mellon University",
+        "Rutgers University"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab8f57b5542991b5579f097",
+      "type": "comparison",
+      "gold_titles": [
+        "Joseph McGrath (film director)",
+        "Thomas H. Ince"
+      ],
+      "gold_present": [
+        "Joseph McGrath (film director)",
+        "Thomas H. Ince"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab6bf6d55429953192ad372",
+      "type": "comparison",
+      "gold_titles": [
+        "Phlebodium",
+        "Pieris (plant)"
+      ],
+      "gold_present": [
+        "Phlebodium",
+        "Pieris (plant)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7dd9445542997cc2c474ac",
+      "type": "comparison",
+      "gold_titles": [
+        "J. G. Farrell",
+        "Louis Aragon"
+      ],
+      "gold_present": [
+        "J. G. Farrell",
+        "Louis Aragon"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abc8620554299700f9d78e2",
+      "type": "comparison",
+      "gold_titles": [
+        "Bitter Jester",
+        "Sicko"
+      ],
+      "gold_present": [
+        "Bitter Jester",
+        "Sicko"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7b76735542997c3ec9719f",
+      "type": "comparison",
+      "gold_titles": [
+        "Hot toddy",
+        "Kir (cocktail)"
+      ],
+      "gold_present": [
+        "Hot toddy",
+        "Kir (cocktail)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a77309d55429972597f1487",
+      "type": "comparison",
+      "gold_titles": [
+        "José Echegaray",
+        "P. J. O'Rourke"
+      ],
+      "gold_present": [
+        "José Echegaray",
+        "P. J. O'Rourke"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abe689a55429976d4830b16",
+      "type": "comparison",
+      "gold_titles": [
+        "Francesca Schiavone",
+        "Olga Morozova"
+      ],
+      "gold_present": [
+        "Francesca Schiavone",
+        "Olga Morozova"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a78daf855429970f5fffdae",
+      "type": "comparison",
+      "gold_titles": [
+        "Icehouse pieces",
+        "Kill Doctor Lucky"
+      ],
+      "gold_present": [
+        "Icehouse pieces",
+        "Kill Doctor Lucky"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7e7ed05542991319bc94c2",
+      "type": "comparison",
+      "gold_titles": [
+        "Dime Magazine",
+        "Gallery (magazine)"
+      ],
+      "gold_present": [
+        "Dime Magazine",
+        "Gallery (magazine)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abf44025542993fe9a41def",
+      "type": "comparison",
+      "gold_titles": [
+        "Ian McEwan",
+        "Langston Hughes"
+      ],
+      "gold_present": [
+        "Ian McEwan",
+        "Langston Hughes"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac45b58554299076e296dad",
+      "type": "comparison",
+      "gold_titles": [
+        "Hanggin Rear Banner",
+        "Shanghai"
+      ],
+      "gold_present": [
+        "Hanggin Rear Banner",
+        "Shanghai"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8f9b8c5542997ba9cb32e6",
+      "type": "comparison",
+      "gold_titles": [
+        "Dirty Pretty Things (band)",
+        "Fireflight"
+      ],
+      "gold_present": [
+        "Dirty Pretty Things (band)",
+        "Fireflight"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab6f0c25542995eadef00ea",
+      "type": "comparison",
+      "gold_titles": [
+        "Buried Country",
+        "South of the Border (2009 film)"
+      ],
+      "gold_present": [
+        "Buried Country",
+        "South of the Border (2009 film)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab72a025542992aa3b8c7b8",
+      "type": "comparison",
+      "gold_titles": [
+        "A Summer in the Cage",
+        "American Hardcore (film)"
+      ],
+      "gold_present": [
+        "A Summer in the Cage",
+        "American Hardcore (film)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a738225554299623ed4abc3",
+      "type": "comparison",
+      "gold_titles": [
+        "Bedknobs and Broomsticks",
+        "The Muppet Christmas Carol"
+      ],
+      "gold_present": [
+        "Bedknobs and Broomsticks",
+        "The Muppet Christmas Carol"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab25004554299722f9b4cd7",
+      "type": "comparison",
+      "gold_titles": [
+        "Battle of Stones River",
+        "Battle of the Ch'ongch'on River"
+      ],
+      "gold_present": [
+        "Battle of Stones River",
+        "Battle of the Ch'ongch'on River"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac1f4495542991316484bd2",
+      "type": "comparison",
+      "gold_titles": [
+        "Delmer Daves",
+        "Phil Rosen"
+      ],
+      "gold_present": [
+        "Delmer Daves",
+        "Phil Rosen"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ac0cf0f554299294b219018",
+      "type": "comparison",
+      "gold_titles": [
+        "Test Icicles",
+        "X Ambassadors"
+      ],
+      "gold_present": [
+        "Test Icicles",
+        "X Ambassadors"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab3306a55429969a97a80fd",
+      "type": "comparison",
+      "gold_titles": [
+        "The Boatniks",
+        "The Great Locomotive Chase"
+      ],
+      "gold_present": [
+        "The Boatniks",
+        "The Great Locomotive Chase"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae4ec1e5542990ba0bbb19b",
+      "type": "comparison",
+      "gold_titles": [
+        "Oceans (film)",
+        "The Bears and I"
+      ],
+      "gold_present": [
+        "Oceans (film)",
+        "The Bears and I"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adc0c2b55429947ff1738db",
+      "type": "comparison",
+      "gold_titles": [
+        "Agee (film)",
+        "To Shoot an Elephant"
+      ],
+      "gold_present": [
+        "Agee (film)",
+        "To Shoot an Elephant"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a7574e25542996c70cfaf01",
+      "type": "comparison",
+      "gold_titles": [
+        "Ibn Arabi",
+        "Mahbub ul Haq"
+      ],
+      "gold_present": [
+        "Ibn Arabi",
+        "Mahbub ul Haq"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a71166d5542994082a3e576",
+      "type": "comparison",
+      "gold_titles": [
+        "Battle of Guam (1944)",
+        "Battle of Manila (1945)"
+      ],
+      "gold_present": [
+        "Battle of Guam (1944)",
+        "Battle of Manila (1945)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a79c1335542994bb9457066",
+      "type": "comparison",
+      "gold_titles": [
+        "Carol Shields",
+        "Eric Ambler"
+      ],
+      "gold_present": [
+        "Carol Shields",
+        "Eric Ambler"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae0038655429925eb1afbe0",
+      "type": "comparison",
+      "gold_titles": [
+        "Hänt Extra",
+        "Tea Moderna (magazine)"
+      ],
+      "gold_present": [
+        "Hänt Extra",
+        "Tea Moderna (magazine)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a73977d554299623ed4ac08",
+      "type": "comparison",
+      "gold_titles": [
+        "Art Laboe",
+        "Scout Tufankjian"
+      ],
+      "gold_present": [
+        "Art Laboe",
+        "Scout Tufankjian"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae1316555429901ffe4adda",
+      "type": "comparison",
+      "gold_titles": [
+        "Echosmith",
+        "Goo Goo Dolls"
+      ],
+      "gold_present": [
+        "Echosmith",
+        "Goo Goo Dolls"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5adeffa85542992d7e9f926f",
+      "type": "comparison",
+      "gold_titles": [
+        "INXS",
+        "Tappi Tíkarrass"
+      ],
+      "gold_present": [
+        "INXS",
+        "Tappi Tíkarrass"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ae15e125542990adbacf773",
+      "type": "comparison",
+      "gold_titles": [
+        "Berghuis v. Thompkins",
+        "Mississippi University for Women v. Hogan"
+      ],
+      "gold_present": [
+        "Berghuis v. Thompkins",
+        "Mississippi University for Women v. Hogan"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8f45ca5542997ba9cb320e",
+      "type": "comparison",
+      "gold_titles": [
+        "500 Years Later",
+        "Manson (film)"
+      ],
+      "gold_present": [
+        "500 Years Later",
+        "Manson (film)"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a71443f5542994082a3e727",
+      "type": "comparison",
+      "gold_titles": [
+        "Gasherbrum II",
+        "Nuptse"
+      ],
+      "gold_present": [
+        "Gasherbrum II",
+        "Nuptse"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5ab611cc5542992aa134a411",
+      "type": "comparison",
+      "gold_titles": [
+        "Danny Cannon",
+        "S. Sylvan Simon"
+      ],
+      "gold_present": [
+        "Danny Cannon",
+        "S. Sylvan Simon"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5a8cd381554299653c1aa12b",
+      "type": "comparison",
+      "gold_titles": [
+        "Evelyn Waugh",
+        "Sigmund Freud"
+      ],
+      "gold_present": [
+        "Evelyn Waugh",
+        "Sigmund Freud"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    },
+    {
+      "id": "5abb1e1b5542992ccd8e7f19",
+      "type": "comparison",
+      "gold_titles": [
+        "Ivo Andrić",
+        "José Saramago"
+      ],
+      "gold_present": [
+        "Ivo Andrić",
+        "José Saramago"
+      ],
+      "gold_missing": [],
+      "is_complete": true
+    }
+  ]
+}

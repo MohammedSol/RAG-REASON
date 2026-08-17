@@ -71,6 +71,15 @@ data/*
 !data/evaluation/
 data/evaluation/*
 !data/evaluation/*.json
+# Sprint I1 : le MANIFESTE du corpus est versionné, pas le corpus lui-même.
+# Le manifeste (175 Ko) documente le choix du split, la couverture gold et la
+# table titre -> nom de fichier, indispensable au Sprint I5 pour relier les
+# `source` des chunks aux `supporting_facts`. Les 1966 .txt (4,1 Mo) restent
+# exclus : ils sont régénérables par scripts/04_build_corpus.py et sont
+# versionnés là où ils servent, dans le dépôt du module ACTION.
+!data/corpus/
+data/corpus/*
+!data/corpus/corpus_manifest.json
 datasets/
 *.parquet
 *.arrow
