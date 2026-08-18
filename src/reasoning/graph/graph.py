@@ -10,11 +10,19 @@ câblant nœuds et arêtes conformément à docs/graph_spec.md.
 
 from __future__ import annotations
 
+import os
+
+from dotenv import load_dotenv
 from langgraph.graph import END, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 
-from reasoning.action_client import ActionClient, RetrievalClient
+from reasoning.action_client import (
+    ActionClient,
+    ActionUnavailableError,
+    RetrievalClient,
+)
 from reasoning.analyzer import QueryAnalyzer
+from reasoning.contracts.action_interface import RetrievalRequest, RetrievalResponse
 from reasoning.critic import Critic
 from reasoning.graph.edges import (
     route_after_analysis,
@@ -48,6 +56,53 @@ from reasoning.graph.state import GraphState
 from reasoning.planner import Planner
 from reasoning.verifier import Verifier
 
+load_dotenv()
+
+
+def _use_real_action() -> bool:
+    """Indique si le nœud `retrieve` doit appeler le module ACTION réel.
+
+    Drapeau `USE_REAL_ACTION`, lu dans l'environnement selon le même
+    mécanisme que `OLLAMA_BASE_URL` ou `DEFAULT_REASONING_MODEL` — aucun
+    système de configuration parallèle n'est introduit.
+
+    **Valeur par défaut : FAUX.** Tant que le drapeau n'est pas positionné,
+    le graphe se comporte exactement comme avant le Sprint I2 : aucun appel
+    réseau n'est tenté, et il faut injecter explicitement un client (double
+    de test ou `ActionClient`) via `build_graph(retrieval_client=...)`.
+    Cette valeur par défaut garantit qu'aucune suite de tests, ni aucun
+    usage existant, ne se met soudainement à dépendre d'un service externe.
+
+    Returns:
+        True uniquement si `USE_REAL_ACTION` vaut 1/true/yes/on
+        (comparaison insensible à la casse).
+    """
+    return os.getenv("USE_REAL_ACTION", "false").strip().lower() in {
+        "1",
+        "true",
+        "yes",
+        "on",
+    }
+
+
+class _UnconfiguredRetrievalClient:
+    """Client de repli, actif quand `USE_REAL_ACTION` est faux.
+
+    Échoue explicitement plutôt que de retourner un résultat vide : un
+    graphe exécuté sans client de retrieval configuré est une erreur de
+    câblage, pas un cas métier. Le nœud `retrieve` intercepte cette
+    exception comme n'importe quelle défaillance et applique son repli
+    fail-closed, mais le message rend la cause immédiatement lisible.
+    """
+
+    def retrieve(self, request: RetrievalRequest) -> RetrievalResponse:
+        """Lève systématiquement : aucun client n'a été configuré."""
+        raise ActionUnavailableError(
+            "aucun client de retrieval configuré : USE_REAL_ACTION est faux "
+            "et aucun client n'a été injecté via build_graph(retrieval_client=...). "
+            "Positionner USE_REAL_ACTION=true pour appeler le module ACTION."
+        )
+
 
 def build_graph(
     analyzer: AnalyzerProtocol | None = None,
@@ -60,8 +115,7 @@ def build_graph(
 
     Tous les composants sont injectables (défaut : instances standard) pour
     permettre la substitution par des doubles de test dans
-    `tests/integration/test_graph.py` — notamment `retrieval_client`, le
-    module ACTION n'étant pas encore branché (docs/graph_spec.md §7).
+    `tests/integration/test_graph.py`.
 
     Args:
         analyzer: Instance QueryAnalyzer (défaut : QueryAnalyzer()).
@@ -69,7 +123,12 @@ def build_graph(
         critic: Instance Critic (défaut : Critic()).
         verifier: Instance Verifier (défaut : Verifier()).
         retrieval_client: Client de retrieval conforme au protocole
-            `RetrievalClient` (défaut : ActionClient() — HTTP réel).
+            `RetrievalClient`. Si omis, le choix dépend du drapeau
+            `USE_REAL_ACTION` : `ActionClient` (module ACTION réel) quand il
+            est vrai, sinon un repli inerte qui échoue explicitement sans
+            tenter le moindre appel réseau. **Le défaut est le repli inerte**
+            — aucun usage existant ne devient dépendant d'un service externe
+            du seul fait du Sprint I2.
 
     Returns:
         Le graphe LangGraph compilé, prêt à être invoqué via `.invoke()`
@@ -79,7 +138,14 @@ def build_graph(
     planner = planner or Planner()
     critic = critic or Critic()
     verifier = verifier or Verifier()
-    retrieval_client = retrieval_client or ActionClient()
+    # Sélection du client de retrieval :
+    #   1. client injecté explicitement (double de test, ou ActionClient) ;
+    #   2. sinon USE_REAL_ACTION=true  -> ActionClient (module ACTION réel) ;
+    #   3. sinon                        -> repli inerte, aucun appel réseau.
+    if retrieval_client is None:
+        retrieval_client = (
+            ActionClient() if _use_real_action() else _UnconfiguredRetrievalClient()
+        )
     policy = ReasoningPolicy()
 
     graph: StateGraph[GraphState, None, GraphState, GraphState] = StateGraph(GraphState)
