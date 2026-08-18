@@ -1,0 +1,13 @@
+{
+  "query_id": "plan-derrickson-nationality",
+  "sub_query": "What nationality is Ed Wood?",
+  "hop_index": 1,
+  "filters": {
+    "source": ["Ed_Wood.txt", "Ed_Wood_(film).txt"],
+    "published_after": "2020-01-01"
+  },
+  "top_k": 5,
+  "metadata": {
+    "origin_step_id": "step_2"
+  }
+}

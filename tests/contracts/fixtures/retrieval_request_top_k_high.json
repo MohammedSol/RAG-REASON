@@ -1,0 +1,8 @@
+{
+  "query_id": "plan-derrickson-nationality",
+  "sub_query": "Which American film directors are known for horror films?",
+  "hop_index": 0,
+  "filters": null,
+  "top_k": 20,
+  "metadata": null
+}

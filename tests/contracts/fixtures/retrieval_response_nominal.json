@@ -1,0 +1,29 @@
+{
+  "query_id": "plan-derrickson-nationality",
+  "chunks": [
+    {
+      "chunk_id": "2557",
+      "content": "Scott Derrickson Scott Derrickson (born July 16, 1966) is an American director, screenwriter and producer. He lives in Los Angeles, California. He is best known for directing horror films such as \"Sinister\", \"The Exorcism of Emily Rose\", and \"Deliver Us From Evil\", as well as the 2016 Marvel Cinematic Universe installment, \"Doctor Strange.\"",
+      "source": "Scott_Derrickson.txt",
+      "relevance_score": 0.95955
+    },
+    {
+      "chunk_id": "987",
+      "content": "Ed Wood (film) Ed Wood is a 1994 American biographical period comedy-drama film directed and produced by Tim Burton, and starring Johnny Depp as cult filmmaker Ed Wood.",
+      "source": "Ed_Wood_(film).txt",
+      "relevance_score": 0.92419
+    },
+    {
+      "chunk_id": "986",
+      "content": "Ed Wood Edward Davis Wood Jr. (October 10, 1924 – December 10, 1978) was an American filmmaker, actor, writer, producer, and director.",
+      "source": "Ed_Wood.txt",
+      "relevance_score": 0.89611
+    }
+  ],
+  "retrieval_score": 0.9266,
+  "metadata": {
+    "hop_index": 0,
+    "n_chunks": 3,
+    "top_k": 5
+  }
+}

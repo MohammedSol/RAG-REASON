@@ -1,0 +1,10 @@
+{
+  "query_id": "plan-derrickson-nationality",
+  "chunks": [],
+  "retrieval_score": null,
+  "metadata": {
+    "hop_index": 2,
+    "n_chunks": 0,
+    "top_k": 5
+  }
+}

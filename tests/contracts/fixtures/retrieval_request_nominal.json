@@ -1,0 +1,8 @@
+{
+  "query_id": "plan-derrickson-nationality",
+  "sub_query": "What nationality is Scott Derrickson?",
+  "hop_index": 0,
+  "filters": null,
+  "top_k": 5,
+  "metadata": null
+}
