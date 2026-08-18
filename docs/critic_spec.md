@@ -57,7 +57,66 @@ Le Critic évalue le contexte récupéré (`RetrievalResponse.chunks`) selon qua
 **Indicateurs d'échec :**
 - Les chunks parlent d'un sujet adjacent mais ne répondent pas à la question posée
 - La `sub_query` porte sur une entité nommée précise, absente des chunks récupérés
-- Le `relevance_score` individuel de chaque chunk (`RetrievedChunk.relevance_score`) est uniformément bas
+- Aucun chunk ne contient l'information demandée, même formulée autrement : le
+  jugement porte sur le **contenu textuel** (`RetrievedChunk.content`), jamais
+  sur les scores retournés par le moteur
+
+> #### ⚠️ `RetrievedChunk.relevance_score` n'est pas un indicateur de pertinence
+>
+> Une version antérieure de cette section citait comme signal d'échec « le
+> `relevance_score` individuel de chaque chunk est uniformément bas ». **Ce
+> signal est structurellement inopérant** et a été retiré.
+>
+> **Mesure à l'origine du retrait (Sprint I3, mesurée sur l'API réelle).** Le
+> moteur `fusion_search` du module ACTION normalise ses scores en **min-max à
+> l'intérieur du lot de résultats d'une même requête**
+> (`app/retrieval/fusion_search.py`). Le meilleur candidat d'une requête reçoit
+> donc toujours une valeur proche de 1,0, **indépendamment de sa pertinence
+> réelle** :
+>
+> | Sous-requête | Meilleur `relevance_score` | Le corpus contient-il la réponse ? |
+> |---|---|---|
+> | « What nationality is Scott Derrickson? » | 0,96000 | oui |
+> | « What is the airspeed velocity of an unladen swallow on Neptune? » | 0,96000 | **non** |
+>
+> Un score « uniformément bas » ne se produit donc jamais, pas même sur une
+> question à laquelle aucun document ne répond. Le même chunk change par
+> ailleurs de score d'une requête à l'autre — le chunk `2557`
+> (`Scott_Derrickson.txt`) vaut **0,96000** sur une requête et **0,73791** sur
+> une autre.
+>
+> **Interprétation correcte :** `relevance_score` est un **rang normalisé
+> intra-requête** — il ordonne les chunks *entre eux, au sein d'une même
+> réponse*. Ce n'est pas une mesure absolue de pertinence, et il **n'est pas
+> comparable d'une requête à l'autre**. Il est légitime pour trier ou
+> départager les chunks d'une même `RetrievalResponse` ; il ne l'est pas pour
+> décider si le contexte répond à la question.
+>
+> La même réserve vaut pour `RetrievalResponse.retrieval_score`, qui n'est que
+> la moyenne de ces valeurs : 0,6516 sur la requête sans réponse ci-dessus,
+> contre 0,694 sur une requête pertinente — les deux ne se séparent pas.
+>
+> **Conséquence sur la conception du Critic.** Le `relevance_score` produit par
+> le Critic (§3) est une appréciation **du LLM sur le contenu des chunks**. Il
+> ne dérive en aucune façon des scores du moteur : ni agrégation, ni moyenne,
+> ni pondération — aucun code du Critic ne lit `RetrievedChunk.relevance_score`
+> pour calculer sa sortie. Les deux grandeurs portent le même nom dans deux
+> contrats distincts et n'ont aucun rapport de calcul. **Aucun seuil n'est
+> modifié par ce constat** : celui de la §3 porte sur le score produit par le
+> Critic, non sur celui du moteur.
+>
+> **Réserve ouverte — le prompt expose tout de même ces scores au LLM.**
+> `Critic._format_chunks` compose chaque chunk sous la forme
+> `[Chunk 1 — source.txt | score=0.96]: contenu…` : la valeur du moteur est
+> donc **présente dans le prompt**, à côté du texte. Le LLM peut s'en saisir
+> comme d'un indice de fiabilité alors qu'elle n'en est pas un — un chunk
+> hors-sujet arrivant en tête affiche `score=0.96`. Le risque est de biaiser
+> le jugement vers la suffisance.
+>
+> Cet effet **n'a pas été mesuré** : il est plausible, non établi. Le retirer
+> du prompt relève d'une modification du Critic, hors du périmètre de cette
+> correction documentaire, et devrait être arbitré par une évaluation
+> comparative (avec et sans score affiché) plutôt que par intuition.
 
 ### 2.2 Complétude (*Completeness*)
 

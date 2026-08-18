@@ -28,7 +28,7 @@ from dotenv import load_dotenv
 from litellm import completion
 from pydantic import ValidationError
 
-from reasoning.action_client import RetrievalClient
+from reasoning.action_client import ActionClientError, RetrievalClient
 from reasoning.contracts.action_interface import RetrievalRequest, RetrievalResponse
 from reasoning.contracts.internal_models import ExecutionPlan, VerificationResult
 from reasoning.graph.policy import ReasoningPolicy
@@ -265,6 +265,20 @@ def make_retrieve_node(client: RetrievalClient, top_k: int = _DEFAULT_TOP_K) -> 
 
         try:
             response = client.retrieve(request)
+        except ActionClientError as exc:
+            # Défaillance ATTENDUE et déjà qualifiée par le client (Sprint I2) :
+            # module injoignable, code HTTP non-2xx, corps non conforme ou
+            # query_id non corrélé. Ces cas font partie du fonctionnement
+            # normal d'un appel réseau — les journaliser en ERROR noierait les
+            # anomalies véritablement imprévues dans le bruit d'exploitation.
+            logger.warning(
+                "retrieve[%s] : module ACTION injoignable ou en erreur "
+                "(%s: %s) — réponse vide défensive.",
+                step_id,
+                type(exc).__name__,
+                exc,
+            )
+            response = _empty_response(plan.plan_id)
         except (httpx.HTTPError, OSError, TimeoutError) as exc:
             logger.warning(
                 "retrieve[%s] : erreur réseau (%s: %s) — réponse vide défensive.",
