@@ -55,6 +55,87 @@ _DEFAULT_TOP_K: int = 5
 # Nombre maximum de caractères par chunk injecté dans le prompt de synthèse.
 _MAX_CHUNK_CHARS: int = 600
 
+# ── Enrichissement de la sous-requête lors d'une relance (Lot A, §2) ─────────
+#
+# STRATÉGIE RETENUE : expansion de requête par rétroaction de pertinence.
+# Les `missing_aspects` de la dernière `CriticEvaluation` sont ajoutés
+# VERBATIM à la sous-requête d'origine. C'est la forme classique de
+# l'expansion de requête (Rocchio) : les termes que le Critic déclare
+# manquants sont réinjectés pour repondérer le classement du moteur.
+#
+# POURQUOI PAS LE `feedback` INTÉGRAL. Mesure faite sur le moteur réel
+# (question Corliss Archer, Lot A étape 2) — quatre variantes comparées :
+#
+#   base seule                          → référence
+#   base + missing_aspects              → 1 chunk sur 5 différent
+#   base + missing_aspects + feedback   → 1 chunk sur 5 différent, LES MÊMES
+#
+# Concaténer la phrase de `feedback` triple la longueur de la requête sans
+# rien changer au résultat : c'est un message rédigé pour un lecteur humain
+# (cf. critic_spec.md §4), pas un porteur de termes discriminants. Seuls ses
+# mots de contenu absents par ailleurs sont donc retenus, en petit nombre.
+#
+# La requête reste courte et bornée : le moteur est un TF-IDF/BM25 lexical,
+# une requête longue y dilue les termes utiles au lieu de les renforcer.
+_MAX_SUB_QUERY_CHARS: int = 300
+_MAX_FEEDBACK_TERMS: int = 4
+
+# Mots vides du feedback — trop fréquents pour discriminer quoi que ce soit
+# dans un index lexical. Liste volontairement courte : elle ne filtre que les
+# tournures récurrentes des messages du Critic.
+_FEEDBACK_STOPWORDS: frozenset[str] = frozenset(
+    {
+        "the",
+        "a",
+        "an",
+        "is",
+        "are",
+        "was",
+        "were",
+        "be",
+        "been",
+        "not",
+        "no",
+        "does",
+        "do",
+        "did",
+        "of",
+        "in",
+        "on",
+        "for",
+        "to",
+        "and",
+        "or",
+        "but",
+        "that",
+        "this",
+        "these",
+        "those",
+        "it",
+        "its",
+        "any",
+        "more",
+        "context",
+        "chunks",
+        "chunk",
+        "retrieved",
+        "information",
+        "needed",
+        "need",
+        "mention",
+        "mentions",
+        "provide",
+        "provides",
+        "about",
+        "there",
+        "which",
+        "with",
+        "from",
+        "only",
+        "however",
+    }
+)
+
 
 class NodeFn(Protocol):
     """Signature structurelle d'un nœud LangGraph (compatible `add_node`).
@@ -116,6 +197,81 @@ def _topological_order(plan: ExecutionPlan) -> list[str]:
 def _empty_response(query_id: str) -> RetrievalResponse:
     """Construit une RetrievalResponse défensive vide (échec réseau ACTION)."""
     return RetrievalResponse(query_id=query_id, chunks=[], retrieval_score=None)
+
+
+def _last_evaluation_for(evaluations: list[Any], step_id: str) -> Any | None:
+    """Dernière `CriticEvaluation` portant sur `step_id`, ou None.
+
+    Args:
+        evaluations: Historique complet des évaluations du Critic.
+        step_id: Étape dont on cherche le dernier verdict.
+
+    Returns:
+        La `CriticEvaluation` la plus récente pour cette étape, `None` si
+        l'étape n'a encore jamais été évaluée.
+    """
+    for evaluation in reversed(evaluations):
+        if evaluation.step_id == step_id:
+            return evaluation
+    return None
+
+
+def _feedback_terms(feedback: str, already_present: str) -> list[str]:
+    """Extrait du `feedback` les mots de contenu absents de `already_present`.
+
+    Args:
+        feedback: Message rédigé par le Critic.
+        already_present: Texte de la requête déjà construite.
+
+    Returns:
+        Au plus `_MAX_FEEDBACK_TERMS` termes, dédupliqués, hors mots vides.
+    """
+    known = {w.strip(".,;:!?\"'()").lower() for w in already_present.split()}
+    terms: list[str] = []
+    for raw in feedback.split():
+        word = raw.strip(".,;:!?\"'()").lower()
+        if len(word) < 4 or word in _FEEDBACK_STOPWORDS or word in known:
+            continue
+        if word not in terms:
+            terms.append(word)
+        if len(terms) >= _MAX_FEEDBACK_TERMS:
+            break
+    return terms
+
+
+def enrich_sub_query(base: str, evaluation: Any | None) -> str:
+    """Enrichit une sous-requête avec le retour du Critic, pour une RELANCE.
+
+    N'est appelée que sur une relance : la première tentative d'une étape
+    utilise toujours `PlanStep.sub_query` inchangée (cf. `make_retrieve_node`).
+
+    Voir le commentaire de stratégie en tête de module. En résumé :
+    `missing_aspects` verbatim, puis quelques mots de contenu du `feedback`,
+    le tout tronqué à `_MAX_SUB_QUERY_CHARS`.
+
+    Args:
+        base: La sous-requête d'origine du `PlanStep`.
+        evaluation: La dernière `CriticEvaluation` de cette étape, ou None.
+
+    Returns:
+        La sous-requête enrichie. Identique à `base` si le Critic n'a fourni
+        aucun terme exploitable — cas légitime, et observable dans le journal.
+    """
+    if evaluation is None:
+        return base
+
+    parts = [base]
+    for aspect in evaluation.missing_aspects:
+        cleaned = aspect.strip()
+        if cleaned and cleaned.lower() not in " ".join(parts).lower():
+            parts.append(cleaned)
+
+    enriched = " ".join(parts)
+    extra = _feedback_terms(evaluation.feedback, enriched)
+    if extra:
+        enriched = f"{enriched} {' '.join(extra)}"
+
+    return enriched[:_MAX_SUB_QUERY_CHARS].strip()
 
 
 def _format_chunks_for_generation(chunks: list[Any]) -> str:
@@ -239,6 +395,11 @@ def make_retrieve_node(client: RetrievalClient, top_k: int = _DEFAULT_TOP_K) -> 
     Repli fail-closed (docs/graph_spec.md §7) : toute erreur réseau ou de
     validation produit une `RetrievalResponse` vide plutôt qu'un crash —
     le `Critic` traite alors le cas "aucun chunk" déjà spécifié.
+
+    Relances (Lot A, §2) : à partir de la deuxième tentative sur une même
+    étape, la sous-requête est enrichie du retour de la dernière
+    `CriticEvaluation` — sans quoi une requête identique adressée à un moteur
+    déterministe rapporterait indéfiniment les mêmes chunks.
     """
 
     async def _node(state: GraphState) -> dict[str, Any]:
@@ -255,10 +416,28 @@ def make_retrieve_node(client: RetrievalClient, top_k: int = _DEFAULT_TOP_K) -> 
         if step is None:
             raise RuntimeError(f"PlanStep '{step_id}' introuvable dans le plan.")
 
+        # `retry_counts[step_id]` vaut 0 à la première tentative de l'étape :
+        # c'est le signal exact qui distingue une relance d'un premier passage.
+        attempt = state["retry_counts"].get(step_id, 0)
+        sub_query = step.sub_query
+        if attempt > 0:
+            sub_query = enrich_sub_query(
+                step.sub_query, _last_evaluation_for(agent_state.evaluations, step_id)
+            )
+            logger.info(
+                "retrieve[%s] : relance %d — sous-requête %s : %r",
+                step_id,
+                attempt,
+                "enrichie"
+                if sub_query != step.sub_query
+                else "INCHANGÉE (aucun terme exploitable dans le retour du Critic)",
+                sub_query,
+            )
+
         hop_index = plan.steps.index(step)
         request = RetrievalRequest(
             query_id=plan.plan_id,
-            sub_query=step.sub_query,
+            sub_query=sub_query,
             hop_index=hop_index,
             top_k=top_k,
         )

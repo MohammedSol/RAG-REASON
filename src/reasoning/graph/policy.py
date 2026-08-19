@@ -80,8 +80,14 @@ class ReasoningPolicy:
     ) -> CritiqueDecision:
         """Décide du routage après `critique` (cf. docs/graph_spec.md §3.3).
 
-        La garde globale (budget épuisé) est TOUJOURS prioritaire sur la
-        garde locale (`max_retries`) et sur le verdict `is_sufficient`.
+        La garde globale (budget épuisé) est prioritaire sur le verdict
+        `is_sufficient` et sur la garde locale — À UNE EXCEPTION PRÈS,
+        introduite au Lot A : lorsque la garde locale `max_retries` est
+        épuisée ET qu'il reste une étape au plan, l'exécution avance vers
+        cette étape plutôt que d'abandonner. Cette exception ne peut pas
+        boucler (elle consomme une étape à chaque déclenchement) et empêche
+        qu'une seule étape affame toutes les suivantes. Voir le commentaire
+        détaillé dans le corps de la méthode.
 
         Args:
             reasoning_budget: Plafond global (`AgentState.analysis.reasoning_budget`).
@@ -103,6 +109,36 @@ class ReasoningPolicy:
             avancer vers l'étape suivante. `CritiqueDecision(route=ROUTE_RETRIEVE,
             advance_step=False)` pour re-tenter la même étape.
         """
+        # ── Garde locale d'ÉPUISEMENT, prioritaire quand elle FAIT PROGRESSER
+        #
+        # Placée avant la garde globale, mais dans le seul cas où elle avance
+        # dans le plan : l'étape courante a consommé toutes ses relances ET il
+        # reste une étape à traiter.
+        #
+        # Motif (Lot A, §4). Sans cette clause, une étape épuise à elle seule
+        # le budget global et les étapes suivantes ne sont jamais tentées —
+        # mesuré au Sprint I4 : budget 3 entièrement consommé par `step_1`,
+        # `step_2` jamais exécuté. La garde locale `max_retries`, pourtant
+        # présente, ne pouvait jamais s'appliquer.
+        #
+        # Pourquoi cela ne rouvre AUCUNE boucle infinie : cette branche porte
+        # `advance_step=True`, qui retire l'étape de `pending_step_ids`. Elle
+        # ne peut donc se déclencher qu'un nombre de fois borné par la
+        # longueur du plan, laquelle est finie et fixée par le Planner. Le
+        # nombre total de retrievals reste borné par
+        # `len(plan.steps) × (1 + max_retries)`.
+        #
+        # Articulation exacte des deux gardes :
+        #   - la garde LOCALE borne les relances D'UNE MÊME étape et fait
+        #     avancer le plan ; elle est prioritaire car avancer est un
+        #     progrès, jamais une boucle ;
+        #   - la garde GLOBALE borne le travail total et reste prioritaire
+        #     dans TOUS les autres cas — y compris lorsque le contexte est
+        #     suffisant, lorsqu'il reste des relances locales, et lorsque le
+        #     plan est épuisé. C'est elle qui garantit la terminaison.
+        if not is_sufficient and retry_count >= max_retries and has_next_step:
+            return CritiqueDecision(route=ROUTE_RETRIEVE, advance_step=True)
+
         if feedback_loop_count >= reasoning_budget:
             return CritiqueDecision(route=ROUTE_GENERATE_ANSWER, advance_step=True)
 
