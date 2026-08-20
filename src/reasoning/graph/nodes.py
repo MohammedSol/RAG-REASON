@@ -31,7 +31,7 @@ from pydantic import ValidationError
 from reasoning.action_client import ActionClientError, RetrievalClient
 from reasoning.contracts.action_interface import RetrievalRequest, RetrievalResponse
 from reasoning.contracts.internal_models import ExecutionPlan, VerificationResult
-from reasoning.graph.policy import ReasoningPolicy
+from reasoning.graph.policy import ROUTE_GENERATE_ANSWER, ReasoningPolicy
 from reasoning.graph.protocols import (
     AnalyzerProtocol,
     CriticProtocol,
@@ -57,6 +57,35 @@ _DEFAULT_FAST_MODEL: str = os.getenv("DEFAULT_FAST_MODEL", "ollama/qwen2.5:3b")
 
 # Nombre de chunks demandés par retrieval (paramètre par défaut du nœud retrieve).
 _DEFAULT_TOP_K: int = 5
+
+# ── Plafond d'appels LLM par requête (Sprint I5-A) ───────────────────────────
+#
+# Exigence du cahier des charges : « le module ne doit pas dépasser un plafond
+# configurable d'appels par requête ».
+#
+# VALEUR PAR DÉFAUT — fondée sur les mesures, pas fixée à l'aveugle. Appels
+# réellement consommés, comptés côté Langfuse (une trace `litellm_request` par
+# appel) sur des exécutions complètes du graphe :
+#
+#   profil       plan   retrievals   évaluations   appels LLM   décomposition
+#   SIMPLE         1         1            1             4       critique, generate,
+#                                                               verify, analyzer
+#   MULTI_HOP      2         4            4             8       planner, 4x critique,
+#                                                               synthèse, generate,
+#                                                               verify
+#
+# L'Analyzer n'appelle pas toujours le LLM : son pré-classificateur regex
+# tranche sans appel sur les tournures reconnues (cas MULTI_HOP ci-dessus).
+#
+# Le pire cas mesuré est 8. Le défaut est fixé à 12, soit 1,5 fois ce pire
+# cas : assez large pour absorber un plan à trois étapes ou un repli de
+# l'Analyzer, assez serré pour arrêter une dérive. Un plan plus long relèverait
+# mécaniquement ce besoin — d'où la configurabilité.
+#
+# `0` désactive le plafond. C'est aussi le comportement effectif quand
+# l'instrumentation n'est pas active, le compteur restant alors à zéro : ne
+# pas instrumenter ne doit jamais brider le pipeline.
+_MAX_LLM_CALLS_PER_QUERY: int = int(os.getenv("MAX_LLM_CALLS_PER_QUERY", "12"))
 
 # Nombre maximum de caractères par chunk injecté dans le prompt de synthèse.
 _MAX_CHUNK_CHARS: int = 600
@@ -339,6 +368,22 @@ _UNKNOWN_MARKER: str = "UNKNOWN"
 # ignoré la consigne « une phrase courte » et produit une dissertation : la
 # concaténer noierait la sous-requête dans un index lexical.
 _MAX_INTERMEDIATE_ANSWER_CHARS: int = 200
+
+
+def _llm_call_count() -> int:
+    """Nombre d'appels LLM émis pour la requête courante.
+
+    Import différé : `reasoning.observability` est facultatif au sens du
+    câblage — il instrumente `nodes` lui-même — et l'importer en tête de
+    module créerait une dépendance circulaire à la lecture. S'il est
+    indisponible, le compteur vaut 0 et le plafond ne se déclenche jamais.
+    """
+    try:
+        from reasoning.observability import llm_call_count
+
+        return llm_call_count()
+    except ImportError:  # pragma: no cover — le module fait partie du paquet
+        return 0
 
 
 def has_dependents(plan: ExecutionPlan, step_id: str) -> bool:
@@ -825,12 +870,45 @@ def make_critique_node(
                     intermediate,
                 )
 
+        # ── Plafond d'appels LLM (Sprint I5-A) ────────────────────────────
+        # Le compteur vient de `reasoning.observability`, qui compte au point
+        # de passage commun `litellm.completion` : il inclut donc les appels
+        # internes de l'Analyzer, du Planner, du Critic et du Verifier, que le
+        # graphe ne voit pas autrement.
+        #
+        # Au dépassement, la route est forcée vers `generate_answer` — sortie
+        # propre, jamais d'exception. Le nœud produira une réponse à partir du
+        # contexte déjà accumulé, et `verify` s'exécutera normalement.
+        #
+        # RÉSERVE ARCHITECTURALE, à traiter dans un lot ultérieur : cette
+        # décision de routage vit ici et non dans `policy.py`, qui est hors
+        # périmètre de ce sprint. Elle y a sa place — c'est une garde de même
+        # nature que le budget global et `max_retries`.
+        route = decision.route
+        llm_calls = _llm_call_count()
+        if (
+            _MAX_LLM_CALLS_PER_QUERY > 0
+            and llm_calls >= _MAX_LLM_CALLS_PER_QUERY
+            and route != ROUTE_GENERATE_ANSWER
+        ):
+            logger.warning(
+                "critique[%s] : plafond d'appels LLM atteint (%d/%d) — sortie "
+                "vers generate_answer avec le contexte déjà accumulé.",
+                step_id,
+                llm_calls,
+                _MAX_LLM_CALLS_PER_QUERY,
+            )
+            route = ROUTE_GENERATE_ANSWER
+            if new_pending and new_pending[0] == step_id:
+                new_pending.pop(0)
+
         return {
             "agent_state": new_agent_state,
             "retry_counts": new_retry_counts,
             "pending_step_ids": new_pending,
-            "next_route": decision.route,
+            "next_route": route,
             "step_answers": new_step_answers,
+            "llm_calls": llm_calls,
         }
 
     return _node

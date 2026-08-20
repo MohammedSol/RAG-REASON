@@ -1,0 +1,218 @@
+{
+  "seed": 20260820,
+  "drawn_from": "hotpotqa_sprint3.json",
+  "n": 20,
+  "stratification": {
+    "bridge": 10,
+    "comparison": 10
+  },
+  "selection_rule": "questions dont les articles gold sont intégralement présents dans le corpus (corpus_manifest.json, is_complete), triées par id puis échantillonnées par random.Random(20260820).sample sur chaque strate",
+  "cost_estimate": {
+    "mean_seconds_per_question": 697,
+    "total_seconds": 13940,
+    "total_human": "3 h 52 min",
+    "basis": "latences totales mesurées sur exécutions complètes du graphe : MULTI_HOP 741/710/675/662 s, SIMPLE 256/185 s (Sprints I4, Lots A et B)"
+  },
+  "questions": [
+    {
+      "id": "5a86ebac55429960ec39b6d6",
+      "type": "bridge",
+      "level": "hard",
+      "question": "Handi-Snacks are a snack food product line sold by what American multinational confectionery, food, and beverage company that is based in Illinois?",
+      "gold_titles": [
+        "Handi-Snacks",
+        "Mondelez International"
+      ]
+    },
+    {
+      "id": "5ab3e45655429976abd1bcd4",
+      "type": "bridge",
+      "level": "hard",
+      "question": "The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "gold_titles": [
+        "America East Conference",
+        "Vermont Catamounts men's soccer"
+      ]
+    },
+    {
+      "id": "5ab84bf555429916710eb01f",
+      "type": "bridge",
+      "level": "hard",
+      "question": "In 1991 Euromarché was bought by a chain that operated how any hypermarkets at the end of 2016?",
+      "gold_titles": [
+        "Carrefour",
+        "Euromarché"
+      ]
+    },
+    {
+      "id": "5aba7cfe554299232ef4a2fd",
+      "type": "bridge",
+      "level": "hard",
+      "question": "The 2017–18 Wigan Athletic F.C. season will be a year in which the team competes in the league cup known as what for sponsorship reasons?",
+      "gold_titles": [
+        "2017–18 Wigan Athletic F.C. season",
+        "EFL Cup"
+      ]
+    },
+    {
+      "id": "5ac3165c5542995ef918c10a",
+      "type": "bridge",
+      "level": "hard",
+      "question": "Which American film director hosted the 18th Independent Spirit Awards in 2002?",
+      "gold_titles": [
+        "18th Independent Spirit Awards",
+        "John Waters"
+      ]
+    },
+    {
+      "id": "5adf37a95542995ec70e8f97",
+      "type": "bridge",
+      "level": "hard",
+      "question": "The 2011–12 VCU Rams men's basketball team, led by third year head coach Shaka Smart, represented Virginia Commonwealth University which was founded in what year?",
+      "gold_titles": [
+        "2011–12 VCU Rams men's basketball team",
+        "Virginia Commonwealth University"
+      ]
+    },
+    {
+      "id": "5ae0361155429925eb1afc2c",
+      "type": "bridge",
+      "level": "hard",
+      "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+      "gold_titles": [
+        "Charles Nungesser",
+        "L'Oiseau Blanc"
+      ]
+    },
+    {
+      "id": "5ae2b770554299495565db0f",
+      "type": "bridge",
+      "level": "hard",
+      "question": "In what month is the annual documentary film festival, that is presented by the fortnightly published British journal of literary essays, held? ",
+      "gold_titles": [
+        "London International Documentary Festival",
+        "London Review of Books"
+      ]
+    },
+    {
+      "id": "5ae33c4d5542992f92d82262",
+      "type": "bridge",
+      "level": "hard",
+      "question": "Robert Suettinger was the national intelligence officer under which former Governor of Arkansas?",
+      "gold_titles": [
+        "Bill Clinton",
+        "Robert Suettinger"
+      ]
+    },
+    {
+      "id": "5ae5736e5542990ba0bbb2b3",
+      "type": "bridge",
+      "level": "hard",
+      "question": "When was the American lawyer, lobbyist and political consultant who was a senior member of the presidential campaign of Donald Trump born?",
+      "gold_titles": [
+        "Paul Manafort",
+        "Trump campaign–Russian meeting"
+      ]
+    },
+    {
+      "id": "5a76387d554299109176e6ba",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Who was born first Am Rong or Ava DuVernay ?",
+      "gold_titles": [
+        "Am Rong",
+        "Ava DuVernay"
+      ]
+    },
+    {
+      "id": "5ab3306a55429969a97a80fd",
+      "type": "comparison",
+      "level": "hard",
+      "question": "The movies The Boatniks and The Great Locomotive Chase were both made by which production company?",
+      "gold_titles": [
+        "The Boatniks",
+        "The Great Locomotive Chase"
+      ]
+    },
+    {
+      "id": "5ab611cc5542992aa134a411",
+      "type": "comparison",
+      "level": "hard",
+      "question": "What professions did S. Sylvan Simon and Danny Cannon have in common?",
+      "gold_titles": [
+        "Danny Cannon",
+        "S. Sylvan Simon"
+      ]
+    },
+    {
+      "id": "5abbd3ac55429931dba1458b",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Are both Duke Energy and Affiliated Managers Group based in Massachusetts?",
+      "gold_titles": [
+        "Affiliated Managers Group",
+        "Duke Energy"
+      ]
+    },
+    {
+      "id": "5abf44025542993fe9a41def",
+      "type": "comparison",
+      "level": "hard",
+      "question": "which writer has the highest number of skill  Langston Hughes or  Ian McEwan",
+      "gold_titles": [
+        "Ian McEwan",
+        "Langston Hughes"
+      ]
+    },
+    {
+      "id": "5adbf0a255429947ff17385a",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "gold_titles": [
+        "Esma Sultan Mansion",
+        "Laleli Mosque"
+      ]
+    },
+    {
+      "id": "5adc0c2b55429947ff1738db",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Are Agee and To Shoot an Elephant both documentaries about war?",
+      "gold_titles": [
+        "Agee (film)",
+        "To Shoot an Elephant"
+      ]
+    },
+    {
+      "id": "5ae058e855429945ae959331",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Are  Chrysalis and Look both women's magazines?",
+      "gold_titles": [
+        "Chrysalis (magazine)",
+        "Look (UK magazine)"
+      ]
+    },
+    {
+      "id": "5ae2070a5542994d89d5b313",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice? ",
+      "gold_titles": [
+        "Badly Drawn Boy",
+        "Wolf Alice"
+      ]
+    },
+    {
+      "id": "5ae25ed15542992decbdccd2",
+      "type": "comparison",
+      "level": "hard",
+      "question": "Both Sorbaria and Goldenrod are a genus of more than 50 flowering plants?",
+      "gold_titles": [
+        "Goldenrod",
+        "Sorbaria"
+      ]
+    }
+  ]
+}

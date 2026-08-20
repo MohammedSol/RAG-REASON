@@ -12,6 +12,8 @@ dependencies = [
     "graphviz>=0.21",
     "httpx>=0.28.1",
     "langchain-core>=1.4.9",
+    # Épinglé au Sprint I5-A pour débloquer `ragas`. Voir la note ci-dessous.
+    "langchain-community>=0.3.29,<0.3.30",
     "langgraph>=1.2.9",
     "litellm>=1.92.0",
     "pydantic>=2.0",
@@ -20,6 +22,46 @@ dependencies = [
     "ragas>=0.4.3",
     "streamlit>=1.60.0",
 ]
+
+# Traçabilité des appels LLM (Sprint I5-A). VOLONTAIREMENT OPTIONNELLE :
+# `reasoning.observability` détecte son absence et laisse le pipeline
+# fonctionner sans elle. Installer avec `uv sync --extra observability`.
+[project.optional-dependencies]
+observability = ["langfuse>=3.0.0"]
+
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTE — pourquoi `langchain-community` est épinglé à 0.3.29 (Sprint I5-A)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# `ragas` 0.4.3 — la dernière version publiée — importe au chargement du module
+# `ragas.llms.base` :
+#
+#     from langchain_community.chat_models.vertexai import ChatVertexAI
+#
+# Or `langchain-community` a retiré `chat_models/vertexai.py` en 0.3.30 (les
+# intégrations Vertex AI ont été externalisées vers `langchain-google-vertexai`)
+# et `ragas` ne déclare aucune borne supérieure sur cette dépendance. Le
+# résolveur choisissait donc 0.4.2, et tout `import ragas` échouait sur
+# `ModuleNotFoundError`.
+#
+# Mettre `ragas` à jour n'est pas une option : 0.4.3 EST la dernière version.
+#
+# 0.3.29 est la seule version qui satisfasse les deux contraintes :
+#
+#   version   chat_models/vertexai.py   contrainte langchain-core
+#   0.3.0     présent                   <0.4.0    -> incompatible
+#   0.3.28    présent                   <1.0.0    -> incompatible
+#   0.3.29    présent                   <2.0.0    -> COMPATIBLE
+#   0.3.30    RETIRÉ                    <2.0.0
+#   0.4.2     RETIRÉ                    <2.0.0
+#
+# `langgraph`, `langchain` et `langchain-openai` exigent tous
+# `langchain-core>=1.4.9` : toute version antérieure à 0.3.29 imposerait de
+# rétrograder `langchain-core` sous 1.0, donc de rétrograder `langgraph` —
+# inacceptable, c'est le cœur du module.
+#
+# La borne haute `<0.3.30` est donc INDISPENSABLE et doit être retirée dès que
+# `ragas` publiera une version sans cet import.
 
 [build-system]
 requires = ["hatchling"]

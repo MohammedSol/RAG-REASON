@@ -72,6 +72,19 @@ class GraphState(TypedDict):
             code construisant un état — le graphe est parfaitement
             fonctionnel sans réponse intermédiaire, c'est un enrichissement,
             pas un prérequis.
+        llm_calls: Nombre d'appels LLM émis depuis le début de la requête
+            (Sprint I5-A). Renseigné par le nœud `critique` à partir du
+            compteur de `reasoning.observability`, qui compte au point de
+            passage commun `litellm.completion` — donc y compris les appels
+            internes de l'Analyzer, du Planner, du Critic et du Verifier, que
+            le graphe ne voit pas autrement.
+
+            Comparé au plafond `MAX_LLM_CALLS_PER_QUERY`. Vaut 0 si
+            l'instrumentation n'est pas active : ne pas instrumenter ne doit
+            jamais brider le pipeline.
+
+            `NotRequired` pour la même raison que `step_answers` : aucun code
+            construisant un état n'a à migrer.
     """
 
     agent_state: AgentState
@@ -83,6 +96,7 @@ class GraphState(TypedDict):
     answer: str | None
     next_route: str
     step_answers: NotRequired[dict[str, str]]
+    llm_calls: NotRequired[int]
 
 
 def build_initial_state(original_query: str) -> GraphState:
@@ -106,6 +120,7 @@ def build_initial_state(original_query: str) -> GraphState:
         answer=None,
         next_route="",
         step_answers={},
+        llm_calls=0,
     )
 
 
