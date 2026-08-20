@@ -48,6 +48,12 @@ _OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 _DEFAULT_REASONING_MODEL: str = os.getenv(
     "DEFAULT_REASONING_MODEL", "ollama/qwen2.5:7b"
 )
+# Modèle des tâches courtes et non-raisonnantes — même variable et même
+# valeur par défaut que l'Analyzer (`analyzer.py`). Utilisé ici pour la
+# synthèse d'une réponse intermédiaire (Lot B) : extraire l'entité résolue
+# d'un jeu de chunks est une tâche d'extraction, pas de raisonnement, et le
+# 3B y répond ~4 fois plus vite que le 7B.
+_DEFAULT_FAST_MODEL: str = os.getenv("DEFAULT_FAST_MODEL", "ollama/qwen2.5:3b")
 
 # Nombre de chunks demandés par retrieval (paramètre par défaut du nœud retrieve).
 _DEFAULT_TOP_K: int = 5
@@ -274,6 +280,119 @@ def enrich_sub_query(base: str, evaluation: Any | None) -> str:
     return enriched[:_MAX_SUB_QUERY_CHARS].strip()
 
 
+# ── Réponse intermédiaire par étape (Lot B, §3) ──────────────────────────────
+#
+# PROBLÈME RÉSOLU. Le Planner produit toutes les sous-requêtes en une passe,
+# avant toute exécution. Une sous-requête dépendante désigne donc sa cible par
+# une périphrase — « What government position did **the identified woman**
+# hold? » — que le moteur lexical ne peut pas résoudre. Mesuré au Lot B :
+# cette requête ramène 0 article gold sur 2 ; la même avec l'entité résolue en
+# ramène 2 sur 2.
+#
+# `depends_on` ordonne les étapes mais ne transporte aucune donnée, et le
+# graphe ne produit aucune réponse intermédiaire — `answer` n'est écrit qu'une
+# fois, par `generate_answer`, en fin de parcours. L'entité doit donc être
+# extraite du texte brut des chunks de l'étape dont on dépend.
+#
+# CONCATÉNATION, PAS SUBSTITUTION. La réponse intermédiaire est ajoutée à la
+# sous-requête d'origine, jamais mise à sa place. Une réponse fausse ajoute
+# alors du bruit sans détruire une requête qui fonctionnait — cohérent avec le
+# principe fail-closed du reste du graphe. Les deux formes donnent 2/2 sur la
+# mesure du Lot B ; la concaténation est la moins risquée.
+# ORDRE DES SECTIONS — mesuré, pas choisi au hasard.
+#
+# Une première rédaction plaçait la consigne d'échappement (« si le contexte
+# ne répond pas, réponds UNKNOWN ») AVANT le contexte. Les deux modèles
+# répondaient alors `UNKNOWN` systématiquement, y compris sur un chunk
+# énonçant littéralement la réponse — 4 essais sur 4, 3B comme 7B.
+#
+# Quatre variantes comparées sur les chunks réels de la question Corliss
+# Archer, dont le meilleur dit « Kiss and Tell is a 1945 American comedy film
+# starring then 17-year-old Shirley Temple as Corliss Archer » :
+#
+#   échappatoire avant le contexte      3B: UNKNOWN        7B: UNKNOWN
+#   aucune échappatoire                 3B: "Janet Waldo"  7B: "Shirley Temple"
+#   échappatoire en dernier             3B: OK             7B: OK
+#   CONTEXTE d'abord, échappatoire      3B: OK             7B: OK      ← retenu
+#
+# Deux enseignements. Le contexte doit venir en PREMIER, et l'échappatoire en
+# dernier, formulée comme un recours et non comme une option par défaut. Et
+# elle doit être CONSERVÉE : sans elle, le 3B invente — il a répondu « Janet
+# Waldo », une actrice bien présente dans les chunks mais qui n'a jamais tenu
+# ce rôle au cinéma. C'est exactement ce que la sentinelle doit empêcher de
+# propager à l'étape suivante.
+_INTERMEDIATE_ANSWER_PROMPT: str = (
+    "CONTEXT:\n{context}\n\n"
+    "Using only the CONTEXT above, answer in ONE short sentence, naming the "
+    "entity exactly as written in the CONTEXT.\n"
+    "If the CONTEXT truly contains nothing relevant, reply: UNKNOWN\n\n"
+    "QUESTION: {sub_query}\n"
+    "ANSWER:"
+)
+
+# Sentinelle demandée au modèle quand le contexte ne répond pas. Toute réponse
+# la contenant est rejetée : mieux vaut aucune réponse intermédiaire qu'une
+# réponse inventée réinjectée dans la requête suivante.
+_UNKNOWN_MARKER: str = "UNKNOWN"
+
+# Longueur maximale d'une réponse intermédiaire retenue. Au-delà, le modèle a
+# ignoré la consigne « une phrase courte » et produit une dissertation : la
+# concaténer noierait la sous-requête dans un index lexical.
+_MAX_INTERMEDIATE_ANSWER_CHARS: int = 200
+
+
+def has_dependents(plan: ExecutionPlan, step_id: str) -> bool:
+    """Indique si une autre étape du plan dépend de `step_id`.
+
+    Sert à n'engager l'appel LLM de synthèse que lorsqu'il servira
+    réellement : produire une réponse intermédiaire pour la dernière étape
+    d'un plan serait payer une latence pour un résultat que personne ne lit.
+
+    Args:
+        plan: Le plan d'exécution courant.
+        step_id: L'étape dont on cherche les dépendants.
+
+    Returns:
+        True si au moins une étape déclare `step_id` dans son `depends_on`.
+    """
+    return any(step_id in step.depends_on for step in plan.steps)
+
+
+def _clean_intermediate_answer(raw: str) -> str | None:
+    """Valide la sortie brute du LLM de synthèse.
+
+    Returns:
+        La réponse nettoyée, ou `None` si elle est inexploitable — vide,
+        marquée `UNKNOWN`, ou trop longue pour être une phrase.
+    """
+    answer = raw.strip().strip('"').strip()
+    if not answer:
+        return None
+    if _UNKNOWN_MARKER.lower() in answer.lower():
+        return None
+    if len(answer) > _MAX_INTERMEDIATE_ANSWER_CHARS:
+        return None
+    return answer
+
+
+def build_dependent_sub_query(base: str, dependency_answers: list[str]) -> str:
+    """Concatène les réponses intermédiaires des dépendances à une sous-requête.
+
+    Args:
+        base: La sous-requête planifiée de l'étape courante.
+        dependency_answers: Réponses intermédiaires des étapes dont elle
+            dépend, dans l'ordre du plan. Les entrées vides sont ignorées.
+
+    Returns:
+        La sous-requête enrichie, ou `base` inchangée si aucune réponse
+        intermédiaire n'est exploitable — dégradation propre exigée.
+    """
+    useful = [a.strip() for a in dependency_answers if a and a.strip()]
+    if not useful:
+        return base
+    return f"{base} {' '.join(useful)}"
+
+
 def _format_chunks_for_generation(chunks: list[Any]) -> str:
     """Formate les chunks accumulés pour le prompt de synthèse finale."""
     lines: list[str] = []
@@ -396,10 +515,17 @@ def make_retrieve_node(client: RetrievalClient, top_k: int = _DEFAULT_TOP_K) -> 
     validation produit une `RetrievalResponse` vide plutôt qu'un crash —
     le `Critic` traite alors le cas "aucun chunk" déjà spécifié.
 
-    Relances (Lot A, §2) : à partir de la deuxième tentative sur une même
-    étape, la sous-requête est enrichie du retour de la dernière
-    `CriticEvaluation` — sans quoi une requête identique adressée à un moteur
-    déterministe rapporterait indéfiniment les mêmes chunks.
+    Deux enrichissements de la sous-requête coexistent, appliqués DANS CET
+    ORDRE et sans se contredire (voir `_build_sub_query`) :
+
+    1. **Dépendances (Lot B, §3)** — si l'étape déclare un `depends_on`, les
+       réponses intermédiaires des étapes dont elle dépend sont concaténées.
+       S'applique dès la PREMIÈRE tentative : c'est ce qui transmet l'entité
+       résolue d'un saut au suivant.
+    2. **Relance (Lot A, §2)** — à partir de la deuxième tentative sur une
+       même étape, le retour de la dernière `CriticEvaluation` est ajouté,
+       sans quoi une requête identique adressée à un moteur déterministe
+       rapporterait indéfiniment les mêmes chunks.
     """
 
     async def _node(state: GraphState) -> dict[str, Any]:
@@ -419,20 +545,53 @@ def make_retrieve_node(client: RetrievalClient, top_k: int = _DEFAULT_TOP_K) -> 
         # `retry_counts[step_id]` vaut 0 à la première tentative de l'étape :
         # c'est le signal exact qui distingue une relance d'un premier passage.
         attempt = state["retry_counts"].get(step_id, 0)
-        sub_query = step.sub_query
+
+        # ── Enrichissement 1/2 — dépendances (Lot B) ──────────────────────
+        # Appliqué en premier, et dès la première tentative : sans l'entité
+        # résolue, l'étape part sur une périphrase que le moteur ne peut pas
+        # résoudre, et toutes ses relances hériteraient de ce handicap.
+        dependency_answers = [
+            answer
+            for dep_id in step.depends_on
+            if (answer := state.get("step_answers", {}).get(dep_id))
+        ]
+        sub_query = build_dependent_sub_query(step.sub_query, dependency_answers)
+        if sub_query != step.sub_query:
+            logger.info(
+                "retrieve[%s] : sous-requête enrichie des dépendances %s : %r",
+                step_id,
+                step.depends_on,
+                sub_query,
+            )
+        elif step.depends_on:
+            logger.info(
+                "retrieve[%s] : dépendances %s sans réponse intermédiaire "
+                "exploitable — sous-requête d'origine conservée.",
+                step_id,
+                step.depends_on,
+            )
+
+        # ── Enrichissement 2/2 — relance (Lot A) ──────────────────────────
+        # Appliqué PAR-DESSUS le précédent : les deux sont additifs et ne se
+        # contredisent pas. Le Lot A ajoute les aspects que le Critic déclare
+        # manquants ; le Lot B a déjà ajouté l'entité résolue. Une étape à la
+        # fois dépendante ET relancée conserve donc les deux apports —
+        # `enrich_sub_query` reçoit la requête déjà enrichie comme base, et
+        # sa déduplication empêche de répéter un terme déjà présent.
         if attempt > 0:
-            sub_query = enrich_sub_query(
-                step.sub_query, _last_evaluation_for(agent_state.evaluations, step_id)
+            enriched = enrich_sub_query(
+                sub_query, _last_evaluation_for(agent_state.evaluations, step_id)
             )
             logger.info(
                 "retrieve[%s] : relance %d — sous-requête %s : %r",
                 step_id,
                 attempt,
                 "enrichie"
-                if sub_query != step.sub_query
+                if enriched != sub_query
                 else "INCHANGÉE (aucun terme exploitable dans le retour du Critic)",
-                sub_query,
+                enriched,
             )
+            sub_query = enriched
 
         hop_index = plan.steps.index(step)
         request = RetrievalRequest(
@@ -497,13 +656,83 @@ def make_retrieve_node(client: RetrievalClient, top_k: int = _DEFAULT_TOP_K) -> 
 # ─────────────────────────────────────────────────────────────────────────────
 
 
-def make_critique_node(critic: CriticProtocol, policy: ReasoningPolicy) -> NodeFn:
+def make_critique_node(
+    critic: CriticProtocol,
+    policy: ReasoningPolicy,
+    model: str = _DEFAULT_FAST_MODEL,
+    api_base: str = _OLLAMA_BASE_URL,
+    temperature: float = 0.0,
+    max_tokens: int = 64,
+) -> NodeFn:
     """Fabrique le nœud `critique`.
 
     Applique la décision de `ReasoningPolicy.route_after_critique` (budget
     global unique + garde locale `max_retries`, docs/graph_spec.md §3) et
     met à jour la file d'attente / le compteur de retries en conséquence.
+
+    Réponse intermédiaire (Lot B, §3) : lorsqu'une étape est QUITTÉE et
+    qu'au moins une autre en dépend, un appel LLM court synthétise une
+    réponse d'une phrase à sa sous-requête, rangée dans
+    `GraphState.step_answers`. Le nœud `retrieve` la concatènera à la
+    sous-requête des étapes dépendantes.
+
+    Les paramètres LLM portent des valeurs par défaut : la signature reste
+    compatible avec `make_critique_node(critic, policy)` tel qu'appelé par
+    `graph.py`. Le modèle par défaut est le RAPIDE (3B) — extraire une
+    entité d'un jeu de chunks est une tâche d'extraction, pas de
+    raisonnement.
     """
+
+    def _synthesize(step: Any, response: Any) -> str | None:
+        """Synthétise la réponse intermédiaire d'une étape, ou None.
+
+        Retourne `None` sur toute défaillance — appel en échec, timeout,
+        sortie vide, `UNKNOWN`, réponse trop longue. L'appelant conserve
+        alors la sous-requête d'origine : jamais d'erreur propagée.
+        """
+        if not response.chunks:
+            return None
+        prompt = _INTERMEDIATE_ANSWER_PROMPT.format(
+            sub_query=step.sub_query,
+            context=_format_chunks_for_generation(response.chunks),
+        )
+        try:
+            completion_response = completion(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                api_base=api_base,
+                max_tokens=max_tokens,
+                temperature=temperature,
+            )
+            raw = completion_response.choices[0].message.content or ""
+        except (httpx.HTTPError, OSError, TimeoutError) as exc:
+            logger.warning(
+                "critique[%s] : synthèse intermédiaire indisponible (%s: %s) — "
+                "l'étape dépendante utilisera sa sous-requête d'origine.",
+                step.step_id,
+                type(exc).__name__,
+                exc,
+            )
+            return None
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(
+                "critique[%s] : synthèse intermédiaire en échec (%s: %s) — "
+                "l'étape dépendante utilisera sa sous-requête d'origine.",
+                step.step_id,
+                type(exc).__name__,
+                exc,
+            )
+            return None
+
+        cleaned = _clean_intermediate_answer(str(raw))
+        if cleaned is None:
+            logger.info(
+                "critique[%s] : réponse intermédiaire inexploitable (%r) — "
+                "l'étape dépendante utilisera sa sous-requête d'origine.",
+                step.step_id,
+                str(raw)[:120],
+            )
+        return cleaned
 
     async def _node(state: GraphState) -> dict[str, Any]:
         agent_state = state["agent_state"]
@@ -557,11 +786,51 @@ def make_critique_node(critic: CriticProtocol, policy: ReasoningPolicy) -> NodeF
         else:
             new_retry_counts[step_id] = retry_count + 1
 
+        # ── Réponse intermédiaire (Lot B, §3) ─────────────────────────────
+        # Deux conditions cumulatives :
+        #   - l'étape est QUITTÉE (`advance_step`) — le graphe passe à la
+        #     suite, c'est la dernière occasion de capturer ce que ses chunks
+        #     contiennent ;
+        #   - au moins un DÉPENDANT — produire une réponse intermédiaire pour
+        #     la dernière étape du plan coûterait un appel LLM que personne
+        #     ne lirait.
+        #
+        # POURQUOI PAS `is_sufficient` (déclencheur d'origine, relâché après
+        # mesure). Conditionner la synthèse à l'acceptation du Critic la
+        # rendait inatteignable en pratique : sur la question Corliss Archer,
+        # `step_1` est rejeté trois fois de suite alors que ses chunks
+        # contiennent l'entité recherchée — le Critic exige une correspondance
+        # littérale là où le corpus n'offre qu'une chaîne d'inférence
+        # (findings §2 bis). La porte ne s'ouvrait jamais.
+        #
+        # Le garde-fou contre la propagation d'une entité douteuse n'est pas
+        # le verdict du Critic : c'est la sentinelle `UNKNOWN` du prompt,
+        # mesurée nécessaire (sans elle le 3B invente « Janet Waldo ») et
+        # suffisante. La concaténation — jamais la substitution — garantit par
+        # ailleurs qu'une réponse fausse ajoute du bruit sans détruire une
+        # sous-requête qui fonctionnait.
+        #
+        # Une étape quittée sur épuisement des relances (garde locale du
+        # Lot A) est donc synthétisée elle aussi. Une étape simplement
+        # RE-TENTÉE ne l'est pas : `advance_step` est alors faux, et elle sera
+        # de toute façon réévaluée au passage suivant.
+        new_step_answers = dict(state.get("step_answers", {}))
+        if decision.advance_step and has_dependents(plan, step_id):
+            intermediate = _synthesize(step, response)
+            if intermediate is not None:
+                new_step_answers[step_id] = intermediate
+                logger.info(
+                    "critique[%s] : réponse intermédiaire retenue : %r",
+                    step_id,
+                    intermediate,
+                )
+
         return {
             "agent_state": new_agent_state,
             "retry_counts": new_retry_counts,
             "pending_step_ids": new_pending,
             "next_route": decision.route,
+            "step_answers": new_step_answers,
         }
 
     return _node

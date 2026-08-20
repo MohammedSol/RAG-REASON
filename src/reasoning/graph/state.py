@@ -13,7 +13,7 @@ ajoute uniquement les champs de plomberie nécessaires au graphe
 
 from __future__ import annotations
 
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 from reasoning.contracts.action_interface import RetrievalResponse, RetrievedChunk
 from reasoning.contracts.internal_models import AgentState
@@ -51,6 +51,27 @@ class GraphState(TypedDict):
         next_route: Nom du prochain nœud, calculé par le nœud courant via
             `ReasoningPolicy` — relu tel quel par la fonction d'arête
             correspondante dans `edges.py`.
+        step_answers: Réponses intermédiaires par `step_id` (Lot B, §3).
+            Une entrée est produite par le nœud `critique` quand une étape
+            est QUITTÉE — contexte accepté, ou relances locales épuisées —
+            ET qu'au moins une autre étape en dépend : elle porte la réponse
+            d'UNE PHRASE à la sous-requête de cette étape, synthétisée depuis
+            ses chunks. Le nœud `retrieve` la concatène ensuite à la
+            sous-requête des étapes dépendantes, ce qui transmet l'entité
+            résolue d'un saut au suivant.
+
+            Ce champ existe parce que le graphe ne produit AUCUNE réponse
+            intermédiaire par ailleurs : `answer` n'est écrit qu'une fois,
+            par `generate_answer`, en fin de parcours (constat du Lot B,
+            étape 2). `AgentState` étant un contrat figé, il ne pouvait pas
+            l'accueillir.
+
+            Déclaré `NotRequired` à dessein : un `GraphState` construit sans
+            cette clé reste valide, et le champ se comporte alors comme un
+            dictionnaire vide. Cela évite d'imposer une migration à tout
+            code construisant un état — le graphe est parfaitement
+            fonctionnel sans réponse intermédiaire, c'est un enrichissement,
+            pas un prérequis.
     """
 
     agent_state: AgentState
@@ -61,6 +82,7 @@ class GraphState(TypedDict):
     last_retrieval_response: RetrievalResponse | None
     answer: str | None
     next_route: str
+    step_answers: NotRequired[dict[str, str]]
 
 
 def build_initial_state(original_query: str) -> GraphState:
@@ -71,7 +93,8 @@ def build_initial_state(original_query: str) -> GraphState:
 
     Returns:
         GraphState initialisé — `agent_state` vierge (analysis=None,
-        plan=None, etc.), aucun chunk accumulé, aucun retry consommé.
+        plan=None, etc.), aucun chunk accumulé, aucun retry consommé,
+        aucune réponse intermédiaire.
     """
     return GraphState(
         agent_state=AgentState(original_query=original_query),
@@ -82,6 +105,7 @@ def build_initial_state(original_query: str) -> GraphState:
         last_retrieval_response=None,
         answer=None,
         next_route="",
+        step_answers={},
     )
 
 
