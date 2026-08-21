@@ -112,10 +112,36 @@ markers = [
 
 [dependency-groups]
 dev = [
+    # ── Outillage de qualité ────────────────────────────────────────────
     "mypy>=2.3.0",
     "pre-commit>=4.6.0",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",
     "ruff>=0.15.21",
+    # ── Évaluation (Sprint I5-B) ────────────────────────────────────────
+    #
+    # `fastembed` fournit les embeddings dont RAGAS a besoin pour calculer
+    # `answer_relevancy` : la métrique compare la question d'origine à des
+    # reformulations générées depuis la réponse, ce qui exige un espace
+    # vectoriel.
+    #
+    # POURQUOI PAS LES EMBEDDINGS D'OLLAMA. Le serveur Ollama de la machine
+    # de développement refuse ses deux points d'entrée d'embedding :
+    #     {"error": "This server does not support embeddings.
+    #                Start it with `--embeddings`"}
+    # constaté sur `/api/embeddings` comme sur `/api/embed`. Sans substitut,
+    # `answer_relevancy` ressort à `n/d` et l'une des quatre métriques
+    # exigées par le cahier des charges devient incalculable.
+    #
+    # `fastembed` est le substitut le plus léger : ONNX, sans torch, modèle
+    # `BAAI/bge-small-en-v1.5` (384 dimensions) téléchargé une seule fois
+    # puis utilisé hors ligne. Il ne dépend pas du serveur Ollama.
+    #
+    # PLACÉ DANS `dev` ET NON DANS LES DÉPENDANCES DE PRODUCTION : le module
+    # REASONING lui-même n'embarque aucun embedding — seuls les scripts
+    # d'évaluation de `tests/evaluation/` s'en servent. Le groupe `dev` est
+    # installé par un `uv sync` nu, ce qui garantit qu'une installation
+    # propre du projet permet de reproduire la campagne d'évaluation.
+    "fastembed>=0.8.0,<0.9.0",
 ]

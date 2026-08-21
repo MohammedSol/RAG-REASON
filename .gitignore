@@ -104,10 +104,49 @@ htmlcov/
 .tox/
 
 # -------------------------
-# Rapports d'évaluation générés (conserver uniquement les baselines commités)
+# Évaluation : rapports versionnés, résultats bruts et fichiers de travail exclus
 # -------------------------
+# Les RAPPORTS sont les mesures de référence du projet et sont VERSIONNÉS,
+# pour la même raison que data/evaluation/*.json : le LLM n'est pas
+# déterministe malgré `temperature=0`, et la bande de bruit mesurée sur ce
+# projet est de ±2 points. Relancer une campagne ne reproduit pas les mêmes
+# valeurs — les versionner conserve la trace datée des mesures effectivement
+# utilisées pour les arbitrages.
+#
+# Note de syntaxe : contrairement à `data/`, aucune règle n'exclut `tests/`
+# ni ses répertoires parents. Une exception simple suffit donc ici, sans
+# désexclusion niveau par niveau.
+#
+# L'ORDRE COMPTE : Git applique la DERNIÈRE règle qui correspond. Les
+# `*.partial.json` sont donc ré-exclus après l'exception `metrics_*.json`,
+# qui les capturerait sinon.
 tests/evaluation/reports/*.json
 !tests/evaluation/reports/baseline_report.json
+!tests/evaluation/reports/comparison_v1.json
+!tests/evaluation/reports/metrics_*.json
+# Fichiers de travail du calcul incrémental des métriques : reconstruits à
+# chaque exécution, sans valeur d'archive.
+tests/evaluation/reports/*.partial.json
+
+# Résultats BRUTS des campagnes : VERSIONNÉS, sauf les fichiers de travail.
+#
+# Ils portent, pour chaque question, la réponse produite, les contextes
+# réellement utilisés, le nombre d'appels LLM, la latence et le verdict du
+# Verifier. Trois raisons de les conserver :
+#
+#   1. Ils ne sont PAS reproductibles à l'identique — même raison que les
+#      rapports : le LLM n'est pas déterministe, ±2 points de bruit mesurés.
+#   2. Ils sont la SOURCE du jeu annoté du Sprint I5-C. Les rapports n'en
+#      sont que la synthèse agrégée : ils ne permettent pas de reconstruire
+#      une annotation question par question.
+#   3. Leur taille est modeste — mesurée au Sprint I5-B : run_full.json
+#      115 Ko + run_naive.json 53 Ko = 168 Ko, l'ordre de grandeur du
+#      manifeste de corpus déjà versionné (175 Ko).
+#
+# Seuls les `.tmp` de l'écriture atomique sont exclus : ils n'existent que
+# le temps d'un remplacement de fichier.
+tests/evaluation/results/*.tmp
+tests/evaluation/results/*.json.tmp
 
 # -------------------------
 # Éditeurs & IDEs
