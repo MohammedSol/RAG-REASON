@@ -1,0 +1,401 @@
+{
+  "version": 1,
+  "source_sample": "e2e_sample.json",
+  "hotpotqa": {
+    "dataset": "hotpotqa/hotpot_qa",
+    "config": "distractor",
+    "split": "validation"
+  },
+  "ground_truth": {
+    "answer": "champ `answer` de HotpotQA",
+    "contexts": "phrases désignées par `supporting_facts` (titre + indice), extraites du `context` de la question — les phrases justificatives précises, pas les articles entiers"
+  },
+  "n": 20,
+  "samples": [
+    {
+      "id": "5a86ebac55429960ec39b6d6",
+      "question": "Handi-Snacks are a snack food product line sold by what American multinational confectionery, food, and beverage company that is based in Illinois?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "Mondelez International, Inc.",
+      "ground_truth_contexts": [
+        "Handi-Snacks are a snack food product line sold by Mondelez International.",
+        "Mondelez International, Inc., styled Mondelēz ( ), is an American multinational confectionery, food, and beverage company based in Illinois which employs about 107,000 people around the world."
+      ],
+      "gold_titles": [
+        "Handi-Snacks",
+        "Mondelez International"
+      ],
+      "gold_sources": [
+        "Handi-Snacks.txt",
+        "Mondelez_International.txt"
+      ]
+    },
+    {
+      "id": "5ab3e45655429976abd1bcd4",
+      "question": "The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "the North Atlantic Conference",
+      "ground_truth_contexts": [
+        "The Vermont Catamounts men's soccer team represents the University of Vermont in all NCAA Division I men's college soccer competitions.",
+        "The team competes in the America East Conference.",
+        "The conference was known as the Eastern College Athletic Conference-North from 1979 to 1988 and the North Atlantic Conference from 1988 to 1996."
+      ],
+      "gold_titles": [
+        "America East Conference",
+        "Vermont Catamounts men's soccer"
+      ],
+      "gold_sources": [
+        "America_East_Conference.txt",
+        "Vermont_Catamounts_men's_soccer.txt"
+      ]
+    },
+    {
+      "id": "5ab84bf555429916710eb01f",
+      "question": "In 1991 Euromarché was bought by a chain that operated how any hypermarkets at the end of 2016?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "1,462",
+      "ground_truth_contexts": [
+        "In June 1991, the group was rebought by its rival, Carrefour, for 5,2 billion francs.",
+        "It is one of the largest hypermarket chains in the world (with 1,462 hypermarkets at the end of 2016)."
+      ],
+      "gold_titles": [
+        "Carrefour",
+        "Euromarché"
+      ],
+      "gold_sources": [
+        "Carrefour.txt",
+        "Euromarché.txt"
+      ]
+    },
+    {
+      "id": "5aba7cfe554299232ef4a2fd",
+      "question": "The 2017–18 Wigan Athletic F.C. season will be a year in which the team competes in the league cup known as what for sponsorship reasons?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "Carabao Cup",
+      "ground_truth_contexts": [
+        "Along with competing in the league, the club will also participate in the FA Cup, EFL Cup and EFL Trophy.",
+        "The EFL Cup (referred to historically, and colloquially, as simply the League Cup), currently known as the Carabao Cup for sponsorship reasons, is an annual knockout football competition in men's domestic English football."
+      ],
+      "gold_titles": [
+        "2017–18 Wigan Athletic F.C. season",
+        "EFL Cup"
+      ],
+      "gold_sources": [
+        "2017–18_Wigan_Athletic_F.C._season.txt",
+        "EFL_Cup.txt"
+      ]
+    },
+    {
+      "id": "5ac3165c5542995ef918c10a",
+      "question": "Which American film director hosted the 18th Independent Spirit Awards in 2002?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "John Waters",
+      "ground_truth_contexts": [
+        "The 2002 Independent Spirit Awards, honoring the best in independent filmmaking for 2002, were announced on March 22, 2003.",
+        "It was hosted by John Waters.",
+        "John Samuel Waters Jr. (born April 22, 1946) is an American film director, screenwriter, author, actor, stand-up comedian, journalist, visual artist, and art collector, who rose to fame in the early 1970s for his transgressive cult films."
+      ],
+      "gold_titles": [
+        "18th Independent Spirit Awards",
+        "John Waters"
+      ],
+      "gold_sources": [
+        "18th_Independent_Spirit_Awards.txt",
+        "John_Waters.txt"
+      ]
+    },
+    {
+      "id": "5adf37a95542995ec70e8f97",
+      "question": "The 2011–12 VCU Rams men's basketball team, led by third year head coach Shaka Smart, represented Virginia Commonwealth University which was founded in what year?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "1838",
+      "ground_truth_contexts": [
+        "Led by third-year head coach Shaka Smart, the Rams were coming off a season marked by a run to the Final Four.",
+        "VCU was founded in 1838 as the medical department of Hampden–Sydney College, becoming the Medical College of Virginia in 1854."
+      ],
+      "gold_titles": [
+        "2011–12 VCU Rams men's basketball team",
+        "Virginia Commonwealth University"
+      ],
+      "gold_sources": [
+        "2011–12_VCU_Rams_men's_basketball_team.txt",
+        "Virginia_Commonwealth_University.txt"
+      ]
+    },
+    {
+      "id": "5ae0361155429925eb1afc2c",
+      "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "Charles Eugène",
+      "ground_truth_contexts": [
+        "The aircraft was flown by French World War I aviation heroes, Charles Nungesser and François Coli.",
+        "Charles Eugène Jules Marie Nungesser, MC (15 March 1892 – presumably on or after 8 May 1927) was a French ace pilot and adventurer, best remembered as a rival of Charles Lindbergh."
+      ],
+      "gold_titles": [
+        "Charles Nungesser",
+        "L'Oiseau Blanc"
+      ],
+      "gold_sources": [
+        "Charles_Nungesser.txt",
+        "L'Oiseau_Blanc.txt"
+      ]
+    },
+    {
+      "id": "5ae2b770554299495565db0f",
+      "question": "In what month is the annual documentary film festival, that is presented by the fortnightly published British journal of literary essays, held? ",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "March and April",
+      "ground_truth_contexts": [
+        "The London International Documentary Festival (or LIDF) is an annual documentary film festival that takes place in the months of March and April every year.",
+        "The event is presented in association with the London Review of Books.",
+        "The London Review of Books (LRB) is a British journal of literary essays.",
+        "It is published fortnightly."
+      ],
+      "gold_titles": [
+        "London International Documentary Festival",
+        "London Review of Books"
+      ],
+      "gold_sources": [
+        "London_International_Documentary_Festival.txt",
+        "London_Review_of_Books.txt"
+      ]
+    },
+    {
+      "id": "5ae33c4d5542992f92d82262",
+      "question": "Robert Suettinger was the national intelligence officer under which former Governor of Arkansas?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "William Jefferson Clinton",
+      "ground_truth_contexts": [
+        "Robert Suettinger was United States President Bill Clinton's national intelligence officer for East Asia at the National Intelligence Council (NIC) from 1997-1998.",
+        "William Jefferson Clinton (born William Jefferson Blythe III; August 19, 1946) is an American politician who served as the 42nd President of the United States from 1993 to 2001.",
+        "Prior to the presidency, he was the Governor of Arkansas during two separate terms, from 1979 to 1981, and again from 1983 to 1992."
+      ],
+      "gold_titles": [
+        "Bill Clinton",
+        "Robert Suettinger"
+      ],
+      "gold_sources": [
+        "Bill_Clinton.txt",
+        "Robert_Suettinger.txt"
+      ]
+    },
+    {
+      "id": "5ae5736e5542990ba0bbb2b3",
+      "question": "When was the American lawyer, lobbyist and political consultant who was a senior member of the presidential campaign of Donald Trump born?",
+      "type": "bridge",
+      "level": "hard",
+      "ground_truth_answer": "April 1, 1949",
+      "ground_truth_contexts": [
+        "On June 9, 2016, a meeting was held in Trump Tower in New York City between three senior members of the presidential campaign of Donald TrumpDonald Trump Jr., Jared Kushner, and Paul Manafortand at least five other people, including Russian lawyer Natalia Veselnitskaya.",
+        "Paul John Manafort Jr. (born April 1, 1949) is an American lawyer, lobbyist and political consultant."
+      ],
+      "gold_titles": [
+        "Paul Manafort",
+        "Trump campaign–Russian meeting"
+      ],
+      "gold_sources": [
+        "Paul_Manafort.txt",
+        "Trump_campaign–Russian_meeting.txt"
+      ]
+    },
+    {
+      "id": "5a76387d554299109176e6ba",
+      "question": "Who was born first Am Rong or Ava DuVernay ?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "Am Rong",
+      "ground_truth_contexts": [
+        "Am Rong (1929 – May 1975) was a Cambodian soldier and filmmaker, who acted as a spokesman on military matters for the Khmer Republic during the Cambodian Civil War.",
+        "Ava Marie DuVernay ( ; born August 24, 1972) is an American director, screenwriter, film marketer, and film distributor."
+      ],
+      "gold_titles": [
+        "Am Rong",
+        "Ava DuVernay"
+      ],
+      "gold_sources": [
+        "Am_Rong.txt",
+        "Ava_DuVernay.txt"
+      ]
+    },
+    {
+      "id": "5ab3306a55429969a97a80fd",
+      "question": "The movies The Boatniks and The Great Locomotive Chase were both made by which production company?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "Walt Disney Productions",
+      "ground_truth_contexts": [
+        "It was made by Walt Disney Productions, released by Buena Vista Distribution and directed by Norman Tokar.",
+        "The Great Locomotive Chase is a 1956 Walt Disney Productions CinemaScope adventure film based on the real Great Locomotive Chase that occurred in 1862 during the American Civil War."
+      ],
+      "gold_titles": [
+        "The Boatniks",
+        "The Great Locomotive Chase"
+      ],
+      "gold_sources": [
+        "The_Boatniks.txt",
+        "The_Great_Locomotive_Chase.txt"
+      ]
+    },
+    {
+      "id": "5ab611cc5542992aa134a411",
+      "question": "What professions did S. Sylvan Simon and Danny Cannon have in common?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "director and producer",
+      "ground_truth_contexts": [
+        "S. Sylvan Simon (March 9, 1910 – May 17, 1951) was an American stage/film director and producer.",
+        "John Danny Cannon (born 1968 in Luton, England) is a British film and television writer, director and producer."
+      ],
+      "gold_titles": [
+        "Danny Cannon",
+        "S. Sylvan Simon"
+      ],
+      "gold_sources": [
+        "Danny_Cannon.txt",
+        "S._Sylvan_Simon.txt"
+      ]
+    },
+    {
+      "id": "5abbd3ac55429931dba1458b",
+      "question": "Are both Duke Energy and Affiliated Managers Group based in Massachusetts?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "no",
+      "ground_truth_contexts": [
+        "Duke Energy, headquartered in Charlotte, North Carolina, is an electric power holding company in the United States, with assets also in Canada and Latin America.",
+        "Affiliated Managers Group Inc. is an American international investment management company headquartered in Massachusetts that owns stakes in a number of boutique asset management, hedge fund, and specialized private equity firms."
+      ],
+      "gold_titles": [
+        "Affiliated Managers Group",
+        "Duke Energy"
+      ],
+      "gold_sources": [
+        "Affiliated_Managers_Group.txt",
+        "Duke_Energy.txt"
+      ]
+    },
+    {
+      "id": "5abf44025542993fe9a41def",
+      "question": "which writer has the highest number of skill  Langston Hughes or  Ian McEwan",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "Langston Hughes",
+      "ground_truth_contexts": [
+        "James Mercer Langston Hughes (February 1, 1902 – May 22, 1967) was an American poet, social activist, novelist, playwright, and columnist from Joplin, Missouri.",
+        "Ian Russell McEwan (born 21 June 1948) is an English novelist and screenwriter."
+      ],
+      "gold_titles": [
+        "Ian McEwan",
+        "Langston Hughes"
+      ],
+      "gold_sources": [
+        "Ian_McEwan.txt",
+        "Langston_Hughes.txt"
+      ]
+    },
+    {
+      "id": "5adbf0a255429947ff17385a",
+      "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "no",
+      "ground_truth_contexts": [
+        "The Laleli Mosque (Turkish: \"Laleli Camii, or Tulip Mosque\" ) is an 18th-century Ottoman imperial mosque located in Laleli, Fatih, Istanbul, Turkey.",
+        "The Esma Sultan Mansion (Turkish: \"Esma Sultan Yalısı\" ), a historical yalı (English: waterside mansion ) located at Bosphorus in Ortaköy neighborhood of Istanbul, Turkey and named after its original owner Esma Sultan, is used today as a cultural center after being redeveloped."
+      ],
+      "gold_titles": [
+        "Esma Sultan Mansion",
+        "Laleli Mosque"
+      ],
+      "gold_sources": [
+        "Esma_Sultan_Mansion.txt",
+        "Laleli_Mosque.txt"
+      ]
+    },
+    {
+      "id": "5adc0c2b55429947ff1738db",
+      "question": "Are Agee and To Shoot an Elephant both documentaries about war?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "no",
+      "ground_truth_contexts": [
+        "Agee is a 1980 American documentary film directed by Ross Spears, about the writer James Agee.",
+        "To Shoot an Elephant is a 2009 documentary film about the 2008-2009 Gaza War directed by Alberto Arce and Mohammad Rujailahk."
+      ],
+      "gold_titles": [
+        "Agee (film)",
+        "To Shoot an Elephant"
+      ],
+      "gold_sources": [
+        "Agee_(film).txt",
+        "To_Shoot_an_Elephant.txt"
+      ]
+    },
+    {
+      "id": "5ae058e855429945ae959331",
+      "question": "Are  Chrysalis and Look both women's magazines?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "yes",
+      "ground_truth_contexts": [
+        "Chrysalis: A Magazine of Women's Culture was a feminist publication produced from 1977 to 1980.",
+        "Look is a glossy high street fashion and celebrity weekly magazine for young women."
+      ],
+      "gold_titles": [
+        "Chrysalis (magazine)",
+        "Look (UK magazine)"
+      ],
+      "gold_sources": [
+        "Chrysalis_(magazine).txt",
+        "Look_(UK_magazine).txt"
+      ]
+    },
+    {
+      "id": "5ae2070a5542994d89d5b313",
+      "question": "Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice? ",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "Badly Drawn Boy",
+      "ground_truth_contexts": [
+        "Damon Michael Gough (born 2 October 1969, in Dunstable, Bedfordshire), known by the stage name Badly Drawn Boy, is an English indie singer-songwriter and multi-instrumentalist.",
+        "Its members since 2012 are Ellie Rowsell (vocals, guitar), Joff Oddie (guitars, vocals), Theo Ellis (bass), and Joel Amey (drums, vocals)."
+      ],
+      "gold_titles": [
+        "Badly Drawn Boy",
+        "Wolf Alice"
+      ],
+      "gold_sources": [
+        "Badly_Drawn_Boy.txt",
+        "Wolf_Alice.txt"
+      ]
+    },
+    {
+      "id": "5ae25ed15542992decbdccd2",
+      "question": "Both Sorbaria and Goldenrod are a genus of more than 50 flowering plants?",
+      "type": "comparison",
+      "level": "hard",
+      "ground_truth_answer": "no",
+      "ground_truth_contexts": [
+        "Sorbaria is a genus of around 9 species of flowering plants belong to family Rosaceae.",
+        "Solidago, commonly called goldenrods, is a genus of about 100 to 120 species of flowering plants in the aster family, Asteraceae."
+      ],
+      "gold_titles": [
+        "Goldenrod",
+        "Sorbaria"
+      ],
+      "gold_sources": [
+        "Goldenrod.txt",
+        "Sorbaria.txt"
+      ]
+    }
+  ]
+}

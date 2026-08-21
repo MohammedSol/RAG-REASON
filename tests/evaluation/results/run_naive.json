@@ -1,0 +1,568 @@
+{
+  "system": "naive",
+  "updated_at": "2026-08-20T18:28:29+00:00",
+  "n": 20,
+  "n_failed": 0,
+  "results": [
+    {
+      "id": "5a86ebac55429960ec39b6d6",
+      "type": "bridge",
+      "question": "Handi-Snacks are a snack food product line sold by what American multinational confectionery, food, and beverage company that is based in Illinois?",
+      "answer": "Handi-Snacks are a snack food product line sold by Mondelez International.",
+      "contexts": [
+        "Handi-Snacks Handi-Snacks are a snack food product line sold by Mondelez International. The common two-compartment Handi-Snack has a small spread compartment and a larger compartment for crackers; a red plastic spreader is included with crackers.",
+        "Canyon Creek Food Company Canyon Creek Food Company () is a food processing company based in Edmonton, Alberta that provides fresh soups and other prepared food products geared towards health conscious consumers. The company provides its fresh food product line to grocery retailers and a broad range of food service establishments such as restaurants and institutions throughout Canada.",
+        "Mondelez International Mondelez International, Inc., styled Mondelēz ( ), is an American multinational confectionery, food, and beverage company based in Illinois which employs about 107,000 people around the world. It consists of the global snack and food brands of the former Kraft Foods Inc after the October 2012 spin-off of its North American grocery operations. The Mondelez name, adopted in 2012, was suggested by Kraft Foods employees and is derived from the words \"mundus\" (Latin for “world”",
+        "PepsiCo PepsiCo, Inc. is an American multinational food, snack, and beverage corporation headquartered in Purchase, New York. PepsiCo has interests in the manufacturing, marketing, and distribution of grain-based snack foods, beverages, and other products. PepsiCo was formed in 1965 with the merger of the Pepsi-Cola Company and Frito-Lay, Inc. PepsiCo has since expanded from its namesake product Pepsi to a broader range of food and beverage brands, the largest of which included an acquisition of",
+        "Robert's American Gourmet Food Robert's American Gourmet Food was and is a snack food company located in the United States. Founded by businessman Robert Ehrlich in 1986, the company was best known for its snack food, Pirate's Booty, which is found in over 90% of United States supermarkets. Robert's American Gourmet targeted health-conscious shoppers with a range of snack foods."
+      ],
+      "sources": [
+        "Handi-Snacks.txt",
+        "Canyon_Creek_Food_Company.txt",
+        "Mondelez_International.txt",
+        "PepsiCo.txt",
+        "Robert's_American_Gourmet_Food.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 13033,
+      "retrieval_ms": 2487,
+      "generation_ms": 10546,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ab3e45655429976abd1bcd4",
+      "type": "bridge",
+      "question": "The Vermont Catamounts men's soccer team currently competes in a conference that was formerly known as what from 1988 to 1996?",
+      "answer": "The provided context does not contain information about the conference name for the Vermont Catamounts men's soccer team from 1988 to 1996. The context only mentions that the team currently competes in the America East Conference.",
+      "contexts": [
+        "Vermont Catamounts men's soccer The Vermont Catamounts men's soccer team represents the University of Vermont in all NCAA Division I men's college soccer competitions. The team competes in the America East Conference.",
+        "Vermont Catamounts men's basketball The Vermont Catamounts Basketball team is the basketball team that represents the University of Vermont in Burlington, Vermont. The school's team currently competes in the America East Conference and plays its home games at Patrick Gym. The team has reached the NCAA Division I Men's Basketball Tournament six times, in 2003, 2004, 2005, 2010, 2012, and 2017. UVM famously upset Syracuse University in the first round of the 2005 tournament. The Catamounts are coa",
+        "2010–11 Vermont Catamounts men's basketball team The 2010–11 Vermont Catamounts men's basketball team represented the University of Vermont in the 2010–11 NCAA Division I men's basketball season. The Catamounts won their third consecutive America East Conference regular season Championship but lost in the semifinals of the conference tournament to Stony Brook. The Catamounts got invited to the National Invitation Tournament but lost in the first round to Cleveland State, 63–60.",
+        "2016–17 Vermont Catamounts men's basketball team The 2016–17 Vermont Catamounts men's basketball team represented the University of Vermont during the 2016–17 NCAA Division I men's basketball season. The Catamounts, led by sixth-year head coach John Becker, played their home games at Patrick Gym in Burlington, Vermont and were members of the America East Conference. They finished the season 29–6, 16–0 in America East play to win the America East regular season championship. In the America East T",
+        "2015–16 Vermont Catamounts men's basketball team The 2015–16 Vermont Catamounts men's basketball team represented the University of Vermont during the 2015–16 NCAA Division I men's basketball season. The Catamounts, led by fifth year head coach John Becker, played their home games at Patrick Gym and were members of the America East Conference. They finished the season 23–14, 11–5 in America East play to finish in a tie for third place. They Maine and New Hampshire to advance to the championship "
+      ],
+      "sources": [
+        "Vermont_Catamounts_men's_soccer.txt",
+        "Vermont_Catamounts_men's_basketball.txt",
+        "2010–11_Vermont_Catamounts_men's_basketball_team.txt",
+        "2016–17_Vermont_Catamounts_men's_basketball_team.txt",
+        "2015–16_Vermont_Catamounts_men's_basketball_team.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 57445,
+      "retrieval_ms": 2500,
+      "generation_ms": 54945,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ab84bf555429916710eb01f",
+      "type": "bridge",
+      "question": "In 1991 Euromarché was bought by a chain that operated how any hypermarkets at the end of 2016?",
+      "answer": "The context provided does not contain information about the number of hypermarkets operated by the chain that bought Euromarché in 1991. Therefore, I cannot answer the question with the given information.",
+      "contexts": [
+        "Euromarché Euromarché (\"Euromarket\") was a French hypermarket chain. The first store opened in 1968 in Saint-Michel-sur-Orge. In June 1991, the group was rebought by its rival, Carrefour, for 5,2 billion francs.",
+        "Lewis's Lewis's was a chain of British department stores that operated from 1856 to 2010. The parent companies of Lewis's have gone into administration many times over the years, including 1991. The first store, which opened in Liverpool city centre, became the flagship of the chain of stores operating under the Lewis's name. Several stores in the chain were bought in 1991 by the company Owen Owen and continued to operate under the Lewis's brand name for several years, but after the closure of t",
+        "Uno-X Uno-X is a chain of unmanned fuel stations throughout Norway and Denmark. It is operated as the low-cost section of YX Energi. The chain was originally created as a low cost chain in Denmark in the late 1950s. The rights to use the name in Sweden were sold to Britain's Burmah Oil. In 1991 Norsk Hydro acquired the 330 outlets of the Danish operation and five years later it bought the Swedish Uno-X chain from Burmah.",
+        "John A. Brown (department store) John A. Brown was an Oklahoman department store chain. It operated under that name from 1932, when its founder bought out its predecessor and renamed the chain for himself. After Mr. Brown died in 1940, his widow took over management until her own death in 1967, forcing a change in ownership. Dayton-Hudson, another retail company, but continued operating the chain under its own name, until 1984, when Dayton-Hudson sold the Brown chain to Dillard's, another nation",
+        "Tesco Extra Tesco Extra is a chain of mainly out-of-town hypermarkets, owned and operated by the United Kingdom's largest retailer, Tesco."
+      ],
+      "sources": [
+        "Euromarché.txt",
+        "Lewis's.txt",
+        "Uno-X.txt",
+        "John_A._Brown_(department_store).txt",
+        "Tesco_Extra.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 42929,
+      "retrieval_ms": 2591,
+      "generation_ms": 40338,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5aba7cfe554299232ef4a2fd",
+      "type": "bridge",
+      "question": "The 2017–18 Wigan Athletic F.C. season will be a year in which the team competes in the league cup known as what for sponsorship reasons?",
+      "answer": "The provided context does not contain information about the specific cup competition for sponsorship reasons in the 2017–18 Wigan Athletic F.C. season.",
+      "contexts": [
+        "2017–18 Wigan Athletic F.C. season The 2017–18 season is Wigan Athletic's 86th year in existence and their first back in League One, after being relegated the previous season. Along with competing in the league, the club will also participate in the FA Cup, EFL Cup and EFL Trophy. Paul Cook was appointed as manager on 31 May 2017, signing a 3 year deal, following the departure of much of the previous coaching staff the day before.",
+        "2007–08 Wigan Athletic F.C. season The 2007–08 Wigan Athletic F.C. season was the club's 30th season in the Football League and their third season in the Premier League.",
+        "2006–07 Wigan Athletic F.C. season The 2006–07 Wigan Athletic F.C. season was the club's 29th season in the Football League and their second season in the Premier League.",
+        "1979–80 Wigan Athletic F.C. season The 1979–80 season was the 42nd season in the history of Wigan Athletic F.C. and their second as a professional club in the Football League.",
+        "1978–79 Wigan Athletic F.C. season The 1978–79 season was the 41st season in the history of Wigan Athletic F.C. and their first as a professional club in the Football League. After finishing 2nd in the Northern Premier League during the previous season, the club was nominated to apply for Football League status, and were elected into the league to replace Southport. After a poor start, the club exceeded expectations in the league, and towards the end of the season, a second consecutive promotion"
+      ],
+      "sources": [
+        "2017–18_Wigan_Athletic_F.C._season.txt",
+        "2007–08_Wigan_Athletic_F.C._season.txt",
+        "2006–07_Wigan_Athletic_F.C._season.txt",
+        "1979–80_Wigan_Athletic_F.C._season.txt",
+        "1978–79_Wigan_Athletic_F.C._season.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 42495,
+      "retrieval_ms": 2562,
+      "generation_ms": 39933,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ac3165c5542995ef918c10a",
+      "type": "bridge",
+      "question": "Which American film director hosted the 18th Independent Spirit Awards in 2002?",
+      "answer": "John Waters hosted the 18th Independent Spirit Awards in 2002.",
+      "contexts": [
+        "18th Independent Spirit Awards The 2002 Independent Spirit Awards, honoring the best in independent filmmaking for 2002, were announced on March 22, 2003. It was hosted by John Waters.",
+        "28th Independent Spirit Awards The 2012 Independent Spirit Awards was the 28th annual occasion of the Film Independent Spirit Awards. It announced its nominees on November 27, 2012. The winners were announced on February 23, 2013 during an awards ceremony hosted by Andy Samberg.",
+        "Independent Spirit Award for Best Editing The Independent Spirit Award for Best Editing is one of the annual awards given by Independent Spirit Awards, a non-profit organization dedicated to independent film and independent filmmakers.",
+        "Independent Spirit Award for Best Cinematography The Independent Spirit Award for Best Cinematography is one of the annual awards given by Independent Spirit Awards, a non-profit organization dedicated to independent film and independent filmmakers.",
+        "Independent Spirit Awards The Film Independent Spirit Awards (abbreviated \"Spirit Awards\" and originally known as the FINDIE or Friends of Independents Awards), founded in 1984, are awards dedicated to independent filmmakers. Winners were typically presented with acrylic glass pyramids containing suspended shoestrings representing the paltry budgets of independent films. Since 2006, winners have received a trophy depicting a bird with its wings spread sitting atop of a pole with the shoestrings "
+      ],
+      "sources": [
+        "18th_Independent_Spirit_Awards.txt",
+        "28th_Independent_Spirit_Awards.txt",
+        "Independent_Spirit_Award_for_Best_Editing.txt",
+        "Independent_Spirit_Award_for_Best_Cinematography.txt",
+        "Independent_Spirit_Awards.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 30366,
+      "retrieval_ms": 2524,
+      "generation_ms": 27842,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5adf37a95542995ec70e8f97",
+      "type": "bridge",
+      "question": "The 2011–12 VCU Rams men's basketball team, led by third year head coach Shaka Smart, represented Virginia Commonwealth University which was founded in what year?",
+      "answer": "The context provided does not contain the specific founding year of Virginia Commonwealth University. Therefore, I cannot answer the question with the given information.",
+      "contexts": [
+        "2011–12 VCU Rams men's basketball team The 2011–12 VCU Rams men's basketball team represented Virginia Commonwealth University during the 2011–12 NCAA Division I men's basketball season. It was the 44th season of the University fielding a men's basketball program. Led by third-year head coach Shaka Smart, the Rams were coming off a season marked by a run to the Final Four. Expected to finish lower in the CAA regular season standings, the Rams finished as regular season runners-up with a 15–3 con",
+        "2010–11 VCU Rams men's basketball team The 2010–11 VCU Rams men's basketball team represented Virginia Commonwealth University in the Colonial Athletic Association conference during the 2010–11 NCAA Division I men's basketball season. The Rams, led by second year head coach Shaka Smart, played their home games at the Stuart C. Siegel Center. They finished the season 28–12, 12–6 in CAA play and lost in the championship game of the 2011 CAA Men's Basketball Tournament to Old Dominion. They receive",
+        "2013–14 VCU Rams men's basketball team The 2013–14 VCU Rams men's basketball team represented Virginia Commonwealth University during the 2013–14 NCAA Division I men's basketball season. It was the 46th season of the University fielding a men's basketball program. Led by fifth-year head coach Shaka Smart, they played their home games at the Stuart C. Siegel Center. It was the second season for the Rams playing in the Atlantic 10 Conference. They finished the season 26–9, 12–4 in A-10 play to fin",
+        "2012–13 VCU Rams men's basketball team The 2012–13 VCU Rams men's basketball team represented Virginia Commonwealth University during the 2012–13 NCAA Division I men's basketball season. It was the 45th season of the University fielding a men's basketball program. Led by fourth-year head coach Shaka Smart, they played their home games at the Stuart C. Siegel Center. This was the Rams inaugural season in the Atlantic 10 Conference (A10), after spending the past 17 years in the Colonial Athletic A",
+        "2014–15 VCU Rams men's basketball team The 2014–15 VCU Rams men's basketball team represented Virginia Commonwealth University during the 2014–15 NCAA Division I men's basketball season. It was the 47th season of the University fielding a men's basketball program. Led by sixth-year head coach Shaka Smart, they continued to play their home games at the Stuart C. Siegel Center. They were a member of the Atlantic 10 Conference. They finished the season 26–10, 12–6 in A-10 play to finish in a tie fo"
+      ],
+      "sources": [
+        "2011–12_VCU_Rams_men's_basketball_team.txt",
+        "2010–11_VCU_Rams_men's_basketball_team.txt",
+        "2013–14_VCU_Rams_men's_basketball_team.txt",
+        "2012–13_VCU_Rams_men's_basketball_team.txt",
+        "2014–15_VCU_Rams_men's_basketball_team.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 53146,
+      "retrieval_ms": 2554,
+      "generation_ms": 50592,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae0361155429925eb1afc2c",
+      "type": "bridge",
+      "question": "Which  French ace pilot and adventurer fly L'Oiseau Blanc",
+      "answer": "François Coli and Charles Nungesser flew L'Oiseau Blanc.",
+      "contexts": [
+        "François Coli François Coli (June 5, 1881 – presumably on or after May 8, 1927) was a French pilot and navigator best known as the one-eyed flying partner of Charles Nungesser in their doomed attempt to fly the Atlantic Ocean on the aircraft known as \"L'Oiseau Blanc\".",
+        "Charles Nungesser Charles Eugène Jules Marie Nungesser, MC (15 March 1892 – presumably on or after 8 May 1927) was a French ace pilot and adventurer, best remembered as a rival of Charles Lindbergh. Nungesser was a renowned ace in France, ranking third highest in the country with 43 air combat victories during World War I.",
+        "L'Oiseau Blanc L'Oiseau Blanc (commonly known in the English-speaking world as The White Bird ) was a French Levasseur PL.8 biplane that disappeared in 1927, during an attempt to make the first non-stop transatlantic flight between Paris and New York City to compete for the Orteig Prize. The aircraft was flown by French World War I aviation heroes, Charles Nungesser and François Coli. The aircraft took off from Paris on 8 May 1927 and was last seen over Ireland. Less than two weeks later, Charle",
+        "Gervais Raoul Lufbery Gervais Raoul Victor Lufbery (March 14, 1885 – May 19, 1918) was a French and American fighter pilot and flying ace in World War I. Because he served in both the French Air Force, and later the United States Army Air Service in World War I, he is sometimes listed alternately as a French ace or as an American ace. Officially, all but one of his 17 combat victories came while flying in French units.",
+        "W. E. Johns William Earl Johns (5 February 189321 June 1968) was an English pilot and writer of adventure stories, usually written under the pen name Captain W. E. Johns. He is best remembered as the creator of the ace pilot and adventurer Biggles."
+      ],
+      "sources": [
+        "François_Coli.txt",
+        "Charles_Nungesser.txt",
+        "L'Oiseau_Blanc.txt",
+        "Gervais_Raoul_Lufbery.txt",
+        "W._E._Johns.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 30059,
+      "retrieval_ms": 2503,
+      "generation_ms": 27556,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae2b770554299495565db0f",
+      "type": "bridge",
+      "question": "In what month is the annual documentary film festival, that is presented by the fortnightly published British journal of literary essays, held? ",
+      "answer": "The annual documentary film festival presented by the fortnightly published British journal of literary essays, which is the London Review of Books, is held in March and April.",
+      "contexts": [
+        "London Review of Books The London Review of Books (LRB) is a British journal of literary essays. It is published fortnightly.",
+        "London International Documentary Festival The London International Documentary Festival (or LIDF) is an annual documentary film festival that takes place in the months of March and April every year. The event is presented in association with the London Review of Books.",
+        "New Haven Documentary Film Festival New Haven Documentary Film Festival (also known as NHdocs) is an annual documentary film festival held in New Haven, Connecticut, over a weekend in the month of June. Screenings take place at Yale University’s Whitney Humanities Center Auditorium and the New Haven Free Public Library. NHdocs is a regional festival that showcases documentaries by filmmakers from the greater New Haven area and beyond. NHdocs was launched in 2014 when the film festival’s co-found",
+        "Chagrin Documentary Film Festival Chagrin Documentary Film Festival is an annual documentary film festival based in Chagrin Falls, Ohio. The festival debuted in 2010, with 93 films showing in venues throughout the village. That year, the festival had an attendance of 1,800. By the 2015 festival, that number had grown to almost 7,000, while the number of films shrank to less than 70.",
+        "Docville The International Documentary Film Festival Docville is an annual documentary film festival set in Leuven, Belgium."
+      ],
+      "sources": [
+        "London_Review_of_Books.txt",
+        "London_International_Documentary_Festival.txt",
+        "New_Haven_Documentary_Film_Festival.txt",
+        "Chagrin_Documentary_Film_Festival.txt",
+        "Docville.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 33028,
+      "retrieval_ms": 2557,
+      "generation_ms": 30471,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae33c4d5542992f92d82262",
+      "type": "bridge",
+      "question": "Robert Suettinger was the national intelligence officer under which former Governor of Arkansas?",
+      "answer": "The context provided does not contain information about Robert Suettinger being the national intelligence officer under a former Governor of Arkansas. The context mainly discusses his role under President Bill Clinton and does not mention any connection to a former Governor of Arkansas.",
+      "contexts": [
+        "Robert Suettinger Robert Suettinger was United States President Bill Clinton's national intelligence officer for East Asia at the National Intelligence Council (NIC) from 1997-1998. While there, Suettinger oversaw the preparation of national intelligence estimates for the director of the Central Intelligence Agency. His areas of specialty included the People's Republic of China and the North Korean nuclear weapons program. After working in the Clinton administration, Suettinger has been a senior",
+        "National Intelligence Cross The National Intelligence Cross is a decoration of the United States Intelligence Community (IC) awarded under the National Intelligence Awards (NIA) Program by the Office of the Director of National Intelligence (ODNI). It is the highest award presented by the Office of the Director of National Intelligence. It is equivalent of the Central Intelligence Agency's Distinguished Intelligence Cross.",
+        "Director of the Defense Intelligence Agency The Director of the Defense Intelligence Agency is an intelligence officer who, upon nomination by the President and confirmation by the Senate, serves as the nation's highest-ranking military intelligence officer. As the chief of the Defense Intelligence Agency, the Director is the primary intelligence adviser to the Secretary of Defense and the Chairman of the Joint Chiefs of Staff and also answers to the Director of National Intelligence through the",
+        "Ground Intelligence Officer Ground Intelligence Officer (MOS 0203) is a primary military occupation code (or MOS) of an U.S. Marine Corps intelligence officer. Ground intelligence officers serve as staff officers and commanders in the operating forces and are responsible for analyzing intelligence and planning, deployment and tactical employment of ground surveillance and reconnaissance units. The Ground Intelligence Officer can be a Recon Marine after their training is done.",
+        " the Director of National Intelligence through the civilian Under Secretary of Defense for Intelligence."
+      ],
+      "sources": [
+        "Robert_Suettinger.txt",
+        "National_Intelligence_Cross.txt",
+        "Director_of_the_Defense_Intelligence_Agency.txt",
+        "Ground_Intelligence_Officer.txt",
+        "Director_of_the_Defense_Intelligence_Agency.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 40811,
+      "retrieval_ms": 2575,
+      "generation_ms": 38236,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae5736e5542990ba0bbb2b3",
+      "type": "bridge",
+      "question": "When was the American lawyer, lobbyist and political consultant who was a senior member of the presidential campaign of Donald Trump born?",
+      "answer": "Paul Manafort, a senior member of the presidential campaign of Donald Trump, was born on April 1, 1949. The context does not provide information about other senior members of Trump's campaign, so we can only answer based on the information given about Paul Manafort.",
+      "contexts": [
+        "Donald Trump presidential campaign, 2000 Donald Trump's presidential campaign of 2000 for the nomination of the Reform Party began when real estate magnate Donald Trump of New York announced the creation of a presidential exploratory committee on the October 7, 1999 edition of \"Larry King Live\". Though Trump had never held elected office, he was well known for his frequent comments on public affairs and business exploits as head of The Trump Organization. He had previously considered a president",
+        "David Urban David Urban (born c. 1964) is an American lobbyist, political operative, and political commentator who worked on the 2016 Donald Trump presidential campaign, helping to orchestrate the 2016 Republican National Convention and serving as a senior advisor in the successful effort to win Pennsylvania. In November 2016, it was reported that Urban was being considered as the next chair of the Republican National Committee, as well as the White House Deputy Chief of Staff, and in May 2017, ",
+        "Paul Manafort Paul John Manafort Jr. (born April 1, 1949) is an American lawyer, lobbyist and political consultant. He joined Donald Trump's presidential campaign team in March 2016 and served as campaign manager from June to August 2016. He was previously an adviser to the U.S. presidential campaigns of Republicans Gerald Ford, Ronald Reagan, George H. W. Bush, and Bob Dole. In 1980 Manafort co-founded the Washington, D.C.-based lobbying firm Black, Manafort & Stone, along with principals Charl",
+        "Trump campaign–Russian meeting On June 9, 2016, a meeting was held in Trump Tower in New York City between three senior members of the presidential campaign of Donald TrumpDonald Trump Jr., Jared Kushner, and Paul Manafortand at least five other people, including Russian lawyer Natalia Veselnitskaya. The meeting was arranged by publicist and long-time Trump acquantiance, Rob Goldstone on behalf of his client, singer-songwriter Emin Agalarov. It was disclosed to U.S. government officials when Kus",
+        "Donald Trump in music Donald Trump in music refers to songs, albums and bands that refer to Donald Trump and his various brands, including Trump Tower, his TV show, his hotel chain, and his casinos. Though recent songs refer to Trump's campaign and subsequent election as president of the United States, more than 200 songs refer to Trump prior to his successful presidential campaign between 1989 and 2013. With his victory in the 2016 presidential election, Trump's prominence in hip-hop music has "
+      ],
+      "sources": [
+        "Donald_Trump_presidential_campaign,_2000.txt",
+        "David_Urban.txt",
+        "Paul_Manafort.txt",
+        "Trump_campaign–Russian_meeting.txt",
+        "Donald_Trump_in_music.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 49361,
+      "retrieval_ms": 2579,
+      "generation_ms": 46783,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5a76387d554299109176e6ba",
+      "type": "comparison",
+      "question": "Who was born first Am Rong or Ava DuVernay ?",
+      "answer": "Am Rong was born first. According to the provided context, Am Rong was born in 1929, while Ava DuVernay was born in 1972.",
+      "contexts": [
+        "Ava DuVernay Ava Marie DuVernay ( ; born August 24, 1972) is an American director, screenwriter, film marketer, and film distributor. At the 2012 Sundance Film Festival, DuVernay won the Best Director Prize for her second feature film \"Middle of Nowhere\", becoming the first African-American woman to win the award. For her work in \"Selma\" (2014), DuVernay was the first black female director to be nominated for a Golden Globe Award. With \"Selma\", she was also the first black female director to hav",
+        "Am Rong Am Rong (1929 – May 1975) was a Cambodian soldier and filmmaker, who acted as a spokesman on military matters for the Khmer Republic during the Cambodian Civil War. Western journalists commented on the irony of his name as he gave briefings which \"painted a rosy picture of the increasingly desperate situation on the ground\" during the war.",
+        "Emayatzy Corinealdi Emayatzy Evett Corinealdi ( ; born January 14, 1980) is an American actress. She is best known for her leading role in the Ava DuVernay film \"Middle of Nowhere\" (2012).",
+        "Howard Barish Howard Barish is an Oscar nominated, Emmy award winning producer and director known for his producing partnership with acclaimed director, writer Ava DuVernay. Their most recognized project to date, \"13TH\", is a 2016 American documentary from Netflix directed by DuVernay. Centered on race in the United States criminal justice system, the critically lauded film is titled after the Thirteenth Amendment to the United States Constitution, which outlawed slavery (unless as punishment fo",
+        "This Is the Life (2008 film) This is the Life is a 2008 documentary film directed by Ava DuVernay, which chronicles the alternative hip hop movement that flourished in 1990s Los Angeles and its legendary center, the Good Life Cafe."
+      ],
+      "sources": [
+        "Ava_DuVernay.txt",
+        "Am_Rong.txt",
+        "Emayatzy_Corinealdi.txt",
+        "Howard_Barish.txt",
+        "This_Is_the_Life_(2008_film).txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 39059,
+      "retrieval_ms": 2468,
+      "generation_ms": 36592,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ab3306a55429969a97a80fd",
+      "type": "comparison",
+      "question": "The movies The Boatniks and The Great Locomotive Chase were both made by which production company?",
+      "answer": "The context provided does not contain information about the production company for The Boatniks or The Great Locomotive Chase. Therefore, I cannot answer the question based on the given context.",
+      "contexts": [
+        "The Great Locomotive Chase The Great Locomotive Chase is a 1956 Walt Disney Productions CinemaScope adventure film based on the real Great Locomotive Chase that occurred in 1862 during the American Civil War. The film stars Fess Parker as James J. Andrews, the leader of a group of Union soldiers from various Ohio regiments who volunteered to go behind Confederate lines in civilian clothes, steal a Confederate train north of Atlanta, and drive it back to Union lines in Tennessee, tearing up railr",
+        ", built in December 1855, which was one of the principals of the Great Locomotive Chase of the American Civil War.",
+        "The Great Locomotive Chase Festival The Great Locomotive Chase Festival is a three-day celebration held in remembering the Great Locomotive Chase of April 12, 1862. It is held the first weekend each October in the center of downtown Adairsville, GA. The festival has arts and crafts booths, historical exhibits, concerts, entertainment, carnival rides, and over 40 food booths. The Grand Parade and multiple pageants are held on Friday and Saturday, as well as street dances. Gospel singing takes pla",
+        "The Yonah (locomotive) The Yonah was a type 4-4-0 steam locomotive that participated in the Great Locomotive Chase of the American Civil War.",
+        "The General (1926 film) The General is a 1926 American silent comedy film released by United Artists. It was inspired by the Great Locomotive Chase, a true story of an event that occurred during the American Civil War. The story was adapted from the memoir \"The Great Locomotive Chase\" by William Pittenger. The film stars Buster Keaton who co-directed it with Clyde Bruckman."
+      ],
+      "sources": [
+        "The_Great_Locomotive_Chase.txt",
+        "Rogers_Locomotive_and_Machine_Works.txt",
+        "The_Great_Locomotive_Chase_Festival.txt",
+        "The_Yonah_(locomotive).txt",
+        "The_General_(1926_film).txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 36883,
+      "retrieval_ms": 2524,
+      "generation_ms": 34359,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ab611cc5542992aa134a411",
+      "type": "comparison",
+      "question": "What professions did S. Sylvan Simon and Danny Cannon have in common?",
+      "answer": "S. Sylvan Simon and Danny Cannon both had the profession of director. However, they did not share any other common professions based on the provided context.",
+      "contexts": [
+        "Danny Cannon John Danny Cannon (born 1968 in Luton, England) is a British film and television writer, director and producer.",
+        "S. Sylvan Simon S. Sylvan Simon (March 9, 1910 – May 17, 1951) was an American stage/film director and producer.",
+        "Tish (film) Tish is a 1942 comedy-drama film directed by S. Sylvan Simon and starring Marjorie Main and ZaSu Pitts.",
+        "Bad Bascomb (film) Bad Bascomb is a 1946 western film starring Wallace Beery and Margaret O'Brien. The movie was directed by S. Sylvan Simon. The supporting cast features Marjorie Main, J. Carrol Naish, Frances Rafferty, Marshall Thompson and Henry O'Neill.",
+        "Two Girls on Broadway Two Girls on Broadway is a 1940 musical film directed by S. Sylvan Simon, and starring Lana Turner and Joan Blondell. The film is a remake of \"The Broadway Melody\" (1929)."
+      ],
+      "sources": [
+        "Danny_Cannon.txt",
+        "S._Sylvan_Simon.txt",
+        "Tish_(film).txt",
+        "Bad_Bascomb_(film).txt",
+        "Two_Girls_on_Broadway.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 25389,
+      "retrieval_ms": 2761,
+      "generation_ms": 22628,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5abbd3ac55429931dba1458b",
+      "type": "comparison",
+      "question": "Are both Duke Energy and Affiliated Managers Group based in Massachusetts?",
+      "answer": "No, both Duke Energy and Affiliated Managers Group are not based in Massachusetts. Duke Energy is headquartered in Charlotte, North Carolina, while Affiliated Managers Group is headquartered in Massachusetts.",
+      "contexts": [
+        "Affiliated Managers Group Affiliated Managers Group Inc. is an American international investment management company headquartered in Massachusetts that owns stakes in a number of boutique asset management, hedge fund, and specialized private equity firms.",
+        "llowing Progress Energy's merger with Duke Energy in 2012, the facility is owned and operated by Duke Energy.",
+        "Duke Energy Florida Duke Energy Florida, formerly Florida Power, was the generation, transmission, and distribution sector of Florida Progress Corporation. The company distributed power over much of central and north Florida. Florida Progress merged with Carolina Power & Light in 2000 to form Progress Energy. Progress Energy merged with Duke Energy in 2012. Today the Florida operations operate as Duke Energy Florida.",
+        "Duke Energy Duke Energy, headquartered in Charlotte, North Carolina, is an electric power holding company in the United States, with assets also in Canada and Latin America.",
+        "Darrell Crate Darrell W. Crate (born 1967) is an American investor, private equity manager, and philanthropist. He served as the chief financial officer of Affiliated Managers Group. He is currently a managing principal of Easterly Capital, a private equity firm in Beverly, Massachusetts he founded in 2009."
+      ],
+      "sources": [
+        "Affiliated_Managers_Group.txt",
+        "Crystal_River_Energy_Complex.txt",
+        "Duke_Energy_Florida.txt",
+        "Duke_Energy.txt",
+        "Darrell_Crate.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 26473,
+      "retrieval_ms": 2856,
+      "generation_ms": 23617,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5abf44025542993fe9a41def",
+      "type": "comparison",
+      "question": "which writer has the highest number of skill  Langston Hughes or  Ian McEwan",
+      "answer": "The provided context does not contain information about the skill levels of Langston Hughes and Ian McEwan. Therefore, I cannot determine which writer has the highest number of skill based on the given context.",
+      "contexts": [
+        "Langston Hughes Society The Langston Hughes Society is a United States-based literary society concerned with the work of African American poet Langston Hughes. The society was the first national organisation to be dedicated to the work of an African American writer. Founded after the poet's death and in the wake of the Langston Hughes Study conference of 1981 by Hughes' literary assistant George Houston Bass, the society's official publication is the \"Langston Hughes Review\", published by Instit",
+        "Langston Hughes Medal The Langston Hughes Medal has been awarded annually since 1978 to recognize an influential and distinguished writer associated with the African diaspora for their \"impressive works of poetry, fiction, drama, autobiography and critical essays that help to celebrate the memory and tradition of Langston Hughes\".",
+        "Ian McEwan Ian Russell McEwan (born 21 June 1948) is an English novelist and screenwriter. In 2008, \"The Times\" featured him on their list of \"The 50 greatest British writers since 1945\", and also in 2008 \"The Daily Telegraph\" ranked him number 19 in their list of the \"100 most powerful people in British culture\".",
+        "Langston Hughes Performing Arts Center Langston Hughes Performing Arts Institute (LHPAI) is an arts venue in Seattle, Washington, USA, operated by City of Seattle Office of Arts and Culture and named after African-American writer Langston Hughes. The building has Seattle landmark status. Dating from 1915, it was originally a synagogue, designed by B. Marcus Priteca for the Orthodox Jewish congregation Chevra Bikur Cholim, now Bikur Cholim Machzikay Hadath. As of 2009, it will soon undergo a US$2",
+        "Langston Hughes James Mercer Langston Hughes (February 1, 1902 – May 22, 1967) was an American poet, social activist, novelist, playwright, and columnist from Joplin, Missouri."
+      ],
+      "sources": [
+        "Langston_Hughes_Society.txt",
+        "Langston_Hughes_Medal.txt",
+        "Ian_McEwan.txt",
+        "Langston_Hughes_Performing_Arts_Center.txt",
+        "Langston_Hughes.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 35559,
+      "retrieval_ms": 2785,
+      "generation_ms": 32773,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5adbf0a255429947ff17385a",
+      "type": "comparison",
+      "question": "Are the Laleli Mosque and Esma Sultan Mansion located in the same neighborhood?",
+      "answer": "No, the Laleli Mosque and Esma Sultan Mansion are not located in the same neighborhood. The Esma Sultan Mansion is in the Ortaköy neighborhood, while the Laleli Mosque is in the Laleli neighborhood, both in Istanbul, Turkey.",
+      "contexts": [
+        "Esma Sultan Mansion The Esma Sultan Mansion (Turkish: \"Esma Sultan Yalısı\" ), a historical yalı (English: waterside mansion ) located at Bosphorus in Ortaköy neighborhood of Istanbul, Turkey and named after its original owner Esma Sultan, is used today as a cultural center after being redeveloped.",
+        "Laleli Mosque The Laleli Mosque (Turkish: \"Laleli Camii, or Tulip Mosque\" ) is an 18th-century Ottoman imperial mosque located in Laleli, Fatih, Istanbul, Turkey.",
+        "Sultan Ahmed Mosque The Sultan Ahmed Mosque or Sultan Ahmet Mosque (Turkish: \"Sultan Ahmet Camii\" ) is a historic mosque located in Istanbul, Turkey. A popular tourist site, the Sultan Ahmed Mosque continues to function as a mosque today; men still kneel in prayer on the mosque's lush red carpet after the call to prayer. The Blue Mosque, as it is popularly known, was constructed between 1609 and 1616 during the rule of Ahmed I. Its Külliye contains Ahmed's tomb, a madrasah and a hospice. Hand-pa",
+        "Esma Sultan (daughter of Abdul Hamid I) Esma Sultan (17 July 1778 – 4 June 1848) was an Ottoman princess, daughter of Sultan Abdul Hamid I, sister of Sultan Mustafa IV and Sultan Mahmud II. She was the adoptive mother of Bezmiâlem Sultan and Rahime Perestu Sultan.",
+        "Esma Sultan (daughter of Ahmed III) Esma Sultan (14 March 1726 – 13 August 1788) was an Ottoman princess, daughter of Sultan Ahmed III and his consort Zeynep Kadın. She was the half-sister of Sultan Mustafa III and Abdul Hamid I."
+      ],
+      "sources": [
+        "Esma_Sultan_Mansion.txt",
+        "Laleli_Mosque.txt",
+        "Sultan_Ahmed_Mosque.txt",
+        "Esma_Sultan_(daughter_of_Abdul_Hamid_I).txt",
+        "Esma_Sultan_(daughter_of_Ahmed_III).txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 35552,
+      "retrieval_ms": 2911,
+      "generation_ms": 32641,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5adc0c2b55429947ff1738db",
+      "type": "comparison",
+      "question": "Are Agee and To Shoot an Elephant both documentaries about war?",
+      "answer": "No, Agee and To Shoot an Elephant are not both documentaries about war. To Shoot an Elephant is a documentary about the 2008-2009 Gaza War, while Agee is about the writer James Agee.",
+      "contexts": [
+        "To Shoot an Elephant To Shoot an Elephant is a 2009 documentary film about the 2008-2009 Gaza War directed by Alberto Arce and Mohammad Rujailahk.",
+        "Agee (film) Agee is a 1980 American documentary film directed by Ross Spears, about the writer James Agee. It was nominated for an Academy Award for Best Documentary Feature.",
+        "Marcel Trillat Marcel Trillat (born 4 April 1940) is a French journalist and documentary filmmaker. A communist, he directed many documentaries about the living conditions of workers, women and immigrants in France. He also did documentaries about French government's response to the Algerian War and the Gulf War and, more recently, religious cults and public hospitals. He co-directed three documentaries with Maurice Failevic, one of which is about the history of communism in France. He was a dir",
+        "Surus Surus (\"the Syrian\") was believed to be the last war elephant of Carthaginian general Hannibal Barca's army in Italy. Several Roman writers give accounts of Surus, which was probably a large Asian elephant with one tusk. Although a Carthaginian coin struck in the time of Hannibal depicts an African elephant, historians believe Surus was an Indian elephant descended from those seized by Ptolemies of Egypt, Alexander's successors, in their campaigns in Syria. According to some accounts, the ",
+        "Carlos Rendón Zipagauta Carlos Rendón Zipagauta (Cali, 29 September 1955) is a Colombian-Belgian documentary filmmaker. Rendón Zipagauta studied film and screenwriting in Belgium, where he lived for 16 years. He began as assistant then co-director to Jean Christophe Lamy. He returned to Colombia to shoot documentaries. His 1993 film \"Nukak Makú\", about the indigenous Nukak peoples, won festival prizes in France and Belgium enabling also EU grants to make further documentaries."
+      ],
+      "sources": [
+        "To_Shoot_an_Elephant.txt",
+        "Agee_(film).txt",
+        "Marcel_Trillat.txt",
+        "Surus.txt",
+        "Carlos_Rendón_Zipagauta.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 39005,
+      "retrieval_ms": 2812,
+      "generation_ms": 36193,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae058e855429945ae959331",
+      "type": "comparison",
+      "question": "Are  Chrysalis and Look both women's magazines?",
+      "answer": "No, based on the provided context, Chrysalis was a feminist publication, not a women's magazine. The context does not provide information about Look to determine if it is a women's magazine.",
+      "contexts": [
+        "List of magazines in Portugal Magazines in Portugal are mostly women's magazines, society magazines and TV magazines. In 1994 there were nearly 984 magazines in the country.",
+        "List of magazines in Malaysia The first women's magazine was published in Malaysia in 1932. In the 2000s there were nearly fifty local titles addressing women in the country. These magazines also include those having an Islamic perspective. Some international women's magazines are also published in Malaysia. One of them is \"Elle Malaysia\", which was first published in March 2014. Another one, \"Women’s Health\", was started in April 2015. Comic magazines and film magazines are also common in Malay",
+        "List of magazines in Austria The magazine sector in Austria is under the dominance of Germany. This influence decreased at the end of the 1990s, but it continued on the women's magazines and fashion magazines. However, business magazines have not been subject to the dominance of Germany. The major fields of Austrian magazines are news, popular science and special interest topics. On the other hand, since the Austrian press market is divided between magazines and newspapers, magazines have a sign",
+        "Lifestyle magazine Lifestyle magazine is an umbrella term for popular magazines concerned with lifestyle and is often used to encompass a number of men's magazines, women's magazines and magazines about health and fitness, tourism, leisure, fashion, decorating, or culture. The concept is chiefly used in reference to a magazine's tone.",
+        "Chrysalis (magazine) Chrysalis: A Magazine of Women's Culture was a feminist publication produced from 1977 to 1980. The self-published magazine was founded by Kirsten Grimstad and Susan Rennie at the Woman's Building in downtown Los Angeles. \"Chysalis\" grew from Grimstad and Rennie's editorial work on the self-help resource books, The New Woman's Survival Catalog and The New Woman's Survival Sourcebook. \"Chrysalis\" distinguished itself from other feminist publications through an organic integra"
+      ],
+      "sources": [
+        "List_of_magazines_in_Portugal.txt",
+        "List_of_magazines_in_Malaysia.txt",
+        "List_of_magazines_in_Austria.txt",
+        "Lifestyle_magazine.txt",
+        "Chrysalis_(magazine).txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 37636,
+      "retrieval_ms": 2585,
+      "generation_ms": 35050,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae2070a5542994d89d5b313",
+      "type": "comparison",
+      "question": "Which performance act has a higher instrument to person ratio, Badly Drawn Boy or Wolf Alice? ",
+      "answer": "The provided context does not contain information about the performance acts or the instrument to person ratio for either Badly Drawn Boy or Wolf Alice. Therefore, I cannot answer the question based on the given information.",
+      "contexts": [
+        "Something to Talk About (Badly Drawn Boy song) \"Something to Talk About\" is a song by British musical artist Badly Drawn Boy from About a Boy. It was released as a single on 30 July 2002. It peaked at number 28 on the UK Singles Chart.",
+        "Badly Drawn Boy Damon Michael Gough (born 2 October 1969, in Dunstable, Bedfordshire), known by the stage name Badly Drawn Boy, is an English indie singer-songwriter and multi-instrumentalist.",
+        "Badly Drawn Boy discography The discography of English alternative music singer/songwriter Badly Drawn Boy (real name Damon Gough) includes eight studio albums (including two soundtracks), one compilation, six extended plays and twenty-one singles. The first EP and several singles were released on Gough's own label \"Twisted Nerve\", which he started with like-minded Manchester musician Andy Votel. Badly Drawn Boy rose in popularity in 1997 when he joined the likes of Thom Yorke, Richard Ashcroft,",
+        "Wolf Alice Wolf Alice are a four-piece alternative rock band from North London, formed initially as a two-person band in 2010. Its members since 2012 are Ellie Rowsell (vocals, guitar), Joff Oddie (guitars, vocals), Theo Ellis (bass), and Joel Amey (drums, vocals).",
+        "Silent Sigh \"Silent Sigh\" is a single by British musical artist Badly Drawn Boy from the soundtrack to the film \"About a Boy\". It reached number 16 in the UK Singles Chart."
+      ],
+      "sources": [
+        "Something_to_Talk_About_(Badly_Drawn_Boy_song).txt",
+        "Badly_Drawn_Boy.txt",
+        "Badly_Drawn_Boy_discography.txt",
+        "Wolf_Alice.txt",
+        "Silent_Sigh.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 37155,
+      "retrieval_ms": 2522,
+      "generation_ms": 34633,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    },
+    {
+      "id": "5ae25ed15542992decbdccd2",
+      "type": "comparison",
+      "question": "Both Sorbaria and Goldenrod are a genus of more than 50 flowering plants?",
+      "answer": "No, the context provided does not state that both Sorbaria and Goldenrod are a genus of more than 50 flowering plants. The context mentions that Goldenrod (Solidago) is a genus of about 100 to 120 species, and Ehretia is a genus of about 50 species. There is no information provided about Sorbaria in the given context.",
+      "contexts": [
+        "Solidago curtisii Solidago curtisii, commonly called Curtis' goldenrod and mountain decumbent goldenrod, is a North American species of flowering plants in the sunflower family. It is the eastern part of the United States from Pennsylvania to Mississippi and Alabama, primarily in the southern Appalachian Mountains.",
+        "Solidago rupestris Solidago rupestris , the rock goldenrod or riverbank goldenrod, is a North American species of flowering plants in the sunflower family. It is found in the eastern United States, found today in the States of Maryland, Virginia, Kentucky, and Tennessee. There are historical records of it formerly growing in Indiana and Pennsylvania as well, but these populations now appear to have been extirpated.",
+        "Goldenrod Solidago, commonly called goldenrods, is a genus of about 100 to 120 species of flowering plants in the aster family, Asteraceae. Most are herbaceous perennial species found in open areas such as meadows, prairies, and savannas. They are mostly native to North America, including Mexico; a few species are native to South America and Eurasia. Some American species have also been introduced into Europe and other parts of the world.",
+        "Ehretia Ehretia is a genus of flowering plants in the borage family, Boraginaceae. It contains about 50 species. The generic name honors German botanical illustrator Georg Dionysius Ehret (1708–1770).",
+        "Silene Silene is a genus of flowering plants in the family Caryophyllaceae. Containing approximately 700 species, it is the largest genus in the family. Common names include campion (which is shared with the related genus \"Lychnis\") and catchfly. Many \"Silene\" species are widely distributed, particularly in the northern hemisphere."
+      ],
+      "sources": [
+        "Solidago_curtisii.txt",
+        "Solidago_rupestris.txt",
+        "Goldenrod.txt",
+        "Ehretia.txt",
+        "Silene.txt"
+      ],
+      "llm_calls": 1,
+      "latency_ms": 46982,
+      "retrieval_ms": 2892,
+      "generation_ms": 44090,
+      "is_grounded": null,
+      "faithfulness_score": null,
+      "unsupported_claims": null,
+      "error": null
+    }
+  ]
+}
