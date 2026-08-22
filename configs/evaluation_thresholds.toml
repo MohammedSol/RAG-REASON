@@ -1,0 +1,120 @@
+
+# ═══════════════════════════════════════════════════════════════════════════
+# Seuils de non-régression de l'évaluation — Sprint I5-C
+# ═══════════════════════════════════════════════════════════════════════════
+#
+# Ces seuils protègent les acquis. Ils ne décrivent PAS un objectif : ils
+# marquent le plancher sous lequel une modification du moteur constituerait
+# une régression, et font échouer `tests/evaluation/test_thresholds.py`.
+#
+# MÉTHODE DE FIXATION
+# -------------------
+# Chaque seuil vaut la MESURE RÉELLE du Sprint I5-B, diminuée d'une marge de
+# bruit. Aucun seuil n'est placé au-dessus de ce qui a été mesuré : un seuil
+# qu'on ne franchit pas déjà n'est pas un garde-fou, c'est un test rouge en
+# permanence.
+#
+# MARGE DE BRUIT : 0,05 (5 points)
+# --------------------------------
+# Le LLM n'est pas déterministe malgré `temperature=0` — ordonnancement des
+# kernels, batching, cache KV. La bande de bruit mesurée sur ce projet aux
+# Lots 1 et 2 est de ±2 points sur l'accuracy globale. Les métriques RAGAS
+# sont calculées par un LLM juge, donc DOUBLEMENT non déterministes : à la
+# variabilité du générateur s'ajoute celle du juge. La marge est portée à
+# 5 points pour éviter des échecs qui ne signaleraient rien.
+#
+# ÉCHANTILLON : 20 QUESTIONS
+# --------------------------
+# Sur 20 points, une seule question qui bascule déplace une moyenne de
+# 5 points. C'est la seconde raison de la marge, et la raison pour laquelle
+# ces seuils sont des GARDE-FOUS grossiers, pas des mesures de qualité.
+
+[meta]
+established_at = "2026-08-21"
+source = "tests/evaluation/reports/comparison_v1.json"
+sample_size = 20
+noise_margin = 0.05
+judge_model = "ollama/qwen2.5:7b"
+note = """Le modèle qui génère les réponses est aussi celui qui les juge. \
+Les valeurs absolues sont optimistes ; ces seuils bornent une dérive, ils \
+ne certifient pas un niveau de qualité."""
+
+# ───────────────────────────────────────────────────────────────────────────
+# Système complet — métriques RAGAS globales
+# ───────────────────────────────────────────────────────────────────────────
+# mesuré → seuil (mesuré − 0,05)
+[full]
+faithfulness = 0.68        # mesuré 0.7333
+answer_relevancy = 0.62    # mesuré 0.6716
+context_precision = 0.16   # mesuré 0.2144
+context_recall = 0.81      # mesuré 0.8667
+
+# ───────────────────────────────────────────────────────────────────────────
+# Système complet — sous-ensemble bridge (multi-hop)
+# ───────────────────────────────────────────────────────────────────────────
+# Le cahier des charges demande une « amélioration démontrée sur requêtes
+# multi-hop ». Ces seuils isolent ce sous-ensemble, sur 10 questions
+# seulement — d'où des planchers plus prudents encore.
+[full_bridge]
+answer_relevancy = 0.60    # mesuré 0.6547
+context_recall = 0.75      # mesuré 0.8000
+
+# ───────────────────────────────────────────────────────────────────────────
+# Écarts par rapport au baseline RAG naïf
+# ───────────────────────────────────────────────────────────────────────────
+# Ce sont les écarts qui portent le sens, le biais du juge étant commun aux
+# deux systèmes.
+#
+# AUCUN SEUIL SUR LE GAIN DE FAITHFULNESS. Il est MESURÉ À −1,7 point, contre
+# une cible indicative de +15 au cahier des charges. Poser un seuil positif
+# serait poser un objectif non atteint déguisé en garde-fou : le test
+# échouerait dès sa création. Le plancher retenu, −5, borne une dégradation
+# supplémentaire sans prétendre que l'écart soit favorable.
+[gains_vs_naive]
+faithfulness_points = -5.0       # mesuré −1.7 — voir la note ci-dessus
+answer_relevancy_points = 11.0   # mesuré +16.3
+context_recall_points = 6.0      # mesuré +11.7
+
+[gains_vs_naive_bridge]
+answer_relevancy_points = 17.0   # mesuré +22.4
+context_recall_points = 15.0     # mesuré +20.0
+
+# ───────────────────────────────────────────────────────────────────────────
+# Coût — le compromis qualité/coût du cahier des charges
+# ───────────────────────────────────────────────────────────────────────────
+# Bornes HAUTES : dépasser signale une dérive du nombre d'appels, donc du
+# coût. `max_llm_calls_per_question` reprend le plafond configurable
+# `MAX_LLM_CALLS_PER_QUERY` du Sprint I5-A.
+[cost]
+max_llm_calls_per_question = 12   # mesuré 4 à 8, moyenne 5.55
+mean_llm_calls_per_question = 8.0 # mesuré 5.55
+
+# ───────────────────────────────────────────────────────────────────────────
+# Verifier — précision et rappel face à l'annotation humaine
+# ───────────────────────────────────────────────────────────────────────────
+# Renseignés APRÈS l'annotation des 50 exemples (Sprint I5-C, étape 3).
+# `enabled = false` tant que la mesure n'existe pas : un seuil inventé avant
+# mesure n'a aucune valeur, et un test qui échoue faute de données n'apprend
+# rien à personne.
+[verifier]
+# Activés le 22 août 2026, APRÈS annotation des 50 exemples — jamais avant.
+#
+# MESURES DE RÉFÉRENCE (ensemble, classe positive = `hallucinated`) :
+#     précision 0.8214 · rappel 0.8214 · F1 0.8214 · exactitude 0.8000
+#
+# Planchers fixés 10 points SOUS la mesure, comme les autres sections de ce
+# fichier : la bande de bruit mesurée sur ce projet est de ±2 points, et
+# l'annotation porte sur 50 exemples seulement — un plancher collé à la
+# mesure se déclencherait au moindre réaménagement du jeu.
+#
+# ATTENTION À LA LECTURE DE CES CHIFFRES. Ils agrègent deux populations très
+# différentes, et l'agrégat flatte le Verifier :
+#     cas synthétiques (n=25) : précision 1.0000 · rappel 0.8400
+#     cas réels        (n=25) : précision 0.2857 · rappel 0.6667
+# Sur les hallucinations fabriquées, le Verifier ne se trompe jamais quand il
+# alerte. Sur les cas réels, il alerte 7 fois pour 3 vraies hallucinations —
+# 5 fausses alertes sur 22 réponses fondées. Voir docs/evaluation_results.md.
+enabled = true
+precision = 0.72
+recall = 0.72
+f1 = 0.72

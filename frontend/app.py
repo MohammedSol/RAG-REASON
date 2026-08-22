@@ -49,6 +49,14 @@ from reasoning.graph.state import build_initial_state
 from reasoning.planner import Planner
 from reasoning.verifier import Verifier
 
+# `streamlit run frontend/app.py` place `frontend/` en tête de `sys.path` :
+# le module voisin s'importe alors directement. La forme paquet couvre le cas
+# où le dashboard serait importé depuis la racine du dépôt (tests, outillage).
+try:  # pragma: no cover — dépend du mode de lancement
+    from annotation import render_tab_annotation
+except ImportError:  # pragma: no cover
+    from frontend.annotation import render_tab_annotation
+
 # ═════════════════════════════════════════════════════════════════════════════
 # Constantes de présentation
 # ═════════════════════════════════════════════════════════════════════════════
@@ -1514,13 +1522,21 @@ def main() -> None:
     st.title("RAG-REASON — Moteur de raisonnement pour agent RAG")
     st.caption("Query Analyzer · Planner · Critic · Verifier · Orchestration LangGraph")
 
-    tab_overview, tab_components, tab_pipeline, tab_quality, tab_metrics = st.tabs(
+    (
+        tab_overview,
+        tab_components,
+        tab_pipeline,
+        tab_quality,
+        tab_metrics,
+        tab_annotation,
+    ) = st.tabs(
         [
             "🏛️ Vue d'ensemble",
             "🧩 Composants",
             "🔀 Pipeline orchestré",
             "🛡️ Qualité & Tests",
             "📊 Métriques",
+            "🏷️ Annotation",
         ]
     )
 
@@ -1534,6 +1550,8 @@ def main() -> None:
         render_tab_quality()
     with tab_metrics:
         render_tab_metrics()
+    with tab_annotation:
+        render_tab_annotation()
 
 
 main()

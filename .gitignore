@@ -124,6 +124,10 @@ tests/evaluation/reports/*.json
 !tests/evaluation/reports/baseline_report.json
 !tests/evaluation/reports/comparison_v1.json
 !tests/evaluation/reports/metrics_*.json
+# Sprint I5-C : précision/rappel du Verifier mesurés sur les 50 exemples
+# annotés. Le nom ne commence pas par `metrics_`, l'exception ci-dessus ne le
+# couvrait donc pas.
+!tests/evaluation/reports/verifier_metrics.json
 # Fichiers de travail du calcul incrémental des métriques : reconstruits à
 # chaque exécution, sans valeur d'archive.
 tests/evaluation/reports/*.partial.json

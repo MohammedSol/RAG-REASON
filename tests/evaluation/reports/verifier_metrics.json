@@ -1,0 +1,93 @@
+{
+  "computed_at": "2026-08-21T23:12:04+00:00",
+  "positive_class": "hallucinated",
+  "n_entries": 50,
+  "n_usable": 50,
+  "discarded": [],
+  "overall": {
+    "n": 50,
+    "confusion": {
+      "true_positive": 23,
+      "false_positive": 5,
+      "false_negative": 5,
+      "true_negative": 17
+    },
+    "precision": 0.8214285714285714,
+    "recall": 0.8214285714285714,
+    "f1": 0.8214285714285714,
+    "accuracy": 0.8
+  },
+  "real": {
+    "n": 25,
+    "confusion": {
+      "true_positive": 2,
+      "false_positive": 5,
+      "false_negative": 1,
+      "true_negative": 17
+    },
+    "precision": 0.2857142857142857,
+    "recall": 0.6666666666666666,
+    "f1": 0.4,
+    "accuracy": 0.76
+  },
+  "synthetic": {
+    "n": 25,
+    "confusion": {
+      "true_positive": 21,
+      "false_positive": 0,
+      "false_negative": 4,
+      "true_negative": 0
+    },
+    "precision": 1.0,
+    "recall": 0.84,
+    "f1": 0.9130434782608696,
+    "accuracy": 0.84
+  },
+  "synthetic_by_injection_kind": {
+    "addition": {
+      "n": 10,
+      "confusion": {
+        "true_positive": 8,
+        "false_positive": 0,
+        "false_negative": 2,
+        "true_negative": 0
+      },
+      "precision": 1.0,
+      "recall": 0.8,
+      "f1": 0.888888888888889,
+      "accuracy": 0.8
+    },
+    "contradiction": {
+      "n": 8,
+      "confusion": {
+        "true_positive": 6,
+        "false_positive": 0,
+        "false_negative": 2,
+        "true_negative": 0
+      },
+      "precision": 1.0,
+      "recall": 0.75,
+      "f1": 0.8571428571428571,
+      "accuracy": 0.75
+    },
+    "substitution": {
+      "n": 7,
+      "confusion": {
+        "true_positive": 7,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 0
+      },
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "accuracy": 1.0
+    }
+  },
+  "expected_vs_human_agreement": 1.0,
+  "expected_vs_human_mismatches": [],
+  "label_distribution": {
+    "grounded": 22,
+    "hallucinated": 28
+  }
+}
